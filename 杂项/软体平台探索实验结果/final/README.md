@@ -56,7 +56,7 @@ metrics/trajectory66_rmse.csv
 metrics/trajectory66_rmse.json
 ```
 
-轨迹 66 的 RMSE：FS-EDMD `0.7889`、EDMD `2.4239`、EDMDDL `1.2927`。
+轨迹 66 的 RMSE：FS-EDMD `0.7889`、EDMD `0.8965`、EDMDDL `1.2927`。
 
 ## 目录
 

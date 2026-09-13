@@ -22,6 +22,24 @@
   - 处理后的数据已同步到 `数据备份/软体平台/处理后的数据`
   - 机械臂三模型与归一化文件已同步到 `结果备份/机械臂训练结果`
   - 软体平台三模型与归一化文件已同步到 `结果备份/软体平台训练结果`
+  - EDMD 预测直线问题已定位并修复；修正后测试集指标已产出，final 包尚未覆盖
+  - 已用修正版 EDMD 重新生成轨迹 66 三模型对比图
+
+## 2026-09-13 会话（轨迹66修正版预测图）
+
+- 目标/任务：用修正后的 EDMD 重新绘制轨迹 66 的三模型预测对比图。
+- 已完成：重新运行 `plot_soft_trajectory66.py`，轨迹 66 RMSE 更新为 FS-EDMD `0.7889`、EDMD `0.8965`、EDMDDL `1.2927`。
+- 产物：`final/figures/trajectory66_comparison.png/pdf/svg` 和 `final/metrics/trajectory66_rmse.csv/json` 已更新；PNG 非空且尺寸 3120x2460。
+
+## 2026-09-13 会话（EDMD预测直线问题修复）
+
+- 目标/任务：检查软体平台 EDMD 预测中 x 分量几乎为直线的问题，确认是不是建模脚本 bug。
+- 根因 1：`SoftLift` 的前三列是 `constant, x, y`，但 EDMD 的 `C` 被初始化为 `C[:2] = I`，实际选择的是 `constant, x`。这导致 x 分量取到常数项，看起来就是一条水平直线。
+- 根因 2：`SoftLift` 会对状态再做一次中心化和缩放，但 EDMD 预测直接取了升维后的 x/y，没有还原回归一化状态空间，相当于少了一次反变换。
+- 修复：`modeling/trainers/edmd.py` 增加 `_build_output_matrix()`，按 `SoftLift.feature_names` 选择 `x/y`；增加 `_from_lift_state()` 还原 `input_center/input_scale`；加载旧模型时也会重建正确的 `C`。
+- 修正后轨迹 66：EDMD RMSE 从 `2.4239` 降到 `0.8965`，x 不再是直线；测试集 10 条轨迹平均 RMSE 为 `1.1523`，最高精度为轨迹 77 `0.7355`。
+- 影响：修正后的 EDMD 平均 RMSE 低于当前 FS-EDMD 和 EDMDDL。`final` 包仍保留旧指标，等待用户确认是否按修正版更新论文候选。
+- 验证：`train_edmd.py --check-load` 通过；`check_soft_experiment_artifacts.py --run-id soft-final-006` 通过；修正版运行记录为 `runs/soft-edmd-cfix-001`。
 
 ## 2026-09-13 会话（软体平台训练结果备份）
 

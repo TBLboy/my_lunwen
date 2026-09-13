@@ -10,12 +10,29 @@
 ## 当前状态
 - 当前阶段：implementation
 - 当前任务：TASK-017 已完成
-- 当前状态：最终论文候选 `soft-final-006` 已确认并封装到 `杂项/软体平台探索实验结果/final/`；处理后的数据、机械臂训练结果、软体平台训练结果均已同步到对应备份目录
+- 当前状态：EDMD 预测直线问题已修复；`soft-final-006` 的 EDMD 旧指标已失效，修正版指标待确认是否覆盖 final
 - 最近验证：EV-017 至 EV-019 已记录；Project Log、Loop、模型重载和 final 哈希校验通过
 - 下一步：
   - 轨迹 66 已确定为论文固定展示轨迹，三模型对比图已输出到 `final/figures/`
+  - 确认是否用修正版 EDMD 更新 final 指标、模型和论文展示图
   - 使用 final 中的模型、配置和指标继续论文写作
   - 如后续需要提升 FS-EDMD 平均 RMSE，再开启新的探索任务
+
+## 2026-09-13 轨迹66修正版预测图
+
+- 状态：已完成
+- 完成内容：用修正版 EDMD 重新生成轨迹 66 三模型对比图
+- 轨迹 66 RMSE：FS-EDMD `0.7889`、EDMD `0.8965`、EDMDDL `1.2927`
+- 产物：`final/figures/trajectory66_comparison.png/pdf/svg`；`final/metrics/trajectory66_rmse.csv/json` 已同步
+- 验证：PNG 非空，尺寸 3120x2460
+
+## 2026-09-13 EDMD预测直线问题修复
+
+- 状态：代码已修复，final 指标待用户确认
+- 根因：EDMD `C` 选错升维列，且未还原 `SoftLift` 的内部状态归一化
+- 修正后测试集：EDMD avg=1.1523、best=0.7355（轨迹 77）；轨迹 66 RMSE=0.8965
+- 验证：机械臂 EDMD 兼容、软体模型重载、修正版运行 `soft-edmd-cfix-001` 均通过
+- 限制：修正后的 EDMD 平均 RMSE 低于 FS-EDMD 和 EDMDDL，尚未覆盖 final 包
 
 ## 2026-09-13 软体平台训练结果备份
 

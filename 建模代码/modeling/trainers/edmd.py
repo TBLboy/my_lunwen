@@ -21,6 +21,26 @@ class EDMDTrainer:
         self.C = None
         self.psi_dim = None
 
+    def _build_output_matrix(self, state_dim: int) -> None:
+        output = np.zeros((self.psi_dim, state_dim), dtype=np.float64)
+        feature_names = getattr(self.lift_fn, "feature_names", None)
+        if feature_names and {"x", "y"}.issubset(feature_names):
+            indices = [feature_names.index("x"), feature_names.index("y")]
+        else:
+            indices = list(range(state_dim))
+        for column, feature_index in enumerate(indices):
+            output[feature_index, column] = 1.0
+        self.C = output
+
+    def _from_lift_state(self, value: np.ndarray) -> np.ndarray:
+        result = np.asarray(value, dtype=np.float64)
+        center = getattr(self.lift_fn, "input_center", None)
+        scale = getattr(self.lift_fn, "input_scale", None)
+        if center is not None and scale is not None:
+            result = result * np.asarray(scale, dtype=np.float64)
+            result = result + np.asarray(center, dtype=np.float64)
+        return result
+
     def fit(self, X_train, Y_train, U_train):
         print("Computing lifted features...")
         X_train = np.asarray(X_train, dtype=np.float64)
@@ -41,8 +61,7 @@ class EDMDTrainer:
         self.B = np.asarray(K[self.psi_dim :, :], dtype=np.float64)
 
         n = X_train.shape[1]
-        self.C = np.zeros((self.psi_dim, n), dtype=np.float64)
-        self.C[:n, :] = np.eye(n)
+        self._build_output_matrix(n)
 
         psi_y_pred = psi_xu @ K
         train_mse = np.mean((psi_y - psi_y_pred) ** 2)
@@ -63,7 +82,7 @@ class EDMDTrainer:
             u_curr = np.asarray(u_sequence[t], dtype=np.float64).flatten()
             psi_xu = np.hstack([psi_curr, u_curr])
             psi_next = psi_xu @ K
-            x_next = psi_next @ self.C
+            x_next = self._from_lift_state(psi_next @ self.C)
             x_pred[t] = x_next
             psi_curr = psi_next
 
@@ -95,4 +114,5 @@ class EDMDTrainer:
             from modeling.soft_lift import SoftLift
 
             self.lift_fn = SoftLift.from_config(self.lift_config)
+            self._build_output_matrix(self.C.shape[1])
         return self

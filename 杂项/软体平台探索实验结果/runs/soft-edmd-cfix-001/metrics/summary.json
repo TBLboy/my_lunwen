@@ -1,0 +1,114 @@
+{
+  "run_id": "soft-edmd-cfix-001",
+  "created_at": "2026-09-13T10:58:58.305631+00:00",
+  "smoke": false,
+  "test_limit": 10,
+  "eval_splits": [
+    "test"
+  ],
+  "lift": {
+    "dimension": 112,
+    "poly_degree": 4,
+    "rbf_grid_size": 9,
+    "rbf_sigma_scale": 1.0,
+    "trig_frequencies": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "input_center": [
+      0.165288188170442,
+      0.12828487871310035
+    ],
+    "input_scale": [
+      2.559911954542496,
+      2.6543986829263413
+    ],
+    "rbf_sigma": [
+      0.25,
+      0.25
+    ],
+    "groups": {
+      "constant": 1,
+      "linear": 2,
+      "polynomial": 12,
+      "rbf": 81,
+      "trig": 16
+    },
+    "sample_condition_number": 197311.81809576775,
+    "sample_finite": true
+  },
+  "methods": {
+    "edmd": {
+      "average_rmse": 1.152338456472793,
+      "best_rmse": 0.7354749932978399,
+      "best_trajectory_id": 77,
+      "trajectory_count": 10
+    }
+  },
+  "split_metrics": {
+    "test": {
+      "per_trajectory": [
+        {
+          "trajectory_id": 6,
+          "steps": 299,
+          "edmd_rmse": 1.3715739805851312
+        },
+        {
+          "trajectory_id": 12,
+          "steps": 299,
+          "edmd_rmse": 0.8612899319054417
+        },
+        {
+          "trajectory_id": 32,
+          "steps": 299,
+          "edmd_rmse": 1.6830206773871488
+        },
+        {
+          "trajectory_id": 36,
+          "steps": 299,
+          "edmd_rmse": 1.7414404132087165
+        },
+        {
+          "trajectory_id": 42,
+          "steps": 299,
+          "edmd_rmse": 0.7409380821345402
+        },
+        {
+          "trajectory_id": 64,
+          "steps": 299,
+          "edmd_rmse": 0.9294422509449521
+        },
+        {
+          "trajectory_id": 66,
+          "steps": 299,
+          "edmd_rmse": 0.8965172802766059
+        },
+        {
+          "trajectory_id": 77,
+          "steps": 299,
+          "edmd_rmse": 0.7354749932978399
+        },
+        {
+          "trajectory_id": 83,
+          "steps": 299,
+          "edmd_rmse": 1.0991108475968752
+        },
+        {
+          "trajectory_id": 93,
+          "steps": 299,
+          "edmd_rmse": 1.4645761073906778
+        }
+      ],
+      "methods": {
+        "edmd": {
+          "average_rmse": 1.152338456472793,
+          "best_rmse": 0.7354749932978399,
+          "best_trajectory_id": 77,
+          "trajectory_count": 10
+        }
+      }
+    }
+  }
+}
