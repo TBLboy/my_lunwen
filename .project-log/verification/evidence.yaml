@@ -1,0 +1,344 @@
+version: "0.2"
+evidence:
+  - id: EV-001
+    task_id: verify-plot-scripts
+    business_logic:
+      - BL-MODELING-007
+      - BL-MODELING-008
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - "& 'C:\\Users\\Windows\\.conda\\envs\\edmddl2\\python.exe' compare_all.py"
+    limitations:
+      - Baseline verification performed in the original 杂项 directory.
+    artifacts:
+      - 杂项/figures/metrics_table.txt
+  - id: EV-002
+    task_id: TASK-002
+    business_logic:
+      - BL-MODELING-001
+    acceptance_criteria:
+      - BL-MODELING-001/AC-001
+    result: passed
+    level: 3
+    commands:
+      - PowerShell Copy-Item and SHA256 hash comparison
+    limitations: []
+    artifacts:
+      - 建模代码/data/train_data.mat
+      - 建模代码/data/val_data.mat
+      - 建模代码/data/test_data.mat
+      - 建模代码/models/ours_model.pkl
+      - 建模代码/models/edmddl_model.pkl
+      - 建模代码/models/edmd_model.pkl
+      - 建模代码/models/meta.npz
+  - id: EV-003
+    task_id: TASK-003
+    business_logic:
+      - BL-MODELING-002
+      - BL-MODELING-003
+      - BL-MODELING-007
+    acceptance_criteria:
+      - BL-MODELING-002/AC-001
+      - BL-MODELING-007/AC-001
+    result: passed
+    level: 3
+    commands:
+      - modeling import and MAT shape smoke check
+    limitations: []
+    artifacts:
+      - 建模代码/modeling/data_io.py
+      - 建模代码/modeling/lift_function.py
+      - 建模代码/modeling/metrics.py
+  - id: EV-004
+    task_id: TASK-004
+    business_logic:
+      - BL-MODELING-004
+    acceptance_criteria:
+      - BL-MODELING-004/AC-001
+    result: passed
+    level: 3
+    commands:
+      - scripts/train_fs_edmd.py --check-load
+      - scripts/train_fs_edmd.py --N 5 --max-iter 2
+    limitations:
+      - Smoke training used reduced N and iterations and did not replace the copied baseline model.
+    artifacts:
+      - 建模代码/modeling/trainers/fs_edmd.py
+      - 建模代码/scripts/train_fs_edmd.py
+  - id: EV-005
+    task_id: TASK-005
+    business_logic:
+      - BL-MODELING-005
+    acceptance_criteria:
+      - BL-MODELING-005/AC-001
+    result: passed
+    level: 3
+    commands:
+      - scripts/train_edmddl.py --check-load
+      - scripts/train_edmddl.py --n-psi 8 --layer-sizes 64,64 --epochs 1
+    limitations:
+      - Smoke training used a compact network and one epoch and did not replace the copied baseline model.
+    artifacts:
+      - 建模代码/modeling/trainers/edmddl.py
+      - 建模代码/scripts/train_edmddl.py
+  - id: EV-006
+    task_id: TASK-006
+    business_logic:
+      - BL-MODELING-006
+    acceptance_criteria:
+      - BL-MODELING-006/AC-001
+    result: passed
+    level: 3
+    commands:
+      - scripts/train_edmd.py --check-load
+      - scripts/train_edmd.py --model-path <temp>
+    limitations:
+      - Training smoke wrote to a temporary path and did not replace the copied baseline model.
+    artifacts:
+      - 建模代码/modeling/trainers/edmd.py
+      - 建模代码/scripts/train_edmd.py
+  - id: EV-007
+    task_id: TASK-007
+    business_logic:
+      - BL-MODELING-003
+      - BL-MODELING-007
+      - BL-MODELING-008
+    acceptance_criteria:
+      - BL-MODELING-003/AC-001
+      - BL-MODELING-007/AC-001
+      - BL-MODELING-008/AC-001
+    result: passed
+    level: 3
+    commands:
+      - scripts/evaluate_and_plot.py --steps 800
+    limitations: []
+    artifacts:
+      - 建模代码/outputs/metrics/metrics_table.txt
+      - 建模代码/outputs/figures/position_comparison.png
+      - 建模代码/outputs/figures/position_comparison.pdf
+      - 建模代码/outputs/figures/position_comparison.svg
+      - 建模代码/outputs/figures/velocity_comparison.png
+      - 建模代码/outputs/figures/velocity_comparison.pdf
+      - 建模代码/outputs/figures/velocity_comparison.svg
+  - id: EV-008
+    task_id: TASK-008
+    business_logic:
+      - BL-MODELING-001
+      - BL-MODELING-002
+      - BL-MODELING-003
+      - BL-MODELING-007
+      - BL-MODELING-008
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - validate_project.py --root .
+    limitations: []
+    artifacts:
+      - .project-log/workflow.yaml
+      - .project-log/tasks/task-list.yaml
+  - id: EV-009
+    task_id: TASK-001
+    business_logic:
+      - BL-MODELING-001
+      - BL-MODELING-002
+      - BL-MODELING-003
+      - BL-MODELING-004
+      - BL-MODELING-005
+      - BL-MODELING-006
+      - BL-MODELING-007
+      - BL-MODELING-008
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - validate_project.py --root .
+    limitations: []
+    artifacts:
+      - .project-log/specs/modeling-refactor-spec.md
+  - id: EV-010
+    task_id: TASK-011
+    business_logic:
+      - BL-SOFT-002
+      - BL-SOFT-003
+    acceptance_criteria:
+      - BL-SOFT-002-AC-001
+    result: passed
+    level: 3
+    commands:
+      - python scripts/prepare_soft_data.py --check
+    limitations: []
+    artifacts:
+      - 杂项/软体平台探索实验结果/processed_data/split_manifest.json
+      - 杂项/软体平台探索实验结果/processed_data/train.npz
+      - 杂项/软体平台探索实验结果/processed_data/validation.npz
+      - 杂项/软体平台探索实验结果/processed_data/test.npz
+  - id: EV-011
+    task_id: TASK-012
+    business_logic:
+      - BL-SOFT-004
+    acceptance_criteria:
+      - BL-SOFT-004-AC-001
+    result: passed
+    level: 3
+    commands:
+      - python scripts/check_soft_lift.py
+    limitations: []
+    artifacts:
+      - 杂项/软体平台探索实验结果/feature_reports/default_soft_lift.json
+  - id: EV-012
+    task_id: TASK-013
+    business_logic:
+      - BL-SOFT-005
+      - BL-SOFT-006
+      - BL-MODELING-004
+      - BL-MODELING-006
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - python scripts/train_fs_edmd.py --check-load
+      - python scripts/train_edmd.py --check-load
+    limitations: []
+    artifacts:
+      - 建模代码/models/ours_model.pkl
+      - 建模代码/models/edmd_model.pkl
+  - id: EV-013
+    task_id: TASK-014
+    business_logic:
+      - BL-SOFT-008
+      - BL-SOFT-009
+    acceptance_criteria:
+      - BL-SOFT-008-AC-001
+    result: passed
+    level: 3
+    commands:
+      - python scripts/run_soft_experiment.py --run-id soft-base-001
+    limitations:
+      - soft-base-001 是第一组完整基线，不代表最终参数搜索结果
+    artifacts:
+      - 杂项/软体平台探索实验结果/runs/soft-base-001/metrics/summary.json
+      - 杂项/软体平台探索实验结果/runs/soft-base-001/run_config.json
+  - id: EV-014
+    task_id: TASK-013
+    business_logic:
+      - BL-SOFT-005
+      - BL-SOFT-006
+      - BL-SOFT-007
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - python scripts/check_soft_experiment_artifacts.py --run-id soft-base-001
+    limitations: []
+    artifacts:
+      - 杂项/软体平台探索实验结果/runs/soft-base-001/models/fs_edmd.pkl
+      - 杂项/软体平台探索实验结果/runs/soft-base-001/models/edmd.pkl
+      - 杂项/软体平台探索实验结果/runs/soft-base-001/models/edmd_dl.pkl
+  - id: EV-015
+    task_id: TASK-015
+    business_logic:
+      - BL-SOFT-009
+    acceptance_criteria:
+      - BL-SOFT-009-AC-001
+    result: passed
+    level: 3
+    commands:
+      - python scripts/evaluate_soft_experiments.py
+    limitations:
+      - 目前只有 soft-base-001 一个正式运行；smoke 运行不进入正式 leaderboard
+    artifacts:
+      - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+      - 杂项/软体平台探索实验结果/summaries/leaderboard.csv
+      - 杂项/软体平台探索实验结果/summaries/leaderboard_all.csv
+  - id: EV-016
+    task_id: TASK-015
+    business_logic:
+      - BL-SOFT-009
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - validate_project.py --root .
+      - loopctl.py --root . --json validate
+    limitations:
+      - 这是工作流与证据链校验，不替代 TASK-017 的最终参数搜索
+    artifacts:
+      - .project-log/research/solution-research.yaml
+      - .project-log/tasks/task-list.yaml
+      - .project-log/workflow.yaml
+      - .project-log/current-session.md
+  - id: EV-017
+    task_id: TASK-017
+    business_logic:
+      - BL-SOFT-004
+      - BL-SOFT-005
+      - BL-SOFT-006
+      - BL-SOFT-007
+      - BL-SOFT-008
+      - BL-SOFT-009
+      - BL-SOFT-010
+    acceptance_criteria:
+      - BL-SOFT-008-AC-001
+      - BL-SOFT-009-AC-001
+    result: passed
+    level: 3
+    commands:
+      - python scripts/run_soft_search.py --campaign soft-fs-opt-001
+      - python scripts/run_soft_search.py --campaign soft-fs-opt2-001
+      - python scripts/run_soft_search.py --campaign soft-lift-optg-001
+      - python scripts/run_soft_search.py --campaign soft-final-opt-001
+      - python scripts/evaluate_soft_experiments.py
+    limitations:
+      - coarse and fine candidate ranking used the validation split; the fixed test split was used for the final three-model runs.
+      - the selected FS-EDMD average RMSE is lower than the initial baseline but remains above EDMDDL on the fixed test set.
+    artifacts:
+      - 杂项/软体平台探索实验结果/runs/soft-final-006/run_config.json
+      - 杂项/软体平台探索实验结果/runs/soft-final-006/metrics/summary.json
+      - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+      - 杂项/软体平台探索实验结果/final/README.md
+  - id: EV-018
+    task_id: TASK-016
+    business_logic:
+      - BL-SOFT-005
+      - BL-SOFT-006
+      - BL-SOFT-007
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - python scripts/check_soft_experiment_artifacts.py --run-id soft-final-006 --test-limit 1
+      - PowerShell Get-FileHash comparison for final models and processed data
+    limitations: []
+    artifacts:
+      - 杂项/软体平台探索实验结果/runs/soft-final-006/models/fs_edmd.pkl
+      - 杂项/软体平台探索实验结果/runs/soft-final-006/models/edmd.pkl
+      - 杂项/软体平台探索实验结果/runs/soft-final-006/models/edmd_dl.pkl
+      - 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
+      - 杂项/软体平台探索实验结果/final/models/edmd.pkl
+      - 杂项/软体平台探索实验结果/final/models/edmd_dl.pkl
+  - id: EV-019
+    task_id: TASK-016
+    business_logic:
+      - BL-SOFT-001
+      - BL-SOFT-010
+    acceptance_criteria: []
+    result: passed
+    level: 3
+    commands:
+      - python C:/Users/Windows/.codex/vibe-workflow/scripts/validate_project.py --root .
+      - python C:/Users/Windows/.codex/vibe-workflow/scripts/loopctl.py --root . --json validate
+      - python C:/Users/Windows/.codex/vibe-workflow/scripts/loopctl.py --root . --json evaluate goal
+      - python C:/Users/Windows/.codex/vibe-workflow/scripts/loopctl.py --root . --json decide
+      - python C:/Users/Windows/.codex/vibe-workflow/scripts/loopctl.py --root . --json handoff
+    limitations:
+      - mechanical-arm baseline check-load passed before handoff.
+    artifacts:
+      - .project-log/goals/active-goal.yaml
+      - .project-log/tasks/task-list.yaml
+      - .project-log/current-session.md
+      - .project-log/progress.md
+      - .project-log/loop/active-run.yaml
+      - .project-log/loop/handoff.md

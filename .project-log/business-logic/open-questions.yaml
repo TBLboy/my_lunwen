@@ -1,0 +1,132 @@
+version: 0.2.1
+questions:
+- id: Q-001
+  title: 本次规划的业务交付目标
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: critical
+  related_business_logic: []
+  related_tasks: []
+  context: 项目目录包含机械臂 Simulink/数据、软体平台数据、三种 Koopman 建模方法与对比绘图脚本，但尚未定义本次规划的论文或工程目标。
+  recommendation: 先明确“论文阶段性成果”目标，再围绕它为数据、建模、对比实验和论文图表排序。
+  alternatives:
+  - name: 可复现论文实验链
+    description: 以代码、数据、结果一键复现为目标
+  - name: 补充新实验
+    description: 以新增建模或平台实验为目标
+  answer: 重构并迁移原工程论文3的建模代码（我们的模型训练代码、EDMD、EDMDDL）到当前工程的建模代码目录。
+  source_refs:
+  - 杂项/compare_all.py
+  - 控制实验部分代码/机械臂/Koopman_Data_Generator
+  - 数据备份/软体平台
+  - 数据备份/机械臂数据
+  - C:/Users/Windows/Desktop/论文3/1_建模精度对比
+  created_at: '2026-09-10T08:27:00Z'
+  answered_at: '2026-09-10T08:40:00Z'
+- id: Q-002
+  title: 重构迁移的代码范围与基线版本
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: medium
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: 原工程1_建模精度对比与当前杂项副本在compare_all.py、utils.py和test_data.mat上存在差异，且原工程还有NN训练与单独show脚本，需要确认迁移主体和基线版本。
+  recommendation: 以当前杂项中已跑通的绘图脚本和机械臂数据为基准；原工程绘图脚本不作为基线。
+  alternatives:
+  - name: 连评估绘图一起迁移
+    description: 重构后直接提供统一评估和绘图入口
+  - name: 以杂项副本为准
+    description: 以当前已跑通的杂项代码作为基线再重构
+  answer: 以当前杂项中的绘图脚本和所用的机械臂数据为基准；论文3中的绘图脚本跑出发散结果，不作为基线。
+  source_refs:
+  - C:/Users/Windows/Desktop/论文3/1_建模精度对比
+  - 杂项
+  created_at: '2026-09-10T08:40:00Z'
+  answered_at: '2026-09-10T08:50:00Z'
+- id: Q-003
+  title: 重构后建模代码的闭环边界
+  status: answered
+  authority: C
+  impact: high
+  uncertainty: medium
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: 用户希望重构并迁移三类建模代码，但尚需确认交付范围是仅整理迁移代码，还是覆盖训练、评估、绘图完整可运行闭环。
+  recommendation: 覆盖训练到评估到绘图的完整闭环，因为当前杂项已具备这一链路且已跑通，验证成本最低。
+  alternatives:
+  - name: 仅整理迁移代码
+    description: 只保证代码结构和文件迁移，不额外统一运行入口
+  - name: 暂不含训练闭环
+    description: 先只迁移可跑通的评估绘图链路，训练接口后续再接
+  answer: 覆盖数据加载、训练/加载模型、评估、绘图的完整闭环。
+  source_refs:
+  - 杂项
+  - C:/Users/Windows/Desktop/论文3/1_建模精度对比
+  created_at: '2026-09-10T08:50:00Z'
+  answered_at: '2026-09-10T09:00:00Z'
+- id: Q-004
+  title: 建模代码目录中的数据、模型和输出组织方式
+  status: answered
+  authority: C
+  impact: high
+  uncertainty: medium
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks: []
+  context: 完整闭环需要机械臂数据、模型文件和输出目录；需要确认这些资源是复制进建模代码目录形成自包含项目，还是通过配置引用现有备份目录。
+  recommendation: 将当前杂项中已验证的数据、模型和输出资源纳入建模代码目录，形成可独立复现的工程；原始备份仍保留在数据备份中。
+  alternatives:
+  - name: 仅代码目录
+    description: 建模代码只包含代码和配置，运行时通过路径读取外部数据/模型
+  - name: 只复制必要资源
+    description: 复制训练、测试数据的处理版和三个模型，输出统一放结果目录
+  answer: 建模代码采用自包含工程，数据和模型文件从当前杂项复制到建模代码目录，复制而非剪切。
+  source_refs:
+  - 杂项/data
+  - 杂项/models
+  - 杂项/figures
+  created_at: '2026-09-10T09:00:00Z'
+  answered_at: '2026-09-10T09:10:00Z'
+- id: Q-005
+  title: 软体平台 7:2:1 数据划分是否固定一次并锁定
+  status: answered
+  authority: C
+  impact: high
+  uncertainty: low
+  rework_cost: high
+  related_business_logic:
+  - BL-SOFT-002
+  related_tasks: []
+  context: 原始数据为 100 条轨迹，每条 300 步；业务要求按 7:2:1 生成 70 条训练、20 条验证、10 条测试。若每轮探索都重新抽样，测试集可能被无意中用于调参，导致论文结果不可复现。
+  recommendation: 固定一次带随机种子的确定性划分并保存划分清单；后续所有探索只使用同一训练/验证集，10 条测试轨迹仅在最终评估阶段使用。
+  alternatives:
+  - name: 每次探索重新划分
+    description: 实现简单，但结果不公平且不可复现。
+  - name: 按文件名顺序划分
+    description: 确定但可能引入顺序偏差。
+  answer: 固定一次：采用确定性轨迹划分 70/20/10；后续探索只调整训练参数配置和升维函数库，不调整数据集划分。
+  source_refs:
+  - 数据备份/软体平台/原始数据
+  created_at: '2026-09-11T11:05:00Z'
+  answered_at: '2026-09-11T19:25:00Z'
+- id: Q-006
+  title: 每条轨迹的精度指标定义
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: low
+  rework_cost: critical
+  related_business_logic: []
+  related_tasks: []
+  context: 筛选训练配置需要统一精度口径；用户确认采用 RMSE。
+  recommendation: 每条轨迹计算去归一化后 xy 位置预测 RMSE；平均精度为 10 条轨迹 RMSE 均值；最高精度为 RMSE 最小的单条轨迹。
+  alternatives: []
+  answer: RMSE
+  source_refs: []
+  created_at: '2026-09-11T11:04:00Z'
+  answered_at: '2026-09-11T11:04:00Z'

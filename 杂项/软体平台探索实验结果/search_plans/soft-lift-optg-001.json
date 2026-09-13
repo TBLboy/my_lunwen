@@ -1,0 +1,84 @@
+{
+  "campaign": "soft-lift-optg-001",
+  "description": "Stage 2h lift-grid search under the improved FS-EDMD optimizer settings.",
+  "configs": [
+    {
+      "run_id": "soft-lift-optg-g11-d090-clip1",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.9,
+      "fs_grad_clip_norm": 1.0
+    },
+    {
+      "run_id": "soft-lift-optg-g11-d095-clip1",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.95,
+      "fs_grad_clip_norm": 1.0
+    },
+    {
+      "run_id": "soft-lift-optg-g13-d090-clip1",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.9,
+      "fs_grad_clip_norm": 1.0
+    },
+    {
+      "run_id": "soft-lift-optg-g13-d095-clip1",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.95,
+      "fs_grad_clip_norm": 1.0
+    },
+    {
+      "run_id": "soft-lift-optg-g13-d095-clip05",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.95,
+      "fs_grad_clip_norm": 0.5
+    },
+    {
+      "run_id": "soft-lift-optg-g15-d095-clip1",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.95,
+      "fs_grad_clip_norm": 1.0
+    }
+  ]
+}

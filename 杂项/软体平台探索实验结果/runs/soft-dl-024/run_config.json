@@ -1,0 +1,55 @@
+{
+  "run_id": "soft-dl-024",
+  "arguments": {
+    "run_id": "soft-dl-024",
+    "seed": 20260911,
+    "models": "edmd_dl",
+    "smoke": false,
+    "lift_poly_degree": 4,
+    "lift_rbf_grid": 9,
+    "lift_rbf_sigma_scale": 0.6,
+    "lift_freqs": "1,2,3,4",
+    "fs_n": 40,
+    "fs_lam": 0.001,
+    "fs_beta": 0.001,
+    "fs_eta_d": 0.01,
+    "fs_max_iter": 2000,
+    "fs_tol": 1e-06,
+    "edmd_reg": 1e-06,
+    "edmd_dl_n_psi": 100,
+    "edmd_dl_layers": "512,512,512",
+    "edmd_dl_lr": 0.0001,
+    "edmd_dl_reg": 1e-06,
+    "edmd_dl_epochs": 50,
+    "edmd_dl_batch_size": 2048,
+    "test_limit": 10,
+    "eval_splits": "test,validation"
+  },
+  "lift": {
+    "kind": "soft_lift",
+    "poly_degree": 4,
+    "rbf_grid_size": 9,
+    "rbf_sigma_scale": 0.6,
+    "trig_frequencies": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "input_center": [
+      0.165288188170442,
+      0.12828487871310035
+    ],
+    "input_scale": [
+      2.559911954542496,
+      2.6543986829263413
+    ]
+  },
+  "methods": [
+    "edmd_dl"
+  ],
+  "eval_splits": [
+    "test",
+    "validation"
+  ]
+}

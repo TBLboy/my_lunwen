@@ -1,0 +1,246 @@
+{
+    "campaign":  "soft-edmddl-coarse-001",
+    "description":  "Stage 3 EDMDDL-only validation coarse search.",
+    "configs":  [
+                    {
+                        "run_id":  "soft-dl-001",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-002",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-003",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-004",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-005",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-006",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-007",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-008",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-009",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-010",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-011",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-012",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-013",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-014",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-015",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-016",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-017",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-018",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-019",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-020",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  50,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-021",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-022",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-dl-023",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0003
+                    },
+                    {
+                        "run_id":  "soft-dl-024",
+                        "models":  "edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "edmd_dl_n_psi":  100,
+                        "edmd_dl_layers":  "512,512,512",
+                        "edmd_dl_lr":  0.0001
+                    }
+                ]
+}

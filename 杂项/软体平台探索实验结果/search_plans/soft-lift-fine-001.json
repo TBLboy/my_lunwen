@@ -1,0 +1,114 @@
+{
+    "campaign":  "soft-lift-fine-001",
+    "description":  "Stage 2d lift library fine search under best FS regularization.",
+    "configs":  [
+                    {
+                        "run_id":  "soft-lift-fine-p3",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  3,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2,3,4",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-p5",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  5,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2,3,4",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-g7",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  7,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2,3,4",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-g11",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  11,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2,3,4",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-s08",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.8,
+                        "lift_freqs":  "1,2,3,4",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-s12",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1.2,
+                        "lift_freqs":  "1,2,3,4",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-t12",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-t123",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2,3",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-lift-fine-t12345",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "lift_freqs":  "1,2,3,4,5",
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    }
+                ]
+}

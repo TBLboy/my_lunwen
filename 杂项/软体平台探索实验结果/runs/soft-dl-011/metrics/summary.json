@@ -1,0 +1,177 @@
+{
+  "run_id": "soft-dl-011",
+  "created_at": "2026-09-11T13:26:23.541742+00:00",
+  "smoke": false,
+  "test_limit": 10,
+  "eval_splits": [
+    "test",
+    "validation"
+  ],
+  "lift": {
+    "dimension": 112,
+    "poly_degree": 4,
+    "rbf_grid_size": 9,
+    "rbf_sigma_scale": 1.0,
+    "trig_frequencies": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "input_center": [
+      0.165288188170442,
+      0.12828487871310035
+    ],
+    "input_scale": [
+      2.559911954542496,
+      2.6543986829263413
+    ],
+    "rbf_sigma": [
+      0.25,
+      0.25
+    ],
+    "groups": {
+      "constant": 1,
+      "linear": 2,
+      "polynomial": 12,
+      "rbf": 81,
+      "trig": 16
+    },
+    "sample_condition_number": 197311.81809576775,
+    "sample_finite": true
+  },
+  "methods": {
+    "edmd_dl": {
+      "average_rmse": 1.6110040307809979,
+      "best_rmse": 0.9605569170607057,
+      "best_trajectory_id": 66,
+      "trajectory_count": 10
+    }
+  },
+  "split_metrics": {
+    "test": {
+      "per_trajectory": [
+        {
+          "trajectory_id": 6,
+          "steps": 299,
+          "edmd_dl_rmse": 0.9623099756366235
+        },
+        {
+          "trajectory_id": 12,
+          "steps": 299,
+          "edmd_dl_rmse": 1.076481976340808
+        },
+        {
+          "trajectory_id": 32,
+          "steps": 299,
+          "edmd_dl_rmse": 2.4364737758749855
+        },
+        {
+          "trajectory_id": 36,
+          "steps": 299,
+          "edmd_dl_rmse": 2.8887131509683197
+        },
+        {
+          "trajectory_id": 42,
+          "steps": 299,
+          "edmd_dl_rmse": 1.7068324974691214
+        },
+        {
+          "trajectory_id": 64,
+          "steps": 299,
+          "edmd_dl_rmse": 1.0440251548940862
+        },
+        {
+          "trajectory_id": 66,
+          "steps": 299,
+          "edmd_dl_rmse": 0.9605569170607057
+        },
+        {
+          "trajectory_id": 77,
+          "steps": 299,
+          "edmd_dl_rmse": 1.2291006397362996
+        },
+        {
+          "trajectory_id": 83,
+          "steps": 299,
+          "edmd_dl_rmse": 2.218841777542621
+        },
+        {
+          "trajectory_id": 93,
+          "steps": 299,
+          "edmd_dl_rmse": 1.586704442286409
+        }
+      ],
+      "methods": {
+        "edmd_dl": {
+          "average_rmse": 1.6110040307809979,
+          "best_rmse": 0.9605569170607057,
+          "best_trajectory_id": 66,
+          "trajectory_count": 10
+        }
+      }
+    },
+    "validation": {
+      "per_trajectory": [
+        {
+          "trajectory_id": 7,
+          "steps": 299,
+          "edmd_dl_rmse": 1.1935747517962234
+        },
+        {
+          "trajectory_id": 11,
+          "steps": 299,
+          "edmd_dl_rmse": 1.142153239103882
+        },
+        {
+          "trajectory_id": 15,
+          "steps": 299,
+          "edmd_dl_rmse": 2.0428150409240318
+        },
+        {
+          "trajectory_id": 16,
+          "steps": 299,
+          "edmd_dl_rmse": 1.803111822496024
+        },
+        {
+          "trajectory_id": 18,
+          "steps": 299,
+          "edmd_dl_rmse": 0.94619052459675
+        },
+        {
+          "trajectory_id": 22,
+          "steps": 299,
+          "edmd_dl_rmse": 3.011985760903694
+        },
+        {
+          "trajectory_id": 27,
+          "steps": 299,
+          "edmd_dl_rmse": 1.4217229698164293
+        },
+        {
+          "trajectory_id": 28,
+          "steps": 299,
+          "edmd_dl_rmse": 1.423783541594734
+        },
+        {
+          "trajectory_id": 31,
+          "steps": 299,
+          "edmd_dl_rmse": 1.963258992642974
+        },
+        {
+          "trajectory_id": 34,
+          "steps": 299,
+          "edmd_dl_rmse": 2.3826810365481332
+        }
+      ],
+      "methods": {
+        "edmd_dl": {
+          "average_rmse": 1.7331277680422876,
+          "best_rmse": 0.94619052459675,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    }
+  }
+}

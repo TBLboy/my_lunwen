@@ -1,0 +1,248 @@
+version: '0.2'
+studies:
+- id: RES-001
+  status: complete
+  problem: 为新设备软体平台选择数据准备、约 200 维升维函数库、三类模型训练、10 条测试轨迹评估和配置探索的实现路径。
+  related_business_logic:
+  - BL-SOFT-001
+  - BL-SOFT-002
+  - BL-SOFT-003
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  related_tasks:
+  - TASK-010
+  - TASK-011
+  - TASK-012
+  - TASK-013
+  - TASK-014
+  - TASK-015
+  - TASK-016
+  constraints:
+  - 代码放在建模代码根目录，不新增 soft_platform 等软体平台专属子文件夹。
+  - 数据固定 7:2:1 划分，测试集为固定 10 条轨迹，不参与训练和调参。
+  - 状态 x 与控制 u 均为 2D，训练与评估使用 Float64。
+  - 升维函数库目标约 200 维，必须包含常数项和 x/y 分量。
+  - 实验中的模型、中间数据、指标和图表输出到杂项/软体平台探索实验结果。
+  - 不得破坏已完成的机械臂建模代码、数据和模型基线。
+  candidates:
+  - name: 复用现有 modeling 包并增加软体平台适配层
+    source: 建模代码/modeling/*.py 与 scripts/*.py 现状
+    capability_match: 可直接复用 FS-EDMD/EDMD/EDMDDL 训练器、指标和实验入口，只需新增 npz 数据管线和 2D 升维函数。
+    integration_cost: 低：给训练器增加可选 lift_fn/state_dim/control_dim 参数可兼容机械臂默认行为。
+    maintenance_cost: 低：代码仍在一个建模代码工程，避免平铺脚本重复实现。
+    performance: 高：训练器、矩阵求解、网络结构均已存在，重点是数据与特征适配。
+    reliability: 较高：机械臂基线已通过验证，默认行为兼容可减少回归风险。
+    lock_in: 无外部框架依赖。
+    risk: 需要保持机械臂模型加载/预测兼容；通过 --check-load 与基线指标回归验证。
+    fit: 推荐
+  - name: 在建模代码根目录新增平铺软体训练脚本
+    source: 现有平铺脚本风格
+    capability_match: 可完成软体平台功能，但不复用现有训练器。
+    integration_cost: 中高：需要重新实现公共逻辑。
+    maintenance_cost: 高：与 modeling 包重复，探索配置调整成本高。
+    performance: 中
+    reliability: 中
+    lock_in: 低
+    risk: 平铺脚本容易路径混乱，与现有工程风格不一致。
+    fit: 不推荐
+  - name: 新建建模代码/soft_platform 子目录
+    source: 用户明确要求不创建子文件夹
+    capability_match: 可隔离代码，但违反已确认目录约束。
+    integration_cost: 中
+    maintenance_cost: 中
+    performance: 中
+    reliability: 中
+    lock_in: 低
+    risk: 直接与用户确认的 DEC-004 冲突。
+    fit: 排除
+  - name: 引入第三方 Koopman 库
+    source: pykoopman 等通用库，未进入项目依赖
+    capability_match: 可提供通用 EDMD/DMD 工具，但本项目需要保留自定义 FS-EDMD 与 EDMDDL 论文算法。
+    integration_cost: 高：需要重写训练/保存/预测接口。
+    maintenance_cost: 中
+    performance: 中
+    reliability: 中
+    lock_in: 中
+    risk: 偏离现有已跑通算法，增加复现不一致风险。
+    fit: 不推荐
+  strategy: spike-first
+  recommendation:
+    implementation: 复用现有 modeling 包，新增 soft_data.py 数据管线和 soft_lift.py 2D 升维函数库；为
+      FS-EDMD/EDMD 增加可选 lift_fn，EDMDDL 使用可配置维度；新增 scripts/prepare_soft_data.py 和 scripts/run_soft_experiment.py。
+    lift_library_baseline: 候选 200 维 = 常数/x/y（3 维）+ 多项式到 4 次（12 维）+ 13x13 高斯 RBF（169
+      维）+ 低频 sin/cos（16 维）。
+    data_pipeline: 读取 100 条 npz，按固定规则整轨划分 70/20/10，构造 X=x[t]、U=u[t]、Y=x[t+1]，保存 Float64
+      npz 到实验输出目录 processed_data。
+    evaluation: 每组在同一固定 10 条测试轨迹上逐条递归预测，计算反归一化 xy RMSE，输出逐轨迹表、平均 RMSE 和最高精度。
+    spike: 先用候选 200 维特征库跑一个短探索组；若 RBF 条件数导致不稳定，再调整中心网格、宽度、标准化、正则或 PCA 截断。
+  conditions:
+  - 若用户要求完全不改动现有训练器文件，则改为在建模代码根目录新增包装/适配脚本。
+  - 若 200 维候选特征库在冒烟中数值不稳定，应先调整 RBF、标准化和正则，再进入全量探索。
+  - 若仅状态升维不足，可增加状态-控制联合或控制相关特征并记录为新探索变量。
+  contrary_evidence:
+  - 现有 lift_function 针对 6 维机械臂状态实现，对 2 维输入无法直接使用。
+  - 现有 data_io 读取 mat，不能直接读取软体平台 npz 原始数据。
+  - 线性近似残差 RMSE 约 0.118，不能仅保留线性项。
+  confidence: 0.85
+  decision_ref: DEC-005
+  sources:
+  - 建模代码/modeling/lift_function.py
+  - 建模代码/modeling/data_io.py
+  - 建模代码/modeling/trainers/fs_edmd.py
+  - 建模代码/modeling/trainers/edmddl.py
+  - 建模代码/modeling/trainers/edmd.py
+  - 数据备份/软体平台/原始数据/*.npz 只读统计
+  retrieved_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T19:55:00Z'
+- id: RES-002
+  status: complete
+  problem: 在初步闭环跑通后，为软体平台找到使 FS-EDMD 最高精度最优且平均 RMSE 尽量低的论文候选参数与升维函数库组合。
+  related_business_logic:
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-009
+  - BL-SOFT-010
+  related_tasks:
+  - TASK-013
+  - TASK-014
+  - TASK-015
+  - TASK-017
+  constraints:
+  - 数据划分固定，测试集固定 10 条，不参与训练或早停。
+  - 候选筛选最终以固定 10 条测试轨迹的逐条、平均和最高精度为准。
+  - 探索可调整训练参数与升维函数库，不调整数据划分。
+  candidates:
+  - name: 现有一组默认 200 维升维库 + FS-EDMD 基线的直接沿用
+    source: 杂项/软体平台探索实验结果/runs/soft-base-001
+    capability_match: FS-EDMD best=0.7346 已优于 EDMD best=1.7267 与 EDMDDL best=0.9860，满足最高精度最优约束。
+    integration_cost: 已完成
+    maintenance_cost: 低
+    performance: 平均 RMSE 1.6849，仍有降低空间
+    reliability: 较高，固定划分和重载校验通过
+    lock_in: 无
+    risk: 当前 FS-EDMD 平均 RMSE 高于 EDMDDL，论文展示时不够理想
+    fit: 作为对照保留
+  - name: 粗到细参数搜索（FS-EDMD N/正则/eta_D + 升维 RBF/多项式）
+    source: 当前 OursKoopmanTrainer 与 SoftLift 可配置接口
+    capability_match: 可分别调整潜在维度、稀疏/正则强度、迭代步长和 RBF 宽度/网格，寻找平均 RMSE 更低且不损失最高精度最优的配置。
+    integration_cost: 低，现有 run_soft_experiment.py 已支持参数入口
+    maintenance_cost: 低
+    performance: 预期可改善；需要控制搜索成本和失败配置保留
+    reliability: 中，需依赖验证集/测试集重复评估确认
+    lock_in: 无
+    risk: 特征条件数过高或 D 优化不稳定会导致部分候选发散；应保留失败记录并退回稳定候选
+    fit: 推荐
+  - name: 扩大状态-控制联合特征或更换非线性核
+    source: 软体平台绳驱映射接近线性但不完全线性，当前 RBF/多项式/三角组合可调
+    capability_match: 可为控制相关动态增加特征，但会改变维度与训练成本
+    integration_cost: 中
+    maintenance_cost: 中
+    performance: 未知
+    reliability: 未知
+    lock_in: 无
+    risk: 探索收益不确定，且需新增特征配置兼容
+    fit: 仅当参数搜索收益不足时再考虑
+  strategy: spike-first
+  recommendation:
+    fs_edmd_search: 网格覆盖 N=20/40/80/120，lam/beta=1e-4/1e-3/1e-2，eta_D=5e-3/1e-2/3e-2；优先用验证集指标排序，再对少量候选做固定 10 轨迹正式评估。
+    lift_search: 多项式 3/4 阶；RBF 网格 9/11/13/15；rbf_sigma_scale 0.6/0.8/1.0；记录条件数与有限性。
+    edmddl_search: n_psi=20/50/100；网络 256,256 与 512,512,512；lr=3e-4/1e-4；测试集在最终候选阶段使用。
+    edmd_search: 正则 1e-6/1e-4/1e-2，作为其余两模型的对照。
+    final_deliverable: 从满足 FS-EDMD 最高精度最优的候选中，取平均 RMSE 最低者为论文候选，复制最终模型、配置、汇总表与复现命令到 杂项/软体平台探索实验结果/final/。
+  conditions:
+  - 若粗搜索后 FS-EDMD 无法保持最高精度最优，则保留当前 soft-base-001 作为回退并记录原因。
+  - 若 RBF 条件数过高导致求解失败，首先收紧 sigma/网格或增加正则，再进入算法参数调整。
+  - 若 EDMDDL 在测试集上持续优于 FS-EDMD 的平均 RMSE，用户选择优先级仍以最高精度最优为硬约束，平均 RMSE 为第二优化目标。
+  contrary_evidence:
+  - soft-base-001 中 FS-EDMD 平均 RMSE 1.6849 高于 EDMDDL 1.6214，说明默认超参数并非平均精度最优。
+  - 默认特征条件数约 1.67e6，数值稳定性需要持续记录。
+  confidence: 0.8
+  decision_ref: DEC-005
+  sources:
+  - 杂项/软体平台探索实验结果/runs/soft-base-001/metrics/summary.json
+  - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+  - 建模代码/scripts/run_soft_experiment.py
+  - 建模代码/modeling/soft_lift.py
+  retrieved_at: '2026-09-11T20:20:00Z'
+  updated_at: '2026-09-11T20:20:00Z'
+- id: RES-003
+  status: complete
+  problem: 把 soft-base-001 之后的参数搜索细化成可执行、可验证的粗到细方案，明确候选范围、排序口径和最终论文候选规则。
+  related_business_logic:
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  related_tasks:
+  - TASK-015
+  - TASK-017
+  constraints:
+  - 粗搜和细搜只使用验证集排名；固定 10 条测试轨迹只在最终候选确认阶段使用。
+  - 搜索可调整训练参数与升维函数库，不调整数据划分。
+  - 正式 leaderboard 只统计包含三模型的非 smoke run。
+  candidates:
+  - name: 一次性全量网格
+    source: 当前允许的搜索维度直接求笛卡尔积
+    capability_match: 覆盖面完整，但组合数量过大，运行成本与失败归因成本高。
+    integration_cost: 低
+    maintenance_cost: 低
+    performance: 未知
+    reliability: 低
+    lock_in: 无
+    risk: 大量组合同时探索会难以区分主导因素，并可能在调参阶段反复接触测试集。
+    fit: 不推荐
+  - name: 分阶段验证集粗到细搜索
+    source: soft-base-001 基线、run_soft_experiment.py、evaluate_soft_experiments.py
+    capability_match: 先筛升维库，再筛 FS-EDMD，最后筛 EDMDDL；只有少量最终候选接触测试集。
+    integration_cost: 低
+    maintenance_cost: 低
+    performance: 运行总量可控，且每阶段结果可单独复核。
+    reliability: 中高
+    lock_in: 无
+    risk: 贪心分阶段可能错过部分交互效应；通过最终多个候选和回退基线缓解。
+    fit: 推荐
+  - name: 直接用测试集调参
+    source: 当前 run_soft_experiment.py 默认同时评估 test/validation
+    capability_match: 可能更快得到漂亮测试指标。
+    integration_cost: 低
+    maintenance_cost: 低
+    performance: 未知
+    reliability: 低
+    lock_in: 无
+    risk: 把测试集用于早期筛选，违反用户固定测试集只做最终确认的要求，存在选择泄漏。
+    fit: 不推荐
+  strategy: spike-first
+  recommendation:
+    stage_1_lift: 24 组升维库粗搜索，poly_degree=3/4、rbf_grid=9/11/13/15、rbf_sigma_scale=0.6/0.8/1.0；只跑 fs_edmd/edmd，按验证集 FS average RMSE 排序。
+    stage_2_fs: 先扫 fs_n=20/40/80/120，再在最佳 N 下扫 fs_lam/fs_beta/fs_eta_d 的 3x3x3 网格，共 31 个 FS/EDMD 验证集运行。
+    stage_3_edmddl: 用 n_psi=20/50/100、layers=256,256 与 512,512,512、lr=3e-4/1e-4 做 12 个 EDMDDL-only 验证集运行。
+    stage_4_final: 最多 3 个三模型正式候选，在固定 10 测试轨迹确认，并刷新正式 leaderboard。
+    stage_5_package: 复制最终模型、run_config、轨迹 RMSE、汇总指标和复现命令到 final 包。
+    selection_rule: FS-EDMD 的 best RMSE 必须严格低于 EDMD/EDMDDL 的 best RMSE；在满足条件者中选 FS-EDMD average RMSE 最低者；无满足者则回退 soft-base-001。
+  conditions:
+  - 若验证集上 FS-EDMD 无法保持 best RMSE 优势，保留 soft-base-001 作为回退并记录失败原因。
+  - 若特征条件数继续导致求解放大，优先收紧 sigma/网格或加强正则，再进入算法参数细调。
+  - 若最终候选在测试集上不满足约束，不得为了指标改写筛选规则，应回退并记录。
+  contrary_evidence:
+  - soft-base-001 中 FS-EDMD 平均 RMSE 高于 EDMDDL，说明默认超参数不是平均精度最优。
+  - 默认特征条件数约 1.67e6，粗搜需要记录每个升维配置的条件数和有限性。
+  confidence: 0.85
+  decision_ref: DEC-005
+  sources:
+  - 杂项/软体平台探索实验结果/search_plans/README.md
+  - 杂项/软体平台探索实验结果/runs/soft-base-001/metrics/summary.json
+  - 建模代码/scripts/run_soft_experiment.py
+  - 建模代码/scripts/evaluate_soft_experiments.py
+  - 建模代码/modeling/soft_lift.py
+  retrieved_at: '2026-09-11T20:45:00Z'
+  updated_at: '2026-09-11T20:45:00Z'

@@ -1,0 +1,554 @@
+schema_version: 1
+evidence:
+- id: EV-001
+  kind: manual-run
+  subject: 杂项绘图脚本 compare_all.py 可运行
+  status: valid
+  command: C:\Users\Windows\.conda\envs\edmddl2\python.exe compare_all.py
+  result_ref: 杂项/figures/metrics_table.txt
+  covers:
+    files:
+    - 杂项/compare_all.py
+    - 杂项/utils.py
+    - 杂项/train_ours.py
+    - 杂项/train_edmddl.py
+    - 杂项/train_edmd.py
+    - 杂项/data/test_data.mat
+    - 杂项/models/ours_model.pkl
+    - 杂项/models/edmddl_model.pkl
+    - 杂项/models/edmd_model.pkl
+    - 杂项/models/meta.npz
+    - 杂项/figures/position_comparison.png
+    - 杂项/figures/velocity_comparison.png
+    - 杂项/figures/metrics_table.txt
+    requirements: []
+    tasks: []
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/compare_all.py: c9d6ff8b3dfd75ae69e1b546767cc16a67adf5d7ec647ff6af346255f9f9db0a
+      杂项/utils.py: c1c10b537ab1d86149c847ad6ea5f7c803ee17323c1360f59c3ac5500bec27a1
+      杂项/train_ours.py: 3c90a7b3fc3c128b8dcf572a4f7cb68e66f1d027ce658cb4b2985513b7cc61ae
+      杂项/train_edmddl.py: e578579c96ca6a89e67ccd03bcf263d88f30b2b5b2fb2560f06bd88786e319cb
+      杂项/train_edmd.py: 3a7993861ea232ae7af7009250476f58c103d99d7b2d8d3824ff9a8ccd8bc860
+      杂项/data/test_data.mat: cb27537dbe98b6c87dd1d422da6617c78dd4d99b881e84641dac85563064e8dc
+      杂项/models/ours_model.pkl: 33e02881f1d599750d902b606c8ebc314684a3c8509dc559d53e72510f4d25dd
+      杂项/models/edmddl_model.pkl: 8c42bcb2daea639fd2d95258fcd5c7763eb5a4e8de6dec86dd784eae5b279d21
+      杂项/models/edmd_model.pkl: 5433c2773b9470c0fb903e142e026a1c0b68d360b6e3a9fa3930f105c10e68ba
+      杂项/models/meta.npz: 8f8d6930522320e19947df9f7d8e63dee24da5a2bf7b911281e85eeb70f4e4a5
+      杂项/figures/position_comparison.png: e12ed8a6aa230065db5e61c3ce1046bca6273f551fad595a7d98bba3948a30ba
+      杂项/figures/velocity_comparison.png: ee189c195e165ed459de9765f7c7b759de3d9d9f89705b762169d73eb23b9615
+      杂项/figures/metrics_table.txt: 9543c86fa43ef71d8f0858c4958dac6128b81425cbf102301b682827f03c1d21
+  recorded_at: '2026-09-10T03:50:46Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-007
+  kind: automated-run
+  subject: closed-loop evaluate and plot produced non-empty outputs with baseline
+    metrics
+  status: valid
+  command: python scripts/evaluate_and_plot.py --steps 800
+  result_ref: 建模代码/outputs/metrics/metrics_table.txt
+  covers:
+    files:
+    - 建模代码/scripts/evaluate_and_plot.py
+    - 建模代码/outputs/metrics/metrics_table.txt
+    - 建模代码/outputs/figures/position_comparison.png
+    - 建模代码/outputs/figures/position_comparison.pdf
+    - 建模代码/outputs/figures/position_comparison.svg
+    - 建模代码/outputs/figures/velocity_comparison.png
+    - 建模代码/outputs/figures/velocity_comparison.pdf
+    - 建模代码/outputs/figures/velocity_comparison.svg
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-007
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/scripts/evaluate_and_plot.py: 133e9294a6f9bba56791ba4eadeeec42380a8c60caf3bee8d44a6201988b926d
+      建模代码/outputs/metrics/metrics_table.txt: 5c2f217234c2b77a9e253bb1af440f13eb2d842b16b450c522647a4247c9fddb
+      建模代码/outputs/figures/position_comparison.png: e12ed8a6aa230065db5e61c3ce1046bca6273f551fad595a7d98bba3948a30ba
+      建模代码/outputs/figures/position_comparison.pdf: 6f654983f6f0f4aa9ea10c8a0acf759526c3311bfc75234494196a6e713fcd39
+      建模代码/outputs/figures/position_comparison.svg: 9df68843ae59cf841bf4324c81269cebd5d88b19b11224f685bac8e48e46e7ad
+      建模代码/outputs/figures/velocity_comparison.png: ee189c195e165ed459de9765f7c7b759de3d9d9f89705b762169d73eb23b9615
+      建模代码/outputs/figures/velocity_comparison.pdf: 47cc1644330b032303eb89598aa7e61c95b7418dbfed9c9fe5862dcc70ea5a5a
+      建模代码/outputs/figures/velocity_comparison.svg: 50428fc2d022e1b8dcd56e2624db7f9fdc03875932fb3137aef1567238a2fd7c
+  recorded_at: '2026-09-10T12:33:10Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-005
+  kind: automated-run
+  subject: EDMDDL trainer loads baseline and generates loadable model
+  status: valid
+  command: scripts/train_edmddl.py --check-load; train smoke with --n-psi 8 --layer-sizes
+    64,64 --epochs 1
+  result_ref: models/edmddl_model.pkl
+  covers:
+    files:
+    - 建模代码/modeling/trainers/edmddl.py
+    - 建模代码/scripts/train_edmddl.py
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-005
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/modeling/trainers/edmddl.py: b0b1d236d22e39f93b9c0a0993858734a113d113caa098c76bf144f391f908d4
+      建模代码/scripts/train_edmddl.py: 8996039aa3cd688bbd8fe5e56f87c9e7243d48a0163d2fb51832f7c0d309cc6b
+  recorded_at: '2026-09-10T12:33:10Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-003
+  kind: automated-run
+  subject: shared data/lift/metrics modules load and match baseline contracts
+  status: valid
+  command: python smoke import + shape check
+  result_ref: 建模代码/outputs/metrics/metrics_table.txt
+  covers:
+    files:
+    - 建模代码/modeling/data_io.py
+    - 建模代码/modeling/lift_function.py
+    - 建模代码/modeling/metrics.py
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-003
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/modeling/data_io.py: 31fa31298b086a767ad3f634a37f288fc5337f1fbafdd970ef66adfda4cfc4fe
+      建模代码/modeling/lift_function.py: bed6dc535651ae62cf25c0fdb620a4c1ba5677915a9e54a3eb72a0633a40d4fb
+      建模代码/modeling/metrics.py: 8ce438cd541ea8933ebc46c0fe9c7b508bd99bc452c90cc0405e60cb528caf50
+  recorded_at: '2026-09-10T12:33:10Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-002
+  kind: automated-run
+  subject: 建模代码 data/models copied from 杂项 and hash-verified
+  status: valid
+  command: Copy-Item + Get-FileHash SHA256 comparison
+  result_ref: 建模代码/models/meta.npz
+  covers:
+    files:
+    - 建模代码/data/train_data.mat
+    - 建模代码/data/val_data.mat
+    - 建模代码/data/test_data.mat
+    - 建模代码/models/ours_model.pkl
+    - 建模代码/models/edmddl_model.pkl
+    - 建模代码/models/edmd_model.pkl
+    - 建模代码/models/meta.npz
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-002
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/data/train_data.mat: b222db168cf17c1aab99c15eac4b1b7cee074963501e66954f45c49ae4cf840e
+      建模代码/data/val_data.mat: 457b47b8f3cd57a2599eaeec61346ed32b55f75f8e751bf034b046dc23e5e0aa
+      建模代码/data/test_data.mat: cb27537dbe98b6c87dd1d422da6617c78dd4d99b881e84641dac85563064e8dc
+      建模代码/models/ours_model.pkl: 33e02881f1d599750d902b606c8ebc314684a3c8509dc559d53e72510f4d25dd
+      建模代码/models/edmddl_model.pkl: 8c42bcb2daea639fd2d95258fcd5c7763eb5a4e8de6dec86dd784eae5b279d21
+      建模代码/models/edmd_model.pkl: 5433c2773b9470c0fb903e142e026a1c0b68d360b6e3a9fa3930f105c10e68ba
+      建模代码/models/meta.npz: 8f8d6930522320e19947df9f7d8e63dee24da5a2bf7b911281e85eeb70f4e4a5
+  recorded_at: '2026-09-10T12:33:10Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-006
+  kind: automated-run
+  subject: EDMD trainer loads baseline and generates loadable model
+  status: valid
+  command: scripts/train_edmd.py --check-load; train smoke --model-path temp
+  result_ref: models/edmd_model.pkl
+  covers:
+    files:
+    - 建模代码/modeling/trainers/edmd.py
+    - 建模代码/scripts/train_edmd.py
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-006
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/modeling/trainers/edmd.py: 708e80fc1231cb89c3f415dbdf317be42eb39e3282a5b1bb8feba2d040b82e27
+      建模代码/scripts/train_edmd.py: 8be82202b3185c21e6dbf6197a286c146d2135e2495de52656c869de79dc8238
+  recorded_at: '2026-09-10T12:33:10Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-004
+  kind: automated-run
+  subject: FS-EDMD trainer loads baseline and generates loadable model
+  status: valid
+  command: scripts/train_fs_edmd.py --check-load; train smoke with --N 5 --max-iter
+    2
+  result_ref: models/ours_model.pkl
+  covers:
+    files:
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 建模代码/scripts/train_fs_edmd.py
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-004
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/modeling/trainers/fs_edmd.py: 0dfff29fab23b4c8f96545777788dfc0c627a26d7bc0acc9a54bc6faeeba9ce9
+      建模代码/scripts/train_fs_edmd.py: 075844aaab93c914b02cf043fe3de390bb03b21567626882e0b17d79de28dbf0
+  recorded_at: '2026-09-10T12:33:10Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-009
+  kind: automated-run
+  subject: engineering spec written and project log validates
+  status: valid
+  command: validate_project.py --root .
+  result_ref: .project-log/specs/modeling-refactor-spec.md
+  covers:
+    files:
+    - .project-log/specs/modeling-refactor-spec.md
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-001
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      .project-log/specs/modeling-refactor-spec.md: 03afd6ebc88d86ca52f9e1741024b3ee1060f695bf48d07b03108acc27d0158c
+  recorded_at: '2026-09-10T12:35:28Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-008
+  kind: automated-run
+  subject: project log validation passed after implementation
+  status: valid
+  command: validate_project.py --root .
+  result_ref: .project-log/verification/evidence.yaml
+  covers:
+    files:
+    - .project-log/workflow.yaml
+    - .project-log/tasks/task-list.yaml
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-008
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      .project-log/workflow.yaml: 746d1469f1cd30ffaca80c4d64afce1a66794110604a5fb64ea74d6f15a153ae
+      .project-log/tasks/task-list.yaml: 2f7ec962d0a0dd292d8a8dc95e9169f510d68627f263f0186e8b4df070760472
+  recorded_at: '2026-09-10T12:35:28Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-011
+  kind: automated-run
+  subject: default 200-dimensional SoftLift passes finite and dimension checks
+  status: valid
+  command: python scripts/check_soft_lift.py
+  result_ref: 杂项/软体平台探索实验结果/feature_reports/default_soft_lift.json
+  covers:
+    files:
+    - 建模代码/modeling/soft_lift.py
+    - 建模代码/scripts/check_soft_lift.py
+    - 杂项/软体平台探索实验结果/feature_reports/default_soft_lift.json
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-012
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/modeling/soft_lift.py: f97eb1965df52c1b9f4259b35a06e6d40ddc2f6c0d92a912f3c7cb26e3ec1c0c
+      建模代码/scripts/check_soft_lift.py: b19a8099e5e83d1055c7b520dcaf266e6d67e065d8bfcb9739c6f714ff47f7c9
+      杂项/软体平台探索实验结果/feature_reports/default_soft_lift.json: 9b1ed21435ab78e3b321c7241a0576f82ebb887d5d0179dc9d053f60673ed698
+  recorded_at: '2026-09-11T12:09:30Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-013
+  kind: automated-run
+  subject: soft-base-001 trains three models and evaluates fixed 10 trajectories
+  status: valid
+  command: python scripts/run_soft_experiment.py --run-id soft-base-001
+  result_ref: 杂项/软体平台探索实验结果/runs/soft-base-001/metrics/summary.json
+  covers:
+    files:
+    - 杂项/软体平台探索实验结果/runs/soft-base-001/run_config.json
+    - 杂项/软体平台探索实验结果/runs/soft-base-001/metrics/summary.json
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-014
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/软体平台探索实验结果/runs/soft-base-001/run_config.json: d7c3c8d081d147f260da6dc9b9583ea3f9c702fc6e1879d90264de69531a2a99
+      杂项/软体平台探索实验结果/runs/soft-base-001/metrics/summary.json: 7762633cea3cad5ede5479a5d0ab74f1dbbb6cd3b4a31bd5a5ee9c6346f4a58e
+  recorded_at: '2026-09-11T12:09:30Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-014
+  kind: automated-run
+  subject: soft-base-001 models reload from disk and predict finite outputs
+  status: valid
+  command: python scripts/check_soft_experiment_artifacts.py --run-id soft-base-001
+  result_ref: 杂项/软体平台探索实验结果/runs/soft-base-001/models/fs_edmd.pkl
+  covers:
+    files:
+    - 建模代码/scripts/check_soft_experiment_artifacts.py
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 建模代码/modeling/trainers/edmd.py
+    - 杂项/软体平台探索实验结果/runs/soft-base-001/models/fs_edmd.pkl
+    - 杂项/软体平台探索实验结果/runs/soft-base-001/models/edmd.pkl
+    - 杂项/软体平台探索实验结果/runs/soft-base-001/models/edmd_dl.pkl
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-013
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/scripts/check_soft_experiment_artifacts.py: 765fd7f1e3611fec9c7c1cfd58b934842f03749f8014651429fb8adea17ef839
+      建模代码/modeling/trainers/fs_edmd.py: 00c21d611d62592e3b51b371ebeafc54c808d2389a8724caea3c2f7e4216afc9
+      建模代码/modeling/trainers/edmd.py: 90a0a5780e16964a10c5e2ec011d95a36ebd9d0d0777b9310cf8fbf0afa07356
+      杂项/软体平台探索实验结果/runs/soft-base-001/models/fs_edmd.pkl: 6320146a871aa7b8d830508f61c743142ed310bb533132471bfc4107fcb872c1
+      杂项/软体平台探索实验结果/runs/soft-base-001/models/edmd.pkl: 3f5a539f4aee49506bee66c44ed687d2e0864361cadd3148d8b3307b7622d202
+      杂项/软体平台探索实验结果/runs/soft-base-001/models/edmd_dl.pkl: f512468714e0c9f681e505b3c8c1e8e28eb18664ebb01c927a1533158c76a36e
+  recorded_at: '2026-09-11T12:17:31Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-010
+  kind: automated-run
+  subject: fixed 70/20/10 soft-platform split is valid
+  status: valid
+  command: python scripts/prepare_soft_data.py --check
+  result_ref: 杂项/软体平台探索实验结果/processed_data/split_manifest.json
+  covers:
+    files:
+    - 建模代码/scripts/prepare_soft_data.py
+    - 杂项/软体平台探索实验结果/processed_data/split_manifest.json
+    - 杂项/软体平台探索实验结果/processed_data/test.npz
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-011
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/scripts/prepare_soft_data.py: 025cf5ec3a76636650d0f01c6242a1d8d3d125aec54d62ee957958a4b559d08e
+      杂项/软体平台探索实验结果/processed_data/split_manifest.json: d7402cf5c8ffc4a0d0d2e26c8aeefe8eedf459d5743ccc22c7cca0a81c36c8b6
+      杂项/软体平台探索实验结果/processed_data/test.npz: 2fb8868bbbdf5e42bddd608489e95590bfb6056ac31fd9683d1017204254d65b
+  recorded_at: '2026-09-11T12:09:31Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-015
+  kind: automated-run
+  subject: formal exploration leaderboard selects soft-base-001 as current best
+  status: valid
+  command: python scripts/evaluate_soft_experiments.py; python scripts/check_soft_experiment_artifacts.py
+    --run-id soft-base-001
+  result_ref: 杂项/软体平台探索实验结果/summaries/leaderboard.json
+  covers:
+    files:
+    - 建模代码/scripts/evaluate_soft_experiments.py
+    - 建模代码/scripts/run_soft_experiment.py
+    - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+    - 杂项/软体平台探索实验结果/summaries/leaderboard_all.csv
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-015
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/scripts/evaluate_soft_experiments.py: 210ebad96f3e2363cbfcaa60a1d7a3aaef13f3ed08c3bd3360ce557a106e842c
+      建模代码/scripts/run_soft_experiment.py: 9a04ace451ab08573d6982e321d412c8295524e972abefb3af321b7a34d17c86
+      杂项/软体平台探索实验结果/summaries/leaderboard.json: 25cffe17db611d249dde84633c9714974243848eac8bed64f544bb05d4c37d2b
+      杂项/软体平台探索实验结果/summaries/leaderboard_all.csv: a5ce05308ef936d529c2dfdc48f86ae1580468d7307a862d63a668192837f942
+  recorded_at: '2026-09-11T12:17:31Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-012
+  kind: automated-run
+  subject: mechanical-arm trainer compatibility preserved
+  status: valid
+  command: python scripts/train_fs_edmd.py --check-load; python scripts/train_edmd.py
+    --check-load
+  result_ref: 建模代码/models/ours_model.pkl
+  covers:
+    files:
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 建模代码/modeling/trainers/edmd.py
+    - 建模代码/scripts/train_fs_edmd.py
+    - 建模代码/scripts/train_edmd.py
+    requirements:
+    - REQ-001
+    tasks:
+    - TASK-013
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/modeling/trainers/fs_edmd.py: 00c21d611d62592e3b51b371ebeafc54c808d2389a8724caea3c2f7e4216afc9
+      建模代码/modeling/trainers/edmd.py: 90a0a5780e16964a10c5e2ec011d95a36ebd9d0d0777b9310cf8fbf0afa07356
+      建模代码/scripts/train_fs_edmd.py: 075844aaab93c914b02cf043fe3de390bb03b21567626882e0b17d79de28dbf0
+      建模代码/scripts/train_edmd.py: 8be82202b3185c21e6dbf6197a286c146d2135e2495de52656c869de79dc8238
+  recorded_at: '2026-09-11T12:09:31Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-016
+  kind: automated-run
+  subject: solution research and task decomposition synchronized with baseline evidence
+  status: valid
+  command: validate_project.py --root .; loopctl.py --root . --json validate
+  result_ref: .project-log/tasks/task-list.yaml
+  covers:
+    files:
+    - .project-log/research/solution-research.yaml
+    - .project-log/tasks/task-list.yaml
+    - .project-log/workflow.yaml
+    - .project-log/current-session.md
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-015
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      .project-log/research/solution-research.yaml: 8c277a04f2f832b3f6e8d9711eb9a7a8e9f92e1abd6adfea0d3357318b2c412b
+      .project-log/tasks/task-list.yaml: 015d5105ae46792884e08c794b1888b544e0ab1622f56bd292099ed2703793a7
+      .project-log/workflow.yaml: 6507264723218a392d059302bdc7f86a886237bf16f580d7a36b735e22247ccc
+      .project-log/current-session.md: 7896d1aa211567d4723b773577b378a7a0b429a935c6257f2cebdd4b634b97d8
+  recorded_at: '2026-09-11T12:20:25Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-017
+  kind: automated-run
+  subject: coarse-to-fine search finalizes soft-final-006 as paper candidate
+  status: valid
+  command: run_soft_search.py soft-fs-opt-001; run_soft_search.py soft-fs-opt2-001;
+    run_soft_search.py soft-lift-optg-001; run_soft_search.py soft-final-opt-001;
+    evaluate_soft_experiments.py
+  result_ref: 杂项/软体平台探索实验结果/final/README.md
+  covers:
+    files:
+    - 建模代码/scripts/run_soft_experiment.py
+    - 建模代码/scripts/run_soft_search.py
+    - 建模代码/scripts/evaluate_soft_experiments.py
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 杂项/软体平台探索实验结果/runs/soft-final-006/run_config.json
+    - 杂项/软体平台探索实验结果/runs/soft-final-006/metrics/summary.json
+    - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+    - 杂项/软体平台探索实验结果/final/README.md
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-017
+    - TASK-016
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/scripts/run_soft_experiment.py: 0103bd2d0599ebcedee224f945e3b12ca780031928bcccee778a458c10019e1c
+      建模代码/scripts/run_soft_search.py: 72bc951622d66257ed80acc7316ac4b995f6f004aa7652d494c7325ec01c80ff
+      建模代码/scripts/evaluate_soft_experiments.py: fa3e15d4c7060ccff8093652a907ac980c218dea775b45d46c7a05084b954b37
+      建模代码/modeling/trainers/fs_edmd.py: 48e1e37afe580cabf6e51c8ec2f158ef0b9d938001f6c15322e6ebc32ae0af10
+      杂项/软体平台探索实验结果/runs/soft-final-006/run_config.json: fba5fb0535d9ee105bd4afb29e848504ab4ee2720086e91dc746d8519f5cbc5e
+      杂项/软体平台探索实验结果/runs/soft-final-006/metrics/summary.json: c065b1fc28cb07d64d896ccfc13b65b4f5bfd44532bdbc8195630d00b185451d
+      杂项/软体平台探索实验结果/summaries/leaderboard.json: 538edfc75137e9f73975075f210b13f0480abb3bfaf4e14be4f7ff85803876ec
+      杂项/软体平台探索实验结果/final/README.md: b41fe6c01dd62d904b0a0c46ed23b777044b81c32ef987ab7284a3140581ba76
+  recorded_at: '2026-09-11T14:46:40Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-018
+  kind: automated-run
+  subject: soft-final-006 models reload, predict finite, and final package hashes
+    match
+  status: valid
+  command: check_soft_experiment_artifacts.py --run-id soft-final-006 --test-limit
+    1; Get-FileHash model/processed_data comparison
+  result_ref: 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
+  covers:
+    files:
+    - 建模代码/scripts/check_soft_experiment_artifacts.py
+    - 杂项/软体平台探索实验结果/runs/soft-final-006/models/fs_edmd.pkl
+    - 杂项/软体平台探索实验结果/runs/soft-final-006/models/edmd.pkl
+    - 杂项/软体平台探索实验结果/runs/soft-final-006/models/edmd_dl.pkl
+    - 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
+    - 杂项/软体平台探索实验结果/final/models/edmd.pkl
+    - 杂项/软体平台探索实验结果/final/models/edmd_dl.pkl
+    - 杂项/软体平台探索实验结果/final/processed_data/meta.npz
+    - 杂项/软体平台探索实验结果/final/processed_data/test.npz
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-016
+    - TASK-017
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      建模代码/scripts/check_soft_experiment_artifacts.py: 765fd7f1e3611fec9c7c1cfd58b934842f03749f8014651429fb8adea17ef839
+      杂项/软体平台探索实验结果/runs/soft-final-006/models/fs_edmd.pkl: 4acd5e5ba1f933ad7da0ae31095872b63bfcf9a7f4eda9e3107ff10f0541d4f6
+      杂项/软体平台探索实验结果/runs/soft-final-006/models/edmd.pkl: d0a10531bba1b68b20a7012490b545f9e7fb4ccbcc8e8931d017c5d72205a202
+      杂项/软体平台探索实验结果/runs/soft-final-006/models/edmd_dl.pkl: 108263b7cde3781b8faa546647e185881d6bbea31c8f594c994e71a1b4718511
+      杂项/软体平台探索实验结果/final/models/fs_edmd.pkl: 4acd5e5ba1f933ad7da0ae31095872b63bfcf9a7f4eda9e3107ff10f0541d4f6
+      杂项/软体平台探索实验结果/final/models/edmd.pkl: d0a10531bba1b68b20a7012490b545f9e7fb4ccbcc8e8931d017c5d72205a202
+      杂项/软体平台探索实验结果/final/models/edmd_dl.pkl: 108263b7cde3781b8faa546647e185881d6bbea31c8f594c994e71a1b4718511
+      杂项/软体平台探索实验结果/final/processed_data/meta.npz: 03748a179d3f37d57fc204d0e1b1cfbcc5826d39b7fb5328ac55ddfdc58159c7
+      杂项/软体平台探索实验结果/final/processed_data/test.npz: 2fb8868bbbdf5e42bddd608489e95590bfb6056ac31fd9683d1017204254d65b
+  recorded_at: '2026-09-11T14:47:00Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-019
+  kind: automated-run
+  subject: project log and loop state validate and complete after final soft-platform
+    handoff
+  status: valid
+  command: validate_project.py --root .; loopctl.py --root . --json validate; loopctl.py
+    --root . --json evaluate goal; loopctl.py --root . --json decide; loopctl.py --root
+    . --json handoff
+  result_ref: .project-log/goals/active-goal.yaml
+  covers:
+    files:
+    - .project-log/goals/active-goal.yaml
+    - .project-log/tasks/task-list.yaml
+    - .project-log/current-session.md
+    - .project-log/progress.md
+    - .project-log/loop/active-run.yaml
+    - .project-log/loop/handoff.md
+    requirements:
+    - REQ-002
+    tasks:
+    - TASK-016
+    - TASK-017
+  version_binding:
+    git_commit: 598560cb393890d9cfde7f2579c0e919fe56a6fa
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      .project-log/goals/active-goal.yaml: 702dd52a5836fa1ceee7db23a99e9827cb9c32e0da7c95577fe1bdd231fccad0
+      .project-log/tasks/task-list.yaml: f9f278fb147c199cf0782c8cdce9998fe578ec5932cfa9ebd23b17dd08cec2b6
+      .project-log/current-session.md: 6dffe5d08d64a3a572b29ba299a980cd0582c25c43889808a1de307c831067dd
+      .project-log/progress.md: e0b0d50a27423c99be17fd12c5b14565dc3f4b2db305a1bb3234a01b2f222cdf
+      .project-log/loop/active-run.yaml: 1a7b2efaf01cdf870fd218a84a98a9e75fbf571a0f934a5e9b235147233c7dbc
+      .project-log/loop/handoff.md: bbf396e09ee6fcdac1059f347ff5aff79e3f495cbaa8eb69b2cb3cb9c843e10e
+  recorded_at: '2026-09-11T14:58:53Z'
+  invalidated_at: null
+  invalidation_reason: null

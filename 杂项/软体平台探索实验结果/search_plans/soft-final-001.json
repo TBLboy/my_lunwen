@@ -1,0 +1,48 @@
+{
+    "campaign":  "soft-final-001",
+    "description":  "Stage 4 final three-model candidates on the fixed 10 test trajectories.",
+    "configs":  [
+                    {
+                        "run_id":  "soft-final-001",
+                        "models":  "fs_edmd,edmd,edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-final-002",
+                        "models":  "fs_edmd,edmd,edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.005,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    },
+                    {
+                        "run_id":  "soft-final-003",
+                        "models":  "fs_edmd,edmd,edmd_dl",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  0.6,
+                        "fs_n":  40,
+                        "fs_lam":  0.001,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.01,
+                        "edmd_dl_n_psi":  20,
+                        "edmd_dl_layers":  "256,256",
+                        "edmd_dl_lr":  0.0001
+                    }
+                ]
+}

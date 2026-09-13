@@ -1,0 +1,215 @@
+{
+  "run_id": "soft-lift-optg-g11-d095-clip1",
+  "created_at": "2026-09-11T14:40:37.441348+00:00",
+  "smoke": false,
+  "test_limit": 10,
+  "eval_splits": [
+    "test",
+    "validation"
+  ],
+  "lift": {
+    "dimension": 152,
+    "poly_degree": 4,
+    "rbf_grid_size": 11,
+    "rbf_sigma_scale": 1.0,
+    "trig_frequencies": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "input_center": [
+      0.165288188170442,
+      0.12828487871310035
+    ],
+    "input_scale": [
+      2.559911954542496,
+      2.6543986829263413
+    ],
+    "rbf_sigma": [
+      0.2,
+      0.2
+    ],
+    "groups": {
+      "constant": 1,
+      "linear": 2,
+      "polynomial": 12,
+      "rbf": 121,
+      "trig": 16
+    },
+    "sample_condition_number": 127318.32907158793,
+    "sample_finite": true
+  },
+  "methods": {
+    "fs_edmd": {
+      "average_rmse": 1.5436085109298487,
+      "best_rmse": 0.7948088049365779,
+      "best_trajectory_id": 66,
+      "trajectory_count": 10
+    },
+    "edmd": {
+      "average_rmse": 3.161504403049805,
+      "best_rmse": 1.7233444136464247,
+      "best_trajectory_id": 83,
+      "trajectory_count": 10
+    }
+  },
+  "split_metrics": {
+    "test": {
+      "per_trajectory": [
+        {
+          "trajectory_id": 6,
+          "steps": 299,
+          "fs_edmd_rmse": 0.8752632434575682,
+          "edmd_rmse": 2.562021907514652
+        },
+        {
+          "trajectory_id": 12,
+          "steps": 299,
+          "fs_edmd_rmse": 1.168039291676512,
+          "edmd_rmse": 2.5905170047944037
+        },
+        {
+          "trajectory_id": 32,
+          "steps": 299,
+          "fs_edmd_rmse": 2.0362702769145744,
+          "edmd_rmse": 5.425555547044306
+        },
+        {
+          "trajectory_id": 36,
+          "steps": 299,
+          "fs_edmd_rmse": 2.4013616627367242,
+          "edmd_rmse": 1.8933132399484662
+        },
+        {
+          "trajectory_id": 42,
+          "steps": 299,
+          "fs_edmd_rmse": 2.053517846595042,
+          "edmd_rmse": 2.5444298460914747
+        },
+        {
+          "trajectory_id": 64,
+          "steps": 299,
+          "fs_edmd_rmse": 0.9301241223910185,
+          "edmd_rmse": 3.5957573281492463
+        },
+        {
+          "trajectory_id": 66,
+          "steps": 299,
+          "fs_edmd_rmse": 0.7948088049365779,
+          "edmd_rmse": 2.363336484137777
+        },
+        {
+          "trajectory_id": 77,
+          "steps": 299,
+          "fs_edmd_rmse": 1.5061348709503326,
+          "edmd_rmse": 2.9225333837308156
+        },
+        {
+          "trajectory_id": 83,
+          "steps": 299,
+          "fs_edmd_rmse": 1.9898188892768345,
+          "edmd_rmse": 1.7233444136464247
+        },
+        {
+          "trajectory_id": 93,
+          "steps": 299,
+          "fs_edmd_rmse": 1.6807461003633024,
+          "edmd_rmse": 5.994234875440486
+        }
+      ],
+      "methods": {
+        "fs_edmd": {
+          "average_rmse": 1.5436085109298487,
+          "best_rmse": 0.7948088049365779,
+          "best_trajectory_id": 66,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.161504403049805,
+          "best_rmse": 1.7233444136464247,
+          "best_trajectory_id": 83,
+          "trajectory_count": 10
+        }
+      }
+    },
+    "validation": {
+      "per_trajectory": [
+        {
+          "trajectory_id": 7,
+          "steps": 299,
+          "fs_edmd_rmse": 1.4335525246319372,
+          "edmd_rmse": 6.009510878378499
+        },
+        {
+          "trajectory_id": 11,
+          "steps": 299,
+          "fs_edmd_rmse": 1.9159605678725369,
+          "edmd_rmse": 4.098248936333258
+        },
+        {
+          "trajectory_id": 15,
+          "steps": 299,
+          "fs_edmd_rmse": 1.7784460575358847,
+          "edmd_rmse": 1.7755532182200808
+        },
+        {
+          "trajectory_id": 16,
+          "steps": 299,
+          "fs_edmd_rmse": 1.9174540961858566,
+          "edmd_rmse": 3.5329097753841134
+        },
+        {
+          "trajectory_id": 18,
+          "steps": 299,
+          "fs_edmd_rmse": 1.144673142553977,
+          "edmd_rmse": 2.3340988401092386
+        },
+        {
+          "trajectory_id": 22,
+          "steps": 299,
+          "fs_edmd_rmse": 2.8137745206527813,
+          "edmd_rmse": 2.778699412740179
+        },
+        {
+          "trajectory_id": 27,
+          "steps": 299,
+          "fs_edmd_rmse": 1.328978783197286,
+          "edmd_rmse": 4.364756466914869
+        },
+        {
+          "trajectory_id": 28,
+          "steps": 299,
+          "fs_edmd_rmse": 1.4063212396687161,
+          "edmd_rmse": 2.8654754584512374
+        },
+        {
+          "trajectory_id": 31,
+          "steps": 299,
+          "fs_edmd_rmse": 2.0144139507200114,
+          "edmd_rmse": 6.009659857854248
+        },
+        {
+          "trajectory_id": 34,
+          "steps": 299,
+          "fs_edmd_rmse": 2.500839524284443,
+          "edmd_rmse": 2.944551248458862
+        }
+      ],
+      "methods": {
+        "fs_edmd": {
+          "average_rmse": 1.8254414407303432,
+          "best_rmse": 1.144673142553977,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.671346409284459,
+          "best_rmse": 1.7755532182200808,
+          "best_trajectory_id": 15,
+          "trajectory_count": 10
+        }
+      }
+    }
+  }
+}

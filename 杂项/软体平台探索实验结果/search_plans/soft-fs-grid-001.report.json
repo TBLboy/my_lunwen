@@ -1,0 +1,332 @@
+{
+  "campaign": "soft-fs-grid-001",
+  "started_at": "2026-09-11T13:00:04.702746+00:00",
+  "runs": [
+    {
+      "run_id": "soft-fs-grid-001",
+      "returncode": 0,
+      "elapsed_seconds": 19.64,
+      "tail": "2026-09-11 21:00:07,404 | INFO | lift dimension=112\n2026-09-11 21:00:07,404 | INFO | Training FS-EDMD\n2026-09-11 21:00:23,306 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-001\\models\\edmd.pkl\n2026-09-11 21:00:23,514 | INFO | Evaluating splits: test,validation\n2026-09-11 21:00:23,978 | INFO | Run complete in 16.68 seconds\n2026-09-11 21:00:23,978 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.617127100406698, \"best_rmse\": 0.7319250749829502, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-002",
+      "returncode": 0,
+      "elapsed_seconds": 18.79,
+      "tail": "2026-09-11 21:00:27,102 | INFO | lift dimension=112\n2026-09-11 21:00:27,103 | INFO | Training FS-EDMD\n2026-09-11 21:00:42,137 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-002\\models\\edmd.pkl\n2026-09-11 21:00:42,351 | INFO | Evaluating splits: test,validation\n2026-09-11 21:00:42,802 | INFO | Run complete in 15.80 seconds\n2026-09-11 21:00:42,803 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6506546022435544, \"best_rmse\": 0.8347069891374053, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-003",
+      "returncode": 0,
+      "elapsed_seconds": 18.53,
+      "tail": "2026-09-11 21:00:45,802 | INFO | lift dimension=112\n2026-09-11 21:00:45,803 | INFO | Training FS-EDMD\n2026-09-11 21:01:00,670 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-003\\models\\edmd.pkl\n2026-09-11 21:01:00,885 | INFO | Evaluating splits: test,validation\n2026-09-11 21:01:01,337 | INFO | Run complete in 15.64 seconds\n2026-09-11 21:01:01,337 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6580426588559227, \"best_rmse\": 0.8390954342780661, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-004",
+      "returncode": 0,
+      "elapsed_seconds": 18.97,
+      "tail": "2026-09-11 21:01:04,326 | INFO | lift dimension=112\n2026-09-11 21:01:04,327 | INFO | Training FS-EDMD\n2026-09-11 21:01:19,621 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-004\\models\\edmd.pkl\n2026-09-11 21:01:19,836 | INFO | Evaluating splits: test,validation\n2026-09-11 21:01:20,306 | INFO | Run complete in 16.08 seconds\n2026-09-11 21:01:20,306 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6522083779258137, \"best_rmse\": 0.8123905794908404, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-005",
+      "returncode": 0,
+      "elapsed_seconds": 19.36,
+      "tail": "2026-09-11 21:01:23,446 | INFO | lift dimension=112\n2026-09-11 21:01:23,446 | INFO | Training FS-EDMD\n2026-09-11 21:01:38,991 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-005\\models\\edmd.pkl\n2026-09-11 21:01:39,206 | INFO | Evaluating splits: test,validation\n2026-09-11 21:01:39,670 | INFO | Run complete in 16.33 seconds\n2026-09-11 21:01:39,670 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.642720073944739, \"best_rmse\": 0.8019713322016829, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-006",
+      "returncode": 0,
+      "elapsed_seconds": 19.3,
+      "tail": "2026-09-11 21:01:42,779 | INFO | lift dimension=112\n2026-09-11 21:01:42,779 | INFO | Training FS-EDMD\n2026-09-11 21:01:58,305 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-006\\models\\edmd.pkl\n2026-09-11 21:01:58,509 | INFO | Evaluating splits: test,validation\n2026-09-11 21:01:58,976 | INFO | Run complete in 16.30 seconds\n2026-09-11 21:01:58,976 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6892423367006857, \"best_rmse\": 0.9045712225956172, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-007",
+      "returncode": 0,
+      "elapsed_seconds": 19.3,
+      "tail": "2026-09-11 21:02:02,043 | INFO | lift dimension=112\n2026-09-11 21:02:02,044 | INFO | Training FS-EDMD\n2026-09-11 21:02:17,592 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-007\\models\\edmd.pkl\n2026-09-11 21:02:17,807 | INFO | Evaluating splits: test,validation\n2026-09-11 21:02:18,279 | INFO | Run complete in 16.34 seconds\n2026-09-11 21:02:18,280 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.695719018490515, \"best_rmse\": 0.8453389011980681, \"best_trajectory_id\": 77, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-008",
+      "returncode": 0,
+      "elapsed_seconds": 19.26,
+      "tail": "2026-09-11 21:02:21,395 | INFO | lift dimension=112\n2026-09-11 21:02:21,395 | INFO | Training FS-EDMD\n2026-09-11 21:02:36,860 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-008\\models\\edmd.pkl\n2026-09-11 21:02:37,074 | INFO | Evaluating splits: test,validation\n2026-09-11 21:02:37,542 | INFO | Run complete in 16.26 seconds\n2026-09-11 21:02:37,542 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6414169234541156, \"best_rmse\": 0.8985268522848104, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-009",
+      "returncode": 0,
+      "elapsed_seconds": 19.4,
+      "tail": "2026-09-11 21:02:40,666 | INFO | lift dimension=112\n2026-09-11 21:02:40,666 | INFO | Training FS-EDMD\n2026-09-11 21:02:56,256 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-009\\models\\edmd.pkl\n2026-09-11 21:02:56,472 | INFO | Evaluating splits: test,validation\n2026-09-11 21:02:56,944 | INFO | Run complete in 16.38 seconds\n2026-09-11 21:02:56,945 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6343201406062924, \"best_rmse\": 0.8446115836998916, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-010",
+      "returncode": 0,
+      "elapsed_seconds": 19.38,
+      "tail": "2026-09-11 21:03:00,102 | INFO | lift dimension=112\n2026-09-11 21:03:00,102 | INFO | Training FS-EDMD\n2026-09-11 21:03:15,648 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-010\\models\\edmd.pkl\n2026-09-11 21:03:15,863 | INFO | Evaluating splits: test,validation\n2026-09-11 21:03:16,331 | INFO | Run complete in 16.33 seconds\n2026-09-11 21:03:16,331 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7692469260904051, \"best_rmse\": 0.8232598165699622, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-011",
+      "returncode": 0,
+      "elapsed_seconds": 19.45,
+      "tail": "2026-09-11 21:03:19,468 | INFO | lift dimension=112\n2026-09-11 21:03:19,469 | INFO | Training FS-EDMD\n2026-09-11 21:03:35,088 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-011\\models\\edmd.pkl\n2026-09-11 21:03:35,303 | INFO | Evaluating splits: test,validation\n2026-09-11 21:03:35,775 | INFO | Run complete in 16.41 seconds\n2026-09-11 21:03:35,775 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.599184845506921, \"best_rmse\": 0.84989828106714, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-012",
+      "returncode": 0,
+      "elapsed_seconds": 19.4,
+      "tail": "2026-09-11 21:03:38,935 | INFO | lift dimension=112\n2026-09-11 21:03:38,935 | INFO | Training FS-EDMD\n2026-09-11 21:03:54,487 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-012\\models\\edmd.pkl\n2026-09-11 21:03:54,702 | INFO | Evaluating splits: test,validation\n2026-09-11 21:03:55,172 | INFO | Run complete in 16.35 seconds\n2026-09-11 21:03:55,172 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.653934460209825, \"best_rmse\": 0.8411700249953208, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-013",
+      "returncode": 0,
+      "elapsed_seconds": 19.42,
+      "tail": "2026-09-11 21:03:58,324 | INFO | lift dimension=112\n2026-09-11 21:03:58,324 | INFO | Training FS-EDMD\n2026-09-11 21:04:13,901 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-013\\models\\edmd.pkl\n2026-09-11 21:04:14,116 | INFO | Evaluating splits: test,validation\n2026-09-11 21:04:14,592 | INFO | Run complete in 16.38 seconds\n2026-09-11 21:04:14,592 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6833790581589745, \"best_rmse\": 0.8232402167713347, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-014",
+      "returncode": 0,
+      "elapsed_seconds": 19.4,
+      "tail": "2026-09-11 21:04:17,703 | INFO | lift dimension=112\n2026-09-11 21:04:17,703 | INFO | Training FS-EDMD\n2026-09-11 21:04:33,305 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-014\\models\\edmd.pkl\n2026-09-11 21:04:33,520 | INFO | Evaluating splits: test,validation\n2026-09-11 21:04:33,990 | INFO | Run complete in 16.39 seconds\n2026-09-11 21:04:33,990 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6376669285086192, \"best_rmse\": 0.7512759402149357, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-015",
+      "returncode": 0,
+      "elapsed_seconds": 19.36,
+      "tail": "2026-09-11 21:04:37,136 | INFO | lift dimension=112\n2026-09-11 21:04:37,136 | INFO | Training FS-EDMD\n2026-09-11 21:04:52,670 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-015\\models\\edmd.pkl\n2026-09-11 21:04:52,884 | INFO | Evaluating splits: test,validation\n2026-09-11 21:04:53,354 | INFO | Run complete in 16.33 seconds\n2026-09-11 21:04:53,355 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6923036473419117, \"best_rmse\": 0.8862999052376406, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-016",
+      "returncode": 0,
+      "elapsed_seconds": 19.37,
+      "tail": "2026-09-11 21:04:56,507 | INFO | lift dimension=112\n2026-09-11 21:04:56,507 | INFO | Training FS-EDMD\n2026-09-11 21:05:12,042 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-016\\models\\edmd.pkl\n2026-09-11 21:05:12,257 | INFO | Evaluating splits: test,validation\n2026-09-11 21:05:12,722 | INFO | Run complete in 16.32 seconds\n2026-09-11 21:05:12,722 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6054877866414088, \"best_rmse\": 0.9247725334575891, \"best_trajectory_id\": 77, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-017",
+      "returncode": 0,
+      "elapsed_seconds": 19.37,
+      "tail": "2026-09-11 21:05:15,889 | INFO | lift dimension=112\n2026-09-11 21:05:15,890 | INFO | Training FS-EDMD\n2026-09-11 21:05:31,407 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-017\\models\\edmd.pkl\n2026-09-11 21:05:31,623 | INFO | Evaluating splits: test,validation\n2026-09-11 21:05:32,083 | INFO | Run complete in 16.30 seconds\n2026-09-11 21:05:32,083 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.634538776484939, \"best_rmse\": 0.8003306010283746, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-018",
+      "returncode": 0,
+      "elapsed_seconds": 19.35,
+      "tail": "2026-09-11 21:05:35,192 | INFO | lift dimension=112\n2026-09-11 21:05:35,192 | INFO | Training FS-EDMD\n2026-09-11 21:05:50,759 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-018\\models\\edmd.pkl\n2026-09-11 21:05:50,973 | INFO | Evaluating splits: test,validation\n2026-09-11 21:05:51,437 | INFO | Run complete in 16.35 seconds\n2026-09-11 21:05:51,437 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6328066034612838, \"best_rmse\": 0.799374933979286, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-019",
+      "returncode": 0,
+      "elapsed_seconds": 19.48,
+      "tail": "2026-09-11 21:05:54,550 | INFO | lift dimension=112\n2026-09-11 21:05:54,550 | INFO | Training FS-EDMD\n2026-09-11 21:06:10,232 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-019\\models\\edmd.pkl\n2026-09-11 21:06:10,446 | INFO | Evaluating splits: test,validation\n2026-09-11 21:06:10,917 | INFO | Run complete in 16.47 seconds\n2026-09-11 21:06:10,918 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.5084832781418807, \"best_rmse\": 0.808860020205681, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-020",
+      "returncode": 0,
+      "elapsed_seconds": 19.29,
+      "tail": "2026-09-11 21:06:14,022 | INFO | lift dimension=112\n2026-09-11 21:06:14,022 | INFO | Training FS-EDMD\n2026-09-11 21:06:29,543 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-020\\models\\edmd.pkl\n2026-09-11 21:06:29,747 | INFO | Evaluating splits: test,validation\n2026-09-11 21:06:30,208 | INFO | Run complete in 16.29 seconds\n2026-09-11 21:06:30,208 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6582511194264722, \"best_rmse\": 0.7478666308316273, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-021",
+      "returncode": 0,
+      "elapsed_seconds": 19.54,
+      "tail": "2026-09-11 21:06:33,323 | INFO | lift dimension=112\n2026-09-11 21:06:33,324 | INFO | Training FS-EDMD\n2026-09-11 21:06:49,079 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-021\\models\\edmd.pkl\n2026-09-11 21:06:49,294 | INFO | Evaluating splits: test,validation\n2026-09-11 21:06:49,758 | INFO | Run complete in 16.54 seconds\n2026-09-11 21:06:49,758 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6822671666984075, \"best_rmse\": 0.8226930207035094, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-022",
+      "returncode": 0,
+      "elapsed_seconds": 19.52,
+      "tail": "2026-09-11 21:06:52,826 | INFO | lift dimension=112\n2026-09-11 21:06:52,827 | INFO | Training FS-EDMD\n2026-09-11 21:07:08,608 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-022\\models\\edmd.pkl\n2026-09-11 21:07:08,820 | INFO | Evaluating splits: test,validation\n2026-09-11 21:07:09,278 | INFO | Run complete in 16.56 seconds\n2026-09-11 21:07:09,278 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.8489435143742838, \"best_rmse\": 0.8584277135459398, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-023",
+      "returncode": 0,
+      "elapsed_seconds": 19.6,
+      "tail": "2026-09-11 21:07:12,431 | INFO | lift dimension=112\n2026-09-11 21:07:12,431 | INFO | Training FS-EDMD\n2026-09-11 21:07:28,209 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-023\\models\\edmd.pkl\n2026-09-11 21:07:28,425 | INFO | Evaluating splits: test,validation\n2026-09-11 21:07:28,883 | INFO | Run complete in 16.55 seconds\n2026-09-11 21:07:28,883 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6325972328583418, \"best_rmse\": 0.7693996666484892, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-024",
+      "returncode": 0,
+      "elapsed_seconds": 19.53,
+      "tail": "2026-09-11 21:07:32,012 | INFO | lift dimension=112\n2026-09-11 21:07:32,012 | INFO | Training FS-EDMD\n2026-09-11 21:07:47,739 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-024\\models\\edmd.pkl\n2026-09-11 21:07:47,954 | INFO | Evaluating splits: test,validation\n2026-09-11 21:07:48,407 | INFO | Run complete in 16.52 seconds\n2026-09-11 21:07:48,407 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6315444045221057, \"best_rmse\": 0.736418031081899, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-025",
+      "returncode": 0,
+      "elapsed_seconds": 19.58,
+      "tail": "2026-09-11 21:07:51,542 | INFO | lift dimension=112\n2026-09-11 21:07:51,543 | INFO | Training FS-EDMD\n2026-09-11 21:08:07,304 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-025\\models\\edmd.pkl\n2026-09-11 21:08:07,518 | INFO | Evaluating splits: test,validation\n2026-09-11 21:08:07,977 | INFO | Run complete in 16.54 seconds\n2026-09-11 21:08:07,977 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6954481095717562, \"best_rmse\": 0.8460907620714414, \"best_trajectory_id\": 77, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-026",
+      "returncode": 0,
+      "elapsed_seconds": 19.58,
+      "tail": "2026-09-11 21:08:11,074 | INFO | lift dimension=112\n2026-09-11 21:08:11,074 | INFO | Training FS-EDMD\n2026-09-11 21:08:26,896 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-026\\models\\edmd.pkl\n2026-09-11 21:08:27,112 | INFO | Evaluating splits: test,validation\n2026-09-11 21:08:27,565 | INFO | Run complete in 16.60 seconds\n2026-09-11 21:08:27,566 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6365849616263284, \"best_rmse\": 0.7959414618859376, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-027",
+      "returncode": 0,
+      "elapsed_seconds": 19.59,
+      "tail": "2026-09-11 21:08:30,678 | INFO | lift dimension=112\n2026-09-11 21:08:30,678 | INFO | Training FS-EDMD\n2026-09-11 21:08:46,485 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001668\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-027\\models\\edmd.pkl\n2026-09-11 21:08:46,700 | INFO | Evaluating splits: test,validation\n2026-09-11 21:08:47,160 | INFO | Run complete in 16.59 seconds\n2026-09-11 21:08:47,161 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6630314889771705, \"best_rmse\": 0.9403692293892878, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-028",
+      "returncode": 0,
+      "elapsed_seconds": 19.59,
+      "tail": "2026-09-11 21:08:50,215 | INFO | lift dimension=112\n2026-09-11 21:08:50,215 | INFO | Training FS-EDMD\n2026-09-11 21:09:06,082 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-028\\models\\edmd.pkl\n2026-09-11 21:09:06,297 | INFO | Evaluating splits: test,validation\n2026-09-11 21:09:06,758 | INFO | Run complete in 16.65 seconds\n2026-09-11 21:09:06,758 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7495042645322414, \"best_rmse\": 0.9120840099919142, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-029",
+      "returncode": 0,
+      "elapsed_seconds": 19.61,
+      "tail": "2026-09-11 21:09:09,849 | INFO | lift dimension=112\n2026-09-11 21:09:09,849 | INFO | Training FS-EDMD\n2026-09-11 21:09:25,697 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-029\\models\\edmd.pkl\n2026-09-11 21:09:25,900 | INFO | Evaluating splits: test,validation\n2026-09-11 21:09:26,363 | INFO | Run complete in 16.62 seconds\n2026-09-11 21:09:26,363 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.743447929832385, \"best_rmse\": 0.8437101648945405, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-030",
+      "returncode": 0,
+      "elapsed_seconds": 19.73,
+      "tail": "2026-09-11 21:09:29,508 | INFO | lift dimension=112\n2026-09-11 21:09:29,508 | INFO | Training FS-EDMD\n2026-09-11 21:09:45,418 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-030\\models\\edmd.pkl\n2026-09-11 21:09:45,631 | INFO | Evaluating splits: test,validation\n2026-09-11 21:09:46,081 | INFO | Run complete in 16.68 seconds\n2026-09-11 21:09:46,082 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7486364276753819, \"best_rmse\": 0.8605898320252254, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-031",
+      "returncode": 0,
+      "elapsed_seconds": 19.74,
+      "tail": "2026-09-11 21:09:49,229 | INFO | lift dimension=112\n2026-09-11 21:09:49,229 | INFO | Training FS-EDMD\n2026-09-11 21:10:05,136 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-031\\models\\edmd.pkl\n2026-09-11 21:10:05,351 | INFO | Evaluating splits: test,validation\n2026-09-11 21:10:05,823 | INFO | Run complete in 16.70 seconds\n2026-09-11 21:10:05,823 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.747357610788868, \"best_rmse\": 0.8672116854820758, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-032",
+      "returncode": 0,
+      "elapsed_seconds": 19.71,
+      "tail": "2026-09-11 21:10:08,934 | INFO | lift dimension=112\n2026-09-11 21:10:08,934 | INFO | Training FS-EDMD\n2026-09-11 21:10:24,861 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-032\\models\\edmd.pkl\n2026-09-11 21:10:25,072 | INFO | Evaluating splits: test,validation\n2026-09-11 21:10:25,530 | INFO | Run complete in 16.70 seconds\n2026-09-11 21:10:25,530 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.744809151726963, \"best_rmse\": 0.8749972476934462, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-033",
+      "returncode": 0,
+      "elapsed_seconds": 19.65,
+      "tail": "2026-09-11 21:10:28,647 | INFO | lift dimension=112\n2026-09-11 21:10:28,647 | INFO | Training FS-EDMD\n2026-09-11 21:10:44,508 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-033\\models\\edmd.pkl\n2026-09-11 21:10:44,724 | INFO | Evaluating splits: test,validation\n2026-09-11 21:10:45,179 | INFO | Run complete in 16.64 seconds\n2026-09-11 21:10:45,180 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7507621195787308, \"best_rmse\": 0.9145486120442714, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-034",
+      "returncode": 0,
+      "elapsed_seconds": 19.73,
+      "tail": "2026-09-11 21:10:48,324 | INFO | lift dimension=112\n2026-09-11 21:10:48,324 | INFO | Training FS-EDMD\n2026-09-11 21:11:04,250 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-034\\models\\edmd.pkl\n2026-09-11 21:11:04,465 | INFO | Evaluating splits: test,validation\n2026-09-11 21:11:04,918 | INFO | Run complete in 16.71 seconds\n2026-09-11 21:11:04,918 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6910144793029533, \"best_rmse\": 0.8955564133078838, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-035",
+      "returncode": 0,
+      "elapsed_seconds": 19.67,
+      "tail": "2026-09-11 21:11:08,040 | INFO | lift dimension=112\n2026-09-11 21:11:08,040 | INFO | Training FS-EDMD\n2026-09-11 21:11:23,916 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-035\\models\\edmd.pkl\n2026-09-11 21:11:24,132 | INFO | Evaluating splits: test,validation\n2026-09-11 21:11:24,593 | INFO | Run complete in 16.66 seconds\n2026-09-11 21:11:24,593 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6847327097785676, \"best_rmse\": 0.8913153914409928, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-036",
+      "returncode": 0,
+      "elapsed_seconds": 19.35,
+      "tail": "2026-09-11 21:11:27,597 | INFO | lift dimension=112\n2026-09-11 21:11:27,598 | INFO | Training FS-EDMD\n2026-09-11 21:11:43,265 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-036\\models\\edmd.pkl\n2026-09-11 21:11:43,479 | INFO | Evaluating splits: test,validation\n2026-09-11 21:11:43,935 | INFO | Run complete in 16.44 seconds\n2026-09-11 21:11:43,936 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6833618174188625, \"best_rmse\": 0.8894676038566791, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-037",
+      "returncode": 0,
+      "elapsed_seconds": 19.82,
+      "tail": "2026-09-11 21:11:47,064 | INFO | lift dimension=112\n2026-09-11 21:11:47,064 | INFO | Training FS-EDMD\n2026-09-11 21:12:03,082 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-037\\models\\edmd.pkl\n2026-09-11 21:12:03,297 | INFO | Evaluating splits: test,validation\n2026-09-11 21:12:03,754 | INFO | Run complete in 16.79 seconds\n2026-09-11 21:12:03,754 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7546834969092142, \"best_rmse\": 0.8570656896910226, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-038",
+      "returncode": 0,
+      "elapsed_seconds": 19.64,
+      "tail": "2026-09-11 21:12:06,849 | INFO | lift dimension=112\n2026-09-11 21:12:06,849 | INFO | Training FS-EDMD\n2026-09-11 21:12:22,727 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-038\\models\\edmd.pkl\n2026-09-11 21:12:22,941 | INFO | Evaluating splits: test,validation\n2026-09-11 21:12:23,396 | INFO | Run complete in 16.65 seconds\n2026-09-11 21:12:23,396 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7531442776506374, \"best_rmse\": 0.8798589907983263, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-039",
+      "returncode": 0,
+      "elapsed_seconds": 19.67,
+      "tail": "2026-09-11 21:12:26,481 | INFO | lift dimension=112\n2026-09-11 21:12:26,482 | INFO | Training FS-EDMD\n2026-09-11 21:12:42,389 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-039\\models\\edmd.pkl\n2026-09-11 21:12:42,603 | INFO | Evaluating splits: test,validation\n2026-09-11 21:12:43,064 | INFO | Run complete in 16.69 seconds\n2026-09-11 21:12:43,065 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7479787372692666, \"best_rmse\": 0.8601285109518254, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-040",
+      "returncode": 0,
+      "elapsed_seconds": 19.71,
+      "tail": "2026-09-11 21:12:46,189 | INFO | lift dimension=112\n2026-09-11 21:12:46,189 | INFO | Training FS-EDMD\n2026-09-11 21:13:02,106 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-040\\models\\edmd.pkl\n2026-09-11 21:13:02,321 | INFO | Evaluating splits: test,validation\n2026-09-11 21:13:02,776 | INFO | Run complete in 16.70 seconds\n2026-09-11 21:13:02,776 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7389719345796606, \"best_rmse\": 0.9027468046214687, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-041",
+      "returncode": 0,
+      "elapsed_seconds": 19.74,
+      "tail": "2026-09-11 21:13:05,915 | INFO | lift dimension=112\n2026-09-11 21:13:05,915 | INFO | Training FS-EDMD\n2026-09-11 21:13:21,857 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-041\\models\\edmd.pkl\n2026-09-11 21:13:22,072 | INFO | Evaluating splits: test,validation\n2026-09-11 21:13:22,528 | INFO | Run complete in 16.72 seconds\n2026-09-11 21:13:22,528 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7679707286561333, \"best_rmse\": 0.811624961945222, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-042",
+      "returncode": 0,
+      "elapsed_seconds": 19.71,
+      "tail": "2026-09-11 21:13:25,622 | INFO | lift dimension=112\n2026-09-11 21:13:25,622 | INFO | Training FS-EDMD\n2026-09-11 21:13:41,561 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-042\\models\\edmd.pkl\n2026-09-11 21:13:41,775 | INFO | Evaluating splits: test,validation\n2026-09-11 21:13:42,229 | INFO | Run complete in 16.71 seconds\n2026-09-11 21:13:42,230 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7512530637701924, \"best_rmse\": 0.9148556357028775, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-043",
+      "returncode": 0,
+      "elapsed_seconds": 19.79,
+      "tail": "2026-09-11 21:13:45,344 | INFO | lift dimension=112\n2026-09-11 21:13:45,344 | INFO | Training FS-EDMD\n2026-09-11 21:14:01,350 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-043\\models\\edmd.pkl\n2026-09-11 21:14:01,564 | INFO | Evaluating splits: test,validation\n2026-09-11 21:14:02,019 | INFO | Run complete in 16.78 seconds\n2026-09-11 21:14:02,020 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7187473825195412, \"best_rmse\": 0.8977415088672145, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-044",
+      "returncode": 0,
+      "elapsed_seconds": 19.7,
+      "tail": "2026-09-11 21:14:05,109 | INFO | lift dimension=112\n2026-09-11 21:14:05,109 | INFO | Training FS-EDMD\n2026-09-11 21:14:21,052 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-044\\models\\edmd.pkl\n2026-09-11 21:14:21,266 | INFO | Evaluating splits: test,validation\n2026-09-11 21:14:21,723 | INFO | Run complete in 16.72 seconds\n2026-09-11 21:14:21,724 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6570926503207797, \"best_rmse\": 0.8549097891474625, \"best_trajectory_id\": 64, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-045",
+      "returncode": 0,
+      "elapsed_seconds": 19.62,
+      "tail": "2026-09-11 21:14:24,836 | INFO | lift dimension=112\n2026-09-11 21:14:24,836 | INFO | Training FS-EDMD\n2026-09-11 21:14:40,663 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-045\\models\\edmd.pkl\n2026-09-11 21:14:40,887 | INFO | Evaluating splits: test,validation\n2026-09-11 21:14:41,342 | INFO | Run complete in 16.61 seconds\n2026-09-11 21:14:41,342 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6822140135490335, \"best_rmse\": 0.888369794291677, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-046",
+      "returncode": 0,
+      "elapsed_seconds": 19.75,
+      "tail": "2026-09-11 21:14:44,486 | INFO | lift dimension=112\n2026-09-11 21:14:44,487 | INFO | Training FS-EDMD\n2026-09-11 21:15:00,417 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-046\\models\\edmd.pkl\n2026-09-11 21:15:00,626 | INFO | Evaluating splits: test,validation\n2026-09-11 21:15:01,083 | INFO | Run complete in 16.70 seconds\n2026-09-11 21:15:01,084 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7517265889778355, \"best_rmse\": 0.8640839898186736, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-047",
+      "returncode": 0,
+      "elapsed_seconds": 19.74,
+      "tail": "2026-09-11 21:15:04,219 | INFO | lift dimension=112\n2026-09-11 21:15:04,220 | INFO | Training FS-EDMD\n2026-09-11 21:15:20,144 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-047\\models\\edmd.pkl\n2026-09-11 21:15:20,366 | INFO | Evaluating splits: test,validation\n2026-09-11 21:15:20,828 | INFO | Run complete in 16.71 seconds\n2026-09-11 21:15:20,828 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7736943841063884, \"best_rmse\": 0.9297114342537918, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-048",
+      "returncode": 0,
+      "elapsed_seconds": 19.62,
+      "tail": "2026-09-11 21:15:23,953 | INFO | lift dimension=112\n2026-09-11 21:15:23,953 | INFO | Training FS-EDMD\n2026-09-11 21:15:39,755 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-048\\models\\edmd.pkl\n2026-09-11 21:15:39,959 | INFO | Evaluating splits: test,validation\n2026-09-11 21:15:40,420 | INFO | Run complete in 16.57 seconds\n2026-09-11 21:15:40,420 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.746468804937722, \"best_rmse\": 0.8547649322343034, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-049",
+      "returncode": 0,
+      "elapsed_seconds": 19.79,
+      "tail": "2026-09-11 21:15:43,624 | INFO | lift dimension=112\n2026-09-11 21:15:43,625 | INFO | Training FS-EDMD\n2026-09-11 21:15:59,547 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-049\\models\\edmd.pkl\n2026-09-11 21:15:59,763 | INFO | Evaluating splits: test,validation\n2026-09-11 21:16:00,226 | INFO | Run complete in 16.71 seconds\n2026-09-11 21:16:00,226 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.723508035253678, \"best_rmse\": 0.8907662210929458, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-050",
+      "returncode": 0,
+      "elapsed_seconds": 19.78,
+      "tail": "2026-09-11 21:16:03,401 | INFO | lift dimension=112\n2026-09-11 21:16:03,401 | INFO | Training FS-EDMD\n2026-09-11 21:16:19,319 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-050\\models\\edmd.pkl\n2026-09-11 21:16:19,542 | INFO | Evaluating splits: test,validation\n2026-09-11 21:16:20,005 | INFO | Run complete in 16.71 seconds\n2026-09-11 21:16:20,005 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7519876290159093, \"best_rmse\": 0.8658324881683084, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-051",
+      "returncode": 0,
+      "elapsed_seconds": 19.76,
+      "tail": "2026-09-11 21:16:23,172 | INFO | lift dimension=112\n2026-09-11 21:16:23,172 | INFO | Training FS-EDMD\n2026-09-11 21:16:39,085 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-051\\models\\edmd.pkl\n2026-09-11 21:16:39,300 | INFO | Evaluating splits: test,validation\n2026-09-11 21:16:39,759 | INFO | Run complete in 16.69 seconds\n2026-09-11 21:16:39,759 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.748129586479744, \"best_rmse\": 0.9112860683081386, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-052",
+      "returncode": 0,
+      "elapsed_seconds": 19.83,
+      "tail": "2026-09-11 21:16:42,962 | INFO | lift dimension=112\n2026-09-11 21:16:42,962 | INFO | Training FS-EDMD\n2026-09-11 21:16:58,923 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-052\\models\\edmd.pkl\n2026-09-11 21:16:59,138 | INFO | Evaluating splits: test,validation\n2026-09-11 21:16:59,592 | INFO | Run complete in 16.74 seconds\n2026-09-11 21:16:59,592 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7094420111569881, \"best_rmse\": 0.901871537559044, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-053",
+      "returncode": 0,
+      "elapsed_seconds": 19.67,
+      "tail": "2026-09-11 21:17:02,720 | INFO | lift dimension=112\n2026-09-11 21:17:02,720 | INFO | Training FS-EDMD\n2026-09-11 21:17:18,580 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-053\\models\\edmd.pkl\n2026-09-11 21:17:18,796 | INFO | Evaluating splits: test,validation\n2026-09-11 21:17:19,253 | INFO | Run complete in 16.64 seconds\n2026-09-11 21:17:19,254 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.713079020305105, \"best_rmse\": 0.9086634171063231, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-fs-grid-054",
+      "returncode": 0,
+      "elapsed_seconds": 19.72,
+      "tail": "2026-09-11 21:17:22,420 | INFO | lift dimension=112\n2026-09-11 21:17:22,420 | INFO | Training FS-EDMD\n2026-09-11 21:17:38,301 | INFO | Training EDMD\nComputing lifted features...\nLifted dimension: 112\nTraining MSE: 0.001674\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-fs-grid-054\\models\\edmd.pkl\n2026-09-11 21:17:38,518 | INFO | Evaluating splits: test,validation\n2026-09-11 21:17:38,976 | INFO | Run complete in 16.66 seconds\n2026-09-11 21:17:38,976 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6890158453113124, \"best_rmse\": 0.8886177843822776, \"best_trajectory_id\": 6, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.148990274190632, \"best_rmse\": 1.5999855228857296, \"best_trajectory_id\": 83, \"trajectory_count\": 10}}\n"
+    }
+  ],
+  "finished_at": "2026-09-11T13:17:39.317890+00:00",
+  "failed": []
+}

@@ -1,0 +1,5 @@
+2026-09-11 21:32:59,100 | INFO | lift dimension=112
+2026-09-11 21:32:59,100 | INFO | Training EDMDDL
+2026-09-11 21:33:55,053 | INFO | Evaluating splits: test,validation
+2026-09-11 21:33:56,251 | INFO | Run complete in 57.26 seconds
+2026-09-11 21:33:56,252 | INFO | Summary: {"edmd_dl": {"average_rmse": 1.6110040307809979, "best_rmse": 0.9605569170607057, "best_trajectory_id": 66, "trajectory_count": 10}}

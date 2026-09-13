@@ -1,0 +1,174 @@
+{
+  "campaign": "soft-lift-coarse-001",
+  "description": "Stage 1 lift library coarse search. Validation metrics are the ranking source.",
+  "configs": [
+    {
+      "run_id": "soft-lift-001",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-002",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-003",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-004",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-005",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-006",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-007",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-008",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-009",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-010",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-011",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-012",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 3,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-013",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-014",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-015",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-016",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-017",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-018",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 11,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-019",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-020",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-021",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 13,
+      "lift_rbf_sigma_scale": 1.0
+    },
+    {
+      "run_id": "soft-lift-022",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 0.6
+    },
+    {
+      "run_id": "soft-lift-023",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 0.8
+    },
+    {
+      "run_id": "soft-lift-024",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 15,
+      "lift_rbf_sigma_scale": 1.0
+    }
+  ]
+}

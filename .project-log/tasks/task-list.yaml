@@ -1,0 +1,1126 @@
+version: '0.2'
+active_goal: REQ-002
+tasks:
+- id: TASK-001
+  title: 建模代码重构工程说明
+  kind: task
+  phase: engineering-spec
+  goal: 产出可指导资源迁移、模块重构、闭环入口和验证的工程说明。
+  status: done
+  priority: critical
+  risk: low
+  authority: B
+  owner: agent
+  tags:
+  - engineering-spec
+  - modeling
+  related_business_logic:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  - BL-MODELING-003
+  - BL-MODELING-004
+  - BL-MODELING-005
+  - BL-MODELING-006
+  - BL-MODELING-007
+  - BL-MODELING-008
+  acceptance_refs:
+  - REQ-001
+  - ARCH-001
+  related_decisions:
+  - DEC-002
+  - DEC-003
+  depends_on: []
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-spec
+  spec_ref: null
+  inputs:
+  - 建模代码/README.md
+  - 杂项
+  - 论文3/1_建模精度对比
+  - .project-log/requirements/baseline.yaml
+  - .project-log/architecture/architecture.yaml
+  outputs:
+  - .project-log/specs/modeling-refactor-spec.md
+  plan:
+  - 明确建模代码目录结构、模块接口和文件职责。
+  - 明确复制源、输出目录和运行命令。
+  - 明确每项验收证据和验证方式。
+  done_when:
+  - spec 覆盖资源复制、共享模块、三训练器、闭环入口和验证命令。
+  - 后续任务可直接按 spec 实施而不需要重新猜测业务语义。
+  verification:
+    status: passed
+    commands:
+    - validate_project.py --root .
+    evidence:
+    - EV-009
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - .project-log/specs/modeling-refactor-spec.md
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-002
+  title: 复制建模资源和基线输出
+  kind: task
+  phase: implementation
+  goal: 将当前杂项中用于建模闭环的数据和模型复制到建模代码目录，并保留源文件。
+  status: done
+  priority: critical
+  risk: low
+  authority: A
+  owner: agent
+  tags:
+  - resources
+  - migration
+  related_business_logic:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  - BL-MODELING-007
+  acceptance_refs:
+  - BL-MODELING-001/AC-001
+  related_decisions:
+  - DEC-002
+  depends_on:
+  - TASK-001
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 杂项/data/*
+  - 杂项/models/*
+  - 杂项/figures/metrics_table.txt
+  outputs:
+  - 建模代码/data/*
+  - 建模代码/models/*
+  - 建模代码/outputs/figures/*
+  plan:
+  - 复制 data 目录下的 train/val/test mat。
+  - 复制 models 目录下的三个模型和 meta.npz。
+  - 复制或记录当前基线指标表。
+  - 校验源文件仍存在且复制文件哈希一致。
+  done_when:
+  - 建模代码/data 与 models 文件齐全。
+  - 杂项源文件未删除。
+  - 复制文件与源文件哈希一致。
+  verification:
+    status: passed
+    commands:
+    - 文件哈希比对
+    evidence:
+    - EV-002
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - 建模代码/data
+    - 建模代码/models
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-003
+  title: 重构共享数据、特征与指标模块
+  kind: task
+  phase: implementation
+  goal: 建立建模代码包内的共享模块，提供数据加载、特征升维和指标计算。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - modeling
+  - shared-modules
+  related_business_logic:
+  - BL-MODELING-002
+  - BL-MODELING-003
+  - BL-MODELING-007
+  acceptance_refs:
+  - BL-MODELING-002/AC-001
+  - BL-MODELING-007/AC-001
+  related_decisions:
+  - DEC-003
+  depends_on:
+  - TASK-002
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 杂项/utils.py
+  - 杂项/lift_function.py
+  - 杂项/compare_all.py
+  outputs:
+  - 建模代码/modeling/data_io.py
+  - 建模代码/modeling/lift_function.py
+  - 建模代码/modeling/metrics.py
+  plan:
+  - 将 utils 中的数据加载、路径和指标拆分到独立模块。
+  - 迁移并收敛 lift_function。
+  - 保证与当前杂项加载契约和指标定义一致。
+  done_when:
+  - 共享模块可从建模代码包导入。
+  - 数据加载返回与当前脚本相同的数组形状和字段。
+  - 指标函数计算与当前杂项指标一致。
+  verification:
+    status: passed
+    commands:
+    - python -m modeling.smoke_test_data
+    evidence:
+    - EV-003
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - 建模代码/modeling/data_io.py
+    - 建模代码/modeling/lift_function.py
+    - 建模代码/modeling/metrics.py
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-004
+  title: 重构我们的方法/FS-EDMD 训练器
+  kind: task
+  phase: implementation
+  goal: 将我们的方法训练逻辑迁移为可导入的 FS-EDMD 训练器模块和训练脚本。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - modeling
+  - fs-edmd
+  related_business_logic:
+  - BL-MODELING-004
+  acceptance_refs:
+  - BL-MODELING-004/AC-001
+  related_decisions:
+  - DEC-003
+  depends_on:
+  - TASK-003
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 杂项/train_ours.py
+  - 杂项/lift_function.py
+  outputs:
+  - 建模代码/modeling/trainers/fs_edmd.py
+  - 建模代码/scripts/train_fs_edmd.py
+  plan:
+  - 将 OursKoopmanTrainer 迁移为 fs_edmd 模块。
+  - 保留 fit/predict/save/load 接口和 float64 精度。
+  - 提供 scripts/train_fs_edmd.py 训练入口。
+  done_when:
+  - FS-EDMD 模块可被导入并加载现有模型。
+  - 训练脚本可运行且生成模型文件。
+  verification:
+    status: passed
+    commands:
+    - python scripts/train_fs_edmd.py --check-load
+    evidence:
+    - EV-004
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 建模代码/scripts/train_fs_edmd.py
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-005
+  title: 重构 EDMDDL 训练器
+  kind: task
+  phase: implementation
+  goal: 将 EDMDDL 训练逻辑迁移为可导入的训练器模块和训练脚本。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - modeling
+  - edmddl
+  related_business_logic:
+  - BL-MODELING-005
+  acceptance_refs:
+  - BL-MODELING-005/AC-001
+  related_decisions:
+  - DEC-003
+  depends_on:
+  - TASK-003
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 杂项/train_edmddl.py
+  outputs:
+  - 建模代码/modeling/trainers/edmddl.py
+  - 建模代码/scripts/train_edmddl.py
+  plan:
+  - 将 DicNN 和 EDMDDLTrainer 迁移为独立模块。
+  - 保留模型保存与预测格式。
+  - 提供训练脚本入口。
+  done_when:
+  - EDMDDL 模块可加载现有模型。
+  - 训练脚本可运行且生成模型文件。
+  verification:
+    status: passed
+    commands:
+    - python scripts/train_edmddl.py --check-load
+    evidence:
+    - EV-005
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - 建模代码/modeling/trainers/edmddl.py
+    - 建模代码/scripts/train_edmddl.py
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-006
+  title: 重构 EDMD 训练器
+  kind: task
+  phase: implementation
+  goal: 将 EDMD 训练逻辑迁移为可导入的训练器模块和训练脚本。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - modeling
+  - edmd
+  related_business_logic:
+  - BL-MODELING-006
+  acceptance_refs:
+  - BL-MODELING-006/AC-001
+  related_decisions:
+  - DEC-003
+  depends_on:
+  - TASK-003
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 杂项/train_edmd.py
+  - 杂项/lift_function.py
+  outputs:
+  - 建模代码/modeling/trainers/edmd.py
+  - 建模代码/scripts/train_edmd.py
+  plan:
+  - 将 EDMDTrainer 迁移为独立模块。
+  - 保留模型保存和预测格式。
+  - 提供训练脚本入口。
+  done_when:
+  - EDMD 模块可加载现有模型。
+  - 训练脚本可运行且生成模型文件。
+  verification:
+    status: passed
+    commands:
+    - python scripts/train_edmd.py --check-load
+    evidence:
+    - EV-006
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - 建模代码/modeling/trainers/edmd.py
+    - 建模代码/scripts/train_edmd.py
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-007
+  title: 建立统一评估绘图闭环入口
+  kind: task
+  phase: implementation
+  goal: 提供统一脚本完成 800 步预测、指标计算、图表输出，并补齐 README 与依赖清单。
+  status: done
+  priority: critical
+  risk: high
+  authority: B
+  owner: agent
+  tags:
+  - modeling
+  - evaluation
+  - plotting
+  - reproducible
+  related_business_logic:
+  - BL-MODELING-003
+  - BL-MODELING-007
+  - BL-MODELING-008
+  acceptance_refs:
+  - BL-MODELING-003/AC-001
+  - BL-MODELING-007/AC-001
+  - BL-MODELING-008/AC-001
+  related_decisions:
+  - DEC-002
+  - DEC-003
+  depends_on:
+  - TASK-004
+  - TASK-005
+  - TASK-006
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 建模代码/modeling
+  - 建模代码/data
+  - 建模代码/models
+  - 杂项/compare_all.py
+  outputs:
+  - 建模代码/scripts/evaluate_and_plot.py
+  - 建模代码/outputs/metrics/metrics_table.txt
+  - 建模代码/outputs/figures/position_comparison.png/pdf/svg
+  - 建模代码/outputs/figures/velocity_comparison.png/pdf/svg
+  - 建模代码/README.md
+  - 建模代码/requirements.txt
+  plan:
+  - 将 compare_all 的预测、评估和绘图逻辑改造成统一入口。
+  - 使用建模代码包内共享模块。
+  - 生成指标表和六类图表文件。
+  - 补 README 和依赖清单。
+  done_when:
+  - 统一入口成功退出并生成指标表和六类图表。
+  - 输出文件非空。
+  - README 包含运行命令、环境和目录说明。
+  verification:
+    status: passed
+    commands:
+    - python scripts/evaluate_and_plot.py
+    evidence:
+    - EV-007
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - 建模代码/scripts/evaluate_and_plot.py
+    - 建模代码/outputs/metrics/metrics_table.txt
+    - 建模代码/outputs/figures
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-008
+  title: 建模代码闭环验证与基线对齐
+  kind: task
+  phase: verification
+  goal: 验证重构后的建模代码可独立运行，且指标与当前杂项基线一致。
+  status: done
+  priority: critical
+  risk: high
+  authority: B
+  owner: agent
+  tags:
+  - verification
+  - reproducibility
+  related_business_logic:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  - BL-MODELING-003
+  - BL-MODELING-004
+  - BL-MODELING-005
+  - BL-MODELING-006
+  - BL-MODELING-007
+  - BL-MODELING-008
+  acceptance_refs:
+  - REQ-001
+  related_decisions:
+  - DEC-002
+  depends_on:
+  - TASK-007
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-verification
+  spec_ref: .project-log/specs/modeling-refactor-spec.md
+  inputs:
+  - 建模代码/scripts/evaluate_and_plot.py
+  - 建模代码/outputs/metrics/metrics_table.txt
+  - 建模代码/outputs/figures/*
+  - 杂项/figures/metrics_table.txt
+  outputs:
+  - .project-log/verification/evidence.yaml
+  - .project-log/loop/evidence-index.yaml
+  plan:
+  - 在建模代码目录运行统一闭环。
+  - 检查退出码、输出文件和指标。
+  - 与当前杂项基线指标比对，记录差异和限制。
+  done_when:
+  - 建模代码闭环在自包含目录中成功运行。
+  - 指标与当前杂项基线未发散。
+  - 验证证据写入 .project-log。
+  verification:
+    status: passed
+    commands:
+    - python scripts/evaluate_and_plot.py
+    - validate_project.py --root .
+    evidence:
+    - EV-007
+    - EV-008
+    - EV-009
+    limitations: []
+  result:
+    summary: implemented and verified per TASK acceptance
+    changed_files:
+    - .project-log/verification/evidence.yaml
+    - .project-log/loop/evidence-index.yaml
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-10T09:40:00Z'
+  updated_at: '2026-09-10T14:00:00Z'
+- id: TASK-009
+  title: 固化软体平台需求基线
+  kind: milestone
+  phase: requirement-baseline
+  goal: 将软体平台建模业务澄清写入 REQ-002，并记录固定划分、升维函数、三类模型、RMSE 评估和产物目录。
+  status: done
+  priority: critical
+  risk: medium
+  authority: C
+  owner: agent
+  tags:
+  - requirement-baseline
+  - soft-platform-modeling
+  related_business_logic:
+  - BL-SOFT-001
+  - BL-SOFT-002
+  - BL-SOFT-003
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions: []
+  depends_on: []
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-business-clarify
+  - a-project-log
+  spec_ref: null
+  inputs:
+  - 用户原始/澄清消息
+  - .project-log/business-logic/open-questions.yaml
+  - .project-log/business-logic/atoms.yaml
+  outputs:
+  - .project-log/business-logic/atoms.yaml
+  - .project-log/business-logic/clarification.yaml
+  - .project-log/requirements/baseline.yaml
+  - .project-log/tasks/task-list.yaml
+  - .project-log/current-session.md
+  plan:
+  - 确认数据划分固定为 7:2:1。
+  - 固化软体平台业务原子与 REQ-002。
+  - 更新会话摘要和工作流阶段。
+  done_when:
+  - Q-005 标记为已确认。
+  - 软体平台业务原子和 REQ-002 已写入 .project-log。
+  - 工作流当前阶段为 requirement-baseline。
+  verification:
+    status: passed
+    commands:
+    - validate_project.py --root .
+    evidence: []
+    limitations: []
+  result:
+    summary: 软体平台需求基线已固化
+    changed_files:
+    - .project-log/business-logic/open-questions.yaml
+    - .project-log/business-logic/atoms.yaml
+    - .project-log/business-logic/clarification.yaml
+    - .project-log/requirements/baseline.yaml
+    - .project-log/tasks/task-list.yaml
+    deviations: []
+    follow_ups:
+    - 待用户确认后进入软体平台方案研究与任务分解
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+- id: TASK-010
+  title: 软体平台建模工程说明
+  kind: task
+  phase: engineering-spec
+  goal: 产出可指导数据准备、升维、训练器适配、评估、探索和验证的软体平台工程说明。
+  status: done
+  priority: critical
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic: &id001
+  - BL-SOFT-001
+  - BL-SOFT-002
+  - BL-SOFT-003
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on: []
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills: []
+  spec_ref: null
+  inputs:
+  - research/solution-research.yaml
+  - architecture/architecture.yaml
+  - requirements/baseline.yaml
+  outputs:
+  - specs/soft-platform-modeling-spec.md
+  plan:
+  - 定义建模代码根目录内的文件职责和统一入口。
+  - 定义 processed_data、归一化、升维配置、run_id 和输出目录。
+  - 定义三模型、评估和最优配置筛选的验证方式。
+  done_when:
+  - spec 覆盖数据管线、200 维特征库、三模型适配、10 轨迹 RMSE 评估、探索输出和验证命令。
+  - 后续实现不需要再猜测目录和接口语义。
+  verification:
+    status: passed
+    commands:
+    - python scripts/prepare_soft_data.py --check
+    - python scripts/check_soft_lift.py
+    - python scripts/run_soft_experiment.py --run-id soft-base-001
+    evidence:
+    - EV-010
+    - EV-011
+    - EV-013
+    limitations: []
+  result:
+    summary: 软体平台工程说明已写入并支撑后续实现闭环
+    changed_files:
+    - .project-log/specs/soft-platform-modeling-spec.md
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T20:15:00Z'
+- id: TASK-011
+  title: 软体平台数据准备与固定划分
+  kind: task
+  phase: implementation
+  goal: 把 100 条原始 npz 处理成固定 70/20/10 的训练/验证/测试数据，并保存为可复现 Float64 npz。
+  status: done
+  priority: critical
+  risk: medium
+  authority: A
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic:
+  - BL-SOFT-001
+  - BL-SOFT-002
+  - BL-SOFT-003
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on:
+  - TASK-010
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - 数据备份/软体平台/原始数据/*.npz
+  outputs:
+  - 杂项/软体平台探索实验结果/processed_data/*.npz
+  - split_manifest.csv
+  - dataset_stats.json
+  - scripts/prepare_soft_data.py
+  plan:
+  - 读取并校验 100 条 npz。
+  - 用固定确定性规则生成 70/20/10 整轨集合。
+  - 构造 X=x[t]、U=u[t]、Y=x[t+1] 并保存 Float64。
+  - 输出轨迹清单、集合计数、数值范围和样本数。
+  done_when:
+  - 自动检查 70/20/10 且集合互斥。
+  - X/U/Y 为 Float64，测试集不混入训练。
+  - 原始源文件未被修改。
+  verification:
+    status: passed
+    commands:
+    - python scripts/prepare_soft_data.py --check
+    evidence:
+    - EV-010
+    limitations: []
+  result:
+    summary: 固定 70/20/10 划分已生成：train 20930、validation 5980、test 2990，测试轨迹 10 条
+    changed_files:
+    - 建模代码/modeling/soft_data.py
+    - 建模代码/scripts/prepare_soft_data.py
+    - 杂项/软体平台探索实验结果/processed_data/*
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T20:15:00Z'
+- id: TASK-012
+  title: 软体平台升维函数库
+  kind: task
+  phase: implementation
+  goal: 实现包含常数、x/y、多项式和 RBF/三角基的约 200 维可配置升维函数库，并验证维度和数值行为。
+  status: done
+  priority: critical
+  risk: high
+  authority: A
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic:
+  - BL-SOFT-004
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on:
+  - TASK-010
+  - TASK-011
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - processed_data 的归一化边界/统计
+  - 软体平台 2D 状态样本
+  outputs:
+  - modeling/soft_lift.py
+  - feature_dimension_report.json
+  - feature smoke checks
+  plan:
+  - 按数据范围设计和实现候选 200 维特征库。
+  - 提供参数控制多项式、RBF 网格/宽度、三角频率。
+  - 用训练数据拟合中心/尺度并检查维度与数值稳定性。
+  done_when:
+  - 默认输出维度约 200 且包含常数、x、y。
+  - 输入 (N,2) 输出 (N,D) Float64。
+  - 产生维度与数值稳定性报告。
+  verification:
+    status: passed
+    commands:
+    - python scripts/check_soft_lift.py
+    evidence:
+    - EV-011
+    limitations: []
+  result:
+    summary: 默认升维库 200 维：常数/x/y + 四次多项式 12 + 13x13 RBF 169 + sin/cos 16；样本条件数约 1.67e6，有限值通过
+    changed_files:
+    - 建模代码/modeling/soft_lift.py
+    - 建模代码/scripts/check_soft_lift.py
+    - 杂项/软体平台探索实验结果/feature_reports/default_soft_lift.json
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T20:15:00Z'
+- id: TASK-013
+  title: 三训练器软体平台适配与冒烟
+  kind: task
+  phase: implementation
+  goal: 让 FS-EDMD/EDMD/EDMDDL 可在软体平台 2D 状态和控制下训练、保存、加载和预测，且机械臂默认行为兼容。
+  status: done
+  priority: critical
+  risk: high
+  authority: B
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic:
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on:
+  - TASK-010
+  - TASK-011
+  - TASK-012
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - modeling/trainers/fs_edmd.py
+  - modeling/trainers/edmd.py
+  - modeling/trainers/edmddl.py
+  - processed_data
+  outputs:
+  - 训练器适配代码
+  - scripts/run_soft_experiment.py 骨架
+  - 三模型短训练/加载冒烟产物
+  plan:
+  - 为 FS-EDMD/EDMD 增加可选 lift_fn，默认仍为机械臂 lift_function。
+  - 用可配置维度调用 EDMDDL。
+  - 用 2D 数据做三模型短训练和加载检查。
+  - 运行机械臂 --check-load 确认默认未破坏。
+  done_when:
+  - 三个模型均可在 2D 数据上完成短训练、保存和加载。
+  - 机械臂现有模型仍可通过 --check-load。
+  - 无 NaN/维度不匹配错误。
+  verification:
+    status: passed
+    commands:
+    - python scripts/train_fs_edmd.py --check-load
+    - python scripts/train_edmd.py --check-load
+    - python scripts/check_soft_experiment_artifacts.py --run-id soft-base-001
+    evidence:
+    - EV-012
+    - EV-014
+    limitations: []
+  result:
+    summary: FS-EDMD/EDMD 支持可选 SoftLift 且机械臂默认加载不变；软体 base 三模型均可重新加载并预测
+    changed_files:
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 建模代码/modeling/trainers/edmd.py
+    - 建模代码/scripts/check_soft_experiment_artifacts.py
+    deviations:
+    - 补充修复独立加载软体模型时缺失 SoftLift 恢复
+    follow_ups: []
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T20:15:00Z'
+- id: TASK-014
+  title: 固定 10 条测试轨迹 RMSE 评估与探索输出
+  kind: task
+  phase: implementation
+  goal: 实现每组配置在固定 10 条测试轨迹上的逐轨迹递归预测、xy RMSE、平均 RMSE 和最高精度输出闭环。
+  status: done
+  priority: critical
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic:
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on:
+  - TASK-010
+  - TASK-011
+  - TASK-013
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - processed_data test 数据
+  - 三模型训练产物/配置
+  outputs:
+  - 逐轨迹 RMSE 表
+  - 平均/最高 RMSE 汇总
+  - run metrics.json
+  - 图表与日志
+  plan:
+  - 为每条测试轨迹独立递归预测并记录轨迹编号。
+  - 计算反归一化 xy RMSE。
+  - 输出 10 条明细、平均和最高精度。
+  - 将文件写入杂项/软体平台探索实验结果。
+  done_when:
+  - 10 条测试轨迹均有逐条 RMSE。
+  - 平均 RMSE 为 10 条均值，最高精度为最小单轨迹 RMSE。
+  - 结果文件可在实验目录直接读取。
+  verification:
+    status: passed
+    commands:
+    - python scripts/run_soft_experiment.py --run-id soft-base-001
+    evidence:
+    - EV-013
+    limitations:
+    - soft-base-001 为第一组较完整基线，不代表最终参数
+  result:
+    summary: soft-base-001 固定 10 测试轨迹评估完成：FS-EDMD avg=1.6849/best=0.7346；EDMD avg=3.1618/best=1.7267；EDMDDL
+      avg=1.6214/best=0.9860
+    changed_files:
+    - 建模代码/scripts/run_soft_experiment.py
+    - 建模代码/modeling/soft_metrics.py
+    - 杂项/软体平台探索实验结果/runs/soft-base-001/*
+    deviations: []
+    follow_ups:
+    - 继续参数搜索以降低 FS-EDMD 平均 RMSE 并保持最高精度最优
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T20:15:00Z'
+- id: TASK-015
+  title: 初始探索批次与最优配置汇总
+  kind: spike
+  phase: implementation
+  goal: 运行第一轮可解释配置探索，比较三模型在固定测试集上的平均与最高精度，并形成可复现探索汇总。
+  status: done
+  priority: critical
+  risk: high
+  authority: B
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic:
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-009
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on:
+  - TASK-013
+  - TASK-014
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - 统一实验入口
+  - 候选升维配置
+  - FS-EDMD N 配置
+  - EDMDDL n_psi/layer_sizes 配置
+  outputs:
+  - 多组 run 模型与配置
+  - 探索汇总表/leaderboard
+  - 最优配置候选说明
+  plan:
+  - 设计第一轮配置，变量包括升维变体、正则、FS-EDMD N、EDMDDL 网络/潜在维度。
+  - 每组固定使用同一 10 条测试轨迹。
+  - 汇总逐轨迹、平均和最高 RMSE。
+  - 按用户筛选标准选择最优候选。
+  done_when:
+  - 至少输出一组完整的 FS-EDMD/EDMD/EDMDDL 结果。
+  - 所有配置、产物路径和指标可追溯。
+  - 能明确给出满足“FS-EDMD 最高精度最优且平均 RMSE 尽量低”的最优候选或说明。
+  verification:
+    status: passed
+    commands:
+    - python scripts/run_soft_experiment.py --run-id soft-base-001
+    - python scripts/evaluate_soft_experiments.py
+    evidence:
+    - EV-013
+    - EV-015
+    - EV-016
+    limitations: []
+  result:
+    summary: 已完成第一组正式基线 soft-base-001 并刷新 leaderboard；FS-EDMD 最高精度最优，平均 RMSE 仍高于 EDMDDL，继续参数搜索
+    changed_files:
+    - 杂项/软体平台探索实验结果/runs/soft-base-001
+    - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+    deviations: []
+    follow_ups:
+    - 执行 TASK-017 粗到细参数搜索
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T22:55:00Z'
+- id: TASK-016
+  title: 软体平台全链路验证与文档
+  kind: milestone
+  phase: verification
+  goal: 验证数据、升维、训练、评估、探索产物与文档组成的完整闭环，并确认机械臂基线未被破坏。
+  status: done
+  priority: critical
+  risk: high
+  authority: B
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  related_business_logic: *id001
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-004
+  - DEC-005
+  depends_on:
+  - TASK-014
+  - TASK-015
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-verification
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - processed_data
+  - 软体平台三模型与探索结果
+  - 机械臂 --check-load
+  outputs:
+  - 验证证据
+  - README 软体平台运行说明
+  - 依赖/requirements 更新
+  - Project Log 更新
+  plan:
+  - 运行数据检查和维度检查。
+  - 运行一个完整探索组或最小复现批次。
+  - 校验 10 轨迹 RMSE 输出和目录约束。
+  - 运行机械臂 --check-load 与基线回归。
+  - 运行 validate_project.py。
+  done_when:
+  - 软体平台闭环命令可复现。
+  - 输出目录、指标和模型均存在。
+  - 机械臂基线未回归。
+  - Project Log 校验通过。
+  verification:
+    status: passed
+    commands:
+    - python scripts/check_soft_lift.py
+    - python scripts/run_soft_experiment.py --run-id soft-final-006
+    - python scripts/evaluate_soft_experiments.py
+    - python scripts/check_soft_experiment_artifacts.py --run-id soft-final-006 --test-limit
+      1
+    - python scripts/train_fs_edmd.py --check-load
+    - python scripts/train_edmddl.py --check-load
+    - python scripts/train_edmd.py --check-load
+    - python scripts/validate_project.py --root .
+    evidence:
+    - EV-017
+    - EV-018
+    - EV-019
+    limitations:
+    - 最终 FS-EDMD 固定测试集平均 RMSE 仍高于 EDMDDL，但单轨迹最小 RMSE 为三者最优。
+  result:
+    summary: 软体平台最终交付与全链路验证完成，机械臂基线 --check-load 未回归
+    changed_files:
+    - 建模代码/scripts/run_soft_experiment.py
+    - 建模代码/scripts/run_soft_search.py
+    - 建模代码/scripts/evaluate_soft_experiments.py
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 杂项/软体平台探索实验结果/final/*
+    deviations:
+    - 最终升维为 112 维；200 维附近在验证集上未更好，已在 final README 记录。
+    follow_ups: []
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T22:55:00Z'
+- id: TASK-017
+  title: 粗到细参数搜索与论文候选最终化
+  kind: spike
+  phase: implementation
+  goal: 以 soft-base-001 为对照，执行 FS-EDMD/EDMD/EDMDDL 与升维库的粗到细参数搜索，最终选出满足 FS-EDMD 最高精度最优且平均
+    RMSE 尽量低的可复现论文候选。
+  status: done
+  priority: critical
+  risk: high
+  authority: B
+  owner: agent
+  tags:
+  - soft-platform-modeling
+  - spike
+  - paper-selection
+  related_business_logic:
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  acceptance_refs:
+  - REQ-002
+  related_decisions:
+  - DEC-005
+  depends_on:
+  - TASK-013
+  - TASK-014
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/soft-platform-modeling-spec.md
+  inputs:
+  - 杂项/软体平台探索实验结果/runs/soft-base-001
+  - 建模代码/scripts/run_soft_experiment.py
+  - 建模代码/scripts/evaluate_soft_experiments.py
+  - 杂项/软体平台探索实验结果/search_plans/README.md
+  outputs:
+  - 杂项/软体平台探索实验结果/runs/soft-*
+  - 杂项/软体平台探索实验结果/summaries/leaderboard*.json/csv
+  - 杂项/软体平台探索实验结果/search_plans/*.json
+  - 杂项/软体平台探索实验结果/search_plans/*.report.json
+  - 杂项/软体平台探索实验结果/final/*
+  - 论文候选配置与复现命令文档
+  plan:
+  - 阶段1：按 24 组升维库组合筛 poly_degree/rbf_grid/rbf_sigma_scale，仅按验证集 FS/EDMD 指标排序。
+  - 阶段2：在最佳升维配置下扫 fs_n，再扫 fs_lam/fs_beta/fs_eta_d 的 3x3x3 网格，仍按验证集排序。
+  - 阶段3：用验证集做 EDMDDL-only 细搜索，覆盖 n_psi、宽度/深度和学习率。
+  - 阶段4：只对少量最终候选跑三模型正式 run，确认固定 10 条测试轨迹，并刷新正式 leaderboard。
+  - 阶段5：选出满足 FS-EDMD best RMSE 最优且 average RMSE 尽量低的论文候选，复制最终模型、配置、指标和复现命令到 final/。
+  done_when:
+  - 至少覆盖一组升维库变化和各模型主要超参数范围。
+  - 正式 leaderboard 只统计非 smoke 运行。
+  - 给出最终候选的配置、10 轨迹 RMSE、平均 RMSE、最高精度和复现命令。
+  - 最终候选满足 FS-EDMD 最高精度最优且平均 RMSE 尽量低，或记录未满足原因。
+  verification:
+    status: passed
+    commands:
+    - python scripts/run_soft_search.py --campaign soft-fs-opt-001
+    - python scripts/run_soft_search.py --campaign soft-fs-opt2-001
+    - python scripts/run_soft_search.py --campaign soft-lift-optg-001
+    - python scripts/run_soft_search.py --campaign soft-final-opt-001
+    - python scripts/evaluate_soft_experiments.py
+    - python scripts/check_soft_experiment_artifacts.py --run-id soft-final-006 --test-limit
+      1
+    evidence:
+    - EV-017
+    - EV-018
+    limitations:
+    - 最终候选固定测试集 FS-EDMD 平均 RMSE 高于 EDMDDL，最高精度仍为三者最优。
+  result:
+    summary: soft-final-006 成为最终论文候选：FS-EDMD 测试集 avg RMSE=1.5328,best RMSE=0.7889；EDMD
+      avg=3.1842,best=1.8033；EDMDDL avg=1.4565,best=1.0223
+    changed_files:
+    - 建模代码/scripts/run_soft_experiment.py
+    - 建模代码/scripts/run_soft_search.py
+    - 建模代码/scripts/evaluate_soft_experiments.py
+    - 建模代码/modeling/trainers/fs_edmd.py
+    - 杂项/软体平台探索实验结果/search_plans/*
+    - 杂项/软体平台探索实验结果/runs/soft-final-006/*
+    - 杂项/软体平台探索实验结果/summaries/leaderboard.json
+    - 杂项/软体平台探索实验结果/final/*
+    deviations:
+    - 约 200 维口径未选用，因为 200 维附近验证集平均 RMSE 更差，最终采用 112 维。
+    follow_ups: []
+  created_at: '2026-09-11T20:15:00Z'
+  updated_at: '2026-09-11T22:55:00Z'

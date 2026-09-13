@@ -1,0 +1,57 @@
+{
+  "campaign": "soft-final-opt-001",
+  "description": "Final three-model confirmation for the strongest FS-EDMD stability candidates.",
+  "configs": [
+    {
+      "run_id": "soft-final-004",
+      "models": "fs_edmd,edmd,edmd_dl",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.95,
+      "fs_grad_clip_norm": 1.0,
+      "edmd_dl_n_psi": 20,
+      "edmd_dl_layers": "256,256",
+      "edmd_dl_lr": 0.0001,
+      "edmd_dl_epochs": 50
+    },
+    {
+      "run_id": "soft-final-005",
+      "models": "fs_edmd,edmd,edmd_dl",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.8,
+      "fs_grad_clip_norm": 2.0,
+      "edmd_dl_n_psi": 20,
+      "edmd_dl_layers": "256,256",
+      "edmd_dl_lr": 0.0001,
+      "edmd_dl_epochs": 50
+    },
+    {
+      "run_id": "soft-final-006",
+      "models": "fs_edmd,edmd,edmd_dl",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_lr_decay_factor": 0.9,
+      "fs_grad_clip_norm": 1.0,
+      "edmd_dl_n_psi": 20,
+      "edmd_dl_layers": "256,256",
+      "edmd_dl_lr": 0.0001,
+      "edmd_dl_epochs": 50
+    }
+  ]
+}

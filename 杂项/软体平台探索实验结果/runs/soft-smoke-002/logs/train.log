@@ -1,0 +1,7 @@
+2026-09-11 20:01:22,702 | INFO | lift dimension=200
+2026-09-11 20:01:22,702 | INFO | Training FS-EDMD
+2026-09-11 20:01:23,594 | INFO | Training EDMD
+2026-09-11 20:01:23,954 | INFO | Training EDMDDL
+2026-09-11 20:01:27,483 | INFO | Evaluating fixed test trajectories
+2026-09-11 20:01:28,268 | INFO | Run complete in 5.77 seconds
+2026-09-11 20:01:28,269 | INFO | Summary: {"fs_edmd": {"average_rmse": 3.3155718118549777, "best_rmse": 1.2058338222429588, "best_trajectory_id": 32, "trajectory_count": 10}, "edmd": {"average_rmse": 3.16178404522298, "best_rmse": 1.726725230615497, "best_trajectory_id": 83, "trajectory_count": 10}, "edmd_dl": {"average_rmse": 1.6298197396292076, "best_rmse": 0.9858827166071266, "best_trajectory_id": 6, "trajectory_count": 10}}

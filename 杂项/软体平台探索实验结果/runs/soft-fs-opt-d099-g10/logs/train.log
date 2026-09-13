@@ -1,0 +1,4 @@
+2026-09-11 22:30:00,486 | INFO | lift dimension=112
+2026-09-11 22:30:00,486 | INFO | Training FS-EDMD
+2026-09-11 22:30:16,301 | INFO | Training EDMD
+2026-09-11 22:30:16,516 | INFO | Evaluating splits: test,validation

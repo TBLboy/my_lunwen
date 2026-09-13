@@ -1,0 +1,26 @@
+{
+  "campaign": "soft-final-opt-001",
+  "started_at": "2026-09-11T14:35:44.835126+00:00",
+  "runs": [
+    {
+      "run_id": "soft-final-004",
+      "returncode": 0,
+      "elapsed_seconds": 32.55,
+      "tail": " Val Loss=0.00013100, LR=1.00e-04\nEpoch 44/50: Train Loss=0.00013002, Val Loss=0.00013076, LR=1.00e-04\nEpoch 45/50: Train Loss=0.00012944, Val Loss=0.00012754, LR=1.00e-04\nEpoch 46/50: Train Loss=0.00012953, Val Loss=0.00013057, LR=1.00e-04\nEpoch 47/50: Train Loss=0.00013477, Val Loss=0.00013175, LR=1.00e-04\nEpoch 48/50: Train Loss=0.00013437, Val Loss=0.00012582, LR=1.00e-04\nEpoch 49/50: Train Loss=0.00012674, Val Loss=0.00012481, LR=1.00e-04\nEpoch 50/50: Train Loss=0.00012549, Val Loss=0.00012398, LR=1.00e-04\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-004\\models\\edmd_dl.pkl\n2026-09-11 22:36:15,380 | INFO | Evaluating splits: test,validation\n2026-09-11 22:36:16,882 | INFO | Run complete in 29.40 seconds\n2026-09-11 22:36:16,883 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.7236824087823215, \"best_rmse\": 0.7824176603900642, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}, \"edmd_dl\": {\"average_rmse\": 1.4564645558668796, \"best_rmse\": 1.0223250542973927, \"best_trajectory_id\": 6, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-final-005",
+      "returncode": 0,
+      "elapsed_seconds": 32.74,
+      "tail": " Val Loss=0.00013100, LR=1.00e-04\nEpoch 44/50: Train Loss=0.00013002, Val Loss=0.00013076, LR=1.00e-04\nEpoch 45/50: Train Loss=0.00012944, Val Loss=0.00012754, LR=1.00e-04\nEpoch 46/50: Train Loss=0.00012953, Val Loss=0.00013057, LR=1.00e-04\nEpoch 47/50: Train Loss=0.00013477, Val Loss=0.00013175, LR=1.00e-04\nEpoch 48/50: Train Loss=0.00013437, Val Loss=0.00012582, LR=1.00e-04\nEpoch 49/50: Train Loss=0.00012674, Val Loss=0.00012481, LR=1.00e-04\nEpoch 50/50: Train Loss=0.00012549, Val Loss=0.00012398, LR=1.00e-04\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-005\\models\\edmd_dl.pkl\n2026-09-11 22:36:48,109 | INFO | Evaluating splits: test,validation\n2026-09-11 22:36:49,616 | INFO | Run complete in 29.63 seconds\n2026-09-11 22:36:49,616 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.6617392555028658, \"best_rmse\": 0.8174348109954758, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}, \"edmd_dl\": {\"average_rmse\": 1.4564645558668796, \"best_rmse\": 1.0223250542973927, \"best_trajectory_id\": 6, \"trajectory_count\": 10}}\n"
+    },
+    {
+      "run_id": "soft-final-006",
+      "returncode": 0,
+      "elapsed_seconds": 32.7,
+      "tail": " Val Loss=0.00013100, LR=1.00e-04\nEpoch 44/50: Train Loss=0.00013002, Val Loss=0.00013076, LR=1.00e-04\nEpoch 45/50: Train Loss=0.00012944, Val Loss=0.00012754, LR=1.00e-04\nEpoch 46/50: Train Loss=0.00012953, Val Loss=0.00013057, LR=1.00e-04\nEpoch 47/50: Train Loss=0.00013477, Val Loss=0.00013175, LR=1.00e-04\nEpoch 48/50: Train Loss=0.00013437, Val Loss=0.00012582, LR=1.00e-04\nEpoch 49/50: Train Loss=0.00012674, Val Loss=0.00012481, LR=1.00e-04\nEpoch 50/50: Train Loss=0.00012549, Val Loss=0.00012398, LR=1.00e-04\nTraining complete.\nModel saved to C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-006\\models\\edmd_dl.pkl\n2026-09-11 22:37:20,889 | INFO | Evaluating splits: test,validation\n2026-09-11 22:37:22,311 | INFO | Run complete in 29.55 seconds\n2026-09-11 22:37:22,311 | INFO | Summary: {\"fs_edmd\": {\"average_rmse\": 1.5328161179076125, \"best_rmse\": 0.7888961333833346, \"best_trajectory_id\": 66, \"trajectory_count\": 10}, \"edmd\": {\"average_rmse\": 3.1841637676324295, \"best_rmse\": 1.8032760494779556, \"best_trajectory_id\": 36, \"trajectory_count\": 10}, \"edmd_dl\": {\"average_rmse\": 1.4564645558668796, \"best_rmse\": 1.0223250542973927, \"best_trajectory_id\": 6, \"trajectory_count\": 10}}\n"
+    }
+  ],
+  "finished_at": "2026-09-11T14:37:22.829786+00:00",
+  "failed": []
+}

@@ -1,0 +1,303 @@
+{
+    "campaign":  "soft-fs-grid2-001",
+    "description":  "Stage 2e FS-EDMD fine regularization grid.",
+    "configs":  [
+                    {
+                        "run_id":  "soft-fs-grid2-001",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-002",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-003",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-004",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-005",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-006",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-007",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-008",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-009",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.005,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-010",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-011",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-012",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-013",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-014",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-015",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-016",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-017",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-018",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-019",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-020",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-021",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.0005,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-022",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-023",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-024",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.05
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-025",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.02
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-026",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-grid2-027",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.02,
+                        "fs_beta":  0.002,
+                        "fs_eta_d":  0.05
+                    }
+                ]
+}

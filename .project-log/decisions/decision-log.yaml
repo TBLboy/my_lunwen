@@ -1,0 +1,233 @@
+version: '0.2'
+decisions:
+- id: DEC-001
+  title: 仓库类型
+  category: process
+  status: active
+  authority: B
+  user_approval: approved
+  related_tasks: []
+  related_business_logic: []
+  context: 初始化工程时需要确定 Git 仓库的协作边界
+  hypothesis: 当前使用场景按个人仓库管理，不需要启用团队协作额外约束
+  options:
+  - name: 个人仓库
+    benefits:
+    - 流程更轻量
+    - 符合当前使用场景
+    costs: []
+    risks: []
+  - name: 团队协作仓库
+    benefits:
+    - 便于多人协作
+    costs:
+    - 需要对无关新增文件是否纳入忽略规则逐项确认
+    risks: []
+  decision: 个人仓库
+  reason_summary:
+  - 用户明确确认当前仓库为个人仓库
+  action: 在根目录 AGENTS.md 写入“仓库类型：个人仓库”
+  expected_result: 后续开发按个人仓库规则执行
+  reversal_plan: 若仓库改为团队协作，更新该规则并补充团队约束
+- id: DEC-002
+  title: 建模代码迁移范围、基线与交付形态
+  category: business
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks: []
+  related_business_logic:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  - BL-MODELING-003
+  - BL-MODELING-004
+  - BL-MODELING-005
+  - BL-MODELING-006
+  - BL-MODELING-007
+  - BL-MODELING-008
+  context: 原工程论文3材料较乱，需要将三类建模代码重构后迁移到当前干净工程，并确认以哪套代码和数据作为基线。
+  hypothesis: 以当前杂项中已跑通的绘图脚本和机械臂数据为基线，形成自包含、可复现的建模代码闭环，能降低重构和论文复现风险。
+  options:
+  - name: 以原论文3绘图脚本为基线
+    benefits:
+    - 使用原工程原始版本
+    costs:
+    - 当前已知跑出发散结果
+    risks:
+    - 重构后仍无法复现论文结果
+  - name: 以当前杂项已跑通版本为基线
+    benefits:
+    - 已验证可运行，指标正常
+    - 与处理版机械臂数据匹配
+    costs: []
+    risks:
+    - 需要明确废弃论文3中的发散绘图版本
+  - name: 仅迁移代码不改资源组织
+    benefits:
+    - 目录更小
+    costs:
+    - 依赖杂项或论文3路径，可复现性差
+    risks:
+    - 换机器或归档后运行断裂
+  decision: 以当前杂项已跑通绘图脚本和机械臂数据为基线；建模代码采用自包含工程，数据与模型复制而非剪切，交付覆盖数据加载、训练/加载模型、评估、绘图的完整闭环。
+  reason_summary:
+  - 当前杂项绘图脚本和机械臂数据已验证跑通。
+  - 原论文3绘图脚本跑出发散结果，不适合作为基线。
+  - 自包含复制方式可保证建模代码独立复现，同时不破坏原资源。
+  action: 在当前工程建模代码目录重构迁移三类建模代码，复制杂项数据/模型，并建立完整闭环与验证证据。
+  expected_result: 建模代码目录可独立运行训练、评估和绘图，指标与当前杂项基线一致。
+  reversal_plan: 若发现迁移版本仍发散，可回退到当前杂项已跑通副本并保留基线指标。
+- id: DEC-003
+  title: 建模代码包结构
+  category: architecture
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks: []
+  related_business_logic:
+  - BL-MODELING-003
+  - BL-MODELING-004
+  - BL-MODELING-005
+  - BL-MODELING-006
+  context: 现有 train_*.py、utils.py、compare_all.py 是平铺脚本，需要在建模代码目录中重构为可维护、可复现的结构。
+  hypothesis: 采用 modeling 包加 scripts 入口、资源目录固定的结构，可以避免平铺脚本的路径和职责混乱。
+  options:
+  - name: 平铺脚本迁移
+    benefits:
+    - 改动最小
+    costs:
+    - 路径和职责仍然混乱
+    risks:
+    - 后续维护和验证困难
+  - name: modeling 包 + scripts 入口
+    benefits:
+    - 模块边界清晰
+    - 训练器可复用
+    - 统一入口便于验证
+    costs:
+    - 需要一次重构与迁移测试
+    risks:
+    - 需要确保接口与旧脚本兼容
+  decision: 在建模代码目录中建立 modeling Python 包，共享数据/特征/指标/绘图模块，三个训练器独立模块，scripts 提供训练与统一评估绘图入口。
+  reason_summary:
+  - 现有脚本已经具备清晰训练器类和共享工具，适合按模块边界重组。
+  - 统一入口满足完整闭环和可复现要求。
+  action: 按 ARCH-001 的组件职责创建建模代码工程结构。
+  expected_result: 建模代码目录结构清晰，三类模型和闭环入口均可独立运行与验证。
+  reversal_plan: 若用户更偏好平铺脚本，可在保留行为不变的前提下直接回退文件布局。
+- id: DEC-004
+  title: 软体平台代码目录与实验输出目录
+  category: architecture
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks:
+  - TASK-009
+  related_business_logic:
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  context: 软体平台建模需要确定代码存放位置和探索产物存放位置。
+  hypothesis: 代码保留在现有可能复用的建模代码根目录，探索产物集中到一个实验目录，可以保持代码整洁并便于对比多组训练结果。
+  options:
+  - name: 新建 soft_platform 子目录放代码
+    benefits:
+    - 模块边界清晰
+    costs:
+    - 与用户明确要求不符
+    - 增加目录层级
+    risks:
+    - 用户需要额外维护两个建模代码位置
+  - name: 代码并入建模代码根目录，产物入实验目录
+    benefits:
+    - 符合用户要求
+    - 代码与实验产物分离
+    costs:
+    - 需要在解决方案中明确如何复用现有 modeling 包
+    risks:
+    - 当前建模代码目录已有子结构，需避免命名冲突
+  decision: 软体平台代码放在论文材料/建模代码根目录，不创建 soft_platform 等软体平台专属子文件夹；数据处理、训练、评估的中间结果放在论文材料/杂项/软体平台探索实验结果。
+  reason_summary:
+  - 用户明确确认代码仍放在建模代码根目录。
+  - 用户明确要求不创建子文件夹。
+  - 中间实验产物集中到杂项/软体平台探索实验结果，便于多组对比且不污染代码目录。
+  action: 后续方案研究和实现按该目录约束执行。
+  expected_result: 软体平台代码与现有建模代码位于同一根目录，探索产物集中在指定实验输出目录。
+  reversal_plan: 若后续需要更清晰的代码边界，由用户确认后再调整目录结构。
+  observation: null
+  actual_result: null
+  outcome_status: not-observed
+  lesson: null
+  evidence:
+  - 用户消息
+  supersedes: []
+  created_at: '2026-09-11T19:40:00Z'
+  updated_at: '2026-09-11T19:40:00Z'
+- id: DEC-005
+  title: 软体平台建模实现策略
+  category: architecture
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-010
+  - TASK-011
+  - TASK-012
+  - TASK-013
+  - TASK-014
+  - TASK-015
+  - TASK-016
+  related_business_logic:
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  context: 需要选择软体平台代码的结构和复用边界，既要满足目录约束，又不破坏机械臂建模基线。
+  hypothesis: 复用现有 modeling 包和训练器，只添加软体平台适配层和实验入口，是维护和复现成本最低的方式。
+  options:
+  - name: 复用现有 modeling 包
+    benefits:
+    - 训练器已验证
+    - 探索参数集中
+    costs:
+    - 需要兼容性适配
+    risks:
+    - 适配可能影响机械臂默认行为
+  - name: 平铺软体脚本
+    benefits:
+    - 改动隔离
+    costs:
+    - 重复实现训练评估逻辑
+    risks:
+    - 维护成本高
+  - name: soft_platform 子目录
+    benefits:
+    - 完全隔离
+    costs:
+    - 违反目录约束
+    risks:
+    - C 级决策冲突
+  decision: 在建模代码根目录复用现有 modeling 包和 scripts 入口，为软体平台新增 soft_data/soft_lift 与统一探索入口；不创建软体平台子文件夹。
+  reason_summary:
+  - 现有三类训练器已验证，复用可减少重复代码。
+  - 用户要求代码放建模代码根目录且不创建子文件夹。
+  - 机械臂基线通过默认参数和 --check-load 保持兼容。
+  action: 按 ARCH-002 实施软体平台数据、升维、训练、评估和探索入口。
+  expected_result: 软体平台代码与现有建模代码共存于同一根目录，实验产物集中输出，机械臂基线不受影响。
+  reversal_plan: 如果适配层导致机械臂基线回归，可回退训练器改动并改为独立适配脚本。
+  observation: null
+  actual_result: null
+  outcome_status: not-observed
+  lesson: null
+  evidence:
+  - RES-001
+  supersedes: []
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T19:55:00Z'

@@ -1,0 +1,33 @@
+{
+  "dimension": 200,
+  "poly_degree": 4,
+  "rbf_grid_size": 13,
+  "rbf_sigma_scale": 0.8,
+  "trig_frequencies": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "input_center": [
+    0.165288188170442,
+    0.12828487871310035
+  ],
+  "input_scale": [
+    2.559911954542496,
+    2.6543986829263413
+  ],
+  "rbf_sigma": [
+    0.13333333333333333,
+    0.13333333333333333
+  ],
+  "groups": {
+    "constant": 1,
+    "linear": 2,
+    "polynomial": 12,
+    "rbf": 169,
+    "trig": 16
+  },
+  "sample_condition_number": 1671837.5613112918,
+  "sample_finite": true
+}

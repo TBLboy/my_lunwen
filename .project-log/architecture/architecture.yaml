@@ -1,0 +1,127 @@
+version: '0.2'
+architectures:
+- id: ARCH-001
+  status: active
+  goal: 在建模代码目录建立自包含、可复现的 Python 工程，以模块化方式承载数据加载、三类建模、评估和绘图完整闭环。
+  related_business_logic:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  - BL-MODELING-003
+  - BL-MODELING-004
+  - BL-MODELING-005
+  - BL-MODELING-006
+  - BL-MODELING-007
+  - BL-MODELING-008
+  decision_refs:
+  - DEC-002
+  - DEC-003
+  components:
+  - name: data
+    responsibility: 存放从当前杂项复制来的机械臂 train/val/test mat 数据
+  - name: models
+    responsibility: 存放三个模型文件与 meta.npz；训练结果默认写到这里
+  - name: outputs
+    responsibility: 存放评估指标表与位置/速度对比图
+  - name: modeling
+    responsibility: Python 包，包含数据接口、特征函数、指标、绘图和三模型训练器
+  - name: scripts
+    responsibility: 面向用户的三模型训练入口与统一评估绘图入口
+  interfaces:
+  - name: data_io.load_train_data/load_val_data/load_test_data
+    contract: 从 data 目录加载处理版 mat，返回现有脚本兼容的数组与归一化参数
+  - name: trainer.fit/predict/save/load
+    contract: FS-EDMD、EDMDDL、EDMD 三类训练器保持统一的保存和加载格式
+  - name: evaluate_and_plot CLI
+    contract: 加载或使用训练结果，输出 metrics_table 与 position/velocity 对比图
+  data_flows:
+  - 当前杂项 data/models 复制到建模代码 data/models，源文件不变
+  - data_io 加载 data 目录 mat
+  - lift_function 生成特征，训练器拟合矩阵或网络
+  - 模型保存到 models 目录
+  - 评估阶段加载测试数据和模型，做 800 步预测
+  - 指标与预测结果写入 outputs/metrics 和 outputs/figures
+  state_and_concurrency:
+  - 文件系统是主要状态；一次运行按配置写入模型、指标和图表
+  - 训练与评估以顺序执行为主，不引入服务级并发
+  failure_paths:
+  - 源资源缺失：停止迁移并报告缺失文件，不创建半成品
+  - 数据格式不兼容：data_io 抛出带字段名的错误
+  - 训练 NaN 或求解失败：停止当前训练并返回非零退出码
+  - 模型加载失败：评估入口列出失败模型路径
+  - 绘图失败：不输出不完整对比图，保留明确错误
+  security_and_privacy:
+  - 无凭据、私钥或在线服务；不引入网络调用
+  observability:
+  - CLI 输出当前步骤、路径、退出结果和指标摘要
+  - 验证阶段通过文件存在性、哈希和指标表检查提供证据
+  deployment_and_compatibility:
+  - 目标 Python 3.10，依赖 numpy/scipy/matplotlib/torch/sklearn
+  - 运行环境记录 requirements.txt 和 README
+  - 建模代码目录自包含，不依赖论文3或杂项路径
+  open_questions: []
+  created_at: '2026-09-10T09:30:00Z'
+  updated_at: '2026-09-10T09:30:00Z'
+- id: ARCH-002
+  status: active
+  goal: 在建模代码根目录建立软体平台建模适配层，复用现有训练器与脚本入口，并把固定数据、升维、训练、评估、探索输出组织为可复现流水线。
+  related_business_logic:
+  - BL-SOFT-001
+  - BL-SOFT-002
+  - BL-SOFT-003
+  - BL-SOFT-004
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  - BL-SOFT-009
+  - BL-SOFT-010
+  decision_refs:
+  - DEC-004
+  - DEC-005
+  components:
+  - name: modeling/soft_data.py
+    responsibility: 读取原始 npz，固定 7:2:1 整轨划分，构造 X/U/Y 样本，保存归一化参数和加载接口。
+  - name: modeling/soft_lift.py
+    responsibility: 实现约 200 维 2D 状态升维函数库，包含常数、x/y、多项式和 RBF/三角基。
+  - name: modeling/trainers 适配层
+    responsibility: FS-EDMD/EDMD 增加可选 lift_fn，EDMDDL 使用可配置维度；机械臂默认行为兼容。
+  - name: scripts/prepare_soft_data.py
+    responsibility: 生成并校验固定划分、样本和归一化参数。
+  - name: scripts/run_soft_experiment.py
+    responsibility: 统一运行一个实验组：训练三模型、评估 10 条轨迹、保存配置/模型/指标。
+  - name: 杂项/软体平台探索实验结果
+    responsibility: 存放中间数据、每组模型、指标、汇总表和图表。
+  interfaces:
+  - name: prepare_soft_data
+    contract: 输入原始 npz 目录，输出 processed_data/*.npz、split_manifest.csv 和归一化参数文件。
+  - name: soft_lift(x)
+    contract: 输入 (N,2) Float64，输出 (N,D) Float64，D 默认约 200。
+  - name: trainer.fit/predict/save/load
+    contract: 与现有训练器接口兼容；FS-EDMD/EDMD 使用 lift_fn，EDMDDL 使用网络配置。
+  - name: run_soft_experiment
+    contract: 输入 run_id 与配置，输出该组模型、指标表和逐轨迹 RMSE。
+  data_flows:
+  - 原始 100 npz → 固定整轨划分 → X/U/Y 样本 → 归一化 → processed_data。
+  - processed_data → 升维函数/网络 → FS-EDMD、EDMD、EDMDDL 训练。
+  - 固定 10 条测试轨迹 → 递归预测 → 反归一化 xy RMSE → 逐条/平均/最高精度。
+  - 每组 run_id 的配置、模型、指标和图表 → 杂项/软体平台探索实验结果。
+  state_and_concurrency:
+  - 固定划分和归一化参数是只读事实源，探索组不得重新划分。
+  - 探索组以 run_id 为键；并行探索写入目录互斥。
+  - 重复运行同一 run_id 应覆盖前一次结果并在 manifest 中保留记录。
+  failure_paths:
+  - 原始 npz 缺失或结构异常：数据管线报具体文件并中止。
+  - 划分数量或互斥检查失败：拒绝生成数据。
+  - 特征维度不等于配置维度：升维函数库报错。
+  - 训练 NaN 或求解失败：该 run_id 标记 failed。
+  - 测试评估不足 10 条：评估入口中止。
+  security_and_privacy:
+  - 无凭据、私钥或在线服务；原始数据仅本机读取。
+  observability:
+  - 每个实验组输出 run.yaml、训练日志、模型、metrics.csv 和 summary.json。
+  deployment_and_compatibility:
+  - Python 3.10，沿用现有依赖；机械臂默认入口保持不变。
+  open_questions:
+  - 200 维候选特征库稳定性由 TASK-012/TASK-015 spike 验证。
+  created_at: '2026-09-11T19:55:00Z'
+  updated_at: '2026-09-11T19:55:00Z'

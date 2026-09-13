@@ -1,0 +1,109 @@
+version: '0.5'
+status: passed
+functional_business_logic:
+  actors:
+  - 用户（论文作者）
+  - 审稿人或论文读者
+  - Agent
+  scenarios:
+  - 用户从原工程论文3中选取建模代码，重构后迁移到当前工程的建模代码目录。
+  - 用户使用重构后的建模代码训练或加载我们的模型、EDMD、EDMDDL并产出可比结果。
+  - 用户提供新设备软体平台 100 条原始轨迹，Agent 固定划分为 70/20/10 并构造一步预测样本。
+  - Agent 在固定划分上探索升维函数库、FS-EDMD/EDMDDL 网络和训练参数，并训练 FS-EDMD、EDMD、EDMDDL。
+  - 每组模型在固定 10 条测试轨迹上计算逐条 xy RMSE、平均 RMSE 和最高精度，用户据此挑选论文展示配置。
+  rules:
+  - 本次迁移主体是三类建模代码：我们的模型训练代码、EDMD、EDMDDL。
+  - 建模代码应组织成干净、可追踪、可重复运行的工程结构。
+  - 以当前杂项中已跑通的绘图脚本和机械臂数据为基线；原论文3绘图脚本发散，不作为基线。
+  - 重构后的建模代码交付完整闭环：数据加载、训练/加载模型、评估、绘图。
+  - 建模代码采用自包含资源组织方式，数据与模型复制而非剪切。
+  - 数据划分固定为 7:2:1，只执行一次并冻结；探索阶段不得调整数据集划分或测试轨迹。
+  - 状态 x 与控制 u 均为 2D；升维函数库必须包含常数项和 xy 状态分量，目标约 200 维。
+  - 每组训练统一使用同一测试集和 xy 位置 RMSE 口径，测试数据不得用于训练或配置调优。
+  - 筛选标准为我们的模型最高精度最优、平均 RMSE 尽量低；EDMDDL 与 EDMD 的次优顺序不强约束。
+  - 软体平台建模代码并入建模代码根目录，不创建软体平台专属子文件夹。
+  - 数据准备、训练、评估产生的中间模型、指标、图表等写入杂项/软体平台探索实验结果。
+  state_transitions: []
+  exceptions:
+  - 原始数据缺失或结构异常
+  - 测试轨迹数量不为 10
+  - 训练或评估出现数值异常
+  boundaries:
+  - 建模代码目录当前为空，是本任务的目标目录。
+  - NN训练、控制实验、软体平台数据和结果备份不属于本次明确迁移范围。
+  - 当前任务范围是软体平台建模与探索训练，不进入机械臂建模迁移和论文写作。
+  - 数据集划分不属于探索变量；训练参数配置和升维函数库属于可探索变量。
+  - 软体平台只新增代码和实验输出，不新增建模代码/soft_platform 等软体平台专属子目录。
+technical_business_logic:
+  current_implementation_facts:
+  - 杂项目录包含 FS-EDMD、EDMDDL、EDMD 三种 Koopman 建模 Python 脚本及 compare_all.py 对比绘图脚本。
+  - 杂项/compare_all.py 已验证可运行，使用杂项/data 与杂项/models 生成杂项/figures 下的对比图与指标表。
+  - 控制实验部分代码/机械臂/Koopman_Data_Generator 包含 MATLAB/Simulink、Quarc、robot real/sim 相关文件及
+    train/test 数据。
+  - 数据备份/机械臂数据 包含原始 data1-20.mat 与处理后的 train/val/test mat 数据。
+  - 数据备份/软体平台 包含 001-100 共 100 个 npz 文件。
+  - 建模代码 与 结果备份 当前未发现文件。
+  - 原工程建模代码位于 C:/Users/Windows/Desktop/论文3/1_建模精度对比。
+  - 原工程建模代码包含 train_ours.py、train_edmd.py、train_edmddl.py、train_nn.py、show_*.py、compare_all.py、utils.py、lift_function.py。
+  - 原工程与杂项副本中 train_ours.py、train_edmd.py、train_edmddl.py、lift_function.py 哈希一致；utils.py、compare_all.py、test_data.mat
+    不一致。
+  - 原工程测试数据为旧版 test_data.mat，杂项副本使用当前验证过的处理版 test_data.mat。
+  - 当前杂项包含已验证的 compare_all.py、三份训练脚本、共享工具、机械臂数据、模型和输出图。
+  - 数据备份/软体平台/原始数据 现有 01.npz 至 100.npz，每条包含 t(300,)、x(300,2)、u(300,2)，均为 Float64。
+  - 数据备份/软体平台/处理后的数据 与 杂项/软体平台探索实验结果 当前为空或不存在，可新建输出目录。
+  - 线性近似 x[t+1] ≈ x[t] + k*u[t] 的残差 RMSE 约 0.118，说明不能用线性项单独完成建模。
+  - 软体平台代码目录约束：代码放在 建模代码 根目录，不新增 soft_platform 子文件夹。
+  - 软体平台探索输出目录：杂项/软体平台探索实验结果。
+  interface_contracts:
+  - compare_all.py 通过 utils.py 读取 data/*.mat 与 models/*.pkl，并输出 figures/* 与 metrics_table.txt。
+  - 每一步样本契约为 X=x[t]、U=u[t]、Y=x[t+1]，x/u 为 2D Float64。
+  data_and_state_rules:
+  - 机械臂数据同时存在原始 mat 和已处理 mat；软体平台数据为 npz。
+  - 原始数据按轨迹组织，样本划分以整条轨迹为单位；同一轨迹不得跨集合。
+  consistency_and_concurrency:
+  - 固定划分生成后作为所有探索组的单一事实源，探索组间不得重新划分。
+  external_constraints:
+  - 验证绘图脚本需要 C:\Users\Windows\.conda\envs\edmddl2\python.exe 对应 Python 3.10 环境。
+  - 机械臂控制与数据生成部分可能依赖 MATLAB、Simulink 和 Quarc。
+  - 探索训练和产物输出路径为 杂项/软体平台探索实验结果。
+  - 中间过程输出的各种结果放入 杂项/软体平台探索实验结果。
+  compatibility_constraints:
+  - 沿用已有建模代码的 FS-EDMD、EDMD、EDMDDL 算法约定，但软体平台数据结构和升维函数独立实现。
+alignment:
+  confirmed_matches:
+  - id: ALIGN-SOFT-001
+    type: confirmed-match
+    summary: 用户确认数据划分固定为 7:2:1，且探索只调整训练参数配置与升维函数库。
+    status: resolved
+    authority: C
+    evidence:
+    - 用户消息：固定就可以，后续探索训练可调整的部分包括训练时的参数配置、升维函数库
+  - id: ALIGN-SOFT-002
+    type: confirmed-match
+    summary: 用户确认精度指标为 RMSE；按 10 条测试轨迹计算平均 RMSE 和最高精度。
+    status: resolved
+    authority: C
+    evidence:
+    - Q-006
+  - id: ALIGN-SOFT-004
+    type: confirmed-match
+    summary: 用户确认软体平台建模代码放在建模代码根目录且不创建子文件夹，中间结果输出到杂项/软体平台探索实验结果。
+    status: resolved
+    authority: C
+    evidence:
+    - 用户消息：建模的代码还是放在 建模代码 这里，不需要创建子文件夹，中间过程输出到 杂项/软体平台探索实验结果
+  conflicts: []
+  unknowns:
+  - id: ALIGN-SOFT-003
+    type: unknown
+    summary: 固定划分的具体确定性种子和随机方式尚未由用户指定；实现时按 A 级决定冻结并记录。
+    status: accepted
+    authority: B
+    evidence: []
+  decisions_required:
+  - 软体平台数据处理/训练/评估脚本与现有 modeling 包的具体复用方式（solution-research）
+gate:
+  status: passed
+  blocking_unknowns: []
+  notes: 软体平台代码目录与实验输出目录已由用户确认；无阻塞语义未知项。
+updated_at: '2026-09-11T19:40:00Z'

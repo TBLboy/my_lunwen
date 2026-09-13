@@ -1,0 +1,6 @@
+2026-09-11 21:09:29,508 | INFO | lift dimension=112
+2026-09-11 21:09:29,508 | INFO | Training FS-EDMD
+2026-09-11 21:09:45,418 | INFO | Training EDMD
+2026-09-11 21:09:45,631 | INFO | Evaluating splits: test,validation
+2026-09-11 21:09:46,081 | INFO | Run complete in 16.68 seconds
+2026-09-11 21:09:46,082 | INFO | Summary: {"fs_edmd": {"average_rmse": 1.7486364276753819, "best_rmse": 0.8605898320252254, "best_trajectory_id": 66, "trajectory_count": 10}, "edmd": {"average_rmse": 3.148990274190632, "best_rmse": 1.5999855228857296, "best_trajectory_id": 83, "trajectory_count": 10}}

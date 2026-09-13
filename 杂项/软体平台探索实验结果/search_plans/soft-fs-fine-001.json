@@ -1,0 +1,96 @@
+{
+    "campaign":  "soft-fs-fine-001",
+    "description":  "Stage 2c FS-EDMD N and iteration fine search.",
+    "configs":  [
+                    {
+                        "run_id":  "soft-fs-fine-n-30",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  30,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-n-50",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  50,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-n-60",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  60,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-n-80",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  80,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-n-100",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  100,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-n-120",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  120,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-iter5k",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03,
+                        "fs_max_iter":  5000
+                    },
+                    {
+                        "run_id":  "soft-fs-fine-iter10k",
+                        "models":  "fs_edmd,edmd",
+                        "lift_poly_degree":  4,
+                        "lift_rbf_grid":  9,
+                        "lift_rbf_sigma_scale":  1,
+                        "fs_n":  40,
+                        "fs_lam":  0.01,
+                        "fs_beta":  0.001,
+                        "fs_eta_d":  0.03,
+                        "fs_max_iter":  10000
+                    }
+                ]
+}

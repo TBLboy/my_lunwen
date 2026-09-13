@@ -1,0 +1,989 @@
+version: '0.2'
+source_of_truth: true
+atoms:
+- id: BL-MODELING-001
+  title: 建模代码自包含资源且源资源只复制不剪切
+  kind: constraint
+  domain: modeling
+  status: active
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户确认：自包含，迁移数据和模型时复制而非剪切
+  description: 建模代码目录必须包含运行所需的数据、模型和输出目录；创建时只能复制当前杂项资源，不能删除或移动源文件。
+  actors:
+  - 用户
+  - Agent
+  trigger: 搭建建模代码自包含工程
+  preconditions:
+  - 当前杂项中存在 data 和 models 资源
+  - 建模代码目录为空或待重建
+  inputs:
+  - 杂项/data/*.mat
+  - 杂项/models/*.pkl
+  - 杂项/models/*.npz
+  rule:
+    statement: 建模代码运行所需的机械臂数据和模型文件从当前杂项复制到建模代码目录，原文件保持不变。
+  outputs:
+  - 建模代码/data/*.mat
+  - 建模代码/models/*.pkl
+  - 建模代码/models/*.npz
+  side_effects:
+  - 当前杂项源文件继续保留
+  exceptions: []
+  failure_handling:
+  - 源文件缺失时中止迁移并报告缺失文件
+  invariants:
+  - 复制后文件与当前杂项源文件哈希一致
+  acceptance:
+  - id: AC-001
+    given: 当前杂项 data/models 资源存在
+    when: 完成资源迁移
+    then: 建模代码目录包含对应文件，且杂项源文件仍存在
+    method: 文件哈希比对和源文件存在性检查
+    evidence: null
+    status: not-verified
+  dependencies: []
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-002
+  title: 机械臂数据加载契约
+  kind: data-contract
+  domain: modeling
+  status: active
+  priority: critical
+  risk: low
+  authority: evidence-derived
+  source:
+    type: code
+    reference: 杂项/utils.py
+  description: 建模代码从本地 mat 文件加载机械臂处理版数据；训练、验证、测试数据和归一化参数必须符合现有脚本契约。
+  actors:
+  - Agent
+  trigger: 运行建模代码的数据加载流程
+  preconditions:
+  - 建模代码/data 下存在 train_data.mat、val_data.mat、test_data.mat
+  inputs:
+  - 建模代码/data/train_data.mat
+  - 建模代码/data/val_data.mat
+  - 建模代码/data/test_data.mat
+  rule:
+    statement: 数据加载接口按现有 mat 结构读取状态、下一状态、控制输入和归一化参数，并支持训练、验证、测试三种数据。
+  outputs:
+  - X_train、Y_train、U_train
+  - X_val、Y_val、U_val
+  - X_test、U_test
+  - q_scaler、q_dc、u_scaler、u_dc
+  side_effects: []
+  exceptions:
+  - mat 文件缺失
+  - mat 结构缺少必需字段
+  failure_handling:
+  - 抛出带具体文件路径和字段名的错误
+  invariants:
+  - 状态维度与现有脚本一致，测试数据可复现当前杂项验证结果
+  acceptance:
+  - id: AC-001
+    given: 建模代码/data 包含处理版机械臂数据
+    when: 调用数据加载接口
+    then: 返回形状和字段与当前杂项脚本一致
+    method: 运行数据加载并检查数组形状
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-001
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-003
+  title: 建模代码提供完整闭环入口
+  kind: flow
+  domain: modeling
+  status: active
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户确认：重构交付完整闭环
+  description: 建模代码必须提供统一可运行入口，覆盖数据加载、训练或加载模型、评估和绘图。
+  actors:
+  - 用户
+  - Agent
+  trigger: 用户运行建模代码主入口
+  preconditions:
+  - BL-MODELING-001 已满足
+  - BL-MODELING-002 已满足
+  inputs:
+  - 数据文件
+  - 模型保存/加载路径
+  - 输出目录配置
+  rule:
+    statement: 建模代码通过统一入口完成数据加载、训练或加载模型、评估和绘图，并返回可检查的成功/失败结果。
+  outputs:
+  - 训练或加载后的模型
+  - 指标表
+  - 对比图
+  side_effects:
+  - 按配置写入模型、指标和图表文件
+  exceptions:
+  - 任一步骤失败应终止并留下可读错误
+  failure_handling:
+  - 不静默产出不完整结果
+  invariants:
+  - 输出文件非空
+  acceptance:
+  - id: AC-001
+    given: 自包含资源和数据均已准备好
+    when: 运行统一入口
+    then: 正常完成训练/加载、评估和绘图并输出对应文件
+    method: 运行命令并检查退出码与输出文件
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-004
+  title: 我们的方法训练闭环
+  kind: flow
+  domain: modeling
+  status: active
+  priority: high
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: code
+    reference: 杂项/train_ours.py
+  description: 建模代码支持运行我们的方法（当前代码中对应 FS-EDMD）训练流程，并保存模型。
+  actors:
+  - 用户
+  - Agent
+  trigger: 用户运行我们的方法训练入口
+  preconditions:
+  - train_data 已加载
+  inputs:
+  - X_train、Y_train、U_train
+  - 特征函数 lift_function
+  - 训练超参数
+  rule:
+    statement: 我们的方法训练流程从机械臂训练数据生成 Koopman 模型矩阵，并保存模型文件和归一化元数据。
+  outputs:
+  - ours_model.pkl
+  - meta.npz
+  side_effects:
+  - 覆写对应模型文件
+  exceptions:
+  - 数据维度不匹配
+  - 训练中出现 NaN
+  failure_handling:
+  - 记录错误并停止训练
+  invariants:
+  - 模型保存格式可被评估闭环加载
+  acceptance:
+  - id: AC-001
+    given: 训练数据和超参数可用
+    when: 运行我们的方法训练入口
+    then: 训练成功退出并生成可加载模型
+    method: 运行训练命令并加载生成模型
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-002
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-005
+  title: EDMDDL 训练闭环
+  kind: flow
+  domain: modeling
+  status: active
+  priority: high
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: code
+    reference: 杂项/train_edmddl.py
+  description: 建模代码支持运行 EDMDDL 训练流程，并保存神经网络字典和 Koopman 矩阵模型。
+  actors:
+  - 用户
+  - Agent
+  trigger: 用户运行 EDMDDL 训练入口
+  preconditions:
+  - 训练数据和验证数据已加载
+  inputs:
+  - X_train、Y_train、U_train
+  - X_val、Y_val、U_val
+  - 网络与训练超参数
+  rule:
+    statement: EDMDDL 训练流程使用训练数据训练字典网络，输出可被预测接口加载的模型文件。
+  outputs:
+  - edmddl_model.pkl
+  side_effects:
+  - 覆写对应模型文件
+  exceptions:
+  - 数据维度不匹配
+  - 训练过程数值异常
+  failure_handling:
+  - 记录错误并停止训练
+  invariants:
+  - 模型保存格式可被评估闭环加载
+  acceptance:
+  - id: AC-001
+    given: 训练和验证数据可用
+    when: 运行 EDMDDL 训练入口
+    then: 训练成功退出并生成可加载模型
+    method: 运行训练命令并加载生成模型
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-002
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-006
+  title: EDMD 训练闭环
+  kind: flow
+  domain: modeling
+  status: active
+  priority: high
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: code
+    reference: 杂项/train_edmd.py
+  description: 建模代码支持运行标准 EDMD 训练流程，并保存 Koopman 矩阵模型。
+  actors:
+  - 用户
+  - Agent
+  trigger: 用户运行 EDMD 训练入口
+  preconditions:
+  - train_data 已加载
+  inputs:
+  - X_train、Y_train、U_train
+  - 特征函数 lift_function
+  rule:
+    statement: EDMD 训练流程从机械臂训练数据计算升维特征并求解 Koopman 矩阵，保存模型文件。
+  outputs:
+  - edmd_model.pkl
+  side_effects:
+  - 覆写对应模型文件
+  exceptions:
+  - 数据维度不匹配
+  - 线性求解失败
+  failure_handling:
+  - 记录错误并停止训练
+  invariants:
+  - 模型保存格式可被评估闭环加载
+  acceptance:
+  - id: AC-001
+    given: 训练数据可用
+    when: 运行 EDMD 训练入口
+    then: 训练成功退出并生成可加载模型
+    method: 运行训练命令并加载生成模型
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-002
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-007
+  title: 评估指标输出契约
+  kind: rule
+  domain: modeling
+  status: active
+  priority: high
+  risk: medium
+  authority: evidence-derived
+  source:
+    type: code
+    reference: 杂项/compare_all.py
+  description: 评估闭环使用测试集和模型进行 800 步预测，计算并输出 MSE、RMSE、MAE 和逐维 RMSE。
+  actors:
+  - Agent
+  trigger: 运行评估流程
+  preconditions:
+  - 测试数据已加载
+  - 三种模型文件可加载
+  inputs:
+  - X_test、U_test
+  - ours_model.pkl、edmddl_model.pkl、edmd_model.pkl
+  - meta.npz
+  rule:
+    statement: 评估输出必须包含三种方法的 MSE、RMSE、MAE 和逐维 RMSE，并以指标表文件保存。
+  outputs:
+  - metrics_table.txt
+  - 控制台指标摘要
+  side_effects: []
+  exceptions:
+  - 模型文件缺失或格式不兼容
+  failure_handling:
+  - 明确报告无法加载的模型
+  invariants:
+  - 使用随工程提供的模型评估时，指标应与当前杂项基线一致
+  acceptance:
+  - id: AC-001
+    given: 当前杂项已跑通模型的权重被复制到建模代码
+    when: 运行评估流程
+    then: 指标表非空且指标与基线没有发散
+    method: 比较指标表与当前杂项/figures/metrics_table.txt
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-001
+  - BL-MODELING-002
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-MODELING-008
+  title: 建模对比图输出契约
+  kind: flow
+  domain: modeling
+  status: active
+  priority: high
+  risk: medium
+  authority: evidence-derived
+  source:
+    type: code
+    reference: 杂项/compare_all.py
+  description: 绘图流程生成位置和速度对比图，输出 PNG、PDF、SVG，并保持论文绘图配置。
+  actors:
+  - Agent
+  trigger: 运行绘图流程
+  preconditions:
+  - 预测结果已生成
+  - 反归一化参数可用
+  inputs:
+  - 真实状态
+  - 三种模型预测结果
+  - 归一化参数
+  rule:
+    statement: 绘图流程按论文配置生成 position_comparison 和 velocity_comparison 的 PNG、PDF、SVG
+      文件。
+  outputs:
+  - position_comparison.png/pdf/svg
+  - velocity_comparison.png/pdf/svg
+  side_effects:
+  - 覆写输出目录中的对应图表
+  exceptions:
+  - 数据维度不足
+  - 字体或后端不可用
+  failure_handling:
+  - 报告错误且不产出半截图表
+  invariants:
+  - 输出文件非空且格式正确
+  acceptance:
+  - id: AC-001
+    given: 当前杂项可跑通绘图结果可复现
+    when: 运行绘图流程
+    then: 六类图表文件均生成且非空
+    method: 检查文件存在性和大小
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-MODELING-007
+  baseline_refs: []
+  decision_refs: []
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: null
+- id: BL-SOFT-001
+  title: 软体平台原始数据只读与处理输出
+  kind: constraint
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户指定数据源：数据备份/软体平台/原始数据
+  description: 新设备软体平台建模的数据源为 100 个 npz 原始轨迹；处理、训练和实验只能读取源数据或写入处理后的副本，不得移动、覆盖或删除源文件。
+  actors:
+  - 用户（论文作者）
+  - Agent
+  trigger: 开始软体平台数据处理或探索训练
+  preconditions:
+  - 数据备份/软体平台/原始数据 下存在 01.npz 至 100.npz
+  inputs:
+  - 数据备份/软体平台/原始数据/*.npz
+  rule:
+    statement: 处理、训练和评估只能读取原始 npz 或写入处理后的副本，不得移动、覆盖或删除源文件。
+  outputs:
+  - 处理后的训练/验证/测试数据副本
+  - 实验记录
+  side_effects:
+  - 可能创建数据备份/软体平台/处理后的数据或实验输出目录
+  exceptions:
+  - 源文件缺失
+  - 文件结构不符合 npz 契约
+  failure_handling:
+  - 缺失或损坏时中止并报告具体文件
+  invariants:
+  - 源文件数量与内容不被修改
+  acceptance:
+  - id: BL-SOFT-001-AC-001
+    given: 源目录中存在 100 条 npz
+    when: 完成数据处理或探索训练
+    then: 源文件仍存在且处理产物不覆盖源文件
+    method: 文件存在性与哈希/元数据检查
+    evidence: null
+    status: not-verified
+  dependencies: []
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: &id001
+  - REQ-002
+  decision_refs: &id002 []
+  implementation_refs: &id003 []
+  test_refs: &id004 []
+  supersedes: &id005 []
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-002
+  title: 固定 7:2:1 轨迹划分
+  kind: rule
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户确认：数据集划分固定，后续探索不调整
+  description: 100 条原始轨迹按 7:2:1 固定划分为 70 条训练、20 条验证、10 条测试。划分只执行一次并冻结，探索阶段不得调整。
+  actors:
+  - 用户（论文作者）
+  - Agent
+  trigger: 准备软体平台训练、验证和测试数据
+  preconditions:
+  - 100 条原始轨迹已读取
+  - 确定性划分规则和种子已记录
+  inputs:
+  - 100 条原始轨迹索引
+  rule:
+    statement: 模型探索和训练统一使用同一份 70/20/10 轨迹划分；测试集固定为 10 条轨迹，不得用于训练或配置调优。
+  outputs:
+  - train/val/test 轨迹清单
+  - 划分种子与生成时间记录
+  side_effects: []
+  exceptions:
+  - 轨迹数量不足 100
+  - 同一轨迹被分到多个集合
+  failure_handling:
+  - 数量或互斥校验失败时中止并报告
+  invariants:
+  - 训练 70 条、验证 20 条、测试 10 条
+  - 所有集合互斥且并集为 100 条
+  acceptance:
+  - id: BL-SOFT-002-AC-001
+    given: 原始数据共 100 条轨迹
+    when: 执行固定划分
+    then: 生成 70/20/10 且测试集为 10 条轨迹
+    method: 自动检查集合计数和互斥性
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-001
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-003
+  title: 软体平台样本数据契约
+  kind: data-contract
+  priority: critical
+  risk: low
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户说明状态 x 为 2D xy、控制 u 为 2D，输入输出关系按一步预测建模
+  description: 将每条原始轨迹处理为一组一步预测样本；状态和控制均为 Float64 二维数组，保留轨迹和时间索引映射。
+  actors:
+  - Agent
+  trigger: 构建软体平台训练数据
+  preconditions:
+  - 固定划分已完成
+  - 每条 npz 包含 t、x、u 字段
+  inputs:
+  - 'x: (N,2)'
+  - 'u: (N,2)'
+  - 't: (N,)'
+  rule:
+    statement: 对每条轨迹构造 X=x[t]、U=u[t]、Y=x[t+1]，数据类型为 Float64，并保留轨迹 id 与 t 索引映射。
+  outputs:
+  - X_train/Y_train/U_train
+  - X_val/Y_val/U_val
+  - X_test/Y_test/U_test
+  - 轨迹/时间索引映射
+  side_effects: []
+  exceptions:
+  - 字段缺失
+  - 维度不匹配
+  - 出现 NaN/Inf
+  failure_handling:
+  - 报错并输出具体 npz 文件与字段
+  invariants:
+  - 所有输入输出为 Float64
+  - 样本不跨越轨迹
+  - 测试轨迹不混入训练
+  acceptance:
+  - id: BL-SOFT-003-AC-001
+    given: 完成数据处理
+    when: 检查样本形状和数值
+    then: X/U 为 (样本数,2)、Y 为 (样本数,2) 且无 NaN/Inf
+    method: 运行数据检查脚本
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-002
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-004
+  title: 软体平台升维函数库需求
+  kind: constraint
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户要求升维函数库包含常数、xy 分量，目标约 200 维
+  description: 为软体平台系统建立可配置升维函数库，默认目标维度约 200；必须包含常数项和 x/y 状态分量，其他候选基函数由探索决定。
+  actors:
+  - Agent
+  trigger: 训练 FS-EDMD、EDMD、EDMDDL 前选择特征
+  preconditions:
+  - 样本数据契约已满足
+  inputs:
+  - 'x: (N,2)'
+  - 升维配置
+  rule:
+    statement: 升维函数库必须包含常数项和 x、y 分量，目标维度约 200，具体函数集合和维度可作为探索变量调整。
+  outputs:
+  - 可配置升维函数库
+  - 维度与函数名记录
+  side_effects: []
+  exceptions:
+  - 函数库无法覆盖基本维度
+  failure_handling:
+  - 维度校验失败时中止并报告
+  invariants:
+  - 升维结果包含原始 xy 信息
+  - 同一训练组使用相同固定划分
+  acceptance:
+  - id: BL-SOFT-004-AC-001
+    given: 配置升维函数库
+    when: 对 2D 状态升维
+    then: 输出维度约 200 且包含常数、x、y
+    method: 检查输入输出维度与函数名集合
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-003
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-005
+  title: FS-EDMD / 我们的模型探索训练
+  kind: flow
+  priority: critical
+  risk: high
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户要求训练三个模型并探索配置，其中我们的模型需要得到最优结果
+  description: 在固定划分和可配置升维函数库下探索 FS-EDMD/我们的模型的升维/潜在维度和训练参数，并记录每次配置和结果。
+  actors:
+  - Agent
+  trigger: 运行软体平台 FS-EDMD 配置探索
+  preconditions:
+  - 训练/验证数据已准备好
+  - 升维函数库已实现
+  inputs:
+  - X_train/Y_train/U_train
+  - X_val/Y_val/U_val
+  - 升维配置
+  - 训练参数配置
+  rule:
+    statement: FS-EDMD 训练只能使用训练数据和验证数据完成拟合/选择，不得使用测试数据；每个探索组输出模型、配置、指标和产物路径。
+  outputs:
+  - FS-EDMD 模型
+  - 配置摘要
+  - 评估指标
+  side_effects:
+  - 写入软体平台探索实验结果目录
+  exceptions:
+  - 数据维度不匹配
+  - 数值异常
+  failure_handling:
+  - 记录失败配置并继续下一组，单组失败不静默当作成功
+  invariants:
+  - 测试集不参与训练或调参
+  acceptance:
+  - id: BL-SOFT-005-AC-001
+    given: 固定划分与配置可用
+    when: 运行一组 FS-EDMD 探索训练
+    then: 生成可加载模型和完整配置记录
+    method: 运行训练并检查输出
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-002
+  - BL-SOFT-004
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-006
+  title: EDMD 训练
+  kind: flow
+  priority: high
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户要求训练第二个模型 EDMD
+  description: 使用同一固定划分和可配置升维函数库训练标准 EDMD，保存模型到对应实验组并评估。
+  actors:
+  - Agent
+  trigger: 运行软体平台 EDMD 训练
+  preconditions:
+  - 训练数据已准备好
+  - 升维函数库已实现
+  inputs:
+  - X_train/Y_train/U_train
+  - 升维配置
+  rule:
+    statement: EDMD 通过升维特征最小二乘/回归拟合 Koopman 矩阵，并生成可加载模型与配置记录。
+  outputs:
+  - EDMD 模型
+  - 配置摘要
+  - 评估指标
+  side_effects:
+  - 写入软体平台探索实验结果目录
+  exceptions:
+  - 维度不匹配
+  - 线性求解失败
+  failure_handling:
+  - 记录错误并中止或标记该组失败
+  invariants:
+  - 与 FS-EDMD/EDMDDL 使用同一测试评估口径
+  acceptance:
+  - id: BL-SOFT-006-AC-001
+    given: 固定划分与配置可用
+    when: 运行 EDMD 训练
+    then: 生成可加载模型和配置记录
+    method: 运行训练并检查输出
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-002
+  - BL-SOFT-004
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-007
+  title: EDMDDL 探索训练
+  kind: flow
+  priority: critical
+  risk: high
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户要求训练第三个模型 EDMDDL，并探索网络结构与维度
+  description: 在固定划分下探索 EDMDDL 的升维/潜在维度和网络结构，使用训练和验证数据训练/早停，不使用测试数据调参。
+  actors:
+  - Agent
+  trigger: 运行软体平台 EDMDDL 配置探索
+  preconditions:
+  - 训练/验证数据已准备好
+  inputs:
+  - X_train/Y_train/U_train
+  - X_val/Y_val/U_val
+  - 网络结构与训练超参数
+  rule:
+    statement: EDMDDL 训练使用训练数据拟合、验证数据选择/早停，测试数据只能用于最终评估。
+  outputs:
+  - EDMDDL 模型
+  - 网络与配置记录
+  - 评估指标
+  side_effects:
+  - 写入软体平台探索实验结果目录
+  exceptions:
+  - 网络训练数值异常
+  - 验证指标不下降
+  failure_handling:
+  - 记录失败配置并继续下一组，单组失败不静默当作成功
+  invariants:
+  - 测试集不参与训练或调参
+  acceptance:
+  - id: BL-SOFT-007-AC-001
+    given: 固定划分与配置可用
+    when: 运行一组 EDMDDL 探索训练
+    then: 生成可加载模型和完整网络/配置记录
+    method: 运行训练并检查输出
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-002
+  - BL-SOFT-004
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-008
+  title: 10 条测试轨迹评估契约
+  kind: rule
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户确认每训练一组在 10 条测试轨迹上测试，并采用 RMSE
+  description: 每组训练配置都在同一 10 条固定测试轨迹上评估，逐条计算反归一化后的 xy 位置预测 RMSE，并汇总平均与最高精度。
+  actors:
+  - Agent
+  trigger: 完成一组训练后运行正式评估
+  preconditions:
+  - 固定测试集 10 条轨迹
+  - 模型可加载
+  - 反归一化参数可用
+  inputs:
+  - X_test/Y_test/U_test
+  - 模型
+  - 归一化参数
+  rule:
+    statement: 评估指标为每条测试轨迹的 xy 位置预测 RMSE；平均精度为 10 条轨迹 RMSE 的均值，最高精度为 10 条轨迹中 RMSE
+      最小的一条。
+  outputs:
+  - 逐轨迹 RMSE
+  - 平均 RMSE
+  - 最高精度（最小单轨迹 RMSE）
+  side_effects: []
+  exceptions:
+  - 测试集不足 10 条
+  - 预测形状不匹配
+  failure_handling:
+  - 指标无法计算时报告具体轨迹和原因
+  invariants:
+  - 所有模型使用同一 10 条测试轨迹和同一指标定义
+  acceptance:
+  - id: BL-SOFT-008-AC-001
+    given: 模型与固定测试集可用
+    when: 运行评估
+    then: 输出 10 条轨迹各自的 xy RMSE、平均 RMSE 和 RMSE 最小轨迹
+    method: 校验指标表字段和数量
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-002
+  - BL-SOFT-003
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-009
+  title: 配置筛选与探索结果输出
+  kind: rule
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户要求探索产物输出到 杂项/软体平台探索实验结果，并按平均与最高精度筛选
+  description: 探索训练完成后，按统一指标挑选论文展示配置；所有模型、配置、逐轨迹/平均指标写入指定实验目录。
+  actors:
+  - 用户（论文作者）
+  - Agent
+  trigger: 完成多组探索训练后汇总筛选
+  preconditions:
+  - 至少完成一组三个模型的训练与评估
+  inputs:
+  - 各组模型
+  - 各组配置
+  - 各组评估结果
+  rule:
+    statement: 筛选配置时，我们的模型/FS-EDMD 的最高精度（最小单轨迹 RMSE）必须最优，平均 RMSE 尽量低；EDMDDL 和 EDMD
+      的次优顺序不强约束。
+  outputs:
+  - 最优配置推荐
+  - 汇总指标表
+  - 实验产物目录
+  side_effects:
+  - 写入 杂项/软体平台探索实验结果
+  exceptions:
+  - 无满足条件配置
+  failure_handling:
+  - 明确报告无入选配置及最接近候选
+  invariants:
+  - 每次探索的原始指标、配置和产物路径可追溯
+  acceptance:
+  - id: BL-SOFT-009-AC-001
+    given: 多组训练评估完成
+    when: 执行配置筛选
+    then: 给出满足“我们的模型最高精度最优且平均 RMSE 尽量低”的最优配置与证据
+    method: 检查汇总指标和产物目录
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-008
+  notes: null
+  domain: soft-platform-modeling
+  status: active
+  baseline_refs: *id001
+  decision_refs: *id002
+  implementation_refs: *id003
+  test_refs: *id004
+  supersedes: *id005
+  created_at: '2026-09-11T19:25:00Z'
+  updated_at: '2026-09-11T19:25:00Z'
+  last_verified_at: null
+- id: BL-SOFT-010
+  title: 软体平台代码与探索产物目录边界
+  kind: constraint
+  domain: soft-platform-modeling
+  status: active
+  priority: critical
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: 用户确认：建模代码放 建模代码 根目录，不创建子文件夹；中间结果输出到 杂项/软体平台探索实验结果
+  description: 软体平台建模代码放在当前工程建模代码根目录，不新增软体平台专属子文件夹；数据处理、训练、评估过程中产生的模型、中间数据、指标和图表等结果写入杂项/软体平台探索实验结果。
+  actors:
+  - 用户（论文作者）
+  - Agent
+  trigger: 编写或运行软体平台建模代码
+  preconditions:
+  - 论文材料工程根目录存在 建模代码
+  inputs:
+  - 建模代码根目录
+  - 杂项/软体平台探索实验结果
+  rule:
+    statement: 软体平台代码并入 建模代码 根目录，不创建 soft_platform 等独立子文件夹；代码产生的中间过程输出写入 杂项/软体平台探索实验结果。
+  outputs:
+  - 建模代码根目录内的软体平台代码
+  - 杂项/软体平台探索实验结果下的模型/中间数据/指标/图表
+  side_effects:
+  - 可能创建杂项/软体平台探索实验结果目录
+  exceptions:
+  - 输出目录不可写
+  - 目录路径包含非法字符
+  failure_handling:
+  - 报错并明确给出期望输出路径
+  invariants:
+  - 建模代码目录不新增软体平台专属子文件夹
+  - 探索产物不在源数据处理目录或建模代码根目录散落
+  acceptance:
+  - id: BL-SOFT-010-AC-001
+    given: 软体平台代码已完成
+    when: 检查目录布局
+    then: 代码位于建模代码根目录且未创建 soft_platform 子文件夹
+    method: 目录结构检查
+    evidence: null
+    status: not-verified
+  - id: BL-SOFT-010-AC-002
+    given: 探索训练产生中间结果
+    when: 检查产物位置
+    then: 模型、中间数据、指标和图表位于杂项/软体平台探索实验结果
+    method: 检查输出路径
+    evidence: null
+    status: not-verified
+  dependencies:
+  - BL-SOFT-005
+  - BL-SOFT-006
+  - BL-SOFT-007
+  - BL-SOFT-009
+  baseline_refs:
+  - REQ-002
+  decision_refs:
+  - DEC-004
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: “不创建子文件夹”按不新增 soft_platform 等软体平台专属子目录理解；已有 modeling 包/scripts 等结构继续沿用。
+  created_at: '2026-09-11T19:40:00Z'
+  updated_at: '2026-09-11T19:40:00Z'
+  last_verified_at: null

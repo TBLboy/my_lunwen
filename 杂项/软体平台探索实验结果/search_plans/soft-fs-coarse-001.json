@@ -1,0 +1,70 @@
+{
+  "campaign": "soft-fs-coarse-001",
+  "description": "Stage 2a FS-EDMD N sweep on the top two lift candidates. Validation metrics are the ranking source.",
+  "configs": [
+    {
+      "run_id": "soft-fs-001",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.6,
+      "fs_n": 20
+    },
+    {
+      "run_id": "soft-fs-002",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.6,
+      "fs_n": 40
+    },
+    {
+      "run_id": "soft-fs-003",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.6,
+      "fs_n": 80
+    },
+    {
+      "run_id": "soft-fs-004",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 0.6,
+      "fs_n": 120
+    },
+    {
+      "run_id": "soft-fs-005",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 20
+    },
+    {
+      "run_id": "soft-fs-006",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40
+    },
+    {
+      "run_id": "soft-fs-007",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 80
+    },
+    {
+      "run_id": "soft-fs-008",
+      "models": "fs_edmd,edmd",
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 120
+    }
+  ]
+}
