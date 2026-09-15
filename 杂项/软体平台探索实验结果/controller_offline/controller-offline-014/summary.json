@@ -1,0 +1,39 @@
+{
+  "run_id": "controller-offline-014",
+  "created_at": "2026-09-15T06:01:25.895497+00:00",
+  "reference_trajectory_id": 66,
+  "plant": "FS-EDMD model in-the-loop",
+  "controller": "FS-EDMD LQR Controller",
+  "model_dimensions": {
+    "lift_dimension": 112,
+    "augmented_dimension": 42,
+    "N": 40,
+    "state_dim": 2,
+    "control_dim": 2
+  },
+  "controller_config": {
+    "model_dir": "./fs_edmd_lqr_controller_assets",
+    "Q_x1": 1500,
+    "Q_x2": 1500,
+    "alpha": 0.01,
+    "R_control": 0.4,
+    "ff_gain": 0.7,
+    "u_limit": 70,
+    "dt": 0.2,
+    "device": "cpu",
+    "output_sign_x": 1.0,
+    "output_sign_y": 1.0,
+    "round_control": false
+  },
+  "closed_loop_rho": 0.9992065588003983,
+  "steps": 299,
+  "clipped_control_steps": 18,
+  "metrics": {
+    "rmse": 0.0710240772847075,
+    "rmse_x": 0.04831728042603518,
+    "rmse_y": 0.05205631533614324,
+    "max_error": 0.1551610740081012,
+    "control_rms": 38.392040269591206
+  },
+  "output_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\controller_offline\\controller-offline-014"
+}

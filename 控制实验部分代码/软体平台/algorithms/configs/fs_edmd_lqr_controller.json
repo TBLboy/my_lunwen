@@ -1,0 +1,14 @@
+{
+    "model_dir": "./fs_edmd_lqr_controller_assets",
+    "Q_x1": 250.0,
+    "Q_x2": 250.0,
+    "alpha": 0.01,
+    "R_control": 1.0,
+    "ff_gain": 0.0,
+    "u_limit": 70.0,
+    "dt": 0.2,
+    "device": "cpu",
+    "output_sign_x": -1.0,
+    "output_sign_y": 1.0,
+    "round_control": false
+}

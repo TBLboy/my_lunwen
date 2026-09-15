@@ -9,21 +9,49 @@
 
 ## 当前状态
 - 当前阶段：implementation
-- 当前目标：软体平台新数据建模探索（数据准备、升维函数、三类模型训练与配置筛选）
-- 当前任务：TASK-017 粗到细参数搜索与论文候选最终化（done）
-- 当前状态：TASK-010 至 TASK-017 已完成；最终交付出现在 `杂项/软体平台探索实验结果/final/`
+- 当前目标：软体平台控制器离线闭环验证（FS-EDMD LQR）
+- 当前任务：controller-offline-final（done）
+- 当前状态：FS-EDMD LQR 控制器已实现并跑通轨迹 66 离线闭环；修复 x 方向 output_sign 后等待硬件复测
 - 后台任务：无
-- 活跃决策：DEC-001 个人仓库；DEC-002 机械臂基线决策；DEC-003 建模包结构；DEC-004 软体平台代码与实验输出目录；DEC-005 软体平台实现策略
+- 活跃决策：DEC-001 个人仓库；DEC-002 机械臂基线决策；DEC-003 建模包结构；DEC-004 软体平台代码与实验输出目录；DEC-005 软体平台实现策略；当前离线控制器选型 Q_x=2500/R=0.4/ff=0.8/u_limit=70
 - 阻塞项：无
 - 下一步：
-  - 已完成 `soft-final-006` 的三模型正式运行、固定测试集确认、模型重载和 final 封装
-  - Project Log 与 Loop 校验通过，可进入论文写作/图表使用阶段
-  - 已生成轨迹 66 作为论文固定展示轨迹的三模型预测对比图，文件位于 `final/figures/`
-  - 处理后的数据已同步到 `数据备份/软体平台/处理后的数据`
-  - 机械臂三模型与归一化文件已同步到 `结果备份/机械臂训练结果`
-  - 软体平台三模型与归一化文件已同步到 `结果备份/软体平台训练结果`
-  - EDMD 预测直线问题已定位并修复；修正后测试集指标已产出，final 包尚未覆盖
-  - 已用修正版 EDMD 重新生成轨迹 66 三模型对比图
+  - 用户使用修复后的 `output_sign_x=-1.0` 重新连接真实设备复测
+  - 正式离线产物位于 `杂项/软体平台探索实验结果/controller_offline/final/`
+
+## 2026-09-15 会话（软体平台控制代码备份）
+
+- 目标/任务：把软体平台控制代码复制备份到 `控制实验部分代码/软体平台`，源文件不移动、不删除。
+- 备份内容：`fs_edmd_lqr_controller.py`、`configs/fs_edmd_lqr_controller.json`、`fs_edmd_lqr_controller_assets/`、控制器依赖的 `tk_assets` 模块、`core/base_algorithm.py`、`scripts/run_fs_edmd_lqr_offline.py`、`requirements.txt`。
+- 已新增 `README.md`，说明备份目录结构、离线运行方式和源工程位置。
+- 验证：从备份目录直接创建 `FSEDMDLQRController`，模型加载成功，`A:(42,42)`、`B:(42,2)`、`D:(40,112)`，LQR 闭环谱半径 `0.9992`，与源工程一致。
+
+## 2026-09-15 会话（FS-EDMD 控制器硬件方向修复）
+
+- 问题：真实设备上目标在光点右侧时，FS-EDMD LQR 控制的光点反而向左移动；EDMD-Koopman LQR 正常。
+- 根因：两个控制器模型内部对 x 控制量的符号约定一致，但硬件 `MOVE` 的 x 方向需要取反；EDMD 配置 `output_sign_x=-1.0`，FS-EDMD 默认误设为 `+1.0`。
+- 对照：同一目标在右侧场景，FS-EDMD 修复前输出 `-70`，修复后输出 `+70`；EDMD-Koopman 输出 `+89`。y 方向两个控制器符号一致，无需修改。
+- 修复：`FlexibleArmControl34/algorithms/configs/fs_edmd_lqr_controller.json` 与 `fs_edmd_lqr_controller.py` 的默认 `output_sign_x` 改为 `-1.0`。
+- 配套：`run_fs_edmd_lqr_offline.py` 现在按输出符号反变换回模型输入控制量，使离线 model-in-the-loop 在硬件符号映射下仍保持一致。
+- 验证：目标右侧输出 x>0、左侧 x<0、上方 y>0；`controller-offline-final` 复跑 RMSE 仍为 `0.0461`。
+
+## 2026-09-15 会话（软体平台 FS-EDMD LQR 离线闭环）
+
+- 目标/任务：按论文 Koopman-LQR 设计，实现软体平台 FS-EDMD 控制器，并先在轨迹 66 上完成离线闭环。
+- 已实现：`FlexibleArmControl34/algorithms/fs_edmd_lqr_controller.py`、`configs/fs_edmd_lqr_controller.json`、资源目录 `algorithms/fs_edmd_lqr_controller_assets/`，以及 `scripts/run_fs_edmd_lqr_offline.py`。
+- 资源：复制 `fs_edmd.pkl`、`meta.npz`、`test.npz` 到控制器资源目录，SHA256 与 final 源文件一致，源文件未移动。
+- 离线闭环：被控对象为 FS-EDMD 模型本身（model-in-the-loop），参考轨迹为轨迹 66，共 299 步。
+- 最终配置：`Q_x1=Q_x2=2500`、`alpha=0.01`、`R_control=0.4`、`ff_gain=0.8`、`u_limit=70`。
+- 最终指标：xy RMSE=0.0461，x RMSE=0.0310，y RMSE=0.0341，最大误差=0.1125，限幅步骤=24/299，闭环谱半径=0.9992。
+- 验证：`AlgorithmManager` 已能注册 `FS-EDMD LQR Controller`；最终图 PNG 非空且尺寸 2400x1600；控制器单步调用正常。
+- 产物：`杂项/软体平台探索实验结果/controller_offline/final/summary.json`、`tracking_metrics.csv`、`tracking_results.npz`、`figures/trajectory66_fs_edmd_lqr.png/pdf/svg`。
+- 说明：离线使用同一模型作为被控对象，结果偏乐观；接硬件前需要按实际执行器限幅和模型偏差再核对 Q/R/ff/u_limit。
+
+## 2026-09-13 会话（软体平台训练结果备份更新）
+
+- 目标/任务：把软体平台三个最新模型整理到 `结果备份/软体平台训练结果`。
+- 已更新：`edmd.pkl` 替换为修正版 `runs/soft-edmd-cfix-001/models/edmd.pkl`；`fs_edmd.pkl`、`edmd_dl.pkl`、`meta.npz` 保持最终版本。
+- 验证：4 个文件 SHA256 与各自源文件一致。
 
 ## 2026-09-13 会话（轨迹66修正版预测图）
 

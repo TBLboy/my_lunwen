@@ -1,0 +1,29 @@
+LOCAL QUALITY-ASSURANCE REPORT
+==============================
+
+Compilation
+- Main file: root.tex
+- Engine: pdfLaTeX + BibTeX + pdfLaTeX twice
+- Result: successful; no unresolved citations/references and no overfull boxes
+
+RA-L/PaperCept manuscript checks
+- Document class: ieeeconf, US Letter, 10 pt, conference mode
+- PDF page size: 612 x 792 pt (US Letter)
+- PDF length: 8 pages
+- PDF size: 4129600 bytes (below 5 MB)
+- Author PDF metadata: empty
+- A blank author-byline area is preserved, but no author information is shown
+- Author names, affiliations, funding acknowledgments, corresponding-author
+  details, running headers, biographies, and publication IDs: absent from root.tex
+- All seven referenced figures exist
+- All 25 cited bibliography keys exist
+- IEEEtran.bst processed references successfully
+- Fonts: all embedded; no Type 3 fonts in the compiled PDF
+
+Figure handling
+- Original plot PDFs containing Type 3 fonts were converted to 300-dpi PNGs.
+- Vector figures without Type 3 fonts were retained as PDFs.
+
+Remaining external check
+- Run the PaperCept online PDF compliance test immediately before submission,
+  because the server-side checker cannot be executed locally.

@@ -1,0 +1,14 @@
+# === GUI & System ===
+PyQt6>=6.4.0
+pyserial>=3.5
+
+# === Computer Vision ===
+opencv-python>=4.7.0
+
+# === Scientific Computing ===
+numpy>=1.23.0
+scipy>=1.9.0
+matplotlib>=3.6.0
+
+# === Icon Library ===
+qtawesome>=1.2.0

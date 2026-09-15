@@ -130,3 +130,25 @@ questions:
   source_refs: []
   created_at: '2026-09-11T11:04:00Z'
   answered_at: '2026-09-11T11:04:00Z'
+- id: Q-007
+  title: 软体平台控制器实验的交付边界
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: 用户要求按论文 Koopman-LQR 设计实现软体平台控制器，并遵守 FlexibleArmControl34/algorithms 的控制器格式；需要先确认本阶段是离线闭环验证还是直接连接硬件。
+  recommendation: 先实现 FS-EDMD-LQR 控制器并用轨迹 66 做离线 model-in-the-loop 闭环验证，确认后可复用同一控制器接入硬件。
+  alternatives:
+  - name: 直接接硬件
+    description: 立即接入 FlexibleArmControl34 实时界面和硬件数据流，依赖软体平台视觉与执行器接口。
+  - name: 先离线再接硬件
+    description: 先完成离线闭环验证，再连接真实平台，工作量最大但最完整。
+  answer: 先做离线；离线闭环跑通并确认后再连接硬件。
+  source_refs:
+  - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms
+  - 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
+  created_at: '2026-09-15T05:30:00Z'
+  answered_at: '2026-09-15T05:30:00Z'

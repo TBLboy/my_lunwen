@@ -1124,3 +1124,69 @@ tasks:
     follow_ups: []
   created_at: '2026-09-11T20:15:00Z'
   updated_at: '2026-09-11T22:55:00Z'
+- id: TASK-018
+  title: 软体平台 FS-EDMD LQR 控制器离线闭环
+  kind: task
+  phase: implementation
+  goal: 实现符合 FlexibleArmControl34 约定的 FS-EDMD LQR 控制器，并在轨迹 66 上完成离线闭环验证。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - controller
+  - soft-platform
+  - offline
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-017
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: null
+  inputs:
+  - 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
+  - 杂项/软体平台探索实验结果/final/processed_data/meta.npz
+  - 杂项/软体平台探索实验结果/final/processed_data/test.npz
+  - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms
+  outputs:
+  - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/fs_edmd_lqr_controller.py
+  - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/configs/fs_edmd_lqr_controller.json
+  - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/fs_edmd_lqr_controller_assets/
+  - C:/Users/Windows/Desktop/FlexibleArmControl34/scripts/run_fs_edmd_lqr_offline.py
+  - 杂项/软体平台探索实验结果/controller_offline/final/
+  plan:
+  - 检查现有算法控制器接口、配置和资源目录约定。
+  - 实现 FS-EDMD KoopmanLifter、SoftLift 运行副本和控制器本体。
+  - 复制模型、归一化与测试数据到控制器资源目录。
+  - 实现轨迹 66 离线闭环脚本并输出指标与图表。
+  - 用 AlgorithmManager 验证控制器可注册。
+  done_when:
+  - 控制器脚本、参数配置和资源目录齐全。
+  - 轨迹 66 离线闭环可运行且输出 summary/csv/npz/figures。
+  - AlgorithmManager 能加载 FS-EDMD LQR Controller。
+  verification:
+    status: passed
+    commands:
+    - python scripts/run_fs_edmd_lqr_offline.py
+    - AlgorithmManager smoke check
+    evidence: []
+    limitations:
+    - 离线被控对象使用与控制器相同的 FS-EDMD 模型，结果偏乐观。
+  result:
+    summary: 最终配置 Q=2500/R=0.4/ff=0.8/u_limit=70，轨迹 66 RMSE=0.0461，max_error=0.1125，限幅 24/299。
+    changed_files:
+    - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/fs_edmd_lqr_controller.py
+    - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/configs/fs_edmd_lqr_controller.json
+    - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/tk_assets/soft_lift.py
+    - C:/Users/Windows/Desktop/FlexibleArmControl34/algorithms/tk_assets/fs_edmd_koopman_lifter.py
+    - C:/Users/Windows/Desktop/FlexibleArmControl34/scripts/run_fs_edmd_lqr_offline.py
+    deviations: []
+    follow_ups:
+    - 用户确认离线结果后进入硬件接入阶段。
+  created_at: '2026-09-15T05:35:00Z'
+  updated_at: '2026-09-15T06:05:00Z'
