@@ -1,0 +1,445 @@
+{
+  "rows": [
+    {
+      "run_id": "soft-final-006",
+      "smoke": false,
+      "fs_average_rmse": 1.5328161179076125,
+      "fs_best_rmse": 0.7888961333833346,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.1841637676324295,
+      "edmd_best_rmse": 1.8032760494779556,
+      "edmd_dl_average_rmse": 1.4564645558668796,
+      "edmd_dl_best_rmse": 1.0223250542973927,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.2334289209140581,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-006",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 9,
+        "lift_rbf_sigma_scale": 1.0,
+        "fs_n": 40,
+        "fs_lam": 0.01,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.03,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": 1.0,
+        "fs_lr_decay_factor": 0.9,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 20,
+        "edmd_dl_layers": "256,256",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": {
+          "average_rmse": 1.5771580884318588,
+          "best_rmse": 1.0826248397178269,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.6990533705398967,
+          "best_rmse": 1.5875964544475187,
+          "best_trajectory_id": 15,
+          "trajectory_count": 10
+        },
+        "edmd_dl": {
+          "average_rmse": 1.5973025375150356,
+          "best_rmse": 0.7045929882379737,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    },
+    {
+      "run_id": "soft-final-001",
+      "smoke": false,
+      "fs_average_rmse": 1.6315444045221057,
+      "fs_best_rmse": 0.736418031081899,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.1841637676324295,
+      "edmd_best_rmse": 1.8032760494779556,
+      "edmd_dl_average_rmse": 1.4564645558668796,
+      "edmd_dl_best_rmse": 1.0223250542973927,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.28590702321549377,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-001",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 9,
+        "lift_rbf_sigma_scale": 1.0,
+        "fs_n": 40,
+        "fs_lam": 0.01,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.03,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": null,
+        "fs_lr_decay_factor": null,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 20,
+        "edmd_dl_layers": "256,256",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": {
+          "average_rmse": 1.584213290797131,
+          "best_rmse": 0.8417933100504588,
+          "best_trajectory_id": 11,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.6990533705398967,
+          "best_rmse": 1.5875964544475187,
+          "best_trajectory_id": 15,
+          "trajectory_count": 10
+        },
+        "edmd_dl": {
+          "average_rmse": 1.5973025375150356,
+          "best_rmse": 0.7045929882379737,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    },
+    {
+      "run_id": "soft-final-005",
+      "smoke": false,
+      "fs_average_rmse": 1.6617392555028658,
+      "fs_best_rmse": 0.8174348109954758,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.1841637676324295,
+      "edmd_best_rmse": 1.8032760494779556,
+      "edmd_dl_average_rmse": 1.4564645558668796,
+      "edmd_dl_best_rmse": 1.0223250542973927,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.20489024330191696,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-005",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 9,
+        "lift_rbf_sigma_scale": 1.0,
+        "fs_n": 40,
+        "fs_lam": 0.01,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.03,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": 2.0,
+        "fs_lr_decay_factor": 0.8,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 20,
+        "edmd_dl_layers": "256,256",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": {
+          "average_rmse": 1.5318412600032247,
+          "best_rmse": 0.8382646847190872,
+          "best_trajectory_id": 11,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.6990533705398967,
+          "best_rmse": 1.5875964544475187,
+          "best_trajectory_id": 15,
+          "trajectory_count": 10
+        },
+        "edmd_dl": {
+          "average_rmse": 1.5973025375150356,
+          "best_rmse": 0.7045929882379737,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    },
+    {
+      "run_id": "soft-base-001",
+      "smoke": false,
+      "fs_average_rmse": 1.6849027344056853,
+      "fs_best_rmse": 0.7345807880253542,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.16178404522298,
+      "edmd_best_rmse": 1.726725230615497,
+      "edmd_dl_average_rmse": 1.6214187640177962,
+      "edmd_dl_best_rmse": 0.9859957419906737,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.25141495396531954,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-base-001",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 13,
+        "lift_rbf_sigma_scale": 0.8,
+        "fs_n": 40,
+        "fs_lam": 0.001,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.01,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": null,
+        "fs_lr_decay_factor": null,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 50,
+        "edmd_dl_layers": "512,512,512",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": null,
+        "edmd": null,
+        "edmd_dl": null
+      }
+    },
+    {
+      "run_id": "soft-final-004",
+      "smoke": false,
+      "fs_average_rmse": 1.7236824087823215,
+      "fs_best_rmse": 0.7824176603900642,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.1841637676324295,
+      "edmd_best_rmse": 1.8032760494779556,
+      "edmd_dl_average_rmse": 1.4564645558668796,
+      "edmd_dl_best_rmse": 1.0223250542973927,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.23990739390732851,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-004",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 9,
+        "lift_rbf_sigma_scale": 1.0,
+        "fs_n": 40,
+        "fs_lam": 0.01,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.03,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": 1.0,
+        "fs_lr_decay_factor": 0.95,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 20,
+        "edmd_dl_layers": "256,256",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": {
+          "average_rmse": 1.5102486245636926,
+          "best_rmse": 0.6966946733626194,
+          "best_trajectory_id": 11,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.6990533705398967,
+          "best_rmse": 1.5875964544475187,
+          "best_trajectory_id": 15,
+          "trajectory_count": 10
+        },
+        "edmd_dl": {
+          "average_rmse": 1.5973025375150356,
+          "best_rmse": 0.7045929882379737,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    },
+    {
+      "run_id": "soft-final-003",
+      "smoke": false,
+      "fs_average_rmse": 1.7679707286561333,
+      "fs_best_rmse": 0.811624961945222,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.148990274190632,
+      "edmd_best_rmse": 1.5999855228857296,
+      "edmd_dl_average_rmse": 1.4564645558668796,
+      "edmd_dl_best_rmse": 1.0223250542973927,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.2107000923521707,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-003",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 9,
+        "lift_rbf_sigma_scale": 0.6,
+        "fs_n": 40,
+        "fs_lam": 0.001,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.01,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": null,
+        "fs_lr_decay_factor": null,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 20,
+        "edmd_dl_layers": "256,256",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": {
+          "average_rmse": 1.6263899858838093,
+          "best_rmse": 0.7056529500371351,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.651809250622,
+          "best_rmse": 2.1804712334792598,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        },
+        "edmd_dl": {
+          "average_rmse": 1.5973025375150356,
+          "best_rmse": 0.7045929882379737,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    },
+    {
+      "run_id": "soft-final-002",
+      "smoke": false,
+      "fs_average_rmse": 1.8489435143742838,
+      "fs_best_rmse": 0.8584277135459398,
+      "fs_best_trajectory_id": 66,
+      "edmd_average_rmse": 3.1841637676324295,
+      "edmd_best_rmse": 1.8032760494779556,
+      "edmd_dl_average_rmse": 1.4564645558668796,
+      "edmd_dl_best_rmse": 1.0223250542973927,
+      "fs_has_best_best_rmse": true,
+      "best_margin": 0.1638973407514529,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-002",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 9,
+        "lift_rbf_sigma_scale": 1.0,
+        "fs_n": 40,
+        "fs_lam": 0.01,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.005,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": null,
+        "fs_lr_decay_factor": null,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 20,
+        "edmd_dl_layers": "256,256",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": {
+          "average_rmse": 1.6183888887184097,
+          "best_rmse": 0.5666035698369899,
+          "best_trajectory_id": 11,
+          "trajectory_count": 10
+        },
+        "edmd": {
+          "average_rmse": 3.6990533705398967,
+          "best_rmse": 1.5875964544475187,
+          "best_trajectory_id": 15,
+          "trajectory_count": 10
+        },
+        "edmd_dl": {
+          "average_rmse": 1.5973025375150356,
+          "best_rmse": 0.7045929882379737,
+          "best_trajectory_id": 18,
+          "trajectory_count": 10
+        }
+      }
+    }
+  ],
+  "best": {
+    "run_id": "soft-final-006",
+    "smoke": false,
+    "fs_average_rmse": 1.5328161179076125,
+    "fs_best_rmse": 0.7888961333833346,
+    "fs_best_trajectory_id": 66,
+    "edmd_average_rmse": 3.1841637676324295,
+    "edmd_best_rmse": 1.8032760494779556,
+    "edmd_dl_average_rmse": 1.4564645558668796,
+    "edmd_dl_best_rmse": 1.0223250542973927,
+    "fs_has_best_best_rmse": true,
+    "best_margin": 0.2334289209140581,
+    "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-final-006",
+    "config": {
+      "lift_poly_degree": 4,
+      "lift_rbf_grid": 9,
+      "lift_rbf_sigma_scale": 1.0,
+      "fs_n": 40,
+      "fs_lam": 0.01,
+      "fs_beta": 0.001,
+      "fs_eta_d": 0.03,
+      "fs_max_iter": 2000,
+      "fs_tol": 1e-06,
+      "fs_grad_clip_norm": 1.0,
+      "fs_lr_decay_factor": 0.9,
+      "edmd_reg": 1e-06,
+      "edmd_dl_n_psi": 20,
+      "edmd_dl_layers": "256,256",
+      "edmd_dl_lr": 0.0001,
+      "edmd_dl_epochs": 50
+    },
+    "validation": {
+      "fs_edmd": {
+        "average_rmse": 1.5771580884318588,
+        "best_rmse": 1.0826248397178269,
+        "best_trajectory_id": 18,
+        "trajectory_count": 10
+      },
+      "edmd": {
+        "average_rmse": 3.6990533705398967,
+        "best_rmse": 1.5875964544475187,
+        "best_trajectory_id": 15,
+        "trajectory_count": 10
+      },
+      "edmd_dl": {
+        "average_rmse": 1.5973025375150356,
+        "best_rmse": 0.7045929882379737,
+        "best_trajectory_id": 18,
+        "trajectory_count": 10
+      }
+    }
+  },
+  "smoke_rows": [
+    {
+      "run_id": "soft-smoke-002",
+      "smoke": true,
+      "fs_average_rmse": 3.3155718118549777,
+      "fs_best_rmse": 1.2058338222429588,
+      "fs_best_trajectory_id": 32,
+      "edmd_average_rmse": 3.16178404522298,
+      "edmd_best_rmse": 1.726725230615497,
+      "edmd_dl_average_rmse": 1.6298197396292076,
+      "edmd_dl_best_rmse": 0.9858827166071266,
+      "fs_has_best_best_rmse": false,
+      "best_margin": -0.2199511056358322,
+      "run_dir": "C:\\Users\\Windows\\Desktop\\论文材料\\杂项\\软体平台探索实验结果\\runs\\soft-smoke-002",
+      "config": {
+        "lift_poly_degree": 4,
+        "lift_rbf_grid": 13,
+        "lift_rbf_sigma_scale": 0.8,
+        "fs_n": 40,
+        "fs_lam": 0.001,
+        "fs_beta": 0.001,
+        "fs_eta_d": 0.01,
+        "fs_max_iter": 2000,
+        "fs_tol": 1e-06,
+        "fs_grad_clip_norm": null,
+        "fs_lr_decay_factor": null,
+        "edmd_reg": 1e-06,
+        "edmd_dl_n_psi": 50,
+        "edmd_dl_layers": "512,512,512",
+        "edmd_dl_lr": 0.0001,
+        "edmd_dl_epochs": 50
+      },
+      "validation": {
+        "fs_edmd": null,
+        "edmd": null,
+        "edmd_dl": null
+      }
+    }
+  ],
+  "count": 7
+}

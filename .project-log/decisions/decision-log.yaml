@@ -231,3 +231,442 @@ decisions:
   supersedes: []
   created_at: '2026-09-11T19:55:00Z'
   updated_at: '2026-09-11T19:55:00Z'
+- id: DEC-006
+  title: 机械臂控制指标的统一评估窗口
+  category: technical
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-020
+  - TASK-021
+  related_business_logic: []
+  context: 旧绘图与指标脚本对正弦、不规则和扰动数据使用了 3-33 s、8-38 s、5-35 s 等不同窗口，导致 Figure 3 与论文表格难以形成一致证据。
+  hypothesis: 使用原始时间 10-40 s 可以覆盖完整的 30 秒轨迹任务以及主要扰动恢复事件，作为三个控制任务的统一评估窗口。
+  options:
+  - name: 统一使用 10-40 s
+    benefits:
+    - 与控制器初始化后开始轨迹任务的实验描述一致
+    - 三个任务使用相同时间长度
+    - 覆盖扰动数据中的主要恢复事件
+    costs:
+    - 需要重算论文现有 Table II 数值
+    risks:
+    - 与旧稿件中的历史数值不同，必须同步更新正文和表格
+  - name: 沿用各自旧窗口
+    benefits:
+    - 不需要改动旧图和旧表
+    costs:
+    - 不同任务指标不可直接比较
+    risks:
+    - 审稿人可能质疑评估口径不一致
+  - name: 使用完整 0-50 s
+    benefits:
+    - 保留全部数据
+    costs:
+    - 包含启动瞬态和任务结束后的无关数据
+    risks:
+    - 指标不能代表实际轨迹跟踪性能
+  decision: 冻结原始时间 10-40 s 为机械臂控制统一评估窗口；图中平移为 0-30 s，Table II 使用该窗口复算的 RMSE 和 MAE。
+  reason_summary:
+  - 参考轨迹任务段位于初始化之后，10-40 s 提供完整的 30 秒跟踪区间。
+  - 扰动数据的主要恢复事件均落在该窗口内。
+  - 统一窗口消除旧稿中新旧指标不可追溯的问题。
+  action: 使用 TASK-020 重新计算指标并生成 Figure 3；后续 Table II 和正文不再引用旧窗口指标。
+  expected_result: Figure 3 与 Table II 使用同一可复现口径，机械臂控制结果内部一致。
+  reversal_plan: 若实验记录证明控制器实际切换时间不是 10 s，则根据原始控制日志修订窗口并重新生成图与指标，同时将本决策标记为 superseded。
+  observation: null
+  actual_result: null
+  outcome_status: not-observed
+  lesson: null
+  evidence:
+  - EV-024
+  supersedes: []
+  created_at: '2026-09-15T11:15:00Z'
+  updated_at: '2026-09-15T11:15:00Z'
+- id: DEC-007
+  title: 正式论文迁移到 RAS 的 Elsevier elsarticle 模板
+  category: tooling
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks:
+  - TASK-024
+  related_business_logic: []
+  context: 用户已确定后续投稿目标为 Robotics and Autonomous Systems（RAS），并指定 `论文部分/elsarticle` 作为正式论文写作模板。当前正文仍继承 RA-L 的 ieeeconf 前置结构和 IEEEtran 引用样式。
+  hypothesis: 将正式稿立即迁移到 Elsevier 官方 `elsarticle` 类，可保留现有正文、公式、图表和编号引用，同时避免后续因摘要、关键词、作者信息和参考文献格式变化产生二次返工。
+  options:
+  - name: 继续使用 ieeeconf 后再迁移
+    benefits:
+    - 暂不需要调整 LaTeX 前置结构
+    costs:
+    - 图表宽度、摘要、关键词、作者信息和引用仍需再次适配
+    risks:
+    - 最终投稿前容易出现版式和引用返工
+  - name: 立即迁移到 elsarticle preprint
+    benefits:
+    - 与 RAS/Elsevier 投稿要求一致
+    - 保留现有编号引用
+    - 后续内容修改直接在目标模板中进行
+    costs:
+    - 当前无 LaTeX 编译器，只能先做静态结构验证
+    risks:
+    - 尚未完成真实编译，局部样式问题可能在后续编译时暴露
+  - name: 立即按最终 production-like 双栏版式迁移
+    benefits:
+    - 可以提前检查双栏图宽和页数
+    costs:
+    - 当前图 4 和设备图素材尚未齐备
+    risks:
+    - 过早排版会将尚未冻结的实验图作为版式约束
+  decision: 正式稿统一使用 `论文部分/elsarticle/main.tex`，文档类固定为 `\documentclass[preprint,12pt]{elsarticle}`，引用样式使用 `elsarticle-num`；最终 production-like 双栏检查推迟到实验图和作者信息冻结后执行。
+  reason_summary:
+  - RAS 属于 Elsevier 期刊，官方 `elsarticle` 类可直接用于投稿稿。
+  - 当前正文、公式、算法、定理、图表和编号引用可以原样保留，无需改写内容。
+  - 先采用 preprint 格式可避免在 Figure 1/4 尚未完成时提前锁定最终双栏版式。
+  action: 将 IEEE 专用前置结构替换为 Elsevier frontmatter，清除 IEEE 专用宏和 `cite` 包，改用 `keyword`、`\journal{Robotics and Autonomous Systems}` 与 `elsarticle-num`，并保留原 `old` 稿件。
+  expected_result: 正式论文后续只在 `论文部分/elsarticle/main.tex` 维护；参考文献、图表路径和交叉引用在静态层面保持完整。
+  reversal_plan: 若 RAS 作者指南要求作者—年份引用或特定 production 选项，则仅调整文档类和 citation/bibliography 配置，不改正文内容。
+  observation: null
+  actual_result: null
+  outcome_status: not-observed
+  lesson: null
+  evidence:
+  - EV-025
+  supersedes: []
+  created_at: '2026-09-16T03:27:40Z'
+  updated_at: '2026-09-16T03:27:40Z'
+- id: DEC-008
+  title: 软体平台控制实验的初始接近段与标题评估窗口
+  category: technical
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-025
+  related_business_logic: []
+  context: 圆形和五角星控制数据均从实际光点静止位置开始，而参考轨迹从远离静止位置的形状起点开始。前约 30 个控制步主要由初始接近过程主导，若计入全段会掩盖控制器对轨迹形状的跟踪差异。
+  hypothesis: 对两种控制器和两条轨迹统一从第 30 个控制步开始统计，可排除初始接近瞬态，并在相同任务阶段比较 FS-EDMD-LQR 与 PID。
+  options:
+  - name: 统计完整记录
+    benefits:
+    - 不需要定义评估起点
+    costs:
+    - 初始接近误差会主导 RMSE
+    risks:
+    - 难以反映圆形和五角星轨迹形状的跟踪质量
+  - name: 统一从第 30 步开始
+    benefits:
+    - 排除初始接近瞬态
+    - 两种控制器和两条轨迹使用完全相同的评估区间
+    - 图 4 的轨迹形状与跟踪差异更清晰
+    costs:
+    - 正文需要明确说明统一评估起点
+    risks:
+    - 若后续设备实验改变初始条件，需要重新核对 30 步窗口
+  - name: 每条轨迹分别选择不同起点
+    benefits:
+    - 可根据单条轨迹最快进入跟踪状态的时间裁剪
+    costs:
+    - 指标口径依赖人工选择
+    risks:
+    - 两个控制器难以进行公平比较
+  decision: 圆形和五角星控制数据均按唯一 `step` 去重，并统一在 `step >= 30` 后计算 RMSE 和 MAE；图中参考轨迹显示完整形状，控制曲线只显示该共同评估区间。
+  reason_summary:
+  - 圆形和五角星在第 30 步左右均完成从静止位置到轨迹起点的过渡。
+  - 统一窗口保留完整的形状跟踪阶段，避免由启动段决定主要指标。
+  - FS-EDMD-LQR 与 PID 使用相同采样、起点和评估区间。
+  action: 生成 `figure4_soft_control_tracking` 及指标 JSON，并在 Table II 中加入圆形和五角星两行结果。
+  expected_result: Figure 4 清晰显示两种控制器的轨迹形状跟踪差异，Table II 与该图使用同一评估口径。
+  reversal_plan: 若后续控制日志表明实际启动切换时间不同，则重新定义统一步数并重绘 Figure 4 与重算 Table II。
+  observation: 圆形评估样本 970，五角星评估样本 470；两平台曲线在排除初始接近段后均进入稳定跟踪。
+  actual_result: 圆形 FS-EDMD-LQR RMSE/MAE=0.054180/0.052832，PID=0.315988/0.303816；五角星 FS-EDMD-LQR=0.132083/0.127820，PID=0.631330/0.620165。
+  outcome_status: successful
+  lesson: 控制轨迹包含从静止位置到参考起点的迁移过程时，应在图文口径中明确区分初始接近和轨迹跟踪。
+  evidence:
+  - EV-026
+  supersedes: []
+  created_at: '2026-09-16T03:45:00Z'
+  updated_at: '2026-09-16T03:45:00Z'
+- id: DEC-009
+  title: Figure 4 使用螺旋轨迹并增加逐时刻误差曲线
+  category: process
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks:
+  - TASK-026
+  related_business_logic: []
+  context: 用户要求将软体平台 Figure 4 的圆形轨迹替换为螺旋轨迹，并在同一图中加入每个时刻的实际跟踪误差，以便同时观察轨迹形状和控制误差的时间演化。
+  hypothesis: 使用上排螺旋/五角星轨迹、下排逐时刻二维欧氏误差的 2x2 紧凑布局，可以在不显著增加图幅的情况下同时展示轨迹跟踪能力和误差时间序列。
+  options:
+  - name: 保留圆形并额外增加误差曲线
+    benefits:
+    - 不改变既有 Table II 和正文指标
+    costs:
+    - 仍需保留圆形数据，不能突出新的螺旋任务
+    risks:
+    - 与用户希望替换任务的选择不一致
+  - name: 替换为螺旋并采用上下两排双面板
+    benefits:
+    - 同时展示轨迹和逐时刻误差
+    - 五个轨迹控制点和更长评估窗口比圆形更具挑战性
+    - 保持两条任务和两种控制器的紧凑对比
+    costs:
+    - Figure 4 高度增加
+    - Table II 和正文数值需要重算
+    risks:
+    - 需要确保误差定义与 RMSE/MAE 一致
+  - name: 替换为螺旋但仅展示轨迹
+    benefits:
+    - 保持单排布局
+    costs:
+    - 无法满足用户查看逐时刻误差的要求
+    risks:
+    - 只能依靠汇总 RMSE/MAE 判断控制性能
+  decision: Figure 4 使用螺旋替代圆形，并采用上排轨迹、下排误差的两排布局；误差定义为 `e(t)=||p_k-p_k^ref||_2`。
+  reason_summary:
+  - 用户明确要求螺旋替代圆形。
+  - 逐时刻误差可补充轨迹图中难以观察的局部误差。
+  - 同一评估窗口与 Table II 的 RMSE/MAE 定义保持一致。
+  action: 更新 Figure 4 生成脚本、指标 JSON、论文 Table II、图题和正文，并重新验证图片与引用。
+  expected_result: 论文可同时展示螺旋和五角星的轨迹跟踪效果与逐时刻误差演化。
+  reversal_plan: 若排版空间不足，可保留轨迹双面板，将误差曲线改为独立补充图或缩小误差面板。
+  observation: 螺旋评估样本 570，五角星评估样本 470；误差曲线与汇总指标使用同一 `act-ref` 二维距离。
+  actual_result: 螺旋 FS-EDMD-LQR RMSE/MAE=0.240537/0.198305，PID=1.140682/0.966802；五角星指标保持不变。
+  outcome_status: successful
+  lesson: 当同时展示轨迹形状和跟踪质量时，将轨迹和逐时刻误差拆成上下两排通常比在单个轨迹面板中叠加更多曲线更清晰。
+  evidence:
+  - EV-027
+  supersedes: []
+  created_at: '2026-09-16T03:55:00Z'
+  updated_at: '2026-09-16T03:55:00Z'
+- id: DEC-010
+  title: RAS 修订采用 9 页内部目标并冻结实验物理体量
+  category: process
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks:
+  - TASK-029
+  - TASK-030
+  related_business_logic:
+  - BL-PAPER-001
+  context: RAS 官方指南没有 8 页硬限制，当前 CAS 主稿因独立 Highlights 页和延迟全宽浮图页达到 11 页。用户同时要求增加软体平台内容，但不允许实验部分相对旧论文扩大体量。
+  hypothesis: 将主稿内部目标放宽到 9 页，并把 Highlights 改为独立提交、压缩最后一张浮图，可以在不删减软体平台内容的前提下达到目标。
+  options:
+  - name: 9 页以内并冻结实验体量
+    benefits:
+    - 符合用户对篇幅和内容密度的要求
+    - 允许通过布局迭代而非删减核心内容解决页数
+    costs:
+    - 需要反复调整图片和实验排版
+    risks:
+    - 若图片缩放过度，可读性下降
+  - name: 继续坚持 8 页
+    benefits:
+    - 版式更紧凑
+    costs:
+    - 需要进一步压缩正文或图表
+    risks:
+    - 软体平台新增内容可能难以清晰呈现
+  - name: 取消页数目标
+    benefits:
+    - 排版自由
+    costs:
+    - 与用户明确的投稿控制目标不一致
+    risks:
+    - 实验部分体量膨胀
+  decision: 采用 9 页以内作为 RAS 主稿内部目标；Highlights 独立提交，不计入主稿页数；实验部分内容可以增加，但相对旧论文的物理体量不得增加。
+  reason_summary:
+  - RAS 对页数没有硬性规定，9 页是用户接受的内部上限。
+  - 软体平台验证需要足够篇幅，但不能以扩大实验体量为代价。
+  - 当前 11 页已定位到独立 Highlights 页和延迟全宽浮图页，可通过排版解决。
+  - The user explicitly owns the final judgment of whether the experimental-section physical volume is acceptable; no agent-side quantitative comparison is required.
+  action: 更新 TASK-029、需求基线并迭代 CAS 双栏图表布局，优先把 Highlights 从主稿移除并压缩最后一张全宽浮图。
+  expected_result: 主稿在保留现有和新增实验内容的同时收敛到 9 页以内，图表仍可清晰阅读。
+  reversal_plan: 若 9 页导致关键图表不可读，可回到用户确认是否放宽至 10 页或进一步精简低价值表格。
+  observation: A forced LaTeX/BibTeX build completed and produced a nine-page main manuscript PDF.
+  actual_result: The agent-side page-count target passed. The user reconfirmed that the experimental-section physical-volume assessment belongs to the user and requires no agent-side quantitative calculation.
+  outcome_status: successful
+  lesson: Keep page-count verification automated while keeping editorial physical-volume acceptance entirely with the author.
+  evidence:
+  - Q-019
+  - EV-033
+  - User instruction on 2026-09-17 that experimental physical volume is user-assessed
+  created_at: '2026-09-17T09:15:00Z'
+  updated_at: '2026-09-17T03:48:25Z'
+- id: DEC-011
+  title: Use explicit top placement for Figure 2 and Figure 3 in the CAS manuscript
+  category: process
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-031
+  related_business_logic: []
+  context: The controller-structure figure and Geomagic Touch equipment figure were deferred away from their corresponding sections by the CAS double-column float queue.
+  hypothesis: Explicit top placement for both figures will keep them on the next available page near their referenced text without changing figure content or the nine-page layout.
+  options:
+  - name: Explicit top placement
+    benefits:
+    - Keeps figures close to Sections 4.1 and 5.1.
+    - Preserves content, captions, labels, and the nine-page target.
+    costs:
+    - Figure placement remains dependent on the page break after a forced rebuild.
+    risks:
+    - Dense text may move a following page break in later revisions.
+  - name: Force exact-here placement
+    benefits:
+    - Makes the figure position deterministic.
+    costs:
+    - Can create large whitespace gaps and interfere with two-column flow.
+    risks:
+    - May increase page count.
+  decision: Set both figures to the CAS top-placement option (`pos=t`) and verify their resolved pages from `main.aux`.
+  reason_summary:
+  - Top placement is native to the CAS float system.
+  - It avoids page-count inflation from exact-here placement.
+  - The resolved output places Figure 2 on page 5 and Figure 3 on page 6.
+  action: Change the Geomagic Touch figure from permissive placement to explicit top placement, rebuild the manuscript, and inspect the rendered page sequence.
+  expected_result: Figure 2 appears near Section 4.1, Figure 3 appears near Section 5.1, and the PDF remains within nine pages.
+  reversal_plan: If later content changes cause a figure to move away from its section, re-evaluate the surrounding page break or use a controlled section barrier without altering figure content.
+  observation: The forced build produced a nine-page PDF; Figure 2 resolves to page 5 and Figure 3 resolves to page 6.
+  actual_result: Both figures are adjacent to their referenced manuscript sections and no figure is deferred to the reference appendix or end of the manuscript.
+  outcome_status: successful
+  lesson: In this CAS double-column layout, explicit top placement is sufficient to keep the two small equipment/controller figures near their sections without forcing extra pages.
+  evidence:
+  - EV-034
+  supersedes: []
+  created_at: '2026-09-17T04:09:00Z'
+  updated_at: '2026-09-17T04:09:00Z'
+- id: DEC-012
+  title: Use fixed in-column placement for Figures 4 and 5
+  category: process
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-032
+  related_business_logic: []
+  context: The user requires Figures 4 and 5 to be single-column and inserted directly at the corresponding points in the manuscript.
+  hypothesis: A fixed in-column environment that bypasses CAS float queues will keep both figures in the intended text flow while preserving a nine-page document.
+  options:
+  - name: Use fixed in-column figurehere environment
+    benefits:
+    - Honors the user's exact placement requirement.
+    - Prevents deferred figures at the end of the manuscript.
+    costs:
+    - A fixed figure can create local whitespace when it does not fit the current column.
+    risks:
+    - Later text edits can move the surrounding content and require another visual check.
+  - name: Keep float placement
+    benefits:
+    - Lets LaTeX optimize page fill.
+    costs:
+    - Cannot guarantee that each figure appears at its corresponding text position.
+    risks:
+    - Figures may be deferred.
+  decision: Define a local figurehere environment using float's fixed-placement primitives and use it for Figures 4 and 5 at column width.
+  reason_summary:
+  - The CAS class redefines the standard figure environment and does not honor [H] through the normal interface.
+  - Fixed placement matches the user's explicit layout requirement.
+  action: Update main.tex and manuscript_body.tex, rebuild, inspect labels, and render the affected pages.
+  expected_result: Figure 4 appears in a single column on page 6 and Figure 5 on page 7, with the manuscript still nine pages.
+  reversal_plan: Restore the standard CAS figure environment and float placement if later content requires automatic page filling.
+  observation: The forced build produced a nine-page PDF; Figure 4 resolves to page 6 and Figure 5 resolves to page 7.
+  actual_result: Both figures are single-column and non-floating at their corresponding discussion points, with no undefined references or fatal errors.
+  outcome_status: successful
+  lesson: In the CAS class, use a local fixed-placement environment rather than the standard [H] option because the class consumes figure placement as key-value options.
+  evidence:
+  - EV-035
+  supersedes: []
+  created_at: '2026-09-17T05:14:00Z'
+  updated_at: '2026-09-17T05:14:00Z'
+- id: DEC-013
+  title: Block soft-platform redraw until PID dataset identity is corrected
+  category: process
+  status: superseded
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-033
+  related_business_logic: []
+  context: The new figure-eight and five-point-star trajectories are complete and aligned, but the purported PID files contain Koopman-LQR metadata or configuration.
+  hypothesis: Requiring corrected PID exports prevents mislabeling a different controller as the paper's baseline and avoids invalidating the control comparison.
+  options:
+  - name: Block redraw pending corrected PID exports
+    benefits:
+    - Preserves the scientific meaning of the FS-EDMD-LQR versus PID comparison.
+    - Keeps the data audit traceable.
+    costs:
+    - Delays figure and table regeneration.
+    risks:
+    - User may need to rerun or re-export two experiments.
+  - name: Treat current files as PID based on filenames
+    benefits:
+    - Allows immediate redraw.
+    costs:
+    - Contradicts the embedded controller configuration.
+    risks:
+    - The paper would report an incorrect baseline.
+  decision: Use the two FS datasets, but do not redraw the soft-platform control figure or update the control table until corrected PID data is supplied or the controller identity is explicitly confirmed.
+  reason_summary:
+  - Filenames are not sufficient evidence when embedded controller metadata says Koopman-LQR.
+  - The controller baseline identity is a critical scientific claim.
+  action: Open Q-020, create TASK-033, and request corrected PID exports with controller configuration.
+  expected_result: Two valid PID datasets with matching trajectory grids and PID configuration metadata will unblock the redraw.
+  reversal_plan: If the current runs are confirmed to be PID and the metadata is known to be a generic exporter label, record that evidence and resume the redraw.
+  observation: The data audit found 400 unique steps for the figure-eight runs and 500 for the five-point-star runs, with exact reference alignment in both pairs.
+  actual_result: Trajectory volume is sufficient, but PID identity remains unresolved.
+  outcome_status: partial
+  lesson: Validate embedded controller metadata, not only filenames, before using experimental data as a paper baseline.
+  evidence:
+  - EV-036
+  supersedes: []
+  created_at: '2026-09-17T08:12:07Z'
+  updated_at: '2026-09-17T08:12:07Z'
+- id: DEC-014
+  title: Use the user-confirmed new soft-platform PID runs
+  category: process
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks:
+  - TASK-033
+  related_business_logic: []
+  context: The new 8-shaped and five-point-star PID exports contain Koopman-LQR labels in their metadata, but the user confirmed that the underlying baseline runs were collected with the PID controller and that the labels are export-name errors.
+  hypothesis: Explicit user confirmation of the actual controller used is sufficient to resolve the identity conflict because it identifies the acquisition authority and does not change the numerical tracking data.
+  options:
+  - name: Use the new runs as PID and record the metadata discrepancy
+    benefits:
+    - Uses the latest aligned control experiments.
+    - Preserves the intended FS-EDMD-LQR versus PID comparison.
+    costs:
+    - The exported metadata remains internally inconsistent.
+    risks:
+    - A later provenance audit must refer to the recorded user confirmation.
+  - name: Keep the redraw blocked until corrected exports arrive
+    benefits:
+    - Maximizes metadata consistency.
+    costs:
+    - Prevents immediate figure and manuscript integration.
+    risks:
+    - Delays the revision without changing the actual experimental data.
+  decision: Treat the new 8-shaped and five-point-star baseline runs as PID data; use them for Figure 6 and Table 2 while recording that the Koopman-LQR export labels are erroneous metadata.
+  reason_summary:
+  - The user explicitly confirmed the actual controller identity.
+  - The FS and PID reference trajectories are aligned and all required fields are complete.
+  action: Update the figure reader to support the CSV PID export, regenerate Figure 6 with figure-eight and five-point-star tasks, update Table 2 and manuscript percentages, rebuild the PDF, and verify the nine-page layout.
+  expected_result: The manuscript presents the new PID comparison using the correct controller identity and the new trajectories.
+  reversal_plan: If the acquisition owner later finds that the runs were not PID, supersede this decision and restore the previous validated control results.
+  observation: The regenerated figure uses 400 unique 8-shaped steps and 500 unique five-point-star steps after dropping repeated final-step rows; both PID runs remain visibly less accurate than FS-EDMD-LQR.
+  actual_result: Figure 6 and Table 2 were regenerated with FS/PID RMSE/MAE of 0.1174/0.1135 versus 0.6386/0.4797 for the figure-eight and 0.1339/0.1294 versus 0.8406/0.6391 for the five-point star; the manuscript remains nine pages.
+  outcome_status: successful
+  lesson: A controller identity can be resolved by an explicit acquisition-authority confirmation when the numerical data remain valid, but the metadata discrepancy must stay recorded.
+  evidence:
+  - EV-038
+  supersedes:
+  - DEC-013
+  created_at: '2026-09-17T08:35:00Z'
+  updated_at: '2026-09-17T08:40:00Z'

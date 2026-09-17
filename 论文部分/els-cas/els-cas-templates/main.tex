@@ -1,0 +1,140 @@
+%% 
+%% Copyright 2019-2024 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3c of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-dc documentclass for 
+%% double column output.
+
+\documentclass[a4paper,fleqn]{cas-dc}
+
+% If the frontmatter runs over more than one page
+% use the longmktitle option.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-dc}
+
+\usepackage[numbers]{natbib}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\interdisplaylinepenalty=2500
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% Fixed in-column figure for placements that must not float.
+\makeatletter
+\newenvironment{figurehere}
+  {\@float@HH{figure}[H]\centering}
+  {\float@endH}
+\makeatother
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+%%%
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{problem}{Problem}[section]
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\uvec}{\mathbf{u}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\e}{\mathbf{e}}
+
+\newcommand{\Kmat}{\mathbf{K}}
+\newcommand{\Dmat}{\mathbf{D}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\Rmat}{\mathbf{R}}
+\newcommand{\Zmat}{\mathbf{Z}}
+\newcommand{\Umat}{\mathbf{U}}
+\newcommand{\W}{\mathbf{W}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}
+
+\newcommand{\Phib}{\boldsymbol{\Phi}}
+\newcommand{\XPhi}{\mathbf{X}_{\Phi}}
+\newcommand{\YPhi}{\mathbf{Y}_{\Phi}}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+\makeatletter
+\@ifundefined{@abspage@last}{\def\@abspage@last{9}}{}
+\AtBeginDocument{\gdef\lastpage{\@abspage@last}}
+\makeatother
+
+\shorttitle{Feature-Selection-Based Koopman Modeling and Robust LQR Control}
+\shortauthors{First Author}
+
+\title[mode=title]{Feature-Selection-Based Koopman Modeling and Robust LQR Control of Robots}
+
+\author[1]{First Author}
+\cormark[1]
+\ead{first.author@example.com}
+\credit{Conceptualization, Methodology, Software, Writing -- original draft}
+
+\affiliation[1]{organization={Institution Name},
+               city={City},
+               country={Country}}
+
+\cortext[1]{Corresponding author}
+
+\begin{abstract}
+Koopman operator theory with Extended Dynamic Mode Decomposition (EDMD) enables nonlinear dynamical systems to be represented by linear dynamics in a lifted space. However, the performance of EDMD strongly depends on the choice of basis functions: insufficient dictionaries limit approximation accuracy, whereas overcomplete dictionaries introduce redundancy, overfitting, and high computational cost. To address this issue, this paper proposes a feature-selection-based Koopman representation learning framework for robotic systems. A physics-informed overcomplete candidate library is first constructed, and a learnable feature selection matrix is then optimized to extract compact and informative linear combinations of candidate functions. The resulting modeling problem is formulated as a joint optimization over the Koopman matrices and the feature selection matrix, and a block coordinate descent algorithm is developed with convergence guarantees. Based on the learned lifted model, a feedforward-feedback Linear Quadratic Regulator controller is designed, where finite-dimensional approximation errors and external uncertainties are treated as bounded lumped disturbances. Lyapunov analysis proves that the closed-loop tracking error is ultimately uniformly bounded. Experiments on a three-degree-of-freedom robotic arm and a cable-driven soft platform demonstrate improved modeling accuracy, tracking performance, and robustness.
+\end{abstract}
+
+\begin{keywords}
+Koopman operator \sep basis function selection \sep data-driven modeling \sep LQR control \sep robust stability
+\end{keywords}
+
+\maketitle
+
+\input{manuscript_body}
+
+\printcredits
+
+\bibliographystyle{cas-model2-names}
+\bibliography{references}
+
+\end{document}

@@ -987,3 +987,54 @@ atoms:
   created_at: '2026-09-11T19:40:00Z'
   updated_at: '2026-09-11T19:40:00Z'
   last_verified_at: null
+- id: BL-PAPER-001
+  title: RAS nine-page revision with user-owned experimental-volume acceptance
+  kind: constraint
+  domain: paper-revision
+  status: active
+  priority: high
+  risk: medium
+  authority: user-confirmed
+  source:
+    type: user-statement
+    reference: Q-019 and the user's page-budget clarification
+  description: The RAS revision targets a main manuscript of no more than nine physical pages. The user owns the final judgment of whether the experimental-section physical volume is acceptable.
+  actors:
+  - User
+  - Agent
+  trigger: Revising and laying out the RAS manuscript.
+  preconditions:
+  - The user accepts nine pages as the internal page limit.
+  - The soft-platform experiments are retained.
+  inputs:
+  - The CAS manuscript source and compiled PDF.
+  rule:
+    statement: The main manuscript must not exceed nine physical pages. The agent verifies the page count, build, and figure/table integrity, while the user judges the experimental physical volume.
+  outputs:
+  - A nine-page-or-shorter RAS manuscript PDF.
+  side_effects: []
+  exceptions: []
+  failure_handling:
+  - If the page count exceeds nine, reflow figures and text without deleting valid experimental content.
+  invariants:
+  - The agent does not perform an automated quantitative comparison of the experimental physical volume.
+  acceptance:
+  - id: BL-PAPER-001-AC-001
+    given: The CAS main manuscript source is available.
+    when: The full LaTeX/BibTeX build is completed.
+    then: The main PDF is nine pages or fewer and its figures, tables, and references remain intact.
+    method: Build the PDF, inspect the page count, and review the rendered layout.
+    evidence: EV-033
+    status: passed
+  dependencies: []
+  baseline_refs:
+  - REQ-003
+  decision_refs:
+  - DEC-010
+  implementation_refs: []
+  test_refs: []
+  supersedes: []
+  notes: Physical-volume acceptance is explicitly user-owned.
+  created_at: '2026-09-17T03:45:00Z'
+  updated_at: '2026-09-17T03:45:00Z'
+  last_verified_at: null

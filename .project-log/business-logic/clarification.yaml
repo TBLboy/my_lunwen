@@ -92,6 +92,14 @@ alignment:
     authority: C
     evidence:
     - 用户消息：建模的代码还是放在 建模代码 这里，不需要创建子文件夹，中间过程输出到 杂项/软体平台探索实验结果
+  - id: ALIGN-PAPER-001
+    type: confirmed-match
+    summary: RAS 没有硬性 8 页限制；本次修订以 9 页以内为内部目标。新增软体平台实验可以增加内容，但实验部分相对于旧论文的物理体量不得增加，需通过合并、压缩与重排实现。
+    status: resolved
+    authority: C
+    evidence:
+    - Q-019
+    - 用户消息：RAS 没有硬性要求 8 页，最终论文限制在 9 页以内；实验部分体量不增加，但内容可以增加。
   conflicts: []
   unknowns:
   - id: ALIGN-SOFT-003

@@ -1,5 +1,103 @@
 # Progress
 
+## Current Snapshot
+
+- Current phase: implementation
+- Current task: TASK-033 is complete; TASK-030 remains pending
+- Current status: the new figure-eight and five-point-star PID runs are integrated into Figure 6 and Table 2 after explicit controller-identity confirmation
+- Latest verification: full-trajectory Figure 6 and nine-page manuscript rebuild recorded as `EV-038`
+- Next steps:
+  - Continue the RAS submission-package checks
+  - Replace the equipment figure when the new soft-platform photograph is supplied
+  - Perform the final page-layout and author-guide pass
+
+## 2026-09-17 New Soft-Platform Control Data Integration
+
+- Status: done.
+- The user confirmed that the new baseline runs were collected with PID and that the embedded Koopman-LQR names are export-label errors; `Q-020` is answered and `DEC-014` supersedes `DEC-013`.
+- Figure 6 now uses figure-eight and five-point-star data and supports both ZIP and CSV inputs; trajectory panels show complete FS-EDMD-LQR/PID paths, while Table 2 and the lower error panels use the common `step >= 30` window.
+- FS-EDMD-LQR versus PID RMSE/MAE: figure-eight `0.1174/0.1135` versus `0.6386/0.4797`; five-point star `0.1339/0.1294` versus `0.8406/0.6391`.
+- The forced manuscript rebuild remains nine pages with no undefined references or fatal errors.
+- Evidence: EV-038; task: TASK-033; decision: DEC-014.
+
+## 2026-09-17 New Soft-Platform Control Dataset Audit
+
+- Status: superseded by explicit PID confirmation; retained for provenance.
+- The 8-shaped and five-point-star FS/PID runs each have aligned references and enough unique control steps.
+- All files contain 30 repeated final-step monitoring samples that must be handled separately from ordinary tracking samples.
+- The purported PID files carry Koopman-LQR metadata or configuration, so their controller identity must be corrected before use.
+- Evidence: EV-036; task: TASK-033; question: Q-020.
+
+## 2026-09-17 Fixed In-Column Placement for Figures 4 and 5
+
+- Status: done.
+- Added a CAS-compatible `figurehere` environment and converted Figures 4 and 5 to single-column fixed placement.
+- Figure 4 is on page 6 near the modeling-accuracy discussion; Figure 5 is on page 7 near robotic-arm tracking.
+- The rebuilt PDF remains nine pages with no undefined references, fatal errors, or ignored float placements.
+- Evidence: EV-035; decision: DEC-012.
+
+## 2026-09-17 Figure 2/3 Float Placement Repair
+
+- Status: done.
+- Set explicit top placement for the controller-structure figure and the existing Geomagic Touch equipment figure in the CAS manuscript.
+- Forced `latexmk` rebuild produced a nine-page PDF; Figure 2 is on page 5 near Section 4.1 and Figure 3 is on page 6 near Section 5.1.
+- Verification passed with no undefined references, fatal errors, or missing figure files.
+- Evidence: EV-034.
+
+## 2026-09-17 User-Owned Experimental-Volume Assessment
+
+- The user will judge whether the experimental-section physical volume is acceptable.
+- The agent will not perform or report a quantitative old-versus-new footprint comparison.
+- TASK-029 is complete from the agent side; the user's judgment remains independent and is not an agent-side blocking acceptance gate.
+
+## 2026-09-17 RAS Page-Budget Clarification
+
+- Status: in progress.
+- User confirmed RAS has no hard eight-page limit; the internal target is now nine pages or fewer.
+- The experiment section may contain additional scientific content, but it must not occupy more physical space than the old manuscript.
+- Q-019, DEC-010, REQ-003, and TASK-029 were updated to make this constraint traceable.
+
+## 2026-09-17 RAS Author Guide Alignment
+
+- Status: in progress; one page-limit decision remains open.
+- Recorded the official RAS author guide and checked the current CAS manuscript against its machine-verifiable requirements.
+- Abstract has 182 words and the manuscript has 5 keywords, both within the guide limits.
+- Reduced all four Highlights to 58-74 characters and added a standalone editable `highlights.tex`.
+- Confirmed the official guide does not state an eight-page limit; Q-019 asks whether to retain eight pages as an internal goal.
+- Added TASK-030 for author metadata, CRediT, declarations, artwork packaging, and final submission-file checks.
+- Verified the standalone Highlights source compiles and the CAS manuscript still builds after the Highlights update.
+
+## 2026-09-17 Official CAS Double-Column Migration
+
+- Status: implemented and verified.
+- Rebuilt the RAS manuscript from the official `cas-dc-template.tex` instead of `elsarticle`.
+- Kept the official CAS class, style, and bibliography files unchanged.
+- Copied the picture and bibliography resources into `els-cas-templates`; the existing `elsarticle` version remains intact.
+- Fixed the visible Q-matrix line overflow and verified the rendered equation page.
+- Full `latexmk`/BibTeX build succeeds and produces `els-cas-templates/main.pdf`.
+- Evidence: EV-031.
+- Remaining: the 11-page physical PDF still exceeds the eight-page target because full-width figures are placed on deferred float pages; tracked as TASK-029.
+
+## 2026-09-17 Elsevier Two-Column Format
+
+- Status: done for the requested format switch.
+- Changed `elsarticle/main.tex` to `\documentclass[final,3p,twocolumn,times]{elsarticle}`.
+- Preserved the preprint class line as a comment for the alternative submission format.
+- Reduced two small horizontal overflows in the tracking table and controller figure.
+- Rebuilt successfully with `latexmk`, `pdflatex`, and `bibtex`; the output is 11 pages with two-column layout.
+- Evidence: EV-030.
+- Remaining: one float-only page remains, and the 8-page target still requires a separate reduction of text or figure footprint.
+
+## 2026-09-16 LaTeX Toolchain Installation and Build Verification
+
+- Status: done.
+- Installed MiKTeX 26.5 and Strawberry Perl 5.42.3 for the current user.
+- Verified `pdflatex`, `bibtex`, and `latexmk` against `论文部分/elsarticle/main.tex`.
+- Added the missing `amsthm` package required by `proof` environments.
+- Generated `论文部分/elsarticle/main.pdf` successfully; current preprint build is 22 pages.
+- Evidence: EV-029.
+- Remaining: perform the production-style 8-page layout check after author metadata and the remaining equipment photo are supplied.
+
 > 面向人的阶段进度摘要。维护规则：
 > - **最新在最上**：按日期倒序排列，最新阶段段落位于文件顶部，旧段落依次向下。
 > - **头部快照**：顶部“当前状态”区块是稳定入口，每次更新时覆盖，不追加旧版本。
@@ -7,16 +105,98 @@
 > - **单一事实源**：本文件是快速摘要；精确当前状态与下一步以 `.project-log/loop/handoff.md`、`.project-log/loop/active-run.yaml` 为准。
 > - **机器文件不手工重排**：`loop/events.jsonl`、`loop/active-run.yaml`、`loop/handoff.md`、`verification/evidence.yaml` 由运行时维护，不做手工重排或改写。
 
-## 当前状态
-- 当前阶段：implementation
-- 当前任务：TASK-017 已完成
-- 当前状态：EDMD 预测直线问题已修复；`soft-final-006` 的 EDMD 旧指标已失效，修正版指标待确认是否覆盖 final
-- 最近验证：EV-017 至 EV-019 已记录；Project Log、Loop、模型重载和 final 哈希校验通过
-- 下一步：
-  - 轨迹 66 已确定为论文固定展示轨迹，三模型对比图已输出到 `final/figures/`
-  - 确认是否用修正版 EDMD 更新 final 指标、模型和论文展示图
-  - 使用 final 中的模型、配置和指标继续论文写作
-  - 如后续需要提升 FS-EDMD 平均 RMSE，再开启新的探索任务
+## 2026-09-16 Figure 3/4 科研绘图质感优化
+
+- 状态：已完成
+- 样式：统一 Reference、FS-EDMD-LQR、PID 的配色、线型、字体、网格、次刻度和面板标签。
+- Figure 3：改为列标题、行标签和共享图例，减少重复标题并保持每行一个实验。
+- Figure 4：保留螺旋/五角星轨迹与逐时刻误差曲线，优化上下两排层级、图例和面积填充。
+- 指标：评估窗口和全部 RMSE/MAE 与优化前一致。
+- 论文同步：Figure 3/4 最新 PDF 已同步到 `论文部分/elsarticle/pictures`，源文件和论文副本哈希一致。
+- 验证：EV-028 通过；脚本重跑、PNG 非空检查、指标检查和 PDF 哈希检查均通过。
+
+## 2026-09-16 Figure 4 螺旋替换与误差曲线
+
+- 状态：已完成
+- 数据：螺旋和五角星的 FS/PID 轨迹跟踪压缩包；统一从 `step >= 30` 展示和评估。
+- 绘制：上排为螺旋/五角星轨迹，下排为对应的 `e(t)=||p_k-p_k^ref||_2` 逐时刻误差曲线。
+- 指标：螺旋 FS-EDMD-LQR RMSE/MAE `0.2405/0.1983`，PID `1.1407/0.9668`；五角星 RMSE/MAE `0.1321/0.1278` 对 `0.6313/0.6202`。
+- 论文同步：Table II 的 `Soft: circular` 已替换为 `Soft: spiral`，图题和正文已更新。
+- 验证：EV-027 通过；脚本重跑、图片视觉检查、指标 JSON、LaTeX 引用和 PDF 哈希均通过。
+
+## 2026-09-16 软体平台 Figure 4 与 Table II
+
+- 状态：已完成
+- 数据：圆形和五角星的 FS/PID 轨迹跟踪压缩包；按 `step` 去重，螺旋数据不进入正文。
+- Figure 4：左侧圆形、右侧五角星，展示完整 Reference 与从 `step >= 30` 开始的 FS-EDMD-LQR/PID 实际轨迹。
+- 指标：圆形 RMSE `0.0542` 对 `0.3160`，MAE `0.0528` 对 `0.3038`；五角星 RMSE `0.1321` 对 `0.6313`，MAE `0.1278` 对 `0.6202`。
+- 论文同步：`main.tex` 已加入 Figure 4、软体控制段落及 Table II 两行结果。
+- 产物：`杂项/正式论文的绘图部分/figure4_soft_control_tracking.png/pdf/svg`、指标 JSON、生成脚本和论文 `pictures` PDF 副本。
+- 验证：EV-026 通过；图像视觉检查、脚本语法、指标 JSON、论文引用、图片路径和 PDF 哈希一致；当前无 LaTeX 编译器，未执行整篇 PDF 编译。
+
+## 2026-09-16 RAS Elsevier elsarticle 模板迁移
+
+- 状态：已实现，待编译验证
+- 模板：Elsevier 官方 `elsarticle` 3.4 包中的 `elsarticle-template-num.tex`
+- 文档配置：`preprint,12pt`，期刊名设置为 `Robotics and Autonomous Systems`，引用样式为 `elsarticle-num`
+- 前置结构：加入 `frontmatter`、摘要和 `keyword`；作者、单位和邮箱暂用占位信息
+- 清理内容：移除 `ieeeconf`、IEEE 专用宏、`pdfinfo`、`cite` 包和 IEEEtran 引用样式
+- 保持不变：正文、公式、算法、定理、图表、指标、图片路径和参考文献键均未改写；原 `old` 稿件未修改
+- 验证：EV-025 通过静态结构和引用完整性检查；当前环境无 LaTeX 编译器，尚未执行整篇 PDF 编译
+
+## 2026-09-16 Figure 3 实验行方向重排
+
+- 状态：已完成
+- 完成内容：将 Figure 3 转置为正弦、不规则、扰动恢复各占一行，Joint 1--3 各占一列
+- 面板编号：按行优先顺序更新为 `(a)--(i)`，每个关节列共享 y 轴范围
+- 正文同步：图题和正文引用从 column-based 更新为 row-based
+- 验证：EV-024 通过；RMSE/MAE 保持不变，PNG/PDF/SVG 非空，论文 PDF 与源 PDF 哈希一致
+- 限制：无 LaTeX 编译器，尚未进行整篇 PDF 编译和 8 页检查
+
+## 2026-09-15 当前 main.tex 图表整合
+
+- 状态：已完成
+- 完成内容：将 Figure 2/3 矢量 PDF 接入主文件，删除旧位置预测图、三张旧控制图和不规则参考参数表
+- 建模表：保留机械臂全状态 MSE/RMSE/MAE，并加入软体轨迹 66 的 FS-EDMD/EDMD/EDMDDL RMSE `0.7889/0.8965/1.2927`
+- 控制图：初始使用 `3×3` 紧凑控制图，后由 TASK-023 改为正弦、不规则和扰动恢复各占一行
+- 验证：EV-023 通过；实验段表格数为 2、标签唯一且引用完整、图片路径存在、PDF 哈希一致
+- 限制：无 LaTeX 编译器，尚未进行整篇 PDF 编译和 8 页检查
+
+## 2026-09-15 Figure 3 机械臂控制轨迹跟踪图
+
+- 状态：已完成
+- 完成内容：生成 3 行 3 列控制轨迹跟踪图，覆盖正弦、不规则和扰动恢复任务
+- 评估窗口：原始 `10–40 s`，图中统一平移为 `0–30 s`
+- 指标：正弦 FS-EDMD-LQR/PID RMSE 为 `0.01545/0.04754`；不规则为 `0.01748/0.04130`；扰动恢复 FS-EDMD-LQR RMSE 为 `0.09577`
+- 产物：`杂项/正式论文的绘图部分/figure3_control_tracking.png/pdf/svg`、`figure3_control_metrics.json` 和生成脚本
+- Table II：已更新为正弦 `0.0154/0.0136` 对 `0.0475/0.0402`，不规则 `0.0175/0.0148` 对 `0.0413/0.0337`，并加入扰动恢复 FS-EDMD-LQR `0.0958/0.0298`
+- 验证：脚本成功执行、语法检查通过、PNG 视觉检查通过、三种格式文件均非空
+
+## 2026-09-15 Figure 2 双平台建模精度图
+
+- 状态：已完成
+- 完成内容：生成左侧三关节、右侧软体平台 `x/y` 的合并建模精度对比图
+- 产物：`杂项/正式论文的绘图部分/figure2_modeling_accuracy.png/pdf/svg` 和生成脚本
+- 指标：机械臂 FS-EDMD RMSE `0.59333305`；软体轨迹 66 FS-EDMD RMSE `0.78889613`
+- 验证：脚本成功执行、语法检查通过、PNG 视觉检查通过、三种格式文件均非空
+
+## 2026-09-15 论文改稿业务逻辑澄清启动
+
+- 状态：进行中
+- 完成内容：结构化阅读论文正文；提取当前方法贡献、实验设计、指标和图片规模；将三次投稿意见映射为“丢弃/部分采纳/必须采纳”
+- 初步结论：期刊 scope 意见不回写正文；方法必要性、有效域、Jacobian 对照和跨平台实验是改稿重点
+- 关键风险：软体平台单轨迹最优但平均 RMSE 暂未全面优于 EDMDDL，论文表述不能无条件宣称全面最优
+- 已确认：保留 FS-EDMD + 鲁棒 Koopman-LQR 为主线，软体平台作为跨平台验证
+- 已确认：软体平台建模只展示轨迹 66；正文不解释择优过程，且不将其描述为随机或代表性样本
+- 已确认：不新增 Jacobian/局部线性化 LQR 对照，控制部分只比较 FS-EDMD-LQR 与 PID
+- 已确认：软体平台控制只采集圆形和五角星，论文合并为一张左右双子图
+- 已确认：机械臂建模精度不展示速度预测图，只保留关节位置预测图
+- 已确认：机械臂建模表保留全状态 MSE/RMSE/MAE，并说明包含位置和速度
+- 已确认：机械臂和软体平台的控制性能均只使用 RMSE、MAE，不展示最大误差
+- 已完成：实验章节句子级骨架、四图两表数据来源、版式约束和禁止表述清单，见 `.project-log/specs/paper-revision-experiment-outline.md`
+- 已确认：实验部分采用 4 图 2 表结构，数据划分写在正文，软体建模展示 x/y 各自预测轨迹
+- 已确认：Figure 2 采用左列三关节、右列软体 x/y 的嵌套子图布局，每个小面板保留三个模型对比曲线
+- 绘图方案：`.project-log/specs/paper-revision-experiment-plan.md`
 
 ## 2026-09-15 软体平台控制代码备份
 

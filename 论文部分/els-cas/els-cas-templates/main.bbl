@@ -1,0 +1,253 @@
+\begin{thebibliography}{25}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Beck and Teboulle(2009)}]{Beck2009ISTA}
+\bibinfo{author}{Beck, A.}, \bibinfo{author}{Teboulle, M.},
+  \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{A fast iterative shrinkage-thresholding algorithm for
+  linear inverse problems}.
+\newblock \bibinfo{journal}{SIAM Journal on Imaging Sciences}
+  \bibinfo{volume}{2}, \bibinfo{pages}{183--202}.
+\newblock \DOIprefix\doi{10.1137/080716542}.
+%Type = Book
+\bibitem[{Blanchini and Miani(2008)}]{Blanchini2008}
+\bibinfo{author}{Blanchini, F.}, \bibinfo{author}{Miani, S.},
+  \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Set-Theoretic Methods in Control}.
+\newblock \bibinfo{publisher}{Birkh{\"a}user}, \bibinfo{address}{Boston, MA,
+  USA}.
+\newblock \DOIprefix\doi{10.1007/978-0-8176-4606-6}.
+%Type = Article
+\bibitem[{Brunke et~al.(2022)Brunke, Greeff, Hall, Yuan, Zhou, Panerati and
+  Schoellig}]{Brunke2022}
+\bibinfo{author}{Brunke, L.}, \bibinfo{author}{Greeff, M.},
+  \bibinfo{author}{Hall, A.W.}, \bibinfo{author}{Yuan, Z.},
+  \bibinfo{author}{Zhou, S.}, \bibinfo{author}{Panerati, J.},
+  \bibinfo{author}{Schoellig, A.P.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Safe learning in robotics: From learning-based
+  control to safe reinforcement learning}.
+\newblock \bibinfo{journal}{Annual Review of Control, Robotics, and Autonomous
+  Systems} \bibinfo{volume}{5}, \bibinfo{pages}{411--444}.
+\newblock \DOIprefix\doi{10.1146/annurev-control-042920-020211}.
+%Type = Article
+\bibitem[{Brunton et~al.(2016)Brunton, Brunton, Proctor and
+  Kutz}]{Brunton2016Koopman}
+\bibinfo{author}{Brunton, S.L.}, \bibinfo{author}{Brunton, B.W.},
+  \bibinfo{author}{Proctor, J.L.}, \bibinfo{author}{Kutz, J.N.},
+  \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{{K}oopman invariant subspaces and finite linear
+  representations of nonlinear dynamical systems for control}.
+\newblock \bibinfo{journal}{PLOS ONE} \bibinfo{volume}{11},
+  \bibinfo{pages}{e0150171}.
+\newblock \DOIprefix\doi{10.1371/journal.pone.0150171}.
+%Type = Article
+\bibitem[{Brunton et~al.(2022)Brunton, Budi{\v{s}}i{\'c}, Kaiser and
+  Kutz}]{Brunton2022}
+\bibinfo{author}{Brunton, S.L.}, \bibinfo{author}{Budi{\v{s}}i{\'c}, M.},
+  \bibinfo{author}{Kaiser, E.}, \bibinfo{author}{Kutz, J.N.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Modern {K}oopman theory for dynamical systems}.
+\newblock \bibinfo{journal}{SIAM Review} \bibinfo{volume}{64},
+  \bibinfo{pages}{229--340}.
+\newblock \DOIprefix\doi{10.1137/21M1401243}.
+%Type = Book
+\bibitem[{Khalil(2002)}]{Khalil2002}
+\bibinfo{author}{Khalil, H.K.}, \bibinfo{year}{2002}.
+\newblock \bibinfo{title}{Nonlinear Systems}.
+\newblock \bibinfo{edition}{3rd} ed., \bibinfo{publisher}{Prentice Hall},
+  \bibinfo{address}{Upper Saddle River, NJ, USA}.
+%Type = Article
+\bibitem[{Koopman(1931)}]{Koopman1931}
+\bibinfo{author}{Koopman, B.O.}, \bibinfo{year}{1931}.
+\newblock \bibinfo{title}{Hamiltonian systems and transformation in {H}ilbert
+  space}.
+\newblock \bibinfo{journal}{Proceedings of the National Academy of Sciences of
+  the United States of America} \bibinfo{volume}{17},
+  \bibinfo{pages}{315--318}.
+\newblock \DOIprefix\doi{10.1073/pnas.17.5.315}.
+%Type = Article
+\bibitem[{Korda and Mezi{\'c}(2018a)}]{Korda2018MPC}
+\bibinfo{author}{Korda, M.}, \bibinfo{author}{Mezi{\'c}, I.},
+  \bibinfo{year}{2018}a.
+\newblock \bibinfo{title}{Linear predictors for nonlinear dynamical systems:
+  {K}oopman operator meets model predictive control}.
+\newblock \bibinfo{journal}{Automatica} \bibinfo{volume}{93},
+  \bibinfo{pages}{149--160}.
+\newblock \DOIprefix\doi{10.1016/j.automatica.2018.03.046}.
+%Type = Article
+\bibitem[{Korda and Mezi{\'c}(2018b)}]{Korda2018conv}
+\bibinfo{author}{Korda, M.}, \bibinfo{author}{Mezi{\'c}, I.},
+  \bibinfo{year}{2018}b.
+\newblock \bibinfo{title}{On convergence of extended dynamic mode decomposition
+  to the {K}oopman operator}.
+\newblock \bibinfo{journal}{Journal of Nonlinear Science} \bibinfo{volume}{28},
+  \bibinfo{pages}{687--710}.
+\newblock \DOIprefix\doi{10.1007/s00332-017-9423-0}.
+%Type = Article
+\bibitem[{Li et~al.(2017)Li, Dietrich, Bollt and Kevrekidis}]{Li2017}
+\bibinfo{author}{Li, Q.}, \bibinfo{author}{Dietrich, F.},
+  \bibinfo{author}{Bollt, E.M.}, \bibinfo{author}{Kevrekidis, I.G.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Extended dynamic mode decomposition with dictionary
+  learning: A data-driven adaptive spectral decomposition of the {K}oopman
+  operator}.
+\newblock \bibinfo{journal}{Chaos: An Interdisciplinary Journal of Nonlinear
+  Science} \bibinfo{volume}{27}, \bibinfo{pages}{103111}.
+\newblock \DOIprefix\doi{10.1063/1.4993854}.
+%Type = Article
+\bibitem[{Li et~al.(2026)Li, Li, Liu, Dong and Johansson}]{LiEtAl2026TCYB}
+\bibinfo{author}{Li, Y.}, \bibinfo{author}{Li, C.}, \bibinfo{author}{Liu, K.},
+  \bibinfo{author}{Dong, J.}, \bibinfo{author}{Johansson, R.},
+  \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Event-triggered control and communication for
+  single-master multislave teleoperation systems with try-once-discard
+  protocol}.
+\newblock \bibinfo{journal}{IEEE Transactions on Cybernetics}
+  \bibinfo{volume}{56}, \bibinfo{pages}{1117--1130}.
+\newblock \DOIprefix\doi{10.1109/TCYB.2025.3621182}.
+%Type = Article
+\bibitem[{Li and Su(2026)}]{LiSu2026TCST}
+\bibinfo{author}{Li, Y.}, \bibinfo{author}{Su, R.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Safety-guaranteed adaptive control of teleoperation
+  systems under event-triggered mechanisms}.
+\newblock \bibinfo{journal}{IEEE Transactions on Control Systems Technology}
+  \bibinfo{volume}{34}, \bibinfo{pages}{1649--1656}.
+\newblock \DOIprefix\doi{10.1109/TCST.2026.3662978}.
+%Type = Article
+\bibitem[{Lusch et~al.(2018)Lusch, Kutz and Brunton}]{Lusch2018}
+\bibinfo{author}{Lusch, B.}, \bibinfo{author}{Kutz, J.N.},
+  \bibinfo{author}{Brunton, S.L.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Deep learning for universal linear embeddings of
+  nonlinear dynamics}.
+\newblock \bibinfo{journal}{Nature Communications} \bibinfo{volume}{9},
+  \bibinfo{pages}{4950}.
+\newblock \DOIprefix\doi{10.1038/s41467-018-07210-0}.
+%Type = Article
+\bibitem[{Mamakoukas et~al.(2021)Mamakoukas, Casta{\~n}o, Tan and
+  Murphey}]{Mamakoukas2021TRO}
+\bibinfo{author}{Mamakoukas, G.}, \bibinfo{author}{Casta{\~n}o, M.L.},
+  \bibinfo{author}{Tan, X.}, \bibinfo{author}{Murphey, T.D.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Derivative-based {K}oopman operators for real-time
+  control of robotic systems}.
+\newblock \bibinfo{journal}{IEEE Transactions on Robotics}
+  \bibinfo{volume}{37}, \bibinfo{pages}{2173--2192}.
+\newblock \DOIprefix\doi{10.1109/TRO.2021.3076581}.
+%Type = Article
+\bibitem[{Mauroy and Goncalves(2020)}]{Mauroy2019}
+\bibinfo{author}{Mauroy, A.}, \bibinfo{author}{Goncalves, J.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{{K}oopman-based lifting techniques for nonlinear
+  systems identification}.
+\newblock \bibinfo{journal}{IEEE Transactions on Automatic Control}
+  \bibinfo{volume}{65}, \bibinfo{pages}{2550--2565}.
+\newblock \DOIprefix\doi{10.1109/TAC.2019.2941433}.
+%Type = Article
+\bibitem[{Proctor et~al.(2016)Proctor, Brunton and Kutz}]{Proctor2016DMDc}
+\bibinfo{author}{Proctor, J.L.}, \bibinfo{author}{Brunton, S.L.},
+  \bibinfo{author}{Kutz, J.N.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Dynamic mode decomposition with control}.
+\newblock \bibinfo{journal}{SIAM Journal on Applied Dynamical Systems}
+  \bibinfo{volume}{15}, \bibinfo{pages}{142--161}.
+\newblock \DOIprefix\doi{10.1137/15M1013857}.
+%Type = Article
+\bibitem[{Ren et~al.(2023)Ren, Jiang, Li, Sun and Ma}]{Ren2023TMech}
+\bibinfo{author}{Ren, C.}, \bibinfo{author}{Jiang, H.}, \bibinfo{author}{Li,
+  C.}, \bibinfo{author}{Sun, W.}, \bibinfo{author}{Ma, S.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{{K}oopman-operator-based robust data-driven control
+  for wheeled mobile robots}.
+\newblock \bibinfo{journal}{IEEE/ASME Transactions on Mechatronics}
+  \bibinfo{volume}{28}, \bibinfo{pages}{461--472}.
+\newblock \DOIprefix\doi{10.1109/TMECH.2022.3203518}.
+%Type = Article
+\bibitem[{Santina et~al.(2023)Santina, Duriez and Rus}]{DellaSantina2023}
+\bibinfo{author}{Santina, C.D.}, \bibinfo{author}{Duriez, C.},
+  \bibinfo{author}{Rus, D.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Model-based control of soft robots: A survey of the
+  state of the art and open challenges}.
+\newblock \bibinfo{journal}{IEEE Control Systems Magazine}
+  \bibinfo{volume}{43}, \bibinfo{pages}{30--65}.
+\newblock \DOIprefix\doi{10.1109/MCS.2023.3253419}.
+%Type = Article
+\bibitem[{Shi and Meng(2022)}]{ShiMeng2022RAL}
+\bibinfo{author}{Shi, H.}, \bibinfo{author}{Meng, M.Q.H.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Deep {K}oopman operator with control for nonlinear
+  systems}.
+\newblock \bibinfo{journal}{IEEE Robotics and Automation Letters}
+  \bibinfo{volume}{7}, \bibinfo{pages}{7700--7707}.
+\newblock \DOIprefix\doi{10.1109/LRA.2022.3184036}.
+%Type = Article
+\bibitem[{Shi and Karydis(2022)}]{ShiKarydis2022RAL}
+\bibinfo{author}{Shi, L.}, \bibinfo{author}{Karydis, K.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{{ACD-EDMD}: Analytical construction for dictionaries
+  of lifting functions in {K}oopman operator-based nonlinear robotic systems}.
+\newblock \bibinfo{journal}{IEEE Robotics and Automation Letters}
+  \bibinfo{volume}{7}, \bibinfo{pages}{906--913}.
+\newblock \DOIprefix\doi{10.1109/LRA.2021.3133001}.
+%Type = Article
+\bibitem[{Tang et~al.(2025)Tang, Abbatematteo, Hu, Chandra,
+  Mart{\'i}n-Mart{\'i}n and Stone}]{Tang2025survey}
+\bibinfo{author}{Tang, C.}, \bibinfo{author}{Abbatematteo, B.},
+  \bibinfo{author}{Hu, J.}, \bibinfo{author}{Chandra, R.},
+  \bibinfo{author}{Mart{\'i}n-Mart{\'i}n, R.}, \bibinfo{author}{Stone, P.},
+  \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Deep reinforcement learning for robotics: A survey of
+  real-world successes}.
+\newblock \bibinfo{journal}{Annual Review of Control, Robotics, and Autonomous
+  Systems} \bibinfo{volume}{8}, \bibinfo{pages}{153--188}.
+\newblock \DOIprefix\doi{10.1146/annurev-control-030323-022510}.
+%Type = Article
+\bibitem[{Tseng(2001)}]{Tseng2001}
+\bibinfo{author}{Tseng, P.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{Convergence of a block coordinate descent method for
+  nondifferentiable minimization}.
+\newblock \bibinfo{journal}{Journal of Optimization Theory and Applications}
+  \bibinfo{volume}{109}, \bibinfo{pages}{475--494}.
+\newblock \DOIprefix\doi{10.1023/A:1017501703105}.
+%Type = Article
+\bibitem[{Wang et~al.(2023)Wang, Xu, Lai, Wang, Hu, Li and
+  Song}]{WangEtAl2023RAL}
+\bibinfo{author}{Wang, J.}, \bibinfo{author}{Xu, B.}, \bibinfo{author}{Lai,
+  J.}, \bibinfo{author}{Wang, Y.}, \bibinfo{author}{Hu, C.},
+  \bibinfo{author}{Li, H.}, \bibinfo{author}{Song, A.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{An improved {K}oopman-{MPC} framework for data-driven
+  modeling and control of soft actuators}.
+\newblock \bibinfo{journal}{IEEE Robotics and Automation Letters}
+  \bibinfo{volume}{8}, \bibinfo{pages}{616--623}.
+\newblock \DOIprefix\doi{10.1109/LRA.2022.3229235}.
+%Type = Article
+\bibitem[{Williams et~al.(2015)Williams, Kevrekidis and
+  Rowley}]{Williams2015EDMD}
+\bibinfo{author}{Williams, M.O.}, \bibinfo{author}{Kevrekidis, I.G.},
+  \bibinfo{author}{Rowley, C.W.}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{A data-driven approximation of the {K}oopman
+  operator: Extending dynamic mode decomposition}.
+\newblock \bibinfo{journal}{Journal of Nonlinear Science} \bibinfo{volume}{25},
+  \bibinfo{pages}{1307--1346}.
+\newblock \DOIprefix\doi{10.1007/s00332-015-9258-5}.
+%Type = Article
+\bibitem[{Zhang et~al.(2022)Zhang, Pan, Scattolini, Yu and
+  Xu}]{Zhang2022Automatica}
+\bibinfo{author}{Zhang, X.}, \bibinfo{author}{Pan, W.},
+  \bibinfo{author}{Scattolini, R.}, \bibinfo{author}{Yu, S.},
+  \bibinfo{author}{Xu, X.}, \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{Robust tube-based model predictive control with
+  {K}oopman operators}.
+\newblock \bibinfo{journal}{Automatica} \bibinfo{volume}{137},
+  \bibinfo{pages}{110114}.
+\newblock \DOIprefix\doi{10.1016/j.automatica.2021.110114}.
+
+\end{thebibliography}

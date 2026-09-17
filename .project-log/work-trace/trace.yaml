@@ -1,2 +1,17 @@
 version: "0.2"
-entries: []
+entries:
+- id: WT-031-001
+  task_id: TASK-031
+  context: Figure 2 and Figure 3 were reported at the end of the CAS manuscript instead of near their corresponding sections.
+  hypothesis: The permissive float placement allowed the CAS double-column float queue to defer the controller and equipment figures.
+  decision_ref: DEC-011
+  action: Set both figures to explicit top placement in manuscript_body.tex, force a complete LaTeX/BibTeX rebuild, and inspect the resolved labels, pages, and rendered sequence.
+  expected_result: Figure 2 remains near Section 4.1, Figure 3 remains near Section 5.1, and the manuscript stays within nine pages.
+  observation: The rebuilt PDF has nine pages; Figure 2 resolves to page 5 and Figure 3 to page 6; no undefined references, fatal errors, or missing figure files were found.
+  actual_result: The placement repair passed the page, reference, and visual checks.
+  delta: Changed Figure 3 from `pos=htbp` to `pos=t`; Figure 2 already used `pos=t`.
+  lesson: For these compact CAS figures, explicit top placement is sufficient and avoids extra pages from exact-here float forcing.
+  next_adjustment: Preserve the current explicit placement unless later text changes alter the page break.
+  evidence:
+  - EV-034
+  knowledge_candidate: false

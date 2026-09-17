@@ -1190,3 +1190,1011 @@ tasks:
     - 用户确认离线结果后进入硬件接入阶段。
   created_at: '2026-09-15T05:35:00Z'
   updated_at: '2026-09-15T06:05:00Z'
+- id: TASK-019
+  title: 绘制 Figure 2 双平台建模精度主图
+  kind: task
+  phase: implementation
+  goal: 将机械臂三关节预测与软体平台轨迹 66 的 xy 预测合并为一张紧凑主图，并输出论文可用格式。
+  status: done
+  priority: high
+  risk: low
+  authority: A
+  owner: agent
+  tags:
+  - paper-revision
+  - figure
+  - modeling-accuracy
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-017
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-outline.md
+  inputs:
+  - 建模代码/data/test_data.mat
+  - 建模代码/models/ours_model.pkl
+  - 建模代码/models/edmddl_model.pkl
+  - 建模代码/models/edmd_model.pkl
+  - 杂项/软体平台探索实验结果/final/processed_data/test.npz
+  - 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
+  - 杂项/软体平台探索实验结果/final/models/edmd_dl.pkl
+  - 杂项/软体平台探索实验结果/final/models/edmd.pkl
+  outputs:
+  - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.png
+  - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.pdf
+  - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.svg
+  - 杂项/正式论文的绘图部分/plot_figure2_modeling_accuracy.py
+  plan:
+  - 复用既有模型和归一化口径生成两组预测。
+  - 采用左侧三关节、右侧软体 xy 的紧凑五面板布局。
+  - 输出 PNG/PDF/SVG 并检查指标、语法和版式。
+  done_when:
+  - 三个模型均进入相应面板，且曲线和图例清晰。
+  - 机械臂 800 步和软体轨迹 66 指标与既有结果一致。
+  - PNG/PDF/SVG 均成功生成并完成视觉检查。
+  verification:
+    status: passed
+    commands:
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure2_modeling_accuracy.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -m py_compile 杂项\正式论文的绘图部分\plot_figure2_modeling_accuracy.py
+    evidence: []
+    limitations:
+    - 最终图宽、字号和嵌入方式需在目标期刊模板确定后复核。
+  result:
+    summary: Figure 2 已生成；机械臂 FS-EDMD RMSE=0.59333305，软体轨迹 66 FS-EDMD RMSE=0.78889613。
+    changed_files:
+    - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.png
+    - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.pdf
+    - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.svg
+    - 杂项/正式论文的绘图部分/plot_figure2_modeling_accuracy.py
+    deviations: []
+    follow_ups:
+    - 目标期刊模板确定后按最终栏宽、字号和线宽复核 Figure 2。
+  created_at: '2026-09-15T10:25:00Z'
+  updated_at: '2026-09-15T10:25:00Z'
+- id: TASK-020
+  title: 绘制 Figure 3 机械臂控制轨迹跟踪主图
+  kind: task
+  phase: implementation
+  goal: 统一机械臂控制评估窗口，生成正弦、不规则和扰动恢复的紧凑三行三列轨迹跟踪主图，并输出 Table II 可直接使用的 RMSE/MAE。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - figure
+  - control-tracking
+  - mechanical-arm
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-006
+  depends_on:
+  - TASK-019
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-outline.md
+  inputs:
+  - 数据备份/机械臂数据/轨迹跟踪数据/my_data_1.mat
+  - 数据备份/机械臂数据/轨迹跟踪数据/my_data_2.mat
+  - 数据备份/机械臂数据/轨迹跟踪数据/my_data_3.mat
+  outputs:
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+  - 杂项/正式论文的绘图部分/figure3_control_metrics.json
+  - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+  plan:
+  - 冻结原始 t=10-40 s、图中 0-30 s 的统一评估窗口。
+  - 复用三份 mat 数据生成 Joint 1-3 的正弦、不规则和扰动恢复面板。
+  - 复算 RMSE/MAE，输出 PNG/PDF/SVG 和 JSON。
+  - 检查图例、坐标范围、曲线可见性与文件完整性。
+  done_when:
+  - Figure 3 前两列比较三个控制器曲线，第三列比较 Reference 与 FS-EDMD-LQR。
+  - Table II 所需的机械臂 RMSE/MAE 已由统一窗口复算并保存。
+  - 三种图片格式和生成脚本均存在且完成验证。
+  verification:
+    status: passed
+    commands:
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -m py_compile 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py
+    evidence:
+    - EV-024
+    limitations:
+    - 最终图宽、字号和线宽需在目标期刊模板确定后复核。
+  result:
+    summary: Figure 3 初始版本已生成，后由 TASK-023 转置为实验行方向布局；正弦 FS-EDMD-LQR/PID RMSE=0.01544872/0.04754018，不规则=0.01748137/0.04130153，扰动恢复 FS-EDMD-LQR RMSE=0.09576842。
+    changed_files:
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure3_control_metrics.json
+    - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+    deviations:
+    - 旧绘图脚本使用多个不一致窗口，本任务按参考轨迹任务段统一为 10-40 s。
+    follow_ups:
+    - 将冻结指标写入 Table II，并在目标期刊模板确定后复核图宽和字号。
+  created_at: '2026-09-15T11:15:00Z'
+  updated_at: '2026-09-15T11:15:00Z'
+- id: TASK-021
+  title: 将冻结的机械臂控制指标写入 Table II
+  kind: task
+  phase: implementation
+  goal: 用 10-40 s 统一评估窗口的 RMSE/MAE 替换论文旧控制指标，并同步修正正文中的改善百分比。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - table-update
+  - control-tracking
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-006
+  depends_on:
+  - TASK-020
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-outline.md
+  inputs:
+  - 杂项/正式论文的绘图部分/figure3_control_metrics.json
+  - 论文部分/main.tex
+  outputs:
+  - 论文部分/main.tex
+  plan:
+  - 用冻结指标替换 Table II 中的旧 RMSE/MAE。
+  - 补充扰动恢复行。
+  - 同步修正正文中的改善百分比并确认旧数值不再出现。
+  done_when:
+  - Table II 的正弦和不规则行与 Figure 3 指标一致。
+  - 正文百分比由冻结指标重新计算。
+  - 旧控制指标不再出现在实验章节。
+  verification:
+    status: passed
+    commands:
+    - rg -n "0.0154|0.0475|0.0175|0.0413|0.0958|0.0370|0.0642|0.2992|0.3293" 论文部分/main.tex
+    evidence:
+    - EV-024
+    limitations:
+    - 当前环境未提供 LaTeX 编译器，未执行整篇 PDF 编译。
+  result:
+    summary: Table II 已更新为统一窗口指标；正弦改善 RMSE/MAE 为 67.5%/66.2%，不规则为 57.7%/56.0%。
+    changed_files:
+    - 论文部分/main.tex
+    deviations: []
+    follow_ups:
+    - 获取 LaTeX 编译环境后执行整篇排版检查。
+  created_at: '2026-09-15T11:35:00Z'
+  updated_at: '2026-09-15T11:35:00Z'
+- id: TASK-022
+  title: 将 Figure 2/3 接入当前 main.tex 并压缩为两表结构
+  kind: task
+  phase: implementation
+  goal: 用新的合并图替换机械臂旧位置预测和三张控制图，删除非必要的不规则参考参数表，使当前 LaTeX 草稿具备紧凑的实验图表结构。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - document-integration
+  - figure-layout
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-006
+  depends_on:
+  - TASK-019
+  - TASK-020
+  - TASK-021
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-outline.md
+  inputs:
+  - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.pdf
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+  - 论文部分/main.tex
+  outputs:
+  - 论文部分/main.tex
+  - 论文部分/pictures/figure2_modeling_accuracy.pdf
+  - 论文部分/pictures/figure3_control_tracking.pdf
+  plan:
+  - 将两张正式绘图复制到论文 pictures 目录，保持源文件不变。
+  - 用 Figure 2 替换旧机械臂位置预测图，并补充软体平台轨迹 66 的建模结果。
+  - 用 Figure 3 替换正弦、不规则和扰动恢复的分散控制图。
+  - 删除不规则参考参数表，仅保留建模精度表和控制性能表。
+  - 检查图片引用、标签、表格编号和旧文件引用是否残留。
+  done_when:
+  - main.tex 只引用新的 Figure 2/3 矢量 PDF，不再引用旧位置预测或三张旧控制图。
+  - 不规则参考参数表已删除，图内参数信息不依赖已删除表格。
+  - 图片与表格标签无断链，旧图标签不再出现在正文引用中。
+  verification:
+    status: passed
+    commands:
+    - 'PowerShell structural assertions: experimental section table/figure counts, required/obsolete references, labels, graphic paths, source-copy hashes'
+    evidence:
+    - EV-024
+    limitations:
+    - 当前环境未提供 LaTeX 编译器，未执行整篇 PDF 编译和 8 页排版检查。
+  result:
+    summary: 当前 main.tex 已接入 Figure 2/3 矢量图并删除旧分散图和不规则参数表；Figure 3 后由 TASK-023 调整行布局，实验段保留两张表，标签和引用检查通过。
+    changed_files:
+    - 论文部分/main.tex
+    - 论文部分/pictures/figure2_modeling_accuracy.pdf
+    - 论文部分/pictures/figure3_control_tracking.pdf
+    deviations: []
+    follow_ups:
+    - 获取目标期刊模板和 LaTeX 编译环境后执行整篇排版及 8 页检查。
+    - 获取软体平台设备照片和圆形/五角星控制数据后完成 Figure 1/4 与 Table II 剩余行。
+  created_at: '2026-09-15T11:40:00Z'
+  updated_at: '2026-09-15T11:39:09Z'
+- id: TASK-023
+  title: 将 Figure 3 调整为实验行方向布局
+  kind: task
+  phase: implementation
+  goal: 将机械臂控制图转置为每行一个实验、每列一个关节，使同一实验的三个关节曲线在同一行展示，并同步更新正文引用和论文图片副本。
+  status: done
+  priority: medium
+  risk: low
+  authority: A
+  owner: agent
+  tags:
+  - paper-revision
+  - figure-layout
+  - control-tracking
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-006
+  depends_on:
+  - TASK-020
+  - TASK-022
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+  - 数据备份/机械臂数据/轨迹跟踪数据/my_data_1.mat
+  - 数据备份/机械臂数据/轨迹跟踪数据/my_data_2.mat
+  - 数据备份/机械臂数据/轨迹跟踪数据/my_data_3.mat
+  - 论文部分/main.tex
+  outputs:
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+  - 论文部分/pictures/figure3_control_tracking.pdf
+  - 论文部分/main.tex
+  plan:
+  - 将 3x3 面板布局转置为第一行正弦、第二行不规则、第三行扰动恢复。
+  - 采用 Three-column joint layout, with shared y scale within each joint column and shared time axis.
+  - 按行优先顺序重新编号 (a)-(i)。
+  - 重新生成 PNG/PDF/SVG 并同步论文 pictures 中的 PDF。
+  - 更新图题与正文中的 row/column 引用。
+  done_when:
+  - 同一实验的三个关节子图位于同一行。
+  - 每个关节列纵向共享一致尺度，底部统一显示时间轴。
+  - 新图通过视觉检查，论文引用和图题与新布局一致。
+  - PNG/PDF/SVG 和论文副本均为最新版本。
+  verification:
+    status: passed
+    commands:
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -m py_compile 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py
+    - 'PowerShell layout assertions: row/column text, unchanged metrics, nonempty outputs, PDF hash'
+    evidence:
+    - EV-024
+    limitations:
+    - 当前环境未提供 LaTeX 编译器，未执行整篇 PDF 编译。
+  result:
+    summary: Figure 3 已转置为每行一个实验、每列一个关节；正弦、不规则、扰动恢复分别位于第一、二、三行，RMSE/MAE 保持不变。
+    changed_files:
+    - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+    - 论文部分/pictures/figure3_control_tracking.pdf
+    - 论文部分/main.tex
+    deviations: []
+    follow_ups:
+    - 目标期刊模板确定后复核面板字号、行标题和双栏图宽。
+  created_at: '2026-09-16T00:00:00Z'
+  updated_at: '2026-09-16T03:06:41Z'
+- id: TASK-024
+  title: 将正式论文迁移到 RAS 的 Elsevier elsarticle 模板
+  kind: task
+  phase: implementation
+  goal: 以 Elsevier 官方 elsarticle 模板重写正式稿前置结构，移除 IEEE 专用配置，并保持现有正文、图表、引用和指标不变。
+  status: implemented-unverified
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - latex-template
+  - ras
+  - elsarticle
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-007
+  depends_on:
+  - TASK-022
+  - TASK-023
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/elsarticle/elsarticle-template-num.tex
+  - 论文部分/old/main.tex
+  - 论文部分/old/references.bib
+  - 论文部分/old/pictures
+  outputs:
+  - 论文部分/elsarticle/main.tex
+  - 论文部分/elsarticle/references.bib
+  - 论文部分/elsarticle/pictures
+  plan:
+  - 将主文件文档类从 ieeeconf 切换为 elsarticle preprint 格式。
+  - 使用 frontmatter、author、affiliation、abstract 和 keyword 组织前置信息。
+  - 删除 IEEE 专用宏、PDF 元数据和 cite 包，改用 Elsevier 编号引用。
+  - 保持正文、公式、算法、定理、图表、指标和标签不变。
+  - 执行结构、引用、书目标签和 IEEE 残留静态检查。
+  done_when:
+  - 正式稿只使用 elsarticle 文档类并声明 Robotics and Autonomous Systems。
+  - frontmatter、abstract、keyword 和 elsarticle-num 配置完整。
+  - IEEE 专用命令和 IEEEtran 样式残留被清除。
+  - 所有交叉引用和文献键可解析，旧稿保持未修改。
+  - LaTeX 编译器可用时完成 main.pdf 编译。
+  verification:
+    status: partial
+    commands:
+    - PowerShell document-structure and forbidden-IEEE-remnant checks
+    - PowerShell label/reference and citation/bib-key checks
+    - PowerShell old/new source comparison and BibTeX/Vc style check
+    evidence:
+    - EV-025
+    limitations:
+    - 当前机器未安装 pdflatex、xelatex、lualatex、latexmk 或 bibtex，未执行整篇 PDF 编译。
+  result:
+    summary: 正式稿前置结构已迁移到 Elsevier elsarticle preprint 模板并声明 RAS；正文和资源路径保持不变，静态引用检查通过。
+    changed_files:
+    - 论文部分/elsarticle/main.tex
+    deviations: []
+    follow_ups:
+    - 作者信息替换后，在安装 TeX 环境的机器或 Overleaf 上执行 pdflatex/bibtex 全流程和 8 页版式检查。
+  created_at: '2026-09-16T03:27:40Z'
+  updated_at: '2026-09-16T03:27:40Z'
+- id: TASK-025
+  title: 生成并整合软体平台 Figure 4 与 Table II 软体控制结果
+  kind: task
+  phase: implementation
+  goal: 使用圆形和五角星软体平台控制数据生成 FS-EDMD-LQR 与 PID 对比图，计算统一评估窗口下的 RMSE/MAE，并接入 RAS 论文。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - soft-platform
+  - control-tracking
+  - figure4
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-008
+  depends_on:
+  - TASK-024
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/圆形-FS.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/圆形-PID.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/FS-五角星.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip
+  - 论文部分/elsarticle/main.tex
+  outputs:
+  - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+  - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+  - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+  - 论文部分/elsarticle/main.tex
+  plan:
+  - 读取四个控制数据压缩包，按 step 去重并配对 FS/PID。
+  - 保留完整参考轨迹，控制曲线统一从 step 30 后展示和评估。
+  - 生成圆形/五角星左右双面板 Figure 4。
+  - 计算 RMSE、MAE 和 FS 相对 PID 的改善百分比。
+  - 将矢量图接入 RAS 论文并在 Table II 中增加软体平台结果。
+  done_when:
+  - Figure 4 的 PNG/PDF/SVG 均生成且非空。
+  - 圆形和五角星使用相同评估窗口，Reference、FS-EDMD-LQR、PID 均可辨识。
+  - Table II 与 Figure 4 指标一致，不使用最大误差。
+  - 论文图片副本哈希与 Figure 4 源 PDF 一致。
+  - 所有引用、书目标签和图片路径静态检查通过。
+  verification:
+    status: passed
+    commands:
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -m py_compile 杂项\正式论文的绘图部分\plot_figure4_soft_control_tracking.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure4_soft_control_tracking.py
+    - 'PowerShell: image/metrics checks, LaTeX labels/references/bib/graphics checks, paper-PDF hash comparison'
+    evidence:
+    - EV-026
+    limitations:
+    - 当前环境没有 LaTeX 编译器，未执行整篇 PDF 编译。
+  result:
+    summary: 已生成圆形/五角星软体平台控制对比图并接入论文；统一从 step 30 后评估，FS-EDMD-LQR 在两条轨迹上均明显优于 PID。
+    changed_files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/elsarticle/main.tex
+    deviations: []
+    follow_ups:
+    - 获取软体平台设备照片后完成 Figure 1 右面板。
+  created_at: '2026-09-16T03:45:00Z'
+  updated_at: '2026-09-16T03:45:00Z'
+- id: TASK-026
+  title: 将软体平台 Figure 4 从圆形替换为螺旋并增加逐时刻误差曲线
+  kind: task
+  phase: implementation
+  goal: 使用螺旋与五角星控制数据重绘 Figure 4，在同一图中加入每个评估时刻的二维跟踪误差，并同步更新论文图表与指标。
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - soft-platform
+  - control-tracking
+  - figure4
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-008
+  - DEC-009
+  depends_on:
+  - TASK-025
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/螺旋-FS.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/螺旋-PID.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/FS-五角星.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip
+  - 论文部分/elsarticle/main.tex
+  outputs:
+  - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+  - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+  - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+  - 论文部分/elsarticle/main.tex
+  plan:
+  - 将 Figure 4 的圆形任务替换为螺旋任务，保留五角星任务。
+  - 上排绘制螺旋与五角星的 xy 轨迹，下排绘制从统一评估起点开始计算的逐时刻跟踪误差。
+  - 误差定义为 act-ref 的二维欧氏距离，并逐点绘制 FS-EDMD-LQR 与 PID。
+  - 更新 Table II、图题和正文中的任务名称、指标及改善百分比。
+  done_when:
+  - Figure 4 使用螺旋和五角星，上下两排分别展示轨迹与逐时刻误差。
+  - 误差曲线使用与 RMSE/MAE 相同的 act-ref 二维距离定义。
+  - Table II 与指标 JSON 的螺旋、五角星数值一致。
+  - 论文图片副本与源 PDF 哈希一致，引用和图片路径静态检查通过。
+  verification:
+    status: passed
+    commands:
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -m py_compile 杂项\正式论文的绘图部分\plot_figure4_soft_control_tracking.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure4_soft_control_tracking.py
+    - 'PowerShell: visual, metrics, LaTeX token/reference/graphics, and paper-PDF hash checks'
+    evidence:
+    - EV-027
+    limitations:
+    - 当前环境没有 LaTeX 编译器，未执行整篇 PDF 编译。
+  result:
+    summary: Figure 4 已替换为螺旋与五角星，并加入逐时刻二维跟踪误差曲线；论文 Table II、图题和正文均已同步。
+    changed_files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/elsarticle/main.tex
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-16T04:05:00Z'
+  updated_at: '2026-09-16T04:05:00Z'
+- id: TASK-027
+  title: 提升 Figure 3 和 Figure 4 的科研绘图质感
+  kind: task
+  phase: implementation
+  goal: 在不改变数据、评估窗口和指标的前提下，优化机械臂与软体平台控制图的配色、字体、布局、层级和论文版式，使其更符合期刊科研绘图表达。
+  status: done
+  priority: medium
+  risk: low
+  authority: A
+  owner: agent
+  tags:
+  - paper-revision
+  - scientific-figure
+  - figure3
+  - figure4
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-023
+  - TASK-026
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+  - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+  outputs:
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+  - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+  - 论文部分/elsarticle/pictures/figure3_control_tracking.pdf
+  - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+  plan:
+  - 统一 Reference、FS-EDMD-LQR 和 PID 的期刊风格配色、线型和线宽。
+  - 使用 Times 系 serif 字体、细边框、轻网格、次刻度并统一面板标签。
+  - 简化 Figure 3 的重复标题，采用列标题、行标签和共享图例。
+  - 优化 Figure 4 的上下两层布局，在保留逐时刻误差曲线时降低视觉拥堵。
+  - 重新生成 PNG/PDF/SVG，复核指标并同步论文图片副本。
+  done_when:
+  - Figure 3 和 Figure 4 的字体、配色、标签、网格和面板层次明显更符合期刊制图风格。
+  - 两张图的评估窗口、曲线数据和 RMSE/MAE 均保持不变。
+  - PNG/PDF/SVG 非空且视觉检查通过。
+  - 论文 pictures 中的 PDF 与绘图源 PDF 哈希一致。
+  verification:
+    status: passed
+    commands:
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -m py_compile 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py 杂项\正式论文的绘图部分\plot_figure4_soft_control_tracking.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py
+    - C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure4_soft_control_tracking.py
+    - 'PowerShell: PNG dimensions/nonempty checks, frozen metrics comparison, paper-PDF SHA256 comparison'
+    evidence:
+    - EV-028
+    limitations:
+    - 当前环境没有 LaTeX 编译器，未在整篇论文 PDF 中复核最终缩放后的版面观感。
+  result:
+    summary: Figure 3 和 Figure 4 已统一为更紧凑的期刊风格；曲线内容、评估口径和全部 RMSE/MAE 保持不变，论文图片副本已同步。
+    changed_files:
+    - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 论文部分/elsarticle/pictures/figure3_control_tracking.pdf
+    - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+    deviations: []
+    follow_ups:
+    - 在 TeX 环境中完成整篇 PDF 编译后，复核 Figure 3/4 在 8 页版面中的最终字号和缩放效果。
+  created_at: '2026-09-16T04:20:00Z'
+  updated_at: '2026-09-16T04:20:00Z'
+- id: TASK-028
+  title: Migrate RAS manuscript to the official Elsevier CAS double-column template
+  kind: task
+  phase: implementation
+  goal: Rebuild the RAS manuscript from the official cas-dc-template.tex, preserve the existing content and figures, and verify a complete LaTeX/BibTeX build.
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - ras
+  - cas-template
+  - latex
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-027
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-verification
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/cas-dc-template.tex
+  - 论文部分/elsarticle/main.tex
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - 论文部分/els-cas/els-cas-templates/main.pdf
+  plan:
+  - Use cas-dc as the document class and preserve the official class, style, and bibliography files.
+  - Move the existing manuscript content into manuscript_body.tex and keep the CAS front matter in main.tex.
+  - Copy rather than move the pictures and references resources.
+  - Compile with latexmk, inspect the rendered pages, and remove the Q-matrix line overflow.
+  done_when:
+  - main.tex uses cas-dc and the official CAS bibliography style.
+  - The complete manuscript, figures, tables, citations, and bibliography compile without fatal errors.
+  - The generated PDF renders the front matter, equations, tables, and figures without visible clipping.
+  verification:
+    status: passed
+    commands:
+    - latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+    - pdfinfo main.pdf
+    - pdftoppm render and visual inspection of key pages
+    evidence:
+    - EV-031
+    limitations:
+    - The physical PDF has 11 pages because three deferred full-width float pages follow the eight numbered article pages; the eight-page physical-page constraint remains open.
+    - The CAS template emits nonfatal duplicate-destination and minor overfull-hbox warnings.
+  result:
+    summary: The manuscript now uses the official CAS double-column template and builds successfully with BibTeX. The visible Q-matrix clipping was removed.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/references.bib
+    - 论文部分/els-cas/els-cas-templates/pictures
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    deviations:
+    - The CAS float behavior leaves full-width figures on deferred pages, so the physical page count exceeds the eight-page target.
+    follow_ups:
+    - TASK-029
+  created_at: '2026-09-17T03:20:00Z'
+  updated_at: '2026-09-17T03:20:00Z'
+- id: TASK-029
+  title: Reduce the CAS manuscript to no more than nine physical pages
+  kind: task
+  phase: implementation
+  goal: Repack the full-width figures, tables, references, and manuscript text so the main CAS manuscript PDF does not exceed nine physical pages while the experimental section does not increase its physical footprint relative to the old manuscript.
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - ras
+  - page-budget
+  related_business_logic: []
+  acceptance_refs:
+  - REQ-003
+  related_decisions: []
+  depends_on:
+  - TASK-028
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/main.pdf
+  plan:
+  - Remove Highlights from the main manuscript because the author guide requires them as a separate editable file.
+  - Do not perform an agent-side quantitative comparison of the experimental-section physical footprint; the user owns this judgment.
+  - Reduce or reflow the deferred full-width figures so the main manuscript fits within nine physical pages.
+  - Preserve all experiment contents and metrics; use figure consolidation and layout compression only.
+  - Rebuild and verify page count, figure legibility, references, and cross-references.
+  done_when:
+  - The main manuscript PDF does not exceed nine physical pages; the separately submitted Highlights file is excluded.
+  - The user independently assesses whether the experimental-section physical volume is acceptable; this is not an agent-side quantitative acceptance gate.
+  - All figures, tables, citations, and cross-references remain present and legible.
+  verification:
+    status: passed
+    commands:
+    - latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+    evidence:
+    - EV-033
+    limitations:
+    - Physical-volume acceptance is user-assessed by explicit instruction; the agent does not calculate or verify it quantitatively.
+  result:
+    summary: Agent-side nine-page layout work is complete. The forced rebuild produced a nine-page main manuscript, and the user explicitly retained independent judgment of experimental-section physical volume.
+    changed_files: []
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-17T03:20:00Z'
+  updated_at: '2026-09-17T03:48:25Z'
+- id: TASK-030
+  title: Align the RAS submission package with the official author guide
+  kind: task
+  phase: implementation
+  goal: Bring the CAS manuscript and submission assets into compliance with the official RAS Guide for Authors without inventing author, funding, data, or AI-use facts.
+  status: in-progress
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - ras
+  - author-guide
+  - submission-package
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-028
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-business-clarify
+  - a-engineering-landing
+  - a-verification
+  spec_ref: .project-log/research/ras-author-guide-2026.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - 论文部分/els-cas/els-cas-templates/pictures
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/highlights.tex
+  - 论文部分/els-cas/els-cas-templates/main.pdf
+  plan:
+  - Confirm and complete title-page author and affiliation metadata.
+  - Keep the abstract within 250 words and keywords within the 1-7 range.
+  - Maintain a separate highlights file with 3-5 bullets of at most 85 characters each.
+  - Add CRediT, competing-interest, funding, data-availability, and generative-AI statements only after the author supplies the facts.
+  - Check figure captions, citation order, editable table integrity, and standalone artwork packaging.
+  done_when:
+  - Every factual field requested by the RAS guide is present and author-approved.
+  - All machine-checkable limits pass.
+  - The complete LaTeX/BibTeX source and standalone highlights file compile and are internally consistent.
+  verification:
+    status: partial
+    commands:
+    - PowerShell checks for abstract word count, keyword count, and highlight character limits
+    - latexmk PDF builds for main.tex and highlights.tex
+    evidence:
+    - EV-032
+    limitations:
+    - Author metadata and declarations require user-provided facts.
+  result:
+    summary: Highlights were reduced and separated; Q-019 is resolved as a nine-page internal target, and the remaining guide-compliance items are in progress.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/highlights.tex
+    - .project-log/research/ras-author-guide-2026.md
+    deviations: []
+    follow_ups:
+    - Complete author metadata and declaration fields.
+    - Finalize the nine-page layout after the soft-platform equipment photo is supplied.
+  created_at: '2026-09-17T03:25:00Z'
+  updated_at: '2026-09-17T03:25:00Z'
+- id: TASK-031
+  title: Restore Figure 2 and Figure 3 to their corresponding manuscript sections
+  kind: task
+  phase: implementation
+  goal: Correct the CAS float behavior so the controller-structure figure and the existing Geomagic Touch equipment figure appear near their referenced text instead of being deferred to the end of the manuscript.
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - ras
+  - latex
+  - float-placement
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-028
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-verification
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - 论文部分/els-cas/els-cas-templates/pictures/controller.pdf
+  - 论文部分/els-cas/els-cas-templates/pictures/geomagic_touch.pdf
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - 论文部分/els-cas/els-cas-templates/main.pdf
+  plan:
+  - Reproduce and identify the float-deferral cause in the CAS main manuscript.
+  - Apply the smallest float-placement change to return the controller figure to Section 4 and the existing equipment figure to Section 5.1.
+  - Rebuild with latexmk and inspect the rendered page sequence.
+  - Preserve all figure files, captions, labels, and manuscript content.
+  done_when:
+  - Figure 2 appears adjacent to the Koopman-LQR controller discussion in Section 4.1.
+  - Figure 3 appears nearby the experimental-platform description in Section 5.1 and still uses the existing Geomagic Touch image.
+  - No figure is deferred to the reference appendix or the end of the manuscript.
+  - The complete manuscript compiles successfully and all figure references remain valid.
+  verification:
+    status: passed
+    commands:
+    - latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+    - pdfinfo and per-page PDF inspection
+    evidence:
+    - EV-034
+    limitations: []
+  result:
+    summary: Figure 2 and Figure 3 now use explicit top placement and remain near their referenced sections; the forced CAS rebuild yields a nine-page PDF with Figure 2 on page 5 and Figure 3 on page 6.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-17T03:55:46Z'
+  updated_at: '2026-09-17T04:14:00Z'
+- id: TASK-032
+  title: Convert Figures 4 and 5 to fixed single-column placements
+  kind: task
+  phase: implementation
+  goal: Place the modeling-accuracy and robotic-arm tracking figures as non-floating single-column visuals at their corresponding manuscript positions.
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - ras
+  - latex
+  - figure-layout
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-012
+  depends_on:
+  - TASK-028
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-verification
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - main.tex
+  - manuscript_body.tex
+  outputs:
+  - main.tex
+  - manuscript_body.tex
+  - main.pdf
+  plan:
+  - Add a fixed in-column figure environment compatible with the CAS class.
+  - Convert the modeling-accuracy and robotic-arm tracking figures to the fixed environment.
+  - Rebuild and visually inspect the affected pages.
+  done_when:
+  - Figure 4 is a single-column non-floating figure near the modeling-accuracy discussion.
+  - Figure 5 is a single-column non-floating figure near the robotic-arm tracking discussion.
+  - The complete manuscript remains nine pages without undefined references or fatal errors.
+  verification:
+    status: passed
+    commands:
+    - latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+    - main.aux label inspection
+    - pdftoppm page 6-9 rendering and visual inspection
+    evidence:
+    - EV-035
+    limitations: []
+  result:
+    summary: Figures 4 and 5 now use a fixed figurehere environment and column-width artwork. They appear on pages 6 and 7 at the corresponding discussion points; the PDF remains nine pages.
+    changed_files:
+    - main.tex
+    - manuscript_body.tex
+    - main.pdf
+    deviations:
+    - The CAS figure environment does not honor the standard [H] placement option; the local figurehere environment calls float's fixed-placement primitives directly.
+    follow_ups: []
+  created_at: '2026-09-17T05:14:00Z'
+  updated_at: '2026-09-17T05:14:00Z'
+- id: TASK-033
+  title: Audit and integrate the newly acquired soft-platform control datasets
+  kind: task
+  phase: implementation
+  goal: Validate the new figure-eight and five-point-star control datasets, replace the corresponding soft-platform figure and table values only after controller identity is confirmed, and preserve the nine-page manuscript target.
+  status: done
+  priority: high
+  risk: high
+  authority: C
+  owner: agent
+  tags:
+  - paper-revision
+  - soft-platform
+  - control
+  - data-audit
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-025
+  - TASK-026
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-business-clarify
+  - a-engineering-landing
+  - a-verification
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-FS.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-PID.csv
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-FS.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip
+  outputs:
+  - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+  - 论文部分/els-cas/els-cas-templates/pictures/figure4_soft_control_tracking.pdf
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  plan:
+  - Validate field completeness, step coverage, reference alignment, and controller identity.
+  - Drop or explicitly handle repeated final-step monitoring samples without weighting the endpoint more heavily.
+  - Regenerate the soft-platform trajectory and error plot with figure-eight and five-point-star runs.
+  - Recompute RMSE and MAE and update the manuscript only after the controller identity is confirmed.
+  done_when:
+  - Both tasks have aligned FS and PID data, with PID identity confirmed by the user.
+  - The new soft-platform figure and table use a consistent evaluation window and do not use maximum error.
+  - The manuscript rebuilds within nine pages with valid references and figures.
+  verification:
+    status: passed
+    commands:
+    - Python ZIP/CSV audit for headers, row counts, duplicated final steps, reference alignment, and controller configuration
+    - edmddl2 python py_compile and Figure 6 regeneration
+    - latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+    - PDF page and rendered-page inspection
+    evidence:
+    - EV-038
+    limitations: []
+  result:
+    summary: The user confirmed that the new baseline runs are PID data despite erroneous Koopman-LQR export labels. Figure 6 and Table 2 now use the complete figure-eight and five-point-star datasets, and the rebuilt manuscript remains nine pages.
+    changed_files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/els-cas/els-cas-templates/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    deviations:
+    - The export metadata still says Koopman-LQR; the PID identity is based on explicit user confirmation rather than corrected files.
+    - The trajectory panels plot complete controller paths; RMSE/MAE and lower error panels still use the common step >= 30 window.
+    follow_ups: []
+  created_at: '2026-09-17T07:25:00Z'
+  updated_at: '2026-09-17T08:35:00Z'

@@ -1,109 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% IEEE Robotics and Automation Letters (RA-L) double-anonymous review manuscript
-% Prepared with the official RAS/PaperCept ieeeconf class.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\documentclass[letterpaper,10pt,conference]{ieeeconf}
-
-\IEEEoverridecommandlockouts
-\overrideIEEEmargins
-
-% Explicitly keep the submitted PDF metadata anonymous.
-\pdfinfo{
-  /Title (Feature-Selection-Based Koopman Modeling and Robust LQR Control of Robots)
-  /Author ()
-  /Subject (Anonymous manuscript submitted for peer review)
-  /Keywords (Koopman operator; basis function selection; data-driven modeling; LQR control; robust stability)
-}
-
-% Core packages required by the manuscript.
-\usepackage{amsmath,amsfonts,amssymb}
-\interdisplaylinepenalty=2500
-\usepackage{mathtools}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage{array}
-\usepackage{textcomp}
-\usepackage{url}
-\usepackage{graphicx}
-\usepackage{cite}
-\usepackage{booktabs}
-\usepackage{multirow}
-
-% Algorithm labels.
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-
-% Theorem environments.
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{definition}{Definition}[section]
-\newtheorem{remark}{Remark}[section]
-\newtheorem{assumption}{Assumption}[section]
-\newtheorem{problem}{Problem}[section]
-
-% Notation definitions.
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\x}{\mathbf{x}}
-\newcommand{\uvec}{\mathbf{u}}
-\newcommand{\z}{\mathbf{z}}
-\newcommand{\y}{\mathbf{y}}
-\newcommand{\w}{\mathbf{w}}
-\newcommand{\e}{\mathbf{e}}
-
-% Bold matrices.
-\newcommand{\Kmat}{\mathbf{K}}
-\newcommand{\Dmat}{\mathbf{D}}
-\newcommand{\A}{\mathbf{A}}
-\newcommand{\B}{\mathbf{B}}
-\newcommand{\C}{\mathbf{C}}
-\newcommand{\I}{\mathbf{I}}
-\newcommand{\Q}{\mathbf{Q}}
-\newcommand{\Rmat}{\mathbf{R}}
-\newcommand{\Zmat}{\mathbf{Z}}
-\newcommand{\Umat}{\mathbf{U}}
-\newcommand{\W}{\mathbf{W}}
-\newcommand{\X}{\mathbf{X}}
-\newcommand{\Y}{\mathbf{Y}}
-
-% Feature-related notation.
-\newcommand{\Phib}{\boldsymbol{\Phi}}
-\newcommand{\XPhi}{\mathbf{X}_{\Phi}}
-\newcommand{\YPhi}{\mathbf{Y}_{\Phi}}
-
-% Operators.
-\DeclareMathOperator{\tr}{tr}
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator*{\argmin}{arg\,min}
-
-\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
-
-\title{\LARGE \bf
-Feature-Selection-Based Koopman Modeling and Robust LQR Control of Robots
-}
-
-
-\author{\rule{0pt}{2.5ex}}
-
-\begin{document}
-
-\maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
-
-\begin{abstract}
-Koopman operator theory with Extended Dynamic Mode Decomposition (EDMD) enables nonlinear dynamical systems to be represented by linear dynamics in a lifted space. However, the performance of EDMD strongly depends on the choice of basis functions: insufficient dictionaries limit approximation accuracy, whereas overcomplete dictionaries introduce redundancy, overfitting, and high computational cost. To address this issue, this paper proposes a feature-selection-based Koopman representation learning framework for robotic systems. A physics-informed overcomplete candidate library is first constructed, and a learnable feature selection matrix is then optimized to extract compact and informative linear combinations of candidate functions. The resulting modeling problem is formulated as a joint optimization over the Koopman matrices and the feature selection matrix, and a block coordinate descent algorithm is developed with convergence guarantees. Based on the learned lifted model, a feedforward-feedback Linear Quadratic Regulator controller is designed, where finite-dimensional approximation errors and external uncertainties are treated as bounded lumped disturbances. Lyapunov analysis proves that the closed-loop tracking error is ultimately uniformly bounded. Experiments on a three-degree-of-freedom robotic arm demonstrate improved modeling accuracy, tracking performance, and robustness.
-\end{abstract}
-
-\begin{keywords}
-Koopman operator, basis function selection, data-driven modeling, LQR control, robust stability
-\end{keywords}
-
-
-% ================== Main Content ==================
-
 \section{Introduction}
 Modern robotic systems such as manipulators, mobile robots,
 and soft robots exhibit highly nonlinear dynamics caused by mechanical
@@ -283,7 +177,7 @@ This structure captures the nonlinear dynamics of the system through $\Dmat\Phib
 \end{equation}
 which facilitates the subsequent full-state feedback design.
 Figure~\ref{fig:koopman_framework} illustrates the proposed Koopman representation learning framework.
-\begin{figure*}[!t]
+\begin{figure*}[t]
 \centering
 \includegraphics[width=0.85\textwidth]{pictures/koopman_framework.pdf}
 \caption{Koopman representation learning with the learnable feature selection mechanism.}
@@ -495,9 +389,9 @@ The feedforward term $\uvec_k^{\mathrm{ff}}$ is used to compensate for the known
 \end{equation}
 where $\B^{\dagger}$ denotes the Moore-Penrose pseudoinverse of $\B$. Figure~\ref{fig:controller} illustrates the structure of the proposed Koopman-LQR controller.
 
-\begin{figure}[!t]
+\begin{figure}[pos=t]
 \centering
-\includegraphics[width=0.48\textwidth]{pictures/controller.pdf}
+\includegraphics[width=\columnwidth]{pictures/controller.pdf}
 \caption{The proposed Koopman-based feedforward-feedback LQR control structure.}
 \label{fig:controller}
 \end{figure}
@@ -567,7 +461,9 @@ According to the technical specifications provided by the manufacturer, the moti
 
 During the data collection experiments, continuous random control torques were applied to the three joints to excite the system dynamics. The sampling period was 0.004 s. In total, 20 trajectories were collected, each with a duration of 20 s, containing joint positions, velocities, and the corresponding control inputs. The complete dataset was split into training, validation, and test sets with a ratio of 15:4:1.
 
-\begin{figure}[htbp]
+The second platform is a cable-driven soft robotic system. Its state is the two-dimensional light-spot position in the $xy$ plane, and its two-dimensional input commands the cable-driven motion of the light spot. The dataset contains 100 trajectories with 300 samples each. A fixed by-trajectory 70/20/10 split is used, and trajectory 66 is used as the displayed modeling test case.
+
+\begin{figure}[pos=t]
 \centering
 \includegraphics[width=0.75\columnwidth]{pictures/geomagic_touch.pdf}
 \caption{The Geomagic Touch robot arm.}
@@ -579,39 +475,47 @@ During the data collection experiments, continuous random control torques were a
 \label{subsec:modeling_accuracy}
 % ---------------------------------------------------------
 
-For comparison, two Koopman baselines were used: EDMDDL~\cite{Li2017}, which learns a 60-dimensional dictionary using a five-layer neural network with 512 ReLU neurons per layer, and standard EDMD~\cite{Williams2015EDMD}, which directly uses the full 364-dimensional candidate function library. FS-EDMD uses the same candidate function library as standard EDMD but learns a compact selection matrix $\Dmat \in \R^{60 \times 364}$. All methods were trained on the same training set and evaluated by an 800-step continuous rollout prediction on an independent test trajectory.
+For comparison, two Koopman baselines were used: EDMDDL~\cite{Li2017}, which learns a 60-dimensional dictionary using a five-layer neural network with 512 ReLU neurons per layer, and standard EDMD~\cite{Williams2015EDMD}, which directly uses the full 364-dimensional candidate function library. FS-EDMD uses the same candidate function library as standard EDMD but learns a compact selection matrix $\Dmat \in \R^{60 \times 364}$. All methods were trained on the same training set. For the robotic arm, evaluation uses an 800-step continuous rollout on an independent test trajectory. For the soft platform, the three models are compared on test trajectory 66 over its full rollout.
 
-Fig.~\ref{fig:position_comparison} shows the joint position prediction results. FS-EDMD maintains the closest agreement with the measured trajectory over the 3.2~s prediction horizon, whereas EDMDDL gradually drifts and standard EDMD accumulates larger errors. The full-state prediction errors, including both joint positions and velocities, are summarized in Table~\ref{tab:modeling_accuracy}.
+Fig.~\ref{fig:modeling_accuracy} shows the prediction results. On the robotic arm, FS-EDMD maintains the closest agreement with the measured joint trajectory over the 3.2~s prediction horizon, whereas EDMDDL gradually drifts and standard EDMD accumulates larger errors. On the soft platform, the $x$ and $y$ predictions of FS-EDMD follow the measured light-spot trajectory more closely than the two baselines over the displayed test trajectory.
 
-\begin{figure}[htbp]
+\begin{figurehere}
 \centering
-\includegraphics[width=0.4\textwidth]{pictures/position_comparison.png}
-\caption{Comparison of the joint position prediction results obtained by FS-EDMD, EDMDDL, and the standard EDMD.}
-\label{fig:position_comparison}
-\end{figure}
+\includegraphics[width=\columnwidth]{pictures/figure2_modeling_accuracy.pdf}
+\caption{Modeling accuracy on the robotic arm and the cable-driven soft platform. The left panels show Joint 1--3 predictions over the 800-step rollout, and the right panels show the $x$ and $y$ predictions for soft-platform test trajectory 66.}
+\label{fig:modeling_accuracy}
+\end{figurehere}
 
-As shown in Table~\ref{tab:modeling_accuracy}, FS-EDMD achieves the lowest full-state prediction errors, with MSE, RMSE, and MAE of 0.3520, 0.5933, and 0.3202, respectively. These correspond to reductions of 40.7\%, 23.0\%, and 29.6\% over EDMDDL, and 51.5\%, 30.3\%, and 36.2\% over standard EDMD.
+As shown in Table~\ref{tab:modeling_accuracy}, FS-EDMD achieves the lowest full-state prediction errors on the robotic arm, with MSE, RMSE, and MAE of 0.3520, 0.5933, and 0.3202, respectively.\footnotemark These correspond to reductions of 40.7\%, 23.0\%, and 29.6\% over EDMDDL, and 51.5\%, 30.3\%, and 36.2\% over standard EDMD. On the soft platform, the FS-EDMD RMSE for test trajectory 66 is 0.7889, compared with 0.8965 for standard EDMD and 1.2927 for EDMDDL.
 
 \begin{table}[htbp]
 \centering
-\caption{Modeling Accuracy Comparison of the Three Methods}
+\caption{Modeling Accuracy Comparison}
 \label{tab:modeling_accuracy}
-\begin{tabular}{lccc}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llccc}
 \toprule
-Method & MSE & RMSE & MAE \\
+Platform & Method & MSE & RMSE & MAE \\
 \midrule
-FS-EDMD & \textbf{0.3520} & \textbf{0.5933} & \textbf{0.3202} \\
-EDMDDL & 0.5936 & 0.7704 & 0.4550 \\
-Standard EDMD & 0.7256 & 0.8518 & 0.5022 \\
+\multirow{3}{*}{Robotic arm}
+    & FS-EDMD & \textbf{0.3520} & \textbf{0.5933} & \textbf{0.3202} \\
+    & EDMDDL & 0.5936 & 0.7704 & 0.4550 \\
+    & EDMD & 0.7256 & 0.8518 & 0.5022 \\
+\midrule
+\multirow{3}{*}{Soft platform}
+    & FS-EDMD & -- & \textbf{0.7889} & -- \\
+    & EDMD & -- & 0.8965 & -- \\
+    & EDMDDL & -- & 1.2927 & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\footnotetext[1]{\label{fn:pred_metrics}
+\footnotetext{\label{fn:pred_metrics}
 $\mathrm{MSE} = \frac{1}{T}\sum_{k=1}^{T}\|\x_k - \hat{\x}_k\|^2$,
 $\mathrm{RMSE} = \sqrt{\mathrm{MSE}}$,
 $\mathrm{MAE} = \frac{1}{T}\sum_{k=1}^{T}\|\x_k - \hat{\x}_k\|$,
-where $\hat{\x}_k$ denotes the predicted state at time step $k$.}
+where $\hat{\x}_k$ denotes the predicted state at time step $k$. Robotic-arm metrics cover joint positions and velocities, whereas soft-platform metrics cover the $xy$ light-spot position.}
 
 
 % ---------------------------------------------------------
@@ -619,102 +523,105 @@ where $\hat{\x}_k$ denotes the predicted state at time step $k$.}
 \label{subsec:control_performance}
 % ---------------------------------------------------------
 
-Trajectory tracking experiments were conducted in the joint space using sinusoidal and irregular references. The Koopman-LQR controller was implemented with the FS-EDMD model and the feedforward-feedback structure in Section~\ref{sec:lqr}. The weighting matrices were set to $\Q=\diag(100,10,100,10,100,10)$ and $\Rmat=\I_3$, and a PID controller with empirically tuned gains $K_p=25$, $K_i=0.1$, and $K_d=2.5$ was used as the baseline.
+Trajectory tracking experiments were conducted in the joint space using sinusoidal and irregular references. The Koopman-LQR controller was implemented with the FS-EDMD model and the feedforward-feedback structure in Section~\ref{sec:lqr}. The weighting matrices were set to
+\begin{equation*}
+\Q=\diag(100,10,100,10,100,10), \qquad \Rmat=\I_3,
+\end{equation*}
+and a PID controller with empirically tuned gains $K_p=25$, $K_i=0.1$, and $K_d=2.5$ was used as the baseline. All tracking metrics were computed over the common 10--40~s evaluation window after controller initialization.
+
+\begin{figurehere}
+\centering
+\includegraphics[width=\columnwidth]{pictures/figure3_control_tracking.pdf}
+\caption{Robotic-arm trajectory tracking under sinusoidal, irregular, and disturbance-recovery references. Rows correspond to the three experiments and columns correspond to Joint 1--3. The first two rows compare Reference, FS-EDMD-LQR, and PID; the third row shows the disturbance-recovery response of FS-EDMD-LQR.}
+\label{fig:control_tracking}
+\end{figurehere}
 
 For sinusoidal tracking, the reference trajectories for the three joints
 were defined as
 \begin{equation}
     q_i^{\text{ref}}(t) = A_i \sin(\omega_i t) + b_i, \quad i = 1, 2, 3,
 \end{equation}
-where $q_i^{\text{ref}}$ denotes the desired joint position. The amplitudes were set to $A_1=0.5$~rad, $A_2=0.4$~rad, and $A_3=0.35$~rad, with $f_i=0.25$~Hz and $b_i=0$ for all joints. As shown in Fig.~\ref{fig:control_comparison_sinusoidal}, Koopman-LQR tracks the references more accurately than PID, especially on joints 2 and 3.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.4\textwidth]{pictures/control_comparison_sinusoidal.png}
-\caption{Comparison of the sinusoidal trajectory tracking performance of the Koopman-LQR and the PID Controllers.}
-\label{fig:control_comparison_sinusoidal}
-\end{figure}
+where $q_i^{\text{ref}}$ denotes the desired joint position. The amplitudes were set to $A_1=0.5$~rad, $A_2=0.4$~rad, and $A_3=0.35$~rad, with $f_i=0.25$~Hz and $b_i=0$ for all joints. The sinusoidal row of Fig.~\ref{fig:control_tracking} shows that FS-EDMD-LQR tracks the references more accurately than PID, especially on joints 2 and 3.
 
 For irregular tracking, joints 1 and 2 used composite references formed by the superposition of three sinusoidal components:
 \begin{equation}
 q_j^{\text{ref}}(t) = \sum_{l=1}^{3} A_{j,l} \sin(2\pi f_{j,l} t + \phi_{j,l}),
 \quad j = 1, 2,
 \end{equation}
-where $A_{j,l}$, $f_{j,l}$, and $\phi_{j,l}$ denote the amplitude, frequency, and phase of the $l$-th component, respectively. The parameters are listed in Table~\ref{tab:irregular_params}. Due to the mechanical coupling between joints 2 and 3, joint 3 used $q_3^{\text{ref}}(t)=0.35\sin(2\pi\cdot0.25t)$.
+where $A_{j,l}$, $f_{j,l}$, and $\phi_{j,l}$ denote the amplitude, frequency, and phase of the $l$-th component, respectively. The component frequencies were $(0.15,0.40,0.80)$~Hz for joint 1 and $(0.18,0.45,0.90)$~Hz for joint 2, with amplitudes and phase shifts selected within the experimentally validated operating range. Due to the mechanical coupling between joints 2 and 3, joint 3 used $q_3^{\text{ref}}(t)=0.35\sin(2\pi\cdot0.25t)$.
 
-\begin{table}[htbp]
-\centering
-\caption{Irregular Reference Parameters}
-\label{tab:irregular_params}
-\small
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{ccccc}
-\toprule
-Joint & $l$ & $A_{j,l}$ (rad) & $f_{j,l}$ (Hz) & $\phi_{j,l}$ (rad) \\
-\midrule
-\multirow{3}{*}{1} & 1 & 0.25 & 0.15 & $0$ \\
-                   & 2 & 0.15 & 0.40 & $\pi/4$ \\
-                   & 3 & 0.08 & 0.80 & $\pi/3$ \\
-\midrule
-\multirow{3}{*}{2} & 1 & 0.22 & 0.18 & $\pi/6$ \\
-                   & 2 & 0.12 & 0.45 & $0$ \\
-                   & 3 & 0.06 & 0.90 & $\pi/2$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+The irregular row of Fig.~\ref{fig:control_tracking} shows that FS-EDMD-LQR follows the composite reference more accurately during fast transitions, whereas PID produces larger tracking errors.
 
-The tracking results are shown in Fig.~\ref{fig:control_comparison_irregular}. Koopman-LQR follows the composite reference more accurately during fast transitions, whereas PID produces larger tracking errors.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.4\textwidth]{pictures/control_comparison_irregular.png}
-\caption{Comparison of the irregular trajectory tracking performance of the Koopman-LQR and the PID Controllers.}
-\label{fig:control_comparison_irregular}
-\end{figure}
-
-Table~\ref{tab:control_metrics} summarizes the quantitative tracking results. Koopman-LQR reduces the RMSE$^{\ref{fn:track_metrics}}$/MAE by 42.4\%/66.4\% for sinusoidal tracking and by 9.1\%/38.1\% for irregular tracking, confirming its advantage over PID.
+Table~\ref{tab:control_metrics} summarizes the quantitative tracking results.\footnotemark FS-EDMD-LQR reduces the RMSE$^{\ref{fn:track_metrics}}$/MAE by 67.5\%/66.2\% for sinusoidal tracking and by 57.7\%/56.0\% for irregular tracking, confirming its advantage over PID.
 
 \begin{table}[htbp]
 \centering
 \caption{Trajectory Tracking Performance}
 \label{tab:control_metrics}
-\small
-\setlength{\tabcolsep}{4pt}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{llcc}
 \toprule
 Type & Controller & RMSE & MAE \\
- &  & (rad) & (rad) \\
 \midrule
-\multirow{2}{*}{Sinusoidal}
-    & Koopman-LQR & \textbf{0.0370} & \textbf{0.0148} \\
-    & PID & 0.0642 & 0.0442 \\
+\multirow{2}{*}{Arm: sinusoidal}
+    & FS-EDMD-LQR & \textbf{0.0154} & \textbf{0.0136} \\
+    & PID & 0.0475 & 0.0402 \\
 \midrule
-\multirow{2}{*}{Irregular}
-    & Koopman-LQR & \textbf{0.2992} & \textbf{0.0722} \\
-    & PID & 0.3293 & 0.1166 \\
+\multirow{2}{*}{Arm: irregular}
+    & FS-EDMD-LQR & \textbf{0.0175} & \textbf{0.0148} \\
+    & PID & 0.0413 & 0.0337 \\
+\midrule
+Arm: disturbance recovery
+    & FS-EDMD-LQR & \textbf{0.0958} & \textbf{0.0298} \\
+\midrule
+\multirow{2}{*}{Soft: figure-eight}
+    & FS-EDMD-LQR & \textbf{0.1174} & \textbf{0.1135} \\
+    & PID & 0.6386 & 0.4797 \\
+\midrule
+\multirow{2}{*}{Soft: five-point star}
+    & FS-EDMD-LQR & \textbf{0.1339} & \textbf{0.1294} \\
+    & PID & 0.8406 & 0.6391 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\footnotetext[2]{\label{fn:track_metrics}\raggedright
-$\mathrm{RMSE}=\sqrt{\frac{1}{3T}\sum_{i=1}^{3}\sum_{k=1}^{T}
-(q_i(k)-q_i^{\mathrm{ref}}(k))^2}$, and
+\footnotetext{\label{fn:track_metrics}\raggedright
+For the robotic arm, $\mathrm{RMSE}=\sqrt{\frac{1}{3T}\sum_{i=1}^{3}
+\sum_{k=1}^{T}(q_i(k)-q_i^{\mathrm{ref}}(k))^2}$ and
 $\mathrm{MAE}=\frac{1}{3T}\sum_{i=1}^{3}\sum_{k=1}^{T}
-|q_i(k)-q_i^{\mathrm{ref}}(k)|$.}
+|q_i(k)-q_i^{\mathrm{ref}}(k)|$. For the soft platform,
+$\mathrm{RMSE}=\sqrt{\frac{1}{T}\sum_{k=1}^{T}
+\|\mathbf{p}_k-\mathbf{p}_k^{\mathrm{ref}}\|_2^2}$ and
+$\mathrm{MAE}=\frac{1}{T}\sum_{k=1}^{T}
+\|\mathbf{p}_k-\mathbf{p}_k^{\mathrm{ref}}\|_2$. Robotic-arm errors are
+expressed in rad, whereas soft-platform errors use the recorded light-spot
+position coordinates.}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.48\textwidth]{pictures/figure4_soft_control_tracking.pdf}
+\caption{Soft-platform trajectory tracking and instantaneous tracking error on the figure-eight and five-point-star references. The top row compares the complete Reference, FS-EDMD-LQR, and PID trajectories; the bottom row shows the pointwise Euclidean tracking error after the common initial approach interval.}
+\label{fig:soft_control_tracking}
+\end{figure*}
+
+For the soft platform, both controllers used the same reference trajectory,
+initial condition, sampling period, input limit, and endpoint condition.
+To isolate trajectory tracking from the initial movement toward the reference
+start, RMSE and MAE were computed over the same samples after a common
+30-step approach interval. Fig.~\ref{fig:soft_control_tracking} shows that
+FS-EDMD-LQR follows both the figure-eight and five-point-star references more
+closely than PID. As reported in Table~\ref{tab:control_metrics},
+FS-EDMD-LQR reduces the RMSE$^{\ref{fn:track_metrics}}$/MAE by
+81.6\%/76.3\% on the figure-eight trajectory and by 84.1\%/79.8\% on the
+five-point-star trajectory.
 
 % ---------------------------------------------------------
 \subsection{Robustness Validation Experiments}
 \label{subsec:robustness_test}
 % ---------------------------------------------------------
 
-Robustness was evaluated using the sinusoidal tracking task with the same controller parameters. During the 30~s experiment, an operator manually disturbed the robot by briefly pushing and pulling the links associated with the three joints, thereby introducing unknown bounded joint torques. As shown in Fig.~\ref{fig:robustness_test}, the joint trajectories exhibit temporary deviations from the references during the disturbances, but recover smoothly after the disturbances are removed and remain bounded throughout the experiment.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.4\textwidth]{pictures/robustness_test.png}
-\caption{Robustness test under disturbances.}
-\label{fig:robustness_test}
-\end{figure}
+Robustness was evaluated using the sinusoidal tracking task with the same controller parameters. During the 30~s experiment, an operator manually disturbed the robot by briefly pushing and pulling the links associated with the three joints, thereby introducing unknown bounded joint torques. In the disturbance-recovery row of Fig.~\ref{fig:control_tracking}, the joint trajectories exhibit temporary deviations from the references during the disturbances but recover smoothly after the disturbances are removed and remain bounded throughout the experiment.
 
 
 
@@ -725,14 +632,9 @@ Robustness was evaluated using the sinusoidal tracking task with the same contro
 \label{sec:conclusion}
 % =========================================================
 
-In this paper, we have presented a Koopman representation learning framework with a learnable feature selection matrix to address the tradeoff among modeling accuracy, computational efficiency, and interpretability in dictionary design for EDMD. By constructing an overcomplete physics-informed candidate function library and learning compact feature combinations through an optimizable selection matrix, the proposed method achieves accurate and interpretable Koopman modeling for robotic systems. Based on the learned model, a feedforward--feedback Koopman-LQR controller has been developed, and the ultimate boundedness of the closed-loop tracking error has been established under bounded disturbances. Experimental results on a three-degree-of-freedom robotic arm demonstrate improved prediction accuracy, trajectory tracking performance, and robustness against external disturbances. Future work will consider extending the proposed framework to online learning settings and incorporating model predictive control to explicitly account for state and input constraints.
+In this paper, we have presented a Koopman representation learning framework with a learnable feature selection matrix to address the tradeoff among modeling accuracy, computational efficiency, and interpretability in dictionary design for EDMD. By constructing an overcomplete physics-informed candidate function library and learning compact feature combinations through an optimizable selection matrix, the proposed method achieves accurate and interpretable Koopman modeling for robotic systems. Based on the learned model, a feedforward--feedback Koopman-LQR controller has been developed, and the ultimate boundedness of the closed-loop tracking error has been established under bounded disturbances. Experimental results on a three-degree-of-freedom robotic arm and a cable-driven soft platform demonstrate improved prediction accuracy, trajectory tracking performance, and robustness against external disturbances. Future work will consider extending the proposed framework to online learning settings and incorporating model predictive control to explicitly account for state and input constraints.
 
 
 
 
 % ================== References ==================
-\bibliographystyle{IEEEtran}
-\bibliography{references}
-
-
-\end{document}

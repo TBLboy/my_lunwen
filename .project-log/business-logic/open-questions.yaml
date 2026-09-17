@@ -152,3 +152,306 @@ questions:
   - 杂项/软体平台探索实验结果/final/models/fs_edmd.pkl
   created_at: '2026-09-15T05:30:00Z'
   answered_at: '2026-09-15T05:30:00Z'
+- id: Q-008
+  title: 论文改稿的主贡献框架
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: critical
+  related_business_logic: []
+  related_tasks: []
+  context: 论文当前贡献为 FS-EDMD 特征选择、BCD 联合优化和鲁棒 Koopman-LQR。用户计划加入软体平台建模与控制实验，目标控制在 8 页以内；需要确认软体平台是作为跨平台验证，还是上升为新的第一贡献。
+  recommendation: 保留 FS-EDMD + 鲁棒 Koopman-LQR 为第一贡献，把软体平台作为第二真实系统和跨平台泛化验证；实验章节围绕“同一方法适配不同机器人平台”组织。
+  alternatives:
+  - name: 跨平台统一方法
+    description: 将双平台一致性提升为第一贡献，需要更强调跨平台迁移、数据域覆盖和统一超参数证据。
+  - name: 软体平台应用优先
+    description: 将软体平台作为核心应用，需要补充更多软体机器人背景和与软体机器人方法的对比，理论部分占比需下降。
+  answer: 保留 FS-EDMD + 鲁棒 Koopman-LQR 为第一贡献；软体平台作为第二个真实平台和跨平台验证，用于补充机械臂实验结果。
+  source_refs:
+  - 论文部分/main.tex
+  - 论文部分/不同期刊编辑意见汇总.md
+  - 杂项/软体平台探索实验结果/final
+  created_at: '2026-09-15T08:35:00Z'
+  answered_at: '2026-09-15T08:45:00Z'
+- id: Q-009
+  title: 软体平台建模精度的论文主指标
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: 软体平台已有固定 10 条测试轨迹。轨迹 66 上 FS-EDMD 最优，但当前汇总显示 FS-EDMD 平均 RMSE 暂未全面优于 EDMDDL；审稿意见又要求解释数据依赖和泛化能力。
+  recommendation: 论文以固定 10 条测试轨迹的平均 RMSE 作为主指标，轨迹 66 仅作为代表性定性展示；若 FS-EDMD 平均指标不占优，则必须继续优化模型或把论文主张改为精度-复杂度折中。
+  alternatives:
+  - name: 轨迹 66 主展示
+    description: 延续当前单轨迹展示，图更简洁，但容易被审稿人质疑挑选测试样本，和泛化性意见冲突。
+  - name: 平均与单轨迹并列
+    description: 同时报告平均和代表性轨迹，信息完整但需要严格控制图表篇幅。
+  answer: 用户确认软体平台只展示轨迹 66，不报告 10 条测试轨迹平均，也不在论文正文解释选择原因。Agent 执行约束：不得将该轨迹描述为随机样本或代表性样本；采用中性 case study 表述，不从单轨迹结果外推全面平均优势。
+  source_refs:
+  - 杂项/软体平台探索实验结果/final/metrics/summary.json
+  - 杂项/软体平台探索实验结果/final/metrics/test_trajectory.csv
+  - 论文部分/不同期刊编辑意见汇总.md
+  created_at: '2026-09-15T08:45:00Z'
+  answered_at: '2026-09-15T08:55:00Z'
+- id: Q-010
+  title: 是否新增 Jacobian/局部线性化 LQR 对照实验
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: RA-L 明确质疑 FS-EDMD + LQR 相比 Jacobian linearization + LQR 的优势。现有控制实验只有 Koopman-LQR 与 PID；机械臂工程中存在动力学模型与训练数据，软体平台只有数据驱动模型。
+  recommendation: 新增一个局部线性化/LQR 基线，优先在相同机械臂训练数据上拟合 `x_{k+1}=A x_k+B u_k` 后设计 LQR，并作为传统线性化路线的数据驱动近似；若时间允许，再在软体平台补充同名基线。只在正文说明优势、不新增对照，复审风险较高。
+  alternatives:
+  - name: 精确 Jacobian 基线
+    description: 对机械臂物理模型在平衡点求 Jacobian 并设计 LQR，更贴合审稿意见，但复现和平台对齐成本更高，软体平台难以做到。
+  - name: 不新增基线
+    description: 只收窄论文主张，强调模型只适用于给定数据域和任务域，不做优于 Jacobian 的声明。
+  answer: 用户决定不新增 Jacobian/局部线性化 LQR 对照。理由：机械臂当前故障，重新实验成本高；Koopman 属于全局线性化路线，与局部 Jacobian 线性化的直接比较意义有限；本次目标改为三区期刊，控制部分维持 FS-EDMD-LQR 与 PID 对比。论文应避免宣称相对局部线性化具有普遍优势。
+  source_refs:
+  - 论文部分/不同期刊编辑意见汇总.md
+  - 控制实验部分代码/机械臂/Koopman_Data_Generator/robot2.m
+  - 建模代码/models
+  created_at: '2026-09-15T08:55:00Z'
+  answered_at: '2026-09-15T09:05:00Z'
+- id: Q-011
+  title: 软体平台控制实验矩阵
+  status: superseded
+  authority: C
+  impact: high
+  uncertainty: high
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: 用户计划采集软体平台控制器轨迹跟踪数据，使用 FS-EDMD-LQR 与 PID 对比。需要一个固定实验矩阵来决定采集数据、图表数量和 8 页预算。
+  recommendation: 采用 3 条代表性轨迹：圆形、五角星、非规则轨迹；两种控制器使用相同起点、采样周期、限幅和终点条件；记录参考 xy、实测 xy、控制量、时间；主图展示 xy 轨迹，指标表报告 RMSE/MAE/最大误差。
+  alternatives:
+  - name: 2 条轨迹
+    description: 圆形和五角星，图表更省空间，但控制多样性和说服力弱于 3 条。
+  - name: 4 条以上轨迹
+    description: 证据更充分，但数据采集和 8 页排版压力最高，适合压成矩阵式小图。
+  answer: 用户确认只采集两条轨迹：圆形和五角星；论文中合并为一张左右双子图，共用图例，以节约 8 页篇幅。控制器比较保持 FS-EDMD-LQR 与 PID。默认报告 RMSE、MAE 和最大误差，两控制器使用相同起点、采样周期、控制限幅和终点条件。
+  source_refs:
+  - 用户消息：软体平台控制准备采用 FS-EDMD-LQR 与 PID 对比，跑几个不同轨迹
+  - 杂项/软体平台探索实验结果/controller_offline/final
+  created_at: '2026-09-15T09:05:00Z'
+  answered_at: '2026-09-15T09:15:00Z'
+- id: Q-018
+  title: 控制器轨迹跟踪指标口径
+  status: answered
+  authority: C
+  impact: medium
+  uncertainty: low
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks: []
+  context: 此前方案曾默认在机械臂和软体平台控制性能中报告 RMSE、MAE 与最大误差。用户已明确最大误差不是本次论文需要展示的指标。
+  recommendation: 将控制性能指标统一收敛为 RMSE 和 MAE。
+  alternatives:
+  - name: 仅隐藏最大误差图
+    description: 表格中仍保留最大误差，无法满足用户当前的指标精简要求。
+  - name: 全部移除最大误差
+    description: 同时精简表格和正文，减少不必要指标并节省版式空间。
+  answer: 机械臂和软体平台均不使用最大误差指标；控制性能表只保留 RMSE 和 MAE，正文也不展示或讨论最大误差。
+  source_refs:
+  - 用户消息：机械臂和软体平台均不使用最大误差
+  created_at: '2026-09-15T10:35:00Z'
+  answered_at: '2026-09-15T10:35:00Z'
+- id: Q-012
+  title: 机械臂建模精度是否展示速度预测
+  status: answered
+  authority: B
+  impact: medium
+  uncertainty: low
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks: []
+  context: 现有机械臂材料同时有位置预测图和速度预测图；用户认为速度噪声大，速度预测图可读性差，占用 8 页预算但证明价值有限。
+  recommendation: 论文只展示三个关节的位置/角度预测图，不再展示速度预测图；速度信息只通过紧凑的定量指标体现。
+  alternatives:
+  - name: 保留速度图
+    description: 视觉证据更完整，但图形难读且会显著占用实验篇幅。
+  - name: 速度图移入补充材料
+    description: 主文不展示，仅在审稿人要求时提供，可作为后续备选。
+  answer: 用户确认去掉机械臂速度预测图，机械臂建模精度主图只保留关节位置预测。
+  source_refs:
+  - 论文部分/main.tex
+  - 建模代码/outputs/figures/position_comparison.png
+  - 建模代码/outputs/figures/velocity_comparison.png
+  created_at: '2026-09-15T09:25:00Z'
+  answered_at: '2026-09-15T09:25:00Z'
+- id: Q-013
+  title: 机械臂建模精度表是否保留全状态指标
+  status: answered
+  authority: C
+  impact: medium
+  uncertainty: medium
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks: []
+  context: 机械臂主图将只展示位置预测，但当前正文表格报告的是包含位置和速度的全状态 MSE/RMSE/MAE。若图的展示范围和表的指标口径不一致，解释时需要谨慎。
+  recommendation: 主图只展示位置；表格保留全状态 MSE/RMSE/MAE，并在表头或脚注明确说明包含位置和速度，用定量指标补充速度建模证据但不画噪声曲线。
+  alternatives:
+  - name: 表格改为位置指标
+    description: 与主图完全一致，但会丢失速度维度的定量证据。
+  - name: 表格同时列位置和全状态指标
+    description: 信息最完整，但表格变宽，和 8 页限制冲突。
+  answer: 用户确认主图只展示关节位置预测；表格保留全状态 MSE/RMSE/MAE，并明确标注指标包含关节位置和速度。速度预测图不再进入正文。
+  source_refs:
+  - 论文部分/main.tex
+  - 建模代码/outputs/metrics/metrics_table.txt
+  created_at: '2026-09-15T09:25:00Z'
+  answered_at: '2026-09-15T09:35:00Z'
+- id: Q-014
+  title: 实验章节骨架和图表上限
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: medium
+  rework_cost: high
+  related_business_logic: []
+  related_tasks: []
+  context: 论文必须加入软体平台实验并保持 8 页以内。机械臂现有内容需要保留但重绘；软体平台新增轨迹 66 建模展示和圆形/五角星控制器对比。
+  recommendation: 实验章节固定为平台与数据、建模精度、轨迹跟踪、鲁棒性四块；实验部分控制在 4 张主图和 2 张表。机械臂控制图把正弦、不规则和扰动恢复合并为 3x3 面板；软体控制使用圆形/五角星左右双子图。
+  alternatives:
+  - name: 5 图 2 表
+    description: 鲁棒性单独保留一张小图，阅读压力小，但 8 页风险更高。
+  - name: 4 图 1 表
+    description: 空间最省，但量化信息压缩较多，可能需要把部分指标写进正文。
+  answer: 用户确认实验部分固定为 4 张主图和 2 张表。图 1 为机械臂/软体平台双面板设备图，数据划分写在正文；图 2 为建模精度，左侧机械臂三个关节角度预测，右侧软体平台 x/y 两个维度各自的预测轨迹，不画二维平面 xy 轨迹；图 3 为机械臂控制 3x3 面板；图 4 为软体平台圆形/五角星左右双面板。表格保留建模精度表和控制器跟踪指标表。
+  source_refs:
+  - 论文部分/main.tex
+  - 论文部分/不同期刊编辑意见汇总.md
+  - 建模代码/outputs/figures
+  - 杂项/软体平台探索实验结果/final/figures
+  created_at: '2026-09-15T09:35:00Z'
+  answered_at: '2026-09-15T09:45:00Z'
+- id: Q-015
+  title: 图 2 建模精度面板展示哪些模型曲线
+  status: answered
+  authority: B
+  impact: high
+  uncertainty: medium
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks: []
+  context: 机械臂三个关节若在同一面板同时画 Ground Truth、FS-EDMD、EDMDDL、EDMD，会产生 12 条曲线；软体平台 x/y 若同时画三模型也会过度拥挤。8 页限制要求图二承担定性展示，表承担三模型定量对比。
+  recommendation: 图 2 只展示 Ground Truth 与 FS-EDMD：左面板 3 个关节角，右面板软体平台 x/y 各自轨迹；EDMDDL 和 EDMD 的结果放入 Table I 做定量比较。这样主图清晰，也仍保留完整三模型对比。
+  alternatives:
+  - name: 三模型全画
+    description: 视觉上直接比较，但图 2 会非常拥挤，缩小后难以判读。
+  - name: FS 预测加基线误差带
+    description: 保留三模型信息，但图形表达复杂，不利于快速阅读。
+  answer: 用户确认采用嵌套子图布局：左列三个机械臂关节、右列软体平台 x/y。每个小面板保留 Ground Truth、FS-EDMD、EDMDDL、EDMD 四条曲线，共享图例和时间标签，独立纵轴。
+  source_refs:
+  - 建模代码/outputs/figures/position_comparison.png
+  - 建模代码/scripts/evaluate_and_plot.py
+  - 杂项/软体平台探索实验结果/final/figures/trajectory66_comparison.png
+  created_at: '2026-09-15T09:45:00Z'
+  answered_at: '2026-09-15T10:00:00Z'
+- id: Q-016
+  title: 软体平台设备照片素材
+  status: open
+  authority: A
+  impact: medium
+  uncertainty: high
+  rework_cost: low
+  related_business_logic: []
+  related_tasks: []
+  context: Figure 1 需要双面板展示机械臂与软体平台，但用户当前尚未拍摄软体平台设备图。
+  recommendation: 先冻结 Figure 1 的左右双面板结构和尺寸，右侧暂留占位；用户后续拍摄并替换图片，不阻塞建模图和控制图重绘。
+  alternatives:
+  - name: 替换为软体平台示意图
+    description: 无需等待照片，但与真实设备展示目标弱于实拍图。
+  - name: 推迟整张 Figure 1 绘制
+    description: 保证素材真实，但会阻塞实验图排版检查。
+  answer: null
+  source_refs:
+  - 用户消息：暂时还没有拍摄软体平台的素材图，之后拍了再提供
+  created_at: '2026-09-15T10:00:00Z'
+  answered_at: null
+- id: Q-017
+  title: 目标期刊与 LaTeX 模板（RAS）
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: low
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks:
+  - TASK-024
+  context: 用户已确认后续目标期刊为 Robotics and Autonomous Systems（RAS），并要求后续正式论文统一在 `论文部分/elsarticle` 的 Elsevier 模板中编写。该选择决定 frontmatter、引用样式和最终版式检查方式。
+  recommendation: 立即将正式稿迁移到 Elsevier `elsarticle`，投稿稿使用 `preprint,12pt`；正文引用保持编号样式，最终版式检查时再切换或模拟 RAS 的 production-like 选项。
+  alternatives:
+  - name: 继续使用 ieeeconf 后再迁移
+    description: 可以暂缓版式调整，但会在图表宽度、摘要、关键词和引用格式上产生重复返工。
+  - name: 立即迁移到 elsarticle
+    description: 当前正文结构可直接保留，图表和参考文献保持编号引用，后续只需在编译器可用时做整篇排版验证。
+  answer: 目标期刊改为 Robotics and Autonomous Systems（RAS，Elsevier）；后续正式论文统一写入 `论文部分/elsarticle/main.tex`，使用官方 `elsarticle` 模板和编号引用。
+  source_refs:
+  - 用户消息：之后投递 RAS，论文在该模板中写
+  - 论文部分/elsarticle/elsarticle-template-num.tex
+  - 论文部分/elsarticle/main.tex
+  created_at: '2026-09-15T10:00:00Z'
+  answered_at: '2026-09-16T03:27:40Z'
+- id: Q-019
+  title: RAS physical page limit versus the internal eight-page target
+  status: answered
+  authority: C
+  impact: high
+  uncertainty: high
+  rework_cost: medium
+  related_business_logic: []
+  related_tasks:
+  - TASK-029
+  - TASK-030
+  context: The official RAS Guide for Authors supplied by the user does not state an eight-page limit. The current CAS PDF has eight numbered article pages followed by deferred full-width float pages, and the project previously treated eight physical pages as a hard constraint.
+  recommendation: Use nine physical pages or fewer as the internal target, with later iterative adjustments to figure layout and experimental formatting. Keep the experiment-section physical footprint no larger than that of the old manuscript even though the soft-platform content is added.
+  alternatives:
+  - name: Keep nine physical pages
+    description: Set nine pages as the internal upper target and tune figures and experiment layout without enlarging the experiment footprint.
+  - name: Keep eight physical pages
+    description: Preserve the original internal constraint and continue compressing figures, text, and tables.
+  - name: Remove the page target
+    description: Focus only on compliance and scientific clarity, accepting a longer double-column manuscript.
+  answer: "RAS has no hard eight-page limit. Use nine pages or fewer as the internal target. The experiment section may gain scientific content, such as the soft-platform validation, but its physical footprint must not increase relative to the old manuscript. Figure redraws and experiment-section reflow may be adjusted repeatedly to approach the nine-page target."
+  source_refs:
+  - https://www.sciencedirect.com/journal/robotics-and-autonomous-systems/publish/guide-for-authors
+  - 论文部分/els-cas/els-cas-templates/main.pdf
+  - .project-log/research/ras-author-guide-2026.md
+  created_at: '2026-09-17T03:25:00Z'
+  answered_at: '2026-09-17T09:15:00Z'
+- id: Q-020
+  title: New soft-platform PID dataset identity and export validity
+  status: answered
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: high
+  related_business_logic: []
+  related_tasks:
+  - TASK-033
+  context: The new 8-shaped and five-point-star control datasets contain matching FS/PID references and sufficient control steps, but the purported PID exports do not carry valid PID metadata. The 8-shaped PID CSV header says Koopman-LQR Controller, and the new five-point-star PID archive config says Koopman-LQR with Q=30, R=0.1, and feedforward gain=1.3.
+  recommendation: Re-export both PID runs with the actual PID controller and its PID configuration metadata, while retaining the new FS archives. The 8-shaped FS and five-point-star FS datasets are otherwise suitable for redrawing.
+  alternatives:
+  - name: Re-export corrected PID data
+    description: Replace the two ambiguous baseline files with PID runs and PID config snapshots, then regenerate the soft-platform figure and table.
+  - name: Keep current files as an alternative Koopman-LQR baseline
+    description: Do not label them PID; this would change the experimental comparison and requires a separate scientific decision.
+  - name: Use old PID data
+    description: Keep the previous validated PID runs, but then the new trajectory set would be incomplete.
+  answer: "The user confirmed that the two new baseline runs were collected with the PID controller and that the Koopman-LQR labels in the CSV header and config snapshot are export-name errors. Use the new PID files as the PID baseline; preserve the confirmation as the authority for the controller identity."
+  source_refs:
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-FS.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-PID.csv
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-FS.zip
+  - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip
+  created_at: '2026-09-17T07:25:00Z'
+  answered_at: '2026-09-17T08:35:00Z'

@@ -552,3 +552,559 @@ evidence:
   recorded_at: '2026-09-11T14:58:53Z'
   invalidated_at: null
   invalidation_reason: null
+- id: EV-020
+  kind: artifact
+  subject: Figure 2 dual-platform modeling-accuracy figure
+  status: valid
+  command: C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure2_modeling_accuracy.py
+  result_ref: FS-EDMD RMSE mechanical=0.59333305; soft trajectory66=0.78889613; PNG/PDF/SVG
+    generated
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/figure2_modeling_accuracy.png
+    requirements: []
+    tasks:
+    - TASK-019
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/figure2_modeling_accuracy.png: fbdad617504e9f24742b2e7f1c5d0f5b216212e37d270c3e0605ee840a20257c
+  recorded_at: '2026-09-15T10:26:43Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-021
+  kind: artifact
+  subject: Figure 3 robotic-arm control tracking figure and frozen metrics
+  status: stale
+  command: C:\Users\Windows\.conda\envs\edmddl2\python.exe -X utf8 杂项\正式论文的绘图部分\plot_figure3_control_tracking.py
+  result_ref: window raw 10-40 s; sinusoidal RMSE 0.01544872 vs 0.04754018; irregular
+    0.01748137 vs 0.04130153; disturbance FS-EDMD-LQR RMSE 0.09576842
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+    requirements: []
+    tasks:
+    - TASK-020
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/figure3_control_tracking.png: 684497a2d3e8338b20111f9c39baaca98e6f3efa26fb3d4d6036cd6e6c12d08c
+  recorded_at: '2026-09-15T11:12:51Z'
+  invalidated_at: '2026-09-16T03:06:08Z'
+  invalidation_reason: Figure 3 was transposed to experiment-row layout and the LaTeX
+    caption/references were updated.
+- id: EV-022
+  kind: verification
+  subject: Table II frozen control metrics and percentage consistency
+  status: stale
+  command: 'PowerShell assertion: figure3_control_metrics.json vs main.tex window/table/improvements/stale
+    values'
+  result_ref: 'PASS: common 10-40 s window; sinusoidal 0.0154/0.0136 vs 0.0475/0.0402;
+    irregular 0.0175/0.0148 vs 0.0413/0.0337; disturbance 0.0958/0.0298; improvements
+    67.5%/66.2% and 57.7%/56.0%; stale metrics absent.'
+  covers:
+    files:
+    - 论文部分/main.tex
+    - 杂项/正式论文的绘图部分/figure3_control_metrics.json
+    requirements: []
+    tasks:
+    - TASK-021
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: 96d25468909100813dcd041eb78ffbb844e63796220c9dc66ef52edad80b5fa7
+    file_hashes:
+      论文部分/main.tex: 7d9ef17a344d78261150010efc7532e9a545ec40f30c374361145bdc1b6c9d31
+      杂项/正式论文的绘图部分/figure3_control_metrics.json: 58b21ad6d73470fa98780e8e07795a0478426997b804e02cb91dbdfe540a0054
+  recorded_at: '2026-09-15T11:30:28Z'
+  invalidated_at: '2026-09-16T03:06:08Z'
+  invalidation_reason: Figure 3 was transposed to experiment-row layout and the LaTeX
+    caption/references were updated.
+- id: EV-023
+  kind: verification
+  subject: Figure 2/3 LaTeX integration and two-table experimental structure
+  status: stale
+  command: 'PowerShell structural assertions: experimental section table/figure counts,
+    required/obsolete references, labels, graphic paths, source-copy hashes'
+  result_ref: 'PASS: 2 tables; device figure plus new Figures 2/3; all refs resolve;
+    obsolete references absent; copied PDF hashes match sources.'
+  covers:
+    files:
+    - 论文部分/main.tex
+    - 论文部分/pictures/figure2_modeling_accuracy.pdf
+    - 论文部分/pictures/figure3_control_tracking.pdf
+    requirements: []
+    tasks:
+    - TASK-022
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: 8c89f7a5d3d76a7d48183f7f8306df439e16330f250733eea79a31b6e2883cc2
+    file_hashes:
+      论文部分/main.tex: acc434944baeb059bf5d884ec9a3a90a3a6303371a8bae0cc9e3d4e0a2a5d343
+      论文部分/pictures/figure2_modeling_accuracy.pdf: f8c93b11b9636225a1390ffd1468d53bc44dc52a39bd8985dd6076f352f412da
+      论文部分/pictures/figure3_control_tracking.pdf: a33e33289d25aafba46d53e5f0e4d5c7db00cd4dacbbf1900850608ae5b5ec16
+  recorded_at: '2026-09-15T11:39:09Z'
+  invalidated_at: '2026-09-16T03:06:08Z'
+  invalidation_reason: Figure 3 was transposed to experiment-row layout and the LaTeX
+    caption/references were updated.
+- id: EV-024
+  kind: verification
+  subject: Transposed Figure 3 with experiment rows and updated LaTeX row references
+  status: valid
+  command: PYTHON -X utf8 plot_figure3_control_tracking.py; py_compile; PowerShell
+    layout, metric, file, hash, and LaTeX text assertions; visual PNG inspection
+  result_ref: 'PASS: rows are sinusoidal/irregular/disturbance, columns are Joint
+    1-3; metrics unchanged; PNG/PDF/SVG and paper PDF updated; row-based LaTeX references
+    verified.'
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure3_control_metrics.json
+    - 论文部分/pictures/figure3_control_tracking.pdf
+    - 论文部分/main.tex
+    requirements: []
+    tasks:
+    - TASK-020
+    - TASK-021
+    - TASK-022
+    - TASK-023
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: 6817be3ada0cb96d12a0fa45ff616399c3db188b8c690669c429e3a8ba2fdcff
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure3_control_tracking.py: fd8087c780c8b3c13a3f205afbc745630cd8b8c0932a006321f58ac3eaa056e1
+      杂项/正式论文的绘图部分/figure3_control_tracking.png: 9444db895d4b3382beda2c5e9ddcc94446c4334182fed9a64da6fa0e0aafe740
+      杂项/正式论文的绘图部分/figure3_control_tracking.pdf: ab19375206e8b46a3b4f311fa901d1956da78fdb27d741556a68992cf4c98b18
+      杂项/正式论文的绘图部分/figure3_control_tracking.svg: 1683eb7c53c60263d61d2733ad7fd426099aa494607de3cdf8a7d16dd5444184
+      杂项/正式论文的绘图部分/figure3_control_metrics.json: 58b21ad6d73470fa98780e8e07795a0478426997b804e02cb91dbdfe540a0054
+      论文部分/pictures/figure3_control_tracking.pdf: ab19375206e8b46a3b4f311fa901d1956da78fdb27d741556a68992cf4c98b18
+      论文部分/main.tex: 11bcc2c7e524cd8a711b2ca20d5321950244c87a599067b62186b9994bd2455a
+  recorded_at: '2026-09-16T03:06:41Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-025
+  kind: verification
+  subject: RAS Elsevier elsarticle template migration static verification
+  status: stale
+  command: PowerShell structural, reference, bibliography, graphic-path, source-diff,
+    hash, and compiler-availability assertions
+  result_ref: 'PASS: active documentclass elsarticle; preprint 12pt; RAS journal;
+    frontmatter/abstract/keyword; elsarticle-num; no IEEE remnants; 38 labels/44 refs/25
+    cite keys/5 graphics valid; old main hash unchanged; no PDF compile because TeX
+    toolchain absent.'
+  covers:
+    files:
+    - 论文部分/elsarticle/main.tex
+    requirements: []
+    tasks:
+    - TASK-024
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/elsarticle/main.tex: 3f8834ab9805afccc61243eb5f3fa212ff065d9a8d5c1c25159cea7cb2fa096a
+  recorded_at: '2026-09-16T03:30:07Z'
+  invalidated_at: '2026-09-17T02:23:45Z'
+  invalidation_reason: main.tex changed when switching from the preprint class to
+    the final two-column class; the earlier evidence hash is superseded by EV-030.
+- id: EV-026
+  kind: verification
+  subject: Soft-platform Figure 4 and Table II control-result integration
+  status: stale
+  command: edmddl2 python py_compile and plot regeneration; PowerShell image, metric,
+    LaTeX reference/graphics, and PDF hash checks
+  result_ref: 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/elsarticle/main.tex
+    requirements: []
+    tasks:
+    - TASK-025
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py: 00aafd072938f848aa85d18dac482c765e232f8706627eb2267ff7a21d713194
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.png: 469c605d14389517701032885bb2c667bd2999e84b78a0b13634e7541396b9ec
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf: 51bc3b7a2fdf224089135212364ce59f414d7df99471f0fc472e6c45cb3e69b5
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg: 4e88fce52227e4c1f35d215616d6d9989a628fbbc9b6f26f002912e8de3895d9
+      杂项/正式论文的绘图部分/figure4_soft_control_metrics.json: 12dd0d4c41b9e45cf140de6452935553dfd32aeb7d596ecbee5861cbf30c96d6
+      论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf: 51bc3b7a2fdf224089135212364ce59f414d7df99471f0fc472e6c45cb3e69b5
+      论文部分/elsarticle/main.tex: 89ca92f576fb6a24317e4f225ee048bebf3c64f32e4544d964cad7dea50f45b3
+  recorded_at: '2026-09-16T03:44:40Z'
+  invalidated_at: '2026-09-17T02:23:45Z'
+  invalidation_reason: main.tex changed when switching from the preprint class to
+    the final two-column class; the earlier evidence hash is superseded by EV-030.
+- id: EV-027
+  kind: verification
+  subject: Soft-platform Figure 4 spiral replacement and pointwise tracking-error
+    curves
+  status: stale
+  command: edmddl2 python py_compile and Figure 4 regeneration; PowerShell visual,
+    metric, LaTeX token/reference/graphics, and PDF hash checks
+  result_ref: 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/elsarticle/main.tex
+    requirements: []
+    tasks:
+    - TASK-026
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py: ce8a28a674b0f1a5a9b3ebfea1f6c3396a3f2dde4fa0505d9323699871552a09
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.png: e92f49db07b494a400056b9b4e77750698cd7c3b29e4cc2153b70b418161ee7b
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf: a4a9daf406c477967188896ff843887cbd7e2518b30b853b66a53676e437f4d7
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg: 57a82bc1a068b76a44c6791267f193812b587a1a9abcf2825ebbc04644c81438
+      杂项/正式论文的绘图部分/figure4_soft_control_metrics.json: 76d98b3761615a6ef2c14b05e68272d6a26214462c8374fd6e82b9a3f01b3d80
+      论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf: a4a9daf406c477967188896ff843887cbd7e2518b30b853b66a53676e437f4d7
+      论文部分/elsarticle/main.tex: c817db23ac887fbdfd878d2b298fdf8299771c3ce0ebdfa93ded364f3a144320
+  recorded_at: '2026-09-16T03:55:18Z'
+  invalidated_at: '2026-09-17T02:23:45Z'
+  invalidation_reason: main.tex changed when switching from the preprint class to
+    the final two-column class; the earlier evidence hash is superseded by EV-030.
+- id: EV-028
+  kind: verification
+  subject: Figure 3 and Figure 4 scientific-style refinement with frozen metrics
+  status: stale
+  command: edmddl2 py_compile and regeneration; visual PNG inspection; PowerShell
+    nonempty/metrics/paper-copy SHA256 checks
+  result_ref: 'PASS: Figures 3/4 regenerated and visually improved; RMSE/MAE unchanged;
+    paper PDF hashes match sources.'
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure3_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure3_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure3_control_metrics.json
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/elsarticle/pictures/figure3_control_tracking.pdf
+    - 论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf
+    requirements: []
+    tasks:
+    - TASK-027
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure3_control_tracking.py: 41eadcb85dda6feb2869ef12cb49ebfc6b5f695c3ec216abbc08c23a2a90f846
+      杂项/正式论文的绘图部分/figure3_control_tracking.png: d814d9de240e891b214ef8664c30592205f9a142d25a1a457a153e6f031f568d
+      杂项/正式论文的绘图部分/figure3_control_tracking.pdf: bb0e885f6e9315fb927e89102043160c60ac085c8b72ed321abb5e708335e487
+      杂项/正式论文的绘图部分/figure3_control_tracking.svg: 1d6666db8d1df70b97dde98a599f1d3f3ad2fd60f2123f5156cf9b1e5455a01a
+      杂项/正式论文的绘图部分/figure3_control_metrics.json: 58b21ad6d73470fa98780e8e07795a0478426997b804e02cb91dbdfe540a0054
+      杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py: 8c14e7619ec59e23ce96dd65e2e1d91fa6eebb1270e892b65c2d2e5996610704
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.png: feeafdb3609b11b6453f7b92a9cc7b9dd21ffb0dba4e34e05a8ea4424c92aeff
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf: 5b56b6a6050e52f959e16f837ca1a8a9a6622c3c1b7090114e321d410c034e37
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg: 9d9b205661db63d5a5658c26502665c975c6749bdba4e4ee975cffff49709d59
+      杂项/正式论文的绘图部分/figure4_soft_control_metrics.json: 76d98b3761615a6ef2c14b05e68272d6a26214462c8374fd6e82b9a3f01b3d80
+      论文部分/elsarticle/pictures/figure3_control_tracking.pdf: bb0e885f6e9315fb927e89102043160c60ac085c8b72ed321abb5e708335e487
+      论文部分/elsarticle/pictures/figure4_soft_control_tracking.pdf: 5b56b6a6050e52f959e16f837ca1a8a9a6622c3c1b7090114e321d410c034e37
+  recorded_at: '2026-09-16T04:11:28Z'
+  invalidated_at: '2026-09-17T08:35:22Z'
+  invalidation_reason: Figure 6 changed to plot complete controller trajectories and
+    full shared limits after user feedback; affected figure, script, manuscript image
+    copy, and compiled PDF were regenerated.
+- id: EV-029
+  kind: verification
+  subject: MiKTeX and Strawberry Perl LaTeX toolchain installation and full manuscript
+    build
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+  result_ref: 'PASS: MiKTeX 26.5 and Strawberry Perl 5.42.3 installed; pdflatex, bibtex,
+    and latexmk succeeded; main.pdf generated with 22 pages.'
+  covers:
+    files:
+    - 论文部分/elsarticle/main.tex
+    requirements: []
+    tasks:
+    - TASK-027
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/elsarticle/main.tex: 0a810975dcbeecb96517909aefcad2f5e3fb5dcaf3bc79521e660478d64b27d6
+  recorded_at: '2026-09-16T05:57:20Z'
+  invalidated_at: '2026-09-17T02:23:45Z'
+  invalidation_reason: main.tex changed when switching from the preprint class to
+    the final two-column class; the earlier evidence hash is superseded by EV-030.
+- id: EV-030
+  kind: verification
+  subject: Elsevier elsarticle final two-column build
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+  result_ref: 'PASS: final,3p,twocolumn,times; main.pdf generated with 11 pages; no
+    undefined references or compile errors; table and controller-figure horizontal
+    overflow removed. Remaining nonfatal: one float-only page and 3.49pt overfull
+    vbox.'
+  covers:
+    files:
+    - 论文部分/elsarticle/main.tex
+    requirements: []
+    tasks:
+    - TASK-027
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/elsarticle/main.tex: ee25c288524fd6e6e79f9d6817f8e710030054e1ac5eda0c2c1058f297524619
+  recorded_at: '2026-09-17T02:24:07Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-031
+  kind: verification
+  subject: Official Elsevier CAS double-column RAS manuscript build
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+  result_ref: 'PASS: cas-dc template build completed through pdflatex/BibTeX/pdflatex;
+    main.pdf generated with 11 physical pages; no fatal errors or undefined references;
+    Q-matrix clipping removed. Remaining: deferred full-width float pages and nonfatal
+    CAS warnings.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    requirements: []
+    tasks:
+    - TASK-028
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: bde5497f8f5da2bfa933ba97b3f9661678fb8fd2d3a3f30864a0c2a5715439ff
+  recorded_at: '2026-09-17T02:58:33Z'
+  invalidated_at: '2026-09-17T05:19:15Z'
+  invalidation_reason: Figures 4 and 5 were converted to fixed single-column placement;
+    prior compiled PDF and source-file hashes no longer cover the current manuscript
+    state.
+- id: EV-032
+  kind: verification
+  subject: RAS author-guide machine-checkable limits
+  status: stale
+  command: PowerShell count checks; latexmk main.tex; latexmk highlights.tex
+  result_ref: 'PASS: abstract 182 words; 5 keywords; 4 Highlights at 74/74/58/72 characters;
+    main.pdf and highlights.pdf both compiled successfully. Remaining guide items
+    require author-provided metadata and declarations.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: 4ee10add986d721347bd5fa7a845f2d34b3500cc92cc92a5e44b30090ac49428
+  recorded_at: '2026-09-17T03:18:15Z'
+  invalidated_at: '2026-09-17T05:19:15Z'
+  invalidation_reason: Figures 4 and 5 were converted to fixed single-column placement;
+    prior compiled PDF and source-file hashes no longer cover the current manuscript
+    state.
+- id: EV-033
+  kind: verification
+  subject: CAS main manuscript forced rebuild produces nine pages
+  status: stale
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex
+  result_ref: 'PASS: forced pdflatex/BibTeX rebuild completed; main.pdf is 9 pages
+    (595.276 x 793.701 pt, 2687248 bytes); page footer previously inspected as Page
+    9 of 9; user owns experimental physical-volume judgment.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements:
+    - REQ-003
+    tasks:
+    - TASK-029
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 3b0e4475c67dcb6235da53a59bac514c3837a2ca9d3938102a919feb17054857
+  recorded_at: '2026-09-17T03:45:33Z'
+  invalidated_at: '2026-09-17T05:19:15Z'
+  invalidation_reason: Figures 4 and 5 were converted to fixed single-column placement;
+    prior compiled PDF and source-file hashes no longer cover the current manuscript
+    state.
+- id: EV-034
+  kind: verification
+  subject: Figure 2 and Figure 3 placement in the CAS manuscript
+  status: stale
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex; pdfinfo; pdftotext; main.aux label inspection
+  result_ref: 'PASS: 9 pages; Figure 2 on page 5 near Section 4.1; Figure 3 on page
+    6 near Section 5.1; no undefined references, fatal errors, or missing figure files;
+    both source figures use explicit top placement.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-031
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 6e0ca4e908134cc0087fd56656516091693631f7df8a3ef4845118be2e0669b6
+  recorded_at: '2026-09-17T04:08:58Z'
+  invalidated_at: '2026-09-17T05:19:15Z'
+  invalidation_reason: Figures 4 and 5 were converted to fixed single-column placement;
+    prior compiled PDF and source-file hashes no longer cover the current manuscript
+    state.
+- id: EV-035
+  kind: verification
+  subject: Fixed single-column placement for Figures 4 and 5
+  status: stale
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex; main.aux label inspection; pdftoppm page 6-9 rendering and visual inspection
+  result_ref: 'PASS: 9 pages; Figure 4 on page 6; Figure 5 on page 7; both are single-column
+    and non-floating; no undefined references, fatal errors, or ignored float placements.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-032
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: c080a4d9ebffe9e79fd6c26afda90fa216a3e5bec631f67b263431a371f6c078
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 9fae227e032609f6762436e696214e3b1f01e075bfacb777d50cf3335adb7b7c
+      论文部分/els-cas/els-cas-templates/main.pdf: 85c7443720bd9d3289dbd45f7200faed8ae120fad31037eb96f00c5e72ab4479
+  recorded_at: '2026-09-17T05:19:30Z'
+  invalidated_at: '2026-09-17T08:35:22Z'
+  invalidation_reason: Figure 6 changed to plot complete controller trajectories and
+    full shared limits after user feedback; affected figure, script, manuscript image
+    copy, and compiled PDF were regenerated.
+- id: EV-036
+  kind: analysis
+  subject: New soft-platform control dataset audit
+  status: valid
+  command: Python ZIP/CSV audit for headers, row counts, repeated final steps, reference
+    alignment, range checks, and controller configuration metadata
+  result_ref: 'PASS WITH BLOCKER: 8-FS/PID have 400 unique steps and identical references;
+    star FS/PID have 500 unique steps and identical references; all fields complete;
+    final step repeated 31 times in each file; 8-PID metadata says Koopman-LQR and
+    star-PID config says Koopman-LQR Q=30/R=0.1/feedforward=1.3, so PID identity is
+    unresolved.'
+  covers:
+    files:
+    - 数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-FS.zip
+    - 数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-PID.csv
+    - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-FS.zip
+    - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip
+    requirements: []
+    tasks:
+    - TASK-033
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-FS.zip: 16704be3154fd74440ce2ff703363ab05bfbd78b7dced270eaebb9da0dee093e
+      数据备份/软体平台/软体机械臂轨迹跟踪数据/8字-PID.csv: e0f2399f5496a0e9a4667857014499975ea00f7fb7a8f91dd901ded984ac1e98
+      数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-FS.zip: 0273f8bc87b674716ac5fcbbb8a4792b0dab3b68354ca604620782a19bf04979
+      数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip: bc4eb66e45a74bf6425fc3bfa03bbb437315ce80c18b4ecd3f4efa61be05fd3c
+  recorded_at: '2026-09-17T08:11:50Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-037
+  kind: verification
+  subject: New soft-platform figure-eight and five-point-star control integration
+  status: stale
+  command: edmddl2 py_compile and Figure 6 regeneration; latexmk forced build; rendered
+    pages 7-9 inspected; PDF page/reference/hash checks
+  result_ref: 'PASS: Figure 6 uses 8-shaped and five-point-star data; FS/PID RMSE-MAE:
+    0.1174/0.1135 vs 0.6386/0.4797 and 0.1339/0.1294 vs 0.8406/0.6391; manuscript
+    is 9 pages with no undefined references or fatal errors; rendered Figure 6 is
+    legible.'
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/els-cas/els-cas-templates/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-033
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py: 0cfa9752cc331528c64e3f2f18a7c163b2e8857a609e2de0740034b48dec4def
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.png: fbf1e81f2354972df4d5eb373db12f1ef2c7561738a3cc86c580b7c074af40ed
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf: 8620fcedd31f4a5ebae5fc561b4c903cbc4f2e8c6f3036e5e219fc035f038aff
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg: 1a548900dc4e62789914ac6017bd4c5de4559c34fb59511dec3f86245db10eb3
+      杂项/正式论文的绘图部分/figure4_soft_control_metrics.json: d21a7bf9a158e59a2373e08ac85616f99921641b7d6659aaa21af5d4bef63b5a
+      论文部分/els-cas/els-cas-templates/pictures/figure4_soft_control_tracking.pdf: 8620fcedd31f4a5ebae5fc561b4c903cbc4f2e8c6f3036e5e219fc035f038aff
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: ae75897a208fe547f4e728a3470922fd12f6ba53b87078d335a0022f6c108a3b
+      论文部分/els-cas/els-cas-templates/main.pdf: b9c83d86699fcb0b2b4cf24ad8c515b672de39b2fe71852e460579d75f485fe8
+  recorded_at: '2026-09-17T08:21:39Z'
+  invalidated_at: '2026-09-17T08:35:22Z'
+  invalidation_reason: Figure 6 changed to plot complete controller trajectories and
+    full shared limits after user feedback; affected figure, script, manuscript image
+    copy, and compiled PDF were regenerated.
+- id: EV-038
+  kind: verification
+  subject: Complete soft-platform trajectories in Figure 6 with unchanged metric window
+  status: valid
+  command: edmddl2 py_compile; Figure 6 regeneration; figure PDF copy; latexmk forced
+    build; pdfinfo; source/path and rendered-page checks
+  result_ref: 'PASS: trajectory panels now plot full FS-EDMD-LQR/PID data and shared
+    limits include full actual ranges; bottom error curves and Table 2 retain step>=30
+    metrics; manuscript is 9 pages with no undefined references or fatal errors.'
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.png
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf
+    - 杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg
+    - 杂项/正式论文的绘图部分/figure4_soft_control_metrics.json
+    - 论文部分/els-cas/els-cas-templates/pictures/figure4_soft_control_tracking.pdf
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-033
+  version_binding:
+    git_commit: 7270777d34eb819c7e905e61757645a434314d7c
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure4_soft_control_tracking.py: f7feb8c932f945bc923f713d5383c20fc114be45ca08ff372f81754c120ea467
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.png: 3864afa960c9df3f6e7f7d5e3d44a171bb697ee2ae307b1aaed15d2f5e54c9a8
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.pdf: 56eb081b3d269fa7e4efb7d7d2139666a68b8b86f703985e7aec9bed4cb344de
+      杂项/正式论文的绘图部分/figure4_soft_control_tracking.svg: 06c0fb995dade970985424b66b2acbcbb7a2374dd6993ac34f779ec89cd0cd04
+      杂项/正式论文的绘图部分/figure4_soft_control_metrics.json: d21a7bf9a158e59a2373e08ac85616f99921641b7d6659aaa21af5d4bef63b5a
+      论文部分/els-cas/els-cas-templates/pictures/figure4_soft_control_tracking.pdf: 56eb081b3d269fa7e4efb7d7d2139666a68b8b86f703985e7aec9bed4cb344de
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: e57b34c7a630f11ab5572d838b12060c4b2d6076f52dfe75cd665ee7738e9286
+      论文部分/els-cas/els-cas-templates/main.pdf: 5284fbf6e89313c6f0150572e236b792407a9deaedba4b8e5aac87e22d62b186
+  recorded_at: '2026-09-17T08:35:33Z'
+  invalidated_at: null
+  invalidation_reason: null
