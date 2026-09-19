@@ -1987,10 +1987,11 @@ tasks:
     - latexmk PDF builds for main.tex and highlights.tex
     evidence:
     - EV-032
+    - EV-051
     limitations:
     - Author metadata and declarations require user-provided facts.
   result:
-    summary: Highlights were reduced and separated; Q-019 is resolved as a nine-page internal target, and the remaining guide-compliance items are in progress.
+    summary: Highlights were reduced and separated; Q-019 is resolved as a nine-page internal target; the Abstract and Introduction now consistently describe the dual-platform experiments, and the remaining guide-compliance items are in progress.
     changed_files:
     - 论文部分/els-cas/els-cas-templates/main.tex
     - 论文部分/els-cas/els-cas-templates/highlights.tex
@@ -2198,3 +2199,201 @@ tasks:
     follow_ups: []
   created_at: '2026-09-17T07:25:00Z'
   updated_at: '2026-09-17T08:35:00Z'
+- id: TASK-034
+  title: Capture reusable paper-writing and revision workflow material
+  kind: task
+  phase: distillation
+  goal: Consolidate the manuscript revision rationale, reusable rules, section-specific checks, pitfalls, and validation workflow into durable project materials that can later be abstracted into a dedicated paper-writing and revision Skill.
+  status: done
+  priority: medium
+  risk: low
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - workflow-capture
+  - skill-input
+  - distillation
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-030
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-work-trace
+  - a-project-log
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/不同期刊编辑意见汇总.md
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - .project-log/research/papers/feature-selection-koopman-q3-revision/reading-note.md
+  - .project-log/research/ras-author-guide-2026.md
+  - .project-log/decisions/decision-log.yaml
+  outputs:
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  - .project-log/work-trace/trace.yaml
+  - .project-log/distillation/candidates.yaml
+  plan:
+  - Extract the reviewer-comment triage rules and distinguish journal-scope feedback from manuscript-content defects.
+  - Capture the claim-evidence contract, page-budget constraints, experiment-planning rules, and cross-section consistency checks.
+  - Record high-signal cases where wording, figure layout, data provenance, or baseline identity changed the revision decision.
+  - Produce a single notes artifact that can be supplied directly to a future Skill authoring task.
+  done_when:
+  - The notes identify inputs, workflow stages, reusable rules, anti-patterns, and verification gates.
+  - Case-specific evidence and generalized lessons are clearly separated.
+  - Work-trace entries and distillation candidates point to the notes artifact.
+  - Project Log validation passes.
+  verification:
+    status: passed
+    commands:
+    - Manual cross-check against the manuscript, editor summary, author guide, decisions, and current evidence.
+    - loopctl validate
+    evidence:
+    - EV-051
+    - EV-052
+    limitations:
+    - The future Skill must still be designed and tested separately; this task only captures source material.
+  result:
+    summary: Captured the reusable manuscript-revision method, section checks, figure and experiment constraints, failure cases, and future Skill input/output contract in one notes artifact.
+    changed_files:
+    - .project-log/docs/paper-revision-agent-skill-notes.md
+    - .project-log/work-trace/trace.yaml
+    - .project-log/distillation/candidates.yaml
+    deviations: []
+    follow_ups:
+    - Use the notes artifact as an input when the user requests the dedicated paper-writing and revision Skill.
+  created_at: '2026-09-19T05:38:27Z'
+  updated_at: '2026-09-19T05:40:21Z'
+- id: TASK-035
+  title: Audit and align the manuscript Conclusion with the final evidence
+  kind: task
+  phase: implementation
+  goal: Make the Conclusion accurately reflect the two-platform modeling and tracking evidence, restrict disturbance-robustness claims to the robotic-arm test, and state the bounded operating scope without overstating generalization.
+  status: done
+  priority: medium
+  risk: low
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - conclusion
+  - claim-consistency
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-030
+  - TASK-034
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-work-trace
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  - .project-log/work-trace/trace.yaml
+  plan:
+  - Compare the Conclusion against the Abstract, contributions, experiment matrix, and reported metrics.
+  - Restrict robustness wording to the robotic-arm disturbance-recovery test.
+  - State the bounded operating-range and disturbance assumptions.
+  - Add the reusable Conclusion audit rule to the paper-revision Skill notes.
+  - Rebuild in a clean copy and inspect the final rendered page.
+  done_when:
+  - Every Conclusion claim is supported by the final manuscript evidence.
+  - The platform scope and disturbance-test scope are unambiguous.
+  - The clean-copy PDF still builds within nine pages without actionable warnings.
+  - Project Log and the future Skill material are updated.
+  verification:
+    status: passed
+    commands:
+    - Clean-copy latexmk -pdf -interaction=nonstopmode main.tex
+    - Strict warning scan and pdfinfo
+    - pdftoppm page 8 rendering and visual inspection
+    evidence:
+    - EV-053
+    limitations: []
+  result:
+    summary: The Conclusion now separates two-platform prediction and tracking results from the arm-only disturbance-recovery test, states the tested operating range and bounded-disturbance setting, and retains the theoretical bound and future work.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - .project-log/docs/paper-revision-agent-skill-notes.md
+    - .project-log/work-trace/trace.yaml
+    - .project-log/distillation/candidates.yaml
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-19T05:43:59Z'
+  updated_at: '2026-09-19T05:47:15Z'
+- id: TASK-036
+  title: Define non-obvious and coined abbreviations at first occurrence
+  kind: task
+  phase: implementation
+  goal: Ensure non-obvious and project-coined abbreviations, especially EDMD, EDMDDL, and FS-EDMD, are introduced by their full terms before the short forms are used, while allowing field-standard abbreviations such as LQR and ReLU to appear without expansion.
+  status: done
+  priority: medium
+  risk: low
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - abbreviations
+  - terminology
+  - consistency
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on:
+  - TASK-035
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-work-trace
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  - .project-log/work-trace/trace.yaml
+  plan:
+  - Audit the first textual occurrence of EDMD, EDMDDL, and FS-EDMD in the Abstract and main text.
+  - Expand EDMDDL and FS-EDMD before their short forms and keep EDMD introductory text consistent.
+  - Leave field-standard abbreviations such as LQR, PID, PCA, ReLU, MSE, RMSE, and MAE unchanged unless they are already defined naturally.
+  - Recompile in a clean copy and inspect the affected pages.
+  done_when:
+  - EDMD, EDMDDL, and FS-EDMD have full-term definitions before their first short-form use in the Abstract and main text.
+  - Expansion wording is consistent with the cited methods and the paper's own terminology.
+  - The manuscript remains nine pages without actionable warnings.
+  verification:
+    status: passed
+    commands:
+    - Clean-copy latexmk -pdf -interaction=nonstopmode main.tex
+    - Strict warning scan of main.log
+    - pdfinfo page-count check
+    - pdftoppm rendering and manual inspection of pages 1-2
+    evidence:
+    - EV-054
+    limitations: []
+  result:
+    summary: EDMD, EDMDDL, and FS-EDMD are now defined before their first short-form uses in the Abstract and Introduction, while common field abbreviations remain unexpanded under the agreed layered terminology policy.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - .project-log/docs/paper-revision-agent-skill-notes.md
+    - .project-log/work-trace/trace.yaml
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-19T05:55:00Z'
+  updated_at: '2026-09-19T06:10:00Z'

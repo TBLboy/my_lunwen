@@ -232,7 +232,7 @@ evidence:
 - id: EV-008
   kind: automated-run
   subject: project log validation passed after implementation
-  status: valid
+  status: stale
   command: validate_project.py --root .
   result_ref: .project-log/verification/evidence.yaml
   covers:
@@ -250,8 +250,8 @@ evidence:
       .project-log/workflow.yaml: 746d1469f1cd30ffaca80c4d64afce1a66794110604a5fb64ea74d6f15a153ae
       .project-log/tasks/task-list.yaml: 2f7ec962d0a0dd292d8a8dc95e9169f510d68627f263f0186e8b4df070760472
   recorded_at: '2026-09-10T12:35:28Z'
-  invalidated_at: null
-  invalidation_reason: null
+  invalidated_at: '2026-09-19T05:34:25Z'
+  invalidation_reason: PostToolUse:apply_patch
 - id: EV-011
   kind: automated-run
   subject: default 200-dimensional SoftLift passes finite and dimension checks
@@ -415,7 +415,7 @@ evidence:
 - id: EV-016
   kind: automated-run
   subject: solution research and task decomposition synchronized with baseline evidence
-  status: valid
+  status: stale
   command: validate_project.py --root .; loopctl.py --root . --json validate
   result_ref: .project-log/tasks/task-list.yaml
   covers:
@@ -437,8 +437,8 @@ evidence:
       .project-log/workflow.yaml: 6507264723218a392d059302bdc7f86a886237bf16f580d7a36b735e22247ccc
       .project-log/current-session.md: 7896d1aa211567d4723b773577b378a7a0b429a935c6257f2cebdd4b634b97d8
   recorded_at: '2026-09-11T12:20:25Z'
-  invalidated_at: null
-  invalidation_reason: null
+  invalidated_at: '2026-09-18T12:58:26Z'
+  invalidation_reason: PostToolUse:apply_patch
 - id: EV-017
   kind: automated-run
   subject: coarse-to-fine search finalizes soft-final-006 as paper candidate
@@ -521,7 +521,7 @@ evidence:
   kind: automated-run
   subject: project log and loop state validate and complete after final soft-platform
     handoff
-  status: valid
+  status: stale
   command: validate_project.py --root .; loopctl.py --root . --json validate; loopctl.py
     --root . --json evaluate goal; loopctl.py --root . --json decide; loopctl.py --root
     . --json handoff
@@ -550,8 +550,8 @@ evidence:
       .project-log/loop/active-run.yaml: 1a7b2efaf01cdf870fd218a84a98a9e75fbf571a0f934a5e9b235147233c7dbc
       .project-log/loop/handoff.md: bbf396e09ee6fcdac1059f347ff5aff79e3f495cbaa8eb69b2cb3cb9c843e10e
   recorded_at: '2026-09-11T14:58:53Z'
-  invalidated_at: null
-  invalidation_reason: null
+  invalidated_at: '2026-09-18T12:58:26Z'
+  invalidation_reason: PostToolUse:apply_patch
 - id: EV-020
   kind: artifact
   subject: Figure 2 dual-platform modeling-accuracy figure
@@ -1074,7 +1074,7 @@ evidence:
 - id: EV-038
   kind: verification
   subject: Complete soft-platform trajectories in Figure 6 with unchanged metric window
-  status: valid
+  status: stale
   command: edmddl2 py_compile; Figure 6 regeneration; figure PDF copy; latexmk forced
     build; pdfinfo; source/path and rendered-page checks
   result_ref: 'PASS: trajectory panels now plot full FS-EDMD-LQR/PID data and shared
@@ -1106,5 +1106,399 @@ evidence:
       论文部分/els-cas/els-cas-templates/manuscript_body.tex: e57b34c7a630f11ab5572d838b12060c4b2d6076f52dfe75cd665ee7738e9286
       论文部分/els-cas/els-cas-templates/main.pdf: 5284fbf6e89313c6f0150572e236b792407a9deaedba4b8e5aac87e22d62b186
   recorded_at: '2026-09-17T08:35:33Z'
+  invalidated_at: '2026-09-18T14:47:31Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-039
+  kind: verification
+  subject: Split Figure 4 into robotic-arm and soft-platform modeling figures
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode main.tex; pdfinfo main.pdf; main.aux
+    figure label check; pdftotext pages 6-7 layout check
+  result_ref: 'PASS: modeling-accuracy figure split into Fig.4 robotic arm (q1-q3)
+    and Fig.5 soft platform (x/y); both single-column inline; main.pdf remains 9 pages;
+    Fig.4 page 6, Fig.5 page 7, Fig.6 page 7, Fig.7 page 8; no undefined references
+    or fatal errors; 5.1 to 5.2 text flow shows the large blank area is reduced.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 杂项/正式论文的绘图部分/plot_figure4_modeling_accuracy_split_v1.py
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 9462e3234d7f100f003298e2de3756b3f698bc3c1f23c8024e940eaebe084fcf
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: f146adccb35c1a1cc3c488b7d33be4b111999d3f6a9d516bbc7907dfc0708c0d
+      杂项/正式论文的绘图部分/plot_figure4_modeling_accuracy_split_v1.py: 95c30fde8f7d6e135e94472d78158fb48806a20ca67f5acfa08af6ea207878e2
+  recorded_at: '2026-09-19T02:21:03Z'
+  invalidated_at: '2026-09-19T02:35:00Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-040
+  kind: verification
+  subject: Soft-platform controller parameters in manuscript
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex;
+    pdfinfo main.pdf; main.aux label check; pdftotext page 8 parameter-text check
+  result_ref: 'PASS: added PID Kp=20.00, Ki=1.00, Kd=10.00 with zero dead zone; FS-EDMD-LQR
+    Qx=diag(250,250), R=I2, lifted-feature alpha=0.01, feedforward gain 0, input limit
+    200; manuscript remains 9 pages with Fig.4 page 6, Fig.5/Fig.6 page 7, Fig.7 page
+    8, and no undefined references or fatal errors.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: d00225b7de318badcd5a5cd857451c2a004928a6ad1440db827595a50c1fc595
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 2d74d0ca92f37d68d2aab15a475b7fd83c021ab63f0e74cf0670dab3a51d46fb
+  recorded_at: '2026-09-19T02:35:29Z'
+  invalidated_at: '2026-09-19T02:37:38Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-041
+  kind: verification
+  subject: Soft-platform controller parameters aligned with robotic-arm experiment
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex;
+    pdfinfo main.pdf; main.log undefined-reference check; pdftotext pages 7-8 parameter-text
+    check
+  result_ref: 'PASS: soft-platform section now reports only PID Kp=20.00, Ki=1.00,
+    Kd=10.00 and FS-EDMD-LQR Qx=diag(250,250), R=I2, matching the robotic-arm parameter
+    granularity; ff_gain, alpha, dead-zone, and input-limit details are omitted; manuscript
+    remains 9 pages with no undefined references or fatal errors.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 55b7e0c9f194aebc22810c8dcce86be07dc0ae094d8947ea720a65467296e73b
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 5b901c7bd53560b9189cc1917257b6abe9184e822042e95fee25d2adf7bbaf6a
+  recorded_at: '2026-09-19T02:38:05Z'
+  invalidated_at: '2026-09-19T02:41:01Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-042
+  kind: verification
+  subject: Merge robustness experiment into Section 5.3
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex;
+    pdfinfo main.pdf; main.aux subsection-label check; main.log undefined-reference
+    check; pdftotext pages 7-8 robustness-flow check
+  result_ref: 'PASS: removed the standalone Section 5.4 heading and moved the robustness
+    experiment into the robotic-arm tracking discussion in Section 5.3; no subsection.5.4
+    label remains; main.pdf remains 9 pages with no undefined references or fatal
+    errors.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: a9d803b78d2f93bb12fff71316a0f19c190da16a98cad43f4d5dbefd6c9dd252
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 42cd174967f5a7684af3c5f901ab69844644c56d41cddae9546519f9242e571a
+  recorded_at: '2026-09-19T02:41:40Z'
+  invalidated_at: '2026-09-19T02:45:15Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-043
+  kind: verification
+  subject: Figure 5 page-6 layout whitespace removal
+  status: stale
+  command: latexmk and rendered-page inspection
+  result_ref: 'PASS: Figure 5 is at the bottom of page 6; blank removed; 9 pages;
+    no fatal errors.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 4b3552bbe3c52eb56528167ff4346a78db936cb12960a014a397b529404d1eb1
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: ff5a7207d24ebb70ca0c396e52f0b01caa90d6cadf3ccbdb1f2dfc0683f7285e
+  recorded_at: '2026-09-19T02:51:58Z'
+  invalidated_at: '2026-09-19T02:53:59Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-044
+  kind: verification
+  subject: Figure 5 layout rollback to full column width
+  status: stale
+  command: latexmk and main.log image-size inspection
+  result_ref: 'PASS: Figure 5 restored to full columnwidth; 9 pages; no fatal errors.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: fdac986aede1375bd8f3892baddb5c348f85ec28afdbcea2c46c5cfb0ba68d1a
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 92cbddd3fb46ee0cba9bfbcef46082657374b9eb2172303c066b3586cbcecbc4
+  recorded_at: '2026-09-19T02:54:42Z'
+  invalidated_at: '2026-09-19T03:22:34Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-045
+  kind: verification
+  subject: Revised soft-platform triangle and Lissajous tracking figure
+  status: valid
+  command: py_compile; runtime data processing and figure export; processed-row audit;
+    rendered PNG inspection
+  result_ref: 'PASS: 500 aligned samples per task/controller; Lissajous FS decimation
+    factor 2; PNG/PDF/SVG generated.'
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/plot_figure7_soft_tracking_singlecol_v4.py
+    requirements: []
+    tasks:
+    - TASK-033
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/plot_figure7_soft_tracking_singlecol_v4.py: 4b7a5fcc30d825c7d3469dea70b83aed3a0254a0cf9f21007d997a39e0be4492
+  recorded_at: '2026-09-19T03:17:31Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-046
+  kind: manuscript-build
+  subject: Soft-platform triangle/Lissajous tracking figure integrated into RAS manuscript
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode main.tex; pdfinfo main.pdf; pdftotext
+    -f 8 -l 9 -layout main.pdf -
+  result_ref: 'PASS: 9 pages; Figure 7 and Table 2 on page 8; no undefined references
+    or fatal errors; rendered page inspected'
+  covers:
+    files:
+    - 杂项/正式论文的绘图部分/figure7_soft_tracking_singlecol_v4.pdf
+    - 杂项/正式论文的绘图部分/figure7_soft_tracking_singlecol_v4_metrics.json
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      杂项/正式论文的绘图部分/figure7_soft_tracking_singlecol_v4.pdf: bfed43fcf1be312d0ca67f4aca1e9809409e53713b4d0a95210e222ecac3ce79
+      杂项/正式论文的绘图部分/figure7_soft_tracking_singlecol_v4_metrics.json: 3a55e60479f54d075516a70bdd32b1267d12fbfb3046880ddfbcda6a0c3565c6
+  recorded_at: '2026-09-19T03:25:29Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-047
+  kind: verification
+  subject: Manuscript pictures normalized to Figure1-Figure7 order
+  status: stale
+  command: Move-Item mapping old picture names to Figure1.pdf...Figure7.pdf; remove
+    six unreferenced files; latexmk -pdf -interaction=nonstopmode main.tex; rg includegraphics;
+    main.aux label check; pdfinfo
+  result_ref: 'PASS: pictures contains only Figure1.pdf through Figure7.pdf; manuscript
+    references match figure order; main.pdf remains 9 pages with no missing files,
+    undefined references, or fatal errors'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 3c307d269e67cfc9799aa1e3653205c86b11005624010e035263ca6249ded3c0
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: fb55289f2f2333033abd6dabc22d998cd2d51568a4580a4361f5fbab01632f39
+  recorded_at: '2026-09-19T03:31:40Z'
+  invalidated_at: '2026-09-19T03:39:44Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-048
+  kind: verification
+  subject: Soft-platform trajectory-66 modeling MSE, RMSE, and MAE completed
+  status: stale
+  command: edmddl2 python -m py_compile; rerun plot_soft_trajectory66.py; compare
+    existing RMSE; latexmk -pdf -interaction=nonstopmode main.tex; pdftotext page
+    7; pdfinfo
+  result_ref: 'PASS: FS-EDMD/EDMD/EDMDDL MSE=0.62235711/0.80374323/1.67108957, RMSE=0.78889613/0.89651728/1.29270630,
+    MAE=0.57667477/0.71482806/0.93678336; Table 1 updated; main.pdf remains 9 pages
+    with no fatal errors'
+  covers:
+    files:
+    - 建模代码/modeling/soft_metrics.py
+    - 建模代码/scripts/plot_soft_trajectory66.py
+    - 杂项/软体平台探索实验结果/final/metrics/trajectory66_metrics.json
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 3cd288cba14f45c01fb69cc8ee928ddb2304c66a9e8faaf265144f0bb805a16f
+    file_hashes:
+      建模代码/modeling/soft_metrics.py: 0d52068466704b54eaefba46045d59d7554e3d371c2fc82d4731ab941240d1b3
+      建模代码/scripts/plot_soft_trajectory66.py: 54816e0c945046fd5511983d3f6488e59609133aa63689b30c6d5ca252b8a04c
+      杂项/软体平台探索实验结果/final/metrics/trajectory66_metrics.json: 86e37613476ea4e4735e101493e7dd6cd654e2580b2e0f87f89d34cadc6d9922
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 8afcc6a4460f23f992b4f929aa6c70f3c81615b9bf6f8101c6ecf8b15ba4ec0b
+  recorded_at: '2026-09-19T03:42:19Z'
+  invalidated_at: '2026-09-19T04:14:18Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-049
+  kind: manuscript-build
+  subject: RAS manuscript warning and typography polish
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode main.tex; rg -n 'Overfull|Underfull|Warning|undefined
+    references|LaTeX Error|Emergency stop' main.log; pdfinfo main.pdf
+  result_ref: 'PASS: independent clean-copy build succeeds; 9 pages; no overfull/underfull/package
+    warnings, undefined references, or fatal errors; pages 3, 4, and 9 rendered and
+    inspected'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: d3e86ab8e259b8de3fb346a80ae8e3d0755d99c2d96549bcce5ce9b2c4647441
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: e34a9d4da0174923c2cc3fc0e410c1b5f486b2ec38e36ee4dc9a672e2d982597
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: d8c1775283c5f6982e25279e933317afc443643e69d3746e9ba22ea0f3d87ee1
+  recorded_at: '2026-09-19T04:18:14Z'
+  invalidated_at: '2026-09-19T04:21:05Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-050
+  kind: manuscript-build
+  subject: Final RAS manuscript clean-build warning audit
+  status: stale
+  command: Copy source to a clean temporary directory; latexmk -pdf -interaction=nonstopmode
+    main.tex; rg -ni 'overfull|underfull|package .*warning|pdftex warning|latex warning|undefined
+    references|LaTeX Error|Emergency stop' main.log; pdfinfo main.pdf
+  result_ref: 'PASS: clean-copy build exits 0; 9 pages; no actionable LaTeX/pdfTeX
+    warnings, undefined references, or fatal errors; representative pages rendered
+    and inspected'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 289c98bc0bd6ecff92940488dd720dff01ca3987934c9cdc40062235f50aef4d
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: c8a64898cb10d8340018d08c8ac0d36fe3e7a92eb7f56cdeb83efaeed6c49720
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: d8c1775283c5f6982e25279e933317afc443643e69d3746e9ba22ea0f3d87ee1
+  recorded_at: '2026-09-19T04:22:31Z'
+  invalidated_at: '2026-09-19T05:32:36Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-051
+  kind: manuscript-build
+  subject: Abstract and Introduction dual-platform content audit
+  status: stale
+  command: Clean-copy latexmk -pdf -interaction=nonstopmode main.tex; strict warning
+    scan; pdfinfo; render pages 1-2
+  result_ref: 'PASS: abstract and introduction aligned with dual-platform experiments;
+    9 pages; strict warning scan clean; rendered pages 1-2 inspected'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 888ead5716a599d20e6f22bcaa513fe9324f417b5d8762d8e12ad63f5d2dced4
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: 3965f6bd0540d5ee5f87999a65172c1aa9e3e33e91c57a0a783422047aaf4426
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: bd3d8f21fdb54237d4d5f92211a7ee7b0628eeac0ca6fc2c1cc71084fcbb0b81
+  recorded_at: '2026-09-19T05:34:16Z'
+  invalidated_at: '2026-09-19T05:44:14Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-052
+  kind: verification
+  subject: Reusable paper-revision Skill source material
+  status: stale
+  command: Cross-check manuscript, editor summary, author guide, decisions, and evidence;
+    loopctl validate
+  result_ref: 'PASS: consolidated workflow notes, case evidence, anti-patterns, Skill
+    input/output contract, work traces, and distillation candidates; Project Log validates
+    cleanly'
+  covers:
+    files:
+    - .project-log/docs/paper-revision-agent-skill-notes.md
+    - .project-log/work-trace/trace.yaml
+    - .project-log/distillation/candidates.yaml
+    requirements: []
+    tasks:
+    - TASK-034
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 85641f69a81e06576c28636f3d544538e1436d06b050be905adf4106ef58d4b7
+    file_hashes:
+      .project-log/docs/paper-revision-agent-skill-notes.md: 5d3b4b3ba128f5efc4e20140d1aa0639f17dc3395495a47153a9cb0676677f0b
+      .project-log/work-trace/trace.yaml: 6eddaab98e906a132fbef0f2e70dc1c8cf09230e94244865791b9f126757e103
+      .project-log/distillation/candidates.yaml: bac39a7aad739ebec4030ed231556b43cf31b0004c85cbf7d707ce8c419e69ad
+  recorded_at: '2026-09-19T05:40:21Z'
+  invalidated_at: '2026-09-19T05:45:42Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-053
+  kind: manuscript-build
+  subject: Conclusion evidence-scope and applicability audit
+  status: stale
+  command: Clean-copy latexmk -pdf -interaction=nonstopmode main.tex; strict warning
+    scan; pdfinfo; render page 8
+  result_ref: 'PASS: Conclusion separated two-platform prediction/tracking from arm-only
+    disturbance recovery, stated bounded applicability, 9 pages, strict warning scan
+    clean, rendered page inspected'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - .project-log/docs/paper-revision-agent-skill-notes.md
+    - .project-log/work-trace/trace.yaml
+    - .project-log/distillation/candidates.yaml
+    requirements: []
+    tasks:
+    - TASK-035
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: 77d8d40aa337a2bab7116aad2e2341389e2220f2dd94a81a0471ac9c64b1e8c9
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 4f07de946097cd53c3578f91b68ae84a13b7151da24cebd7bb5830a77fab1fab
+      .project-log/docs/paper-revision-agent-skill-notes.md: 5ea0511125a0cce0657e8880c14a193019c4d7dd94c3ab0d4c6726033d0e7b8b
+      .project-log/work-trace/trace.yaml: b022ccfb150e26d78278fb6b63db277ed6773c423a28275c19d46f5e9980763a
+      .project-log/distillation/candidates.yaml: db795af3319a85523a7fba2c2b15bad300a77ad62e04c4450db5542127e944b7
+  recorded_at: '2026-09-19T05:47:15Z'
+  invalidated_at: '2026-09-19T05:58:59Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-054
+  kind: manuscript_build
+  subject: TASK-036 clean-copy abbreviation audit
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode main.tex in clean copy; strict warning
+    scan; pdfinfo; pdftoppm pages 1-2
+  result_ref: exit 0; 9 pages; no strict warning matches; pages 1-2 rendered and inspected;
+    PDF SHA256 70304F77F38BB7CA7FD5FF082F9D6BEE772CD9D866ED844997B9C9E2FD5DFECC
+  covers:
+    files:
+    - 论文部分/els-cas/main.pdf
+    requirements: []
+    tasks:
+    - TASK-036
+  version_binding:
+    git_commit: aa22cab413b1e65ab38b23c1f2d3c9193c6caab0
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/main.pdf: 70304f77f38bb7ca7fd5ff082f9d6bee772cd9d866ed844997b9c9e2fd5dfecc
+  recorded_at: '2026-09-19T06:03:53Z'
   invalidated_at: null
   invalidation_reason: null

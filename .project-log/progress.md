@@ -3,13 +3,149 @@
 ## Current Snapshot
 
 - Current phase: implementation
-- Current task: TASK-033 is complete; TASK-030 remains pending
-- Current status: the new figure-eight and five-point-star PID runs are integrated into Figure 6 and Table 2 after explicit controller-identity confirmation
-- Latest verification: full-trajectory Figure 6 and nine-page manuscript rebuild recorded as `EV-038`
+- Current task: TASK-036 is complete; TASK-030 remains in-progress for final submission-package checks
+- Current status: Non-obvious and paper-specific abbreviations now have first-use definitions under a layered terminology policy
+- Latest verification: EV-054; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
 - Next steps:
-  - Continue the RAS submission-package checks
+  - Continue the remaining RAS submission-package checks
+  - Use the captured notes when the dedicated paper-writing and revision Skill is requested
   - Replace the equipment figure when the new soft-platform photograph is supplied
   - Perform the final page-layout and author-guide pass
+
+## 2026-09-19 Layered Abbreviation Audit
+
+- Status: done.
+- Defined EDMD, EDMDDL, and FS-EDMD before their first short-form uses in the Abstract and Introduction.
+- Left common field abbreviations such as LQR, PID, PCA, ReLU, MSE, RMSE, and MAE unchanged, avoiding mechanical expansion.
+- Added the reusable terminology rule to the paper-revision Skill material and a corresponding work trace.
+- Verification: 9-page clean build, clean strict warning scan, and rendered pages 1-2. Evidence: EV-054.
+
+## 2026-09-19 Conclusion Evidence-Scope Audit
+
+- Status: done.
+- Separated two-platform prediction and tracking claims from the arm-only disturbance-recovery test.
+- Limited robustness wording to the disturbance-recovery test and stated the operating-range and bounded-disturbance scope.
+- Added the Conclusion consistency rule to the future paper-revision Skill material.
+- Verification: 9-page clean build, clean warning scan, and rendered Conclusion page. Evidence: EV-053.
+
+## 2026-09-19 Reusable Paper-Revision Skill Material
+
+- Status: done.
+- Created a consolidated notes artifact covering review triage, claim-evidence mapping, experiment planning, figure/page budgets, data audits, writing checks, and the future Skill contract.
+- Added four reusable work traces and four distillation candidates tied to the notes and existing evidence.
+- Verification: `loopctl validate` passed. Evidence: EV-052.
+
+## 2026-09-19 Abstract and Introduction Content Audit
+
+- Status: done.
+- Corrected the Abstract so robustness is attributed only to the robotic-arm disturbance-recovery test rather than to both platforms.
+- Added the dual-platform validation to the contribution list and corrected the section roadmap from one platform to experiments on both platforms.
+- Tightened the problem-method-theory-validation sequence and replaced several formulaic transitions while preserving all technical claims and metrics.
+- Verification: clean-copy `latexmk` exits 0 with 9 pages and a clean strict warning scan; pages 1--2 were rendered and inspected.
+- Evidence: EV-051.
+
+## 2026-09-19 LaTeX Warning and Typography Polish
+
+- Status: done.
+- Updated `main.tex` to disable hyperlinked footnotes, omit an empty ORCID footnote, handle the CAS keyword-box layout warning locally, use unique hyperref targets, raise the PDF output version to 1.7, and use ragged-right bibliography lines.
+- Made minimal wording and line-break adjustments in `manuscript_body.tex`; scientific meaning, metrics, figures, and tables were unchanged.
+- Verification: independent clean-copy `latexmk` build is 9 pages with no actionable `Overfull`, `Underfull`, hyperref, pdfTeX, undefined-reference, or fatal warnings; rendered pages 3, 4, and 9 were inspected.
+- Evidence: EV-050.
+
+## 2026-09-19 Soft-Platform Modeling Metrics Completion
+
+- Status: done.
+- Added MSE, RMSE, and MAE computation to the soft-platform trajectory-66 evaluation script.
+- Recovered and persisted soft-platform metrics for FS-EDMD, EDMD, and EDMDDL.
+- Updated Table 1 and the modeling-results text with the complete metrics and reductions.
+- Verification: the previous RMSE values are unchanged; the table fits on page 7; `main.pdf` remains 9 pages with no fatal errors.
+- Evidence: EV-048.
+
+## 2026-09-19 Paper Picture Filename Normalization
+
+- Status: done.
+- Renamed the seven active manuscript images to `Figure1.pdf`--`Figure7.pdf` in first-reference order.
+- Updated all `\includegraphics` paths in `manuscript_body.tex`.
+- Deleted six unreferenced legacy images from `pictures`.
+- Verification: the pictures folder contains only the seven active files, all figure labels resolve to Figures 1--7, and `main.pdf` remains 9 pages with no fatal errors.
+- Evidence: EV-047.
+
+## 2026-09-19 Soft-Platform Triangle/Lissajous Figure Integration
+
+- Status: done.
+- Replaced the manuscript image with `figure7_soft_tracking_singlecol_v4.pdf`.
+- Updated the Figure 7 caption, Section 5.3 discussion, and Table 2 soft-platform labels and metrics to triangle/Lissajous results.
+- Recorded triangle FS/PID RMSE 0.1749/0.6645 and MAE 0.1703/0.5468; Lissajous FS/PID RMSE 0.1266/1.7883 and MAE 0.1172/1.6710.
+- Verification: 9-page `main.pdf`, Figure 7 and Table 2 on page 8, no undefined references or fatal errors, and a rendered page inspection passed.
+- Evidence: EV-046.
+
+## 2026-09-19 New Soft-Platform Control Data Audit
+
+- Status: checked.
+- Triangle FS/PID contain 500 unique steps each and their references match exactly.
+- Lissajous FS/PID contain 1000/500 unique steps; deduplicate terminal repeats, use `FS[0::2]`, and pair by sample index with the time axis ignored.
+- All new CSVs contain 30 repeated terminal-step rows. Triangle and Lissajous data are sufficient for the next control-figure redraw.
+
+## 2026-09-19 Revised Soft-Platform Tracking Figure
+
+- Status: done.
+- Added a v4 processing and plotting script, generated PNG/PDF/SVG outputs, an aligned processed CSV, and a metrics JSON.
+- Lissajous FS is decimated from 1000 to 500 samples; all task/controller combinations have 500 aligned sample rows.
+- The revised figure shows triangle and Lissajous trajectories side by side in a single-column layout and uses sample index rather than raw elapsed time.
+- Evidence: EV-045.
+
+## 2026-09-19 Figure 5 Layout Rollback
+
+- Status: done.
+- User rejected the compressed Figure 5 layout because it was narrower than Figure 4.
+- Restored `width=\columnwidth` and the original paragraph-before-figure order.
+- Verification: Figure 5 requests the full column width, `main.pdf` remains 9 pages, and no undefined references or fatal errors are present.
+- Evidence: EV-044.
+
+## 2026-09-19 Robustness Experiment Merged into Section 5.3
+
+- Status: done.
+- Removed the `Robustness Validation Experiments` subsection and its label.
+- Moved the robustness paragraph directly after the irregular-tracking result in Section 5.3, so it reads as part of the robotic-arm tracking evaluation.
+- The paragraph identifies the sinusoidal reference, same controller parameters, manual link disturbances, and the disturbance-recovery row of Fig.6.
+- Verification: 9-page `main.pdf`, no undefined references or fatal errors, and no remaining `subsection.5.4` label.
+- Evidence: EV-042.
+
+## 2026-09-19 Soft-Platform Controller Parameters Aligned with Robotic-Arm Experiment
+
+- Status: done.
+- The soft-platform paragraph now reports only the same parameter types as the robotic-arm paragraph: PID \(K_p=20.00\), \(K_i=1.00\), \(K_d=10.00\), and FS-EDMD-LQR \(\mathbf{Q}_x=\diag(250,250)\), \(\mathbf{R}=\mathbf{I}_2\).
+- Removed feedforward gain, lifted-feature weight, PID dead zone, input limit, model asset path, output sign, and control-rounding details.
+- Verification: 9-page `main.pdf`, no undefined references or fatal errors; existing figure/table page assignments remain unchanged.
+- Evidence: EV-041.
+
+## 2026-09-19 Split Figure 4 into Robotic-Arm and Soft-Platform Modeling Figures
+
+- Status: done.
+- User wanted the tall combined modeling-accuracy figure split to give the 5.1/5.2 layout more flexibility.
+- Added `plot_figure4_modeling_accuracy_split_v1.py` and generated `figure4_robotic_modeling.{png,pdf,svg}` and `figure5_soft_modeling.{png,pdf,svg}`.
+- `manuscript_body.tex` now has `fig:robotic_modeling` (q1/q2/q3) and `fig:soft_modeling` (x/y), each using `figurehere` and `\columnwidth`; 5.1/5.2 text was adjusted to describe the two platforms separately.
+- Modeling RMSE values remain unchanged: robotic arm FS-EDMD/EDMDDL/EDMD `0.59333305/0.77044169/0.85184558`, soft trajectory 66 `0.78889613/1.29270630/0.89651728`.
+- Verification: 9-page `main.pdf`, no undefined references or fatal errors; `main.aux` places Fig.4 on page 6, Fig.5/Fig.6 on page 7, and Fig.7 on page 8; `pdftotext` confirms the 5.1 to 5.2 flow.
+- Evidence: EV-039.
+
+## 2026-09-18 Figure 6 Trajectory-Only v3
+
+- Followed the user decision to remove Figure 6's error-curve panels and keep only the figure-eight and five-point-star trajectory tracking panels.
+- Added `plot_figure4_soft_control_tracking_singlecol_v3.py`, output `figure6_soft_tracking_singlecol_v3`, and copied the v3 PDF into the CAS template.
+- Updated the Figure 6 caption so it no longer describes a bottom error row.
+- FS-EDMD-LQR versus PID RMSE/MAE remains unchanged: figure-eight `0.1174/0.1135` versus `0.6386/0.4797`; five-point star `0.1339/0.1294` versus `0.8406/0.6391`.
+- Rebuilt `main.pdf` successfully at 9 pages, Figure 6 on page 8, no undefined references or fatal errors.
+
+## 2026-09-18 Single-Column Paper Figure Integration
+
+- The three finalized plotting versions were copied into the CAS template `pictures` directory:
+  - Figure 4 uses `figure4_modeling_accuracy_singlecol_v7.pdf`.
+  - Figure 5 uses `figure5_control_tracking_singlecol_v6.pdf`.
+  - Figure 6 uses `figure6_soft_tracking_singlecol_v2.pdf`.
+- Figure 6 was changed from full-width `figure*` to `figurehere` with `\columnwidth`; Figures 4/5 already used `figurehere`.
+- `latexmk -pdf -interaction=nonstopmode main.tex` rebuilds successfully to 9 pages; Figure labels resolve to page 7/7/8 respectively.
+- Remaining: soft-platform equipment photo and final RAS submission-package checks are still pending.
 
 ## 2026-09-17 New Soft-Platform Control Data Integration
 

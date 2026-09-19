@@ -1,0 +1,52 @@
+{
+  "evaluation_start_step": 30,
+  "error_definition": "sqrt((act_x-ref_x)^2 + (act_y-ref_y)^2)",
+  "tasks": {
+    "figure_eight": {
+      "samples": 370,
+      "start_time_s": 6.2954,
+      "end_time_s": 81.2497,
+      "controllers": {
+        "FS-EDMD-LQR": {
+          "rmse": 0.11736275480839828,
+          "mae": 0.11350383718984172,
+          "x_rmse": 0.09231722629211878,
+          "y_rmse": 0.0724675509862583
+        },
+        "PID": {
+          "rmse": 0.638587114419562,
+          "mae": 0.47973444662551035,
+          "x_rmse": 0.6268397743464454,
+          "y_rmse": 0.12192374666159173
+        }
+      },
+      "fs_over_pid": {
+        "rmse_reduction_percent": 81.62149655727487,
+        "mae_reduction_percent": 76.34027783740846
+      }
+    },
+    "five_point_star": {
+      "samples": 470,
+      "start_time_s": 6.2873,
+      "end_time_s": 101.5509,
+      "controllers": {
+        "FS-EDMD-LQR": {
+          "rmse": 0.13385120350916185,
+          "mae": 0.12941643529467264,
+          "x_rmse": 0.09696059739300553,
+          "y_rmse": 0.09227560476118568
+        },
+        "PID": {
+          "rmse": 0.8406474151484348,
+          "mae": 0.6391184786633815,
+          "x_rmse": 0.6144468901793416,
+          "y_rmse": 0.573709940426938
+        }
+      },
+      "fs_over_pid": {
+        "rmse_reduction_percent": 84.07760482014598,
+        "mae_reduction_percent": 79.75079118893147
+      }
+    }
+  }
+}

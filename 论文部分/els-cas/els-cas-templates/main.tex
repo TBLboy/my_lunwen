@@ -17,6 +17,8 @@
 %% Template article for cas-dc documentclass for 
 %% double column output.
 
+\pdfminorversion=7
+\PassOptionsToPackage{hyperfootnotes=false,hypertexnames=false}{hyperref}
 \documentclass[a4paper,fleqn]{cas-dc}
 
 % If the frontmatter runs over more than one page
@@ -38,6 +40,34 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
+
+\AtBeginDocument{\apptocmd{\bibfont}{\raggedright}{}{}}
+
+% The CAS class places the keyword box in an intentional zero-width box.
+\newlength{\casSavedHfuzz}
+\BeforeBeginEnvironment{Abstract}
+  {\setlength{\casSavedHfuzz}{\hfuzz}\hfuzz=124pt}
+\AfterEndEnvironment{Abstract}
+  {\hfuzz=\casSavedHfuzz}
+
+% The CAS template prints an empty ORCID footnote when no ORCID is supplied.
+\ExplSyntaxOn
+\RenewDocumentCommand{\printorcid}{}
+  {
+    \seq_if_empty:NF \g_stm_orcid_seq
+      {
+        \group_begin:
+          \tex_let:D \thefootnote \relax
+          \footnotetext
+            {
+              \raggedright
+              \textsc{orcid}(s):\c_space_token
+              \seq_use:Nn \g_stm_orcid_seq { ;~ }
+            }
+        \group_end:
+      }
+  }
+\ExplSyntaxOff
 
 % Fixed in-column figure for placements that must not float.
 \makeatletter
@@ -121,7 +151,7 @@
 \cortext[1]{Corresponding author}
 
 \begin{abstract}
-Koopman operator theory with Extended Dynamic Mode Decomposition (EDMD) enables nonlinear dynamical systems to be represented by linear dynamics in a lifted space. However, the performance of EDMD strongly depends on the choice of basis functions: insufficient dictionaries limit approximation accuracy, whereas overcomplete dictionaries introduce redundancy, overfitting, and high computational cost. To address this issue, this paper proposes a feature-selection-based Koopman representation learning framework for robotic systems. A physics-informed overcomplete candidate library is first constructed, and a learnable feature selection matrix is then optimized to extract compact and informative linear combinations of candidate functions. The resulting modeling problem is formulated as a joint optimization over the Koopman matrices and the feature selection matrix, and a block coordinate descent algorithm is developed with convergence guarantees. Based on the learned lifted model, a feedforward-feedback Linear Quadratic Regulator controller is designed, where finite-dimensional approximation errors and external uncertainties are treated as bounded lumped disturbances. Lyapunov analysis proves that the closed-loop tracking error is ultimately uniformly bounded. Experiments on a three-degree-of-freedom robotic arm and a cable-driven soft platform demonstrate improved modeling accuracy, tracking performance, and robustness.
+Extended Dynamic Mode Decomposition (EDMD) provides a practical route to Koopman-based modeling by representing nonlinear robot dynamics as linear evolution in a lifted space. Its accuracy, however, depends strongly on the chosen dictionary: a small dictionary may miss important nonlinearities, while an overcomplete one can introduce redundancy, ill-conditioning, and unnecessary computation. We propose a feature-selection-based Koopman representation learning framework that retains the interpretability of a physics-informed candidate library while learning a compact set of linear feature combinations. The selection matrix is optimized jointly with the Koopman matrices, and the resulting problem is solved by block coordinate descent with stationary-point convergence guarantees under standard assumptions. The learned lifted model is then used in a feedforward-feedback linear quadratic regulator that treats finite-dimensional approximation errors and external uncertainties as bounded lumped disturbances. Lyapunov analysis shows that the closed-loop tracking error is ultimately uniformly bounded and relates the disturbance level to the steady-state error bound. The method is evaluated on a three-degree-of-freedom rigid robot arm and a cable-driven soft platform. The proposed feature-selection-based EDMD (FS-EDMD) model achieves lower multi-step prediction errors than EDMD and Extended Dynamic Mode Decomposition with Dictionary Learning (EDMDDL), and the resulting controller reduces tracking error relative to a PID baseline over multiple references. A disturbance-recovery test on the robotic arm further demonstrates bounded deviations and smooth recovery.
 \end{abstract}
 
 \begin{keywords}

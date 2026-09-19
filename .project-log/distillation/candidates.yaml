@@ -1,2 +1,59 @@
 version: "0.2"
-candidates: []
+candidates:
+- id: DIST-001
+  statement: Paper-revision workflows should begin with reviewer-comment triage that separates journal-fit advice from substantive manuscript defects.
+  stage: candidate
+  confidence: 0.86
+  context:
+  - Three journal rejections mixed scope mismatch with novelty, evidence, and formatting feedback.
+  - Treating all feedback as an editing mandate would over-expand and dilute the manuscript.
+  evidence:
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  - .project-log/research/papers/feature-selection-koopman-q3-revision/reading-note.md
+  counterexamples:
+  - A scope-based rejection may still contain a valid technical criticism that must be separated and handled.
+  target: .project-log/docs/paper-revision-agent-skill-notes.md
+  approval_required: false
+- id: DIST-002
+  statement: Experimental expansion in a paper revision should be constrained by a claim-evidence matrix, figure plan, and user-approved page budget.
+  stage: candidate
+  confidence: 0.84
+  context:
+  - The paper added a soft platform while preserving a nine-page internal target.
+  - New evidence was framed as cross-platform validation rather than a new paper.
+  evidence:
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  - DEC-010
+  - EV-051
+  counterexamples:
+  - Some journals or article types may permit substantially longer experimental sections.
+  target: .project-log/docs/paper-revision-agent-skill-notes.md
+  approval_required: false
+- id: DIST-003
+  statement: Any experiment change in a manuscript should trigger a cross-section consistency audit of Abstract, Introduction, Contributions, Roadmap, Results, and Conclusion.
+  stage: candidate
+  confidence: 0.9
+  context:
+  - Adding a platform left stale singular-platform wording and an unsupported cross-platform robustness claim.
+  evidence:
+  - EV-051
+  - EV-053
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  counterexamples:
+  - Purely local typo fixes do not require a full claim-consistency audit.
+  target: .project-log/docs/paper-revision-agent-skill-notes.md
+  approval_required: false
+- id: DIST-004
+  statement: Manuscript data should be audited for controller identity, sample alignment, endpoint duplication, metric windows, and provenance before plotting or reporting results.
+  stage: candidate
+  confidence: 0.88
+  context:
+  - Misleading export labels, repeated terminal rows, unequal trajectory lengths, and unstable timestamps affected the soft-platform control data.
+  evidence:
+  - EV-038
+  - EV-045
+  - .project-log/docs/paper-revision-agent-skill-notes.md
+  counterexamples:
+  - Clean, already validated datasets may require only a lighter audit.
+  target: .project-log/docs/paper-revision-agent-skill-notes.md
+  approval_required: false

@@ -3,13 +3,151 @@
 ## Current Snapshot
 
 - Current phase: implementation
-- Current task: TASK-033 is complete; TASK-030 remains pending
-- Current status: the new figure-eight and five-point-star PID runs are integrated into Figure 6 and Table 2 after explicit user confirmation of their controller identity
-- Latest verification: full-trajectory Figure 6 and nine-page manuscript rebuild recorded as `EV-038`
+- Current task: TASK-036 is complete; TASK-030 remains in-progress for final submission-package checks
+- Current status: Non-obvious and paper-specific abbreviations now have first-use definitions under a layered terminology policy
+- Latest verification: EV-054; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
 - Next steps:
-  - Continue TASK-030 metadata and submission-package checks
+  - Continue the remaining TASK-030 RAS submission-package checks
+  - Use the captured notes when the dedicated paper-writing and revision Skill is requested
   - Replace the equipment figure when the new soft-platform photograph is supplied
-  - Perform the final page-layout and author-guide pass
+  - Perform the final author-guide page-layout pass
+
+## 2026-09-19 Layered Abbreviation Audit
+
+- Established a sensitivity-based terminology rule: define EDMD, EDMDDL, and FS-EDMD at first use, while allowing common field abbreviations such as LQR, PID, PCA, ReLU, MSE, RMSE, and MAE to appear without mechanical expansion.
+- Checked the Abstract and Introduction independently. The Abstract now presents `Extended Dynamic Mode Decomposition (EDMD)`, `Extended Dynamic Mode Decomposition with Dictionary Learning (EDMDDL)`, and `feature-selection-based EDMD (FS-EDMD)` before the corresponding short forms; the Introduction follows the same order.
+- Added the layered terminology rule to `.project-log/docs/paper-revision-agent-skill-notes.md` and recorded the rationale in `WT-036-001`.
+- Verification: clean-copy `latexmk` exits 0 with 9 pages, the strict warning scan has no matches, and rendered pages 1-2 show correct definitions and layout. Evidence: EV-054.
+
+## 2026-09-19 Conclusion Evidence-Scope Audit
+
+- Rewrote the Conclusion so two-platform prediction and tracking evidence is separated from the arm-only disturbance-recovery experiment.
+- Removed the implication that both platforms demonstrate external-disturbance robustness.
+- Added an explicit limitation to the tested operating ranges and bounded-disturbance setting.
+- Retained the theoretical boundedness result and future work on online adaptation and model predictive control.
+- Added the reusable Conclusion audit rule to the paper-revision Skill notes and a corresponding work trace.
+- Verification: clean-copy `latexmk` exits 0 with 9 pages and a clean strict warning scan; the rendered Conclusion page was inspected. Evidence: EV-053.
+
+## 2026-09-19 Reusable Paper-Revision Skill Material
+
+- Added `.project-log/docs/paper-revision-agent-skill-notes.md` as the single source-material entry for a future paper-writing and revision Skill.
+- Captured reviewer-comment triage, claim-evidence contracts, experiment and page-budget rules, figure/table planning, data provenance checks, section-level checklists, human-like language heuristics, and the proposed Skill input/output contract.
+- Added four work-trace entries covering review triage, cross-platform experiment expansion, data alignment, and Abstract/Introduction consistency.
+- Added four distillation candidates for review triage, claim-driven experimental expansion, cross-section consistency, and manuscript-data auditing.
+- Verification: source materials were cross-checked and `loopctl validate` passed. Evidence: EV-052.
+
+## 2026-09-19 Abstract and Introduction Content Audit
+
+- Corrected the Abstract so robustness is attributed only to the robotic-arm disturbance-recovery test; the earlier wording implied that both platforms had been tested for disturbance robustness.
+- Tightened the problem-method-theory-validation sequence, replaced several formulaic transitions, and made the PID and EDMD/EDMDDL comparisons explicit.
+- Added the dual-platform validation to the contribution list: a rigid three-degree-of-freedom robot arm and a cable-driven soft platform, covering prediction, multiple tracking references, and disturbance recovery.
+- Corrected the section roadmap from one real robotic platform to experiments on both platforms.
+- Verification: independent clean-copy `latexmk` exits 0 with 9 pages and a clean strict warning scan; rendered pages 1--2 show no clipping or layout regressions. Evidence: EV-051.
+
+## 2026-09-19 LaTeX Warning and Typography Polish
+
+- Updated `main.tex` to disable hyperlinked footnotes, omit an empty ORCID footnote, handle the CAS keyword-box layout warning locally, use unique hyperref targets, raise the PDF output version to 1.7, and use ragged-right bibliography lines.
+- Made minimal wording and line-break adjustments in `manuscript_body.tex`; scientific meaning, metrics, figures, and tables were unchanged.
+- Verification: an independent clean-copy `latexmk` build succeeds with 9 pages and no actionable `Overfull`, `Underfull`, hyperref, pdfTeX, undefined-reference, or fatal warnings. Rendered pages 3, 4, and 9 were inspected. Evidence: EV-050.
+
+## 2026-09-19 Soft-Platform Modeling Metrics Completion
+
+- Extended the soft-platform trajectory-66 evaluation script to compute MSE, RMSE, and MAE from the same deployed-model predictions.
+- The recovered soft-platform metrics are FS-EDMD `0.6224/0.7889/0.5767`, EDMD `0.8037/0.8965/0.7148`, and EDMDDL `1.6711/1.2927/0.9368` for MSE/RMSE/MAE.
+- Updated Table 1 and the modeling-results text, including reductions of 22.6\%/12.0\%/19.3\% over EDMD and 62.8\%/39.0\%/38.4\% over EDMDDL.
+- Verification: `py_compile` and the default evaluation script pass; the recomputed RMSE values exactly match the previous outputs; `latexmk` produces a 9-page PDF with the updated table on page 7 and no fatal errors. Evidence: EV-048.
+
+## 2026-09-19 Paper Picture Filename Normalization
+
+- Renamed the seven manuscript images to `Figure1.pdf`--`Figure7.pdf` according to their first-reference order in the paper.
+- Updated all seven `\includegraphics` paths in `manuscript_body.tex`.
+- Deleted six unreferenced legacy images: `control_comparison_irregular.png`, `control_comparison_sinusoidal.png`, `figure2_modeling_accuracy.pdf`, `position_comparison.png`, `robustness_test.png`, and `velocity_comparison.png`.
+- Verification: the `pictures` folder contains only the seven active files, all references resolve in order, `main.pdf` remains 9 pages, and no missing-file, undefined-reference, or fatal errors were found. Evidence: EV-047.
+
+## 2026-09-19 Soft-Platform Triangle/Lissajous Figure Integration
+
+- Replaced `pictures/figure4_soft_control_tracking.pdf` with `figure7_soft_tracking_singlecol_v4.pdf`.
+- Updated the Figure 7 caption and Section 5.3 text from figure-eight/five-point-star to triangle/Lissajous.
+- Updated the soft-platform rows in Table 2: triangle FS/PID RMSE is 0.1749/0.6645 and MAE is 0.1703/0.5468; Lissajous FS/PID RMSE is 0.1266/1.7883 and MAE is 0.1172/1.6710.
+- Updated the reported reductions to 73.7\%/68.9\% for the triangle and 92.9\%/93.0\% for Lissajous.
+- Verification: `latexmk` rebuild succeeds, `main.pdf` remains 9 pages, Figure 7 and Table 2 resolve to page 8, and a rendered page inspection found no clipping or misplacement. Evidence: EV-046.
+
+## 2026-09-19 New Soft-Platform Control Data Audit
+
+- Checked the newly exported triangle and Lissajous tracking datasets in `数据备份/软体平台/软体机械臂轨迹跟踪数据`.
+- Triangle: FS and PID each contain 500 unique control steps; their reference trajectories match exactly at every step. Raw controller RMSE is 0.174589 for FS-EDMD-LQR and 0.654608 for PID over the deduplicated 500 samples.
+- Lissajous: FS contains 1000 unique control steps and PID contains 500. After sorting by `step`, use `FS[0::2]` to obtain 500 samples and pair them with PID by sample index rather than raw time.
+- Lissajous decimated-reference comparison: RMSE 0.064846 and maximum Euclidean reference difference 0.130173 over a coordinate range of approximately [-7, 7]; the offset choice `0::2` or `1::2` gives effectively the same result. Raw controller RMSE is 0.128146 for FS-EDMD-LQR and 1.77376 for PID.
+- Every new CSV has 30 repeated terminal rows at the last step; remove duplicates by `step` before plotting. The exported timestamps also fluctuate rather than forming a strict uniform grid, so the control plots should use sample/step or normalized trajectory progress, not elapsed time.
+
+## 2026-09-19 Revised Soft-Platform Tracking Figure
+
+- Added `plot_figure7_soft_tracking_singlecol_v4.py` to process the triangle and Lissajous archives, deduplicate by `step`, decimate Lissajous FS by `FS[0::2]`, and align both controllers by sample index.
+- Generated `figure7_soft_tracking_singlecol_v4.{png,pdf,svg}`, the aligned long-form `figure7_soft_tracking_singlecol_v4_processed.csv`, and the metric report `figure7_soft_tracking_singlecol_v4_metrics.json` in `杂项/正式论文的绘图部分`.
+- The processed CSV contains 500 unique samples for each task/controller combination. Metrics use the common PID reference and the established 30-sample initial-approach exclusion.
+- Verification: script compilation, runtime export, processed-row audit, PDF metadata inspection, and rendered PNG inspection passed. Evidence: EV-045.
+
+## 2026-09-19 Figure 5 Layout Rollback
+
+- User rejected the compressed Figure 5 layout because its width no longer matched Figure 4.
+- Restored Figure 5 to `width=\columnwidth` and restored the original order with the soft-platform explanation before the figure.
+- Verification: `latexmk` succeeds, the requested Figure 5 width is 238.25 pt (full column width), and `main.pdf` remains 9 pages with no undefined references or fatal errors. Evidence: EV-044.
+
+## 2026-09-19 Robustness Experiment Merged into Section 5.3
+
+- User decision: remove the standalone Section 5.4 and present the robustness test as part of the robotic-arm tracking evaluation.
+- Manuscript: deleted the `Robustness Validation Experiments` subsection heading/label and moved the robustness paragraph immediately after the irregular-tracking result within Section 5.3.
+- The paragraph now explicitly states that the test used the sinusoidal reference and the same robotic-arm controller parameters, then discusses the disturbance-recovery row of Fig.~6.
+- Verification: `latexmk` rebuild succeeds; no `subsection.5.4` label remains; `main.pdf` remains 9 pages with no undefined references or fatal errors. Evidence: EV-042.
+
+## 2026-09-19 Soft-Platform Controller Parameters Aligned with Robotic-Arm Experiment
+
+- User requested that the soft-platform section report only the same controller parameters as the robotic-arm section.
+- Manuscript: Section 5.3 now reports only PID \(K_p=20.00\), \(K_i=1.00\), \(K_d=10.00\) and FS-EDMD-LQR \(\mathbf{Q}_x=\diag(250,250)\), \(\mathbf{R}=\mathbf{I}_2\).
+- Omitted parameters: feedforward gain, lifted-feature weight, PID dead zone, input limit, model asset path, output sign, and control-rounding switch.
+- Verification: `latexmk` rebuild succeeds, `main.pdf` remains 9 pages, and no undefined references or fatal errors were found. Evidence: EV-041.
+
+## 2026-09-19 Split Figure 4 into Robotic-Arm and Soft-Platform Modeling Figures
+
+- User request: split the tall combined modeling-accuracy figure into two independent single-column inline figures, update the surrounding 5.1/5.2 text, and preserve correct downstream figure numbering.
+- Changes: created `plot_figure4_modeling_accuracy_split_v1.py`; generated `figure4_robotic_modeling.{png,pdf,svg}` and `figure5_soft_modeling.{png,pdf,svg}`; replaced the old combined `fig:modeling_accuracy` with `fig:robotic_modeling` and `fig:soft_modeling` in `manuscript_body.tex`.
+- Layout: Fig.4 shows robotic-arm q1/q2/q3 predictions; Fig.5 shows soft-platform x/y predictions; both use `figurehere` and `\columnwidth`, and modeling RMSE values remain unchanged.
+- Verification: `latexmk -pdf -interaction=nonstopmode main.tex` produces a 9-page `main.pdf`; `main.aux` resolves Fig.4 to page 6, Fig.5 to page 7, Fig.6 to page 7, and Fig.7 to page 8; `pdftotext -f 6 -l 7 -layout` confirms 5.1 flows into 5.2 with the large gap reduced.
+- Evidence: EV-039.
+
+## 2026-09-18 Figure 6 Trajectory-Only v3
+
+- User decision: remove the error-curve panels from Figure 6 and keep only the two trajectory tracking panels.
+- Changes: created `plot_figure4_soft_control_tracking_singlecol_v3.py` with a compact one-row `1x2` layout at `(3.42, 1.90)` inches; removed `Time (s)` and `e(t)` error plotting; tracking metrics are unchanged.
+- Artifacts: `figure6_soft_tracking_singlecol_v3.png/pdf/svg` and `figure6_soft_tracking_metrics_singlecol_v3.json`.
+- Manuscript: copied `figure6_soft_tracking_singlecol_v3.pdf` into `pictures/figure4_soft_control_tracking.pdf` and removed the error-row wording from the Figure 6 caption.
+- Verification: `latexmk -pdf -interaction=nonstopmode main.tex` rebuilds to 9 pages; Figure 6 remains on page 8 and no undefined references or fatal errors were found.
+
+## 2026-09-18 Single-Column Paper Figure Integration
+
+- Goal/task: integrate the finalized modeling and tracking figures into the CAS manuscript as single-column inline figures.
+- Changes:
+  - Copied `figure4_modeling_accuracy_singlecol_v7.pdf` into `pictures/figure2_modeling_accuracy.pdf`.
+  - Copied `figure5_control_tracking_singlecol_v6.pdf` into `pictures/figure3_control_tracking.pdf`.
+  - Copied `figure6_soft_tracking_singlecol_v2.pdf` into `pictures/figure4_soft_control_tracking.pdf`.
+  - Changed Figure 6 from `figure*` full-width floating layout to `figurehere` with `\columnwidth`.
+- Verification: `latexmk -pdf -interaction=nonstopmode main.tex` completes with a 9-page `main.pdf` no fatal errors; `main.aux` resolves Figure 4 to page 7, Figure 5 to page 7, and Figure 6 to page 8.
+- Remaining: soft-platform equipment photo and final RAS author-guide/submission-package checks are still pending.
+
+## 2026-09-18 FlexibleArm Triple Triangle Trajectory Option
+
+- Goal/task: add the user-approved 45° three-triangle sharp-turn trajectory to the soft-platform trajectory editor before future control-data acquisition.
+- Changes: added `generate_triple_triangle` in `FlexibleArmControl34/logic/trajectory_patterns.py`, added the `三三角` editor button and `gen_triple_triangle()` handler, and generated `FlexibleArmControl34/trajectories/TripleTriangle.txt` with 1000 points at side length `8 cm`.
+- Trajectory properties: starts and ends at the origin, contains 9 straight edges of `8 cm`, 8 `60°` sharp turns, and stays within `+/-8 cm`.
+- Verification: trajectory pattern checks pass; modified files pass `py_compile`; offscreen GUI smoke check confirms the `三三角` button is present, visible, and has a loaded icon in the `FlexibleArm` conda environment.
+- Remaining: physical soft-platform execution and any paper-figure integration are deferred until the user collects data with this new trajectory.
+
+## 2026-09-18 Soft Platform Hexagram Trajectory
+
+- Goal/task: replace the soft-platform five-point star trajectory with a true Star-of-David hexagram outline.
+- Changes: added `generate_hexagram` in `FlexibleArmControl34/logic/trajectory_patterns.py`, updated the editor star control and UI label to `六芒星`, and generated a default `Hexagram.txt` with 1000 points at 8 cm radius.
+- Verification: `verify_trajectory_patterns.py` passes; the hexagram is closed, bounded within `+/-8 cm`, has 999 unique points, and starts at an outer vertex rather than the origin; modified files pass `py_compile`.
+- Remaining: physical soft-platform execution was not run.
 
 ## 2026-09-17 绘图外包资料包
 
@@ -19,6 +157,74 @@
 - Confirmed constraints in the brief: no retraining or data re-acquisition, no metric changes, flexible-soft-platform upper trajectories must be complete, lower error panels and tables use `step >= 30`, and the manuscript remains CAS double-column within nine pages.
 - Verified: all three plotting scripts were rerun in the mirrored package directory and produced the same Figure 2 / Figure 3 / Figure 6 metrics as the source project.
 - Next: external GPT can use `杂项/绘图外包/README.md` as the primary handoff; main-agent work continues with TASK-030 RAS submission-package checks.
+
+## 2026-09-17 GPT 单栏绘图返回快速检查
+
+- Goal/task: quickly inspect the plotting scripts and outputs returned by the external GPT in `杂项/正式论文的绘图部分`.
+- Returned artifacts: `figure4_modeling_accuracy_singlecol_v3`, `figure5_control_tracking_singlecol_v3`, `figure6_soft_tracking_singlecol_v1`, plus an `老版本/` backup of the previous scripts and outputs.
+- Verified: all three new scripts ran successfully in the local `edmddl2` environment and regenerated PNG/PDF/SVG plus metric JSON.
+- Metrics: Figure 4 FS-EDMD RMSE is still `0.59333305` mechanical and `0.78889613` soft trajectory 66; Figure 5 and Figure 6 metrics match the old JSON within the 1e-9 comparison.
+- Layout check: new figures are compact single-column sizes with nonblank high-resolution PNGs; no script-modified evaluation window, trajectory truncation, or metric changes were found.
+- Next: await user decision on integrating the returned figures into the CAS manuscript or continuing figure-level polish; TASK-030 remains pending.
+
+## 2026-09-17 Figure 4 单栏绘图二次优化
+
+- Goal/task: improve the GPT single-column Figure 4 so the final layout matches the frozen paper specification.
+- Diagnosis: the GPT v3 figure placed all five panels in one vertical stack, while the frozen spec and the current manuscript caption require left-column Joint 1--3 and right-column soft-platform `x`/`y`.
+- Change: added `plot_figure2_modeling_accuracy_singlecol_v4.py` and generated `figure4_modeling_accuracy_singlecol_v4.png/pdf/svg`. The v4 layout restores the two-column nested subplot structure, raises font sizes from the GPT v3 defaults, and adds compact `Robotic arm` / `Soft platform` column headings.
+- Verification: script rerun succeeded; FS-EDMD RMSE remains `0.59333305` mechanical and `0.78889613` soft trajectory 66; axes geometry, nonblank PNG output, and legend/column-heading text overlap checks passed.
+- Next: user can inspect the v4 figure and decide whether to switch the paper input file and continue layout integration.
+
+## 2026-09-17 Figure 4 v5 面板标签可读性修复
+
+- User clarification: the vertical five-panel layout is acceptable; the issue is specifically that `(a)/(b)` style panel labels can be obscured by plotted curves.
+- Change: added `plot_figure2_modeling_accuracy_singlecol_v5.py` and generated `figure4_modeling_accuracy_singlecol_v5.png/pdf/svg`, based on the GPT v3 vertical layout with panel labels kept in the upper-left plot corner.
+- Label fixes: panel labels now use a high `zorder`, a white `withStroke` outline, `clip_on=False`, and a slightly larger font so curves can no longer visually cut through the label text.
+- Verification: script rerun succeeded; mechanical FS-EDMD RMSE remains `0.59333305`, soft trajectory 66 RMSE remains `0.78889613`; all five panel labels were detected inside their axes with the outline effect applied.
+
+## 2026-09-17 Figure 4 v6 移除面板字母标签
+
+- User decision: remove the `(a)-(e)` panel letters and keep only the subplot variable titles.
+- Change: added `plot_figure2_modeling_accuracy_singlecol_v6.py` and generated `figure4_modeling_accuracy_singlecol_v6.png/pdf/svg`; panel text is now `q1/q2/q3` and `x/y` only, retaining the white-outline readability treatment.
+- Verification: script rerun succeeded; no `(` panel labels remain; mechanical FS-EDMD RMSE stays `0.59333305`; soft trajectory 66 RMSE stays `0.78889613`.
+
+## 2026-09-17 Figure 4 v7 压缩左侧与顶部留白
+
+- User feedback: the left-axis titles and the top legend sit too far from the panels, leaving excessive blank space.
+- Change: added `plot_figure2_modeling_accuracy_singlecol_v7.py` and generated `figure4_modeling_accuracy_singlecol_v7.png/pdf/svg`; replaced the loose `fig.text` y-axis labels with attached axis `ylabel` settings, reduced the left grid margin from `0.16` to `0.105`, moved the legend closer to the top panel, and reduced figure height from `4.55` to `4.35` inches.
+- Verification: script rerun succeeded; rendered PNG shrank from about `3.31 x 4.36 in` to `3.25 x 4.13 in`; axis labels, panel titles, and legend boxes remain non-overlapping; RMSE values are unchanged at `0.59333305` and `0.78889613`.
+
+## 2026-09-17 Figure 5 v4 统一紧凑期刊版式
+
+- Goal/task: bring the robotic-arm tracking figure to the same compact layout standard approved in Figure 4 v7.
+- Change: added `plot_figure3_control_tracking_singlecol_v4.py` and generated `figure5_control_tracking_singlecol_v4.png/pdf/svg` plus `figure5_control_metrics_singlecol_v4.json`.
+- Layout: removed `(a)-(i)` panel letters, moved the `q1/q2/q3` column labels inside their axes with white outlines, tightened the left margin, moved the legend close to the top row, enlarged fonts and line widths, and kept the row labels close to the plot area.
+- Verification: script rerun succeeded; no panel letters remain; figure and axis texts have no overlaps; PNG is nonblank at about `3.44 x 3.33 in` at 600 dpi; all RMSE/MAE values match the previous Figure 5 metrics.
+
+## 2026-09-17 Figure 5 v5 线宽对齐与 q 标签移出绘图区
+
+- User feedback: Figure 5 line widths should match Figure 4, and the `q1` style labels inside the panels can obscure plotted curves.
+- Change: added `plot_figure3_control_tracking_singlecol_v5.py` and generated `figure5_control_tracking_singlecol_v5.png/pdf/svg` plus `figure5_control_metrics_singlecol_v5.json`.
+- Alignment: `Reference=0.95`, `FS-EDMD-LQR=1.12`, and `PID=0.88`, matching Figure 4 v7's `Ground truth`, `FS-EDMD`, and `EDMDDL` line widths.
+- Label fix: `q1/q2/q3` were moved from inside the axes to column titles above the plotting area; the legend was shifted to the top edge so the titles and legend no longer overlap.
+- Verification: script rerun succeeded; text-overlap check reports no overlaps; detected line widths are exactly `0.95/1.12/0.88`; all RMSE/MAE values remain identical to the prior Figure 5 metrics.
+
+## 2026-09-17 Figure 5 v6 等粗细线
+
+- User feedback: the three curves are still too thick and should use the same line width so controller differences remain easy to compare.
+- Change: added `plot_figure3_control_tracking_singlecol_v6.py` and generated `figure5_control_tracking_singlecol_v6.png/pdf/svg` plus `figure5_control_metrics_singlecol_v6.json`; all three curves now use line width `0.80`.
+- Verification: script rerun succeeded; detected line widths are `Reference=0.80`, `FS-EDMD-LQR=0.80`, and `PID=0.80`; no text overlaps; RMSE/MAE values are unchanged.
+
+## 2026-09-17 Figure 6 v2 最后一张图版式统一
+
+- Goal/task: apply the same compact journal style to the soft-platform tracking figure and finish the three-figure optimization pass.
+- Change: added `plot_figure4_soft_control_tracking_singlecol_v2.py` and generated `figure6_soft_tracking_singlecol_v2.png/pdf/svg` plus `figure6_soft_tracking_metrics_singlecol_v2.json`.
+- Layout: removed `(a)-(d)` panel letters and the in-plot RMSE annotations, used equal line width `0.80` for Reference/FS-EDMD-LQR/PID, tightened left/right/top margins, moved the legend close to the top row, and removed redundant left row labels that overlapped the `y` and `e(t)` axis labels.
+- Verification: script rerun succeeded; no text overlaps; detected line widths are all `0.80`; soft-platform RMSE/MAE values are unchanged and match the prior metrics JSON.
+- User feedback after the tight-pass: the upper-row x-axis tick labels and the lower row became too close.
+- Final spacing adjustment: set `hspace=0.16` and `height_ratios=(0.72, 1.0)`; measured final PNG clearance between the top-row bottom axis and lower-row top axis is about `0.248 in`, with no label overlap.
+- User feedback after the spacing fix: remove the two top-row panel titles.
+- Title removal: deleted the `Figure-eight` and `Five-point star` panel titles from the trajectory row and regenerated Figure 6; RMSE/MAE values remain unchanged.
 
 ## 2026-09-17 New Soft-Platform Control Data Integration
 

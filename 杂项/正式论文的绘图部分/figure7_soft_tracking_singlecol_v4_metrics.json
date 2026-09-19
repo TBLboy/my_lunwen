@@ -1,0 +1,67 @@
+{
+  "evaluation_start_sample": 30,
+  "time_axis_used": false,
+  "error_definition": "sqrt((act_x-reference_x)^2 + (act_y-reference_y)^2)",
+  "tasks": {
+    "triangle": {
+      "fs_raw_samples": 500,
+      "pid_raw_samples": 500,
+      "decimation": 1,
+      "reference_disagreement": {
+        "rmse": 0.0,
+        "max": 0.0,
+        "x_max": 0.0,
+        "y_max": 0.0
+      },
+      "evaluation_samples": 470,
+      "controllers": {
+        "FS-EDMD-LQR": {
+          "rmse": 0.17494211808724355,
+          "mae": 0.17029766454316403,
+          "x_rmse": 0.12179157291882944,
+          "y_rmse": 0.12558486153517276
+        },
+        "PID": {
+          "rmse": 0.6645055784790578,
+          "mae": 0.5468146178723806,
+          "x_rmse": 0.4430960752646017,
+          "y_rmse": 0.49521059350027397
+        }
+      },
+      "fs_over_pid": {
+        "rmse_reduction_percent": 73.67334093903969,
+        "mae_reduction_percent": 68.85641696892067
+      }
+    },
+    "lissajous": {
+      "fs_raw_samples": 1000,
+      "pid_raw_samples": 500,
+      "decimation": 2,
+      "reference_disagreement": {
+        "rmse": 0.06484555497487858,
+        "max": 0.13017296186228536,
+        "x_max": 0.12100000000000001,
+        "y_max": 0.08800000000000002
+      },
+      "evaluation_samples": 470,
+      "controllers": {
+        "FS-EDMD-LQR": {
+          "rmse": 0.12658395582513773,
+          "mae": 0.11715422245870757,
+          "x_rmse": 0.10756118496297025,
+          "y_rmse": 0.06673896434394323
+        },
+        "PID": {
+          "rmse": 1.788337107661276,
+          "mae": 1.6709916596810503,
+          "x_rmse": 1.6192333384214022,
+          "y_rmse": 0.7591001293524977
+        }
+      },
+      "fs_over_pid": {
+        "rmse_reduction_percent": 92.9216949487404,
+        "mae_reduction_percent": 92.98894032295354
+      }
+    }
+  }
+}

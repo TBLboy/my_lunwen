@@ -15,3 +15,93 @@ entries:
   evidence:
   - EV-034
   knowledge_candidate: false
+- id: WT-034-001
+  task_id: TASK-034
+  context: The paper had three rejections whose feedback mixed journal-scope mismatch with genuine issues in novelty framing, justification, experiment coverage, and technical validation.
+  hypothesis: Treating every reviewer comment as a manuscript defect would over-expand the paper and dilute its main contribution; the comments first need classification by consequence and revision action.
+  decision_ref: null
+  action: Separate journal-fit feedback from content, experimental, data, and formatting feedback; keep scope-based recommendations for journal selection, and convert only evidence-backed criticisms into manuscript work.
+  expected_result: The revision stays centered on FS-EDMD plus robust Koopman-LQR while still addressing the substantive objections.
+  observation: The resulting plan retained the core method, narrowed unsupported claims, added cross-platform evidence, and did not introduce an unrelated local-linearization baseline.
+  actual_result: The revision strategy remained coherent and the three journal rejections produced distinct actions rather than one undifferentiated expansion request.
+  delta: Replaced blanket adoption with a triage table and per-comment disposition.
+  lesson: An academic-revision Skill should classify review comments before editing and distinguish journal fit from scientific defects.
+  next_adjustment: Encode this triage as an explicit early-stage gate in the future Skill.
+  evidence: []
+  knowledge_candidate: true
+- id: WT-034-002
+  task_id: TASK-034
+  context: The original experiment used one three-degree-of-freedom arm, and the reviewers considered the validation too narrow and ideal. The user required added soft-platform evidence without increasing the experiment section's physical footprint.
+  hypothesis: A second platform with different dynamics can strengthen external validity if the new evidence is framed as cross-platform validation and the paper's main contribution remains unchanged.
+  decision_ref: DEC-010
+  action: Add soft-platform modeling and control evidence, use a rigid arm and cable-driven platform as complementary systems, compact the supporting figures, and keep the manuscript within the user-approved nine-page internal target.
+  expected_result: The paper covers more experimental conditions without turning the soft platform into a second paper or exceeding the page budget.
+  observation: The final structure uses two modeling figures, two control figures, one combined metrics table, and cross-platform language in the abstract, introduction, and roadmap.
+  actual_result: The added experiments improve coverage while the manuscript remains nine pages and the experiment-related claims remain tied to explicit comparisons.
+  delta: Experiment count and platform diversity increased without an equivalent increase in experimental-section length.
+  lesson: Experimental expansion should be driven by an identified claim gap and shipped with an explicit figure and page budget.
+  next_adjustment: A paper-revision Skill should require a claim-to-experiment-to-figure map before adding new experiments.
+  evidence:
+  - EV-051
+  knowledge_candidate: true
+- id: WT-034-003
+  task_id: TASK-034
+  context: New soft-platform control exports had misleading controller labels, unequal sampling lengths, unstable timestamps, and repeated terminal rows.
+  hypothesis: Plotting or evaluating the files by filename and raw time would produce a mislabeled baseline, overweight the endpoint, and misalign the controllers.
+  decision_ref: DEC-013
+  action: Verify controller identity with the user, deduplicate by step, ignore the unstable time axis, decimate the longer Lissajous trajectory, align controllers by sample index, and use a common evaluation window.
+  expected_result: The figure and metrics use aligned, correctly identified controller runs and a reproducible evaluation window.
+  observation: The processed data contain 500 aligned samples per task and controller; the revised figure and table were regenerated from that aligned data.
+  actual_result: The figure integration passed data-row, metric, PDF, and rendered-image checks.
+  delta: Replaced filename-based assumptions and raw-time pairing with explicit provenance confirmation and sample-index alignment.
+  lesson: Paper revision must audit data semantics and controller identity, not only whether a figure script runs.
+  next_adjustment: Include a data-provenance gate in any future paper-revision Skill before results are accepted.
+  evidence:
+  - EV-038
+  - EV-045
+  knowledge_candidate: true
+- id: WT-034-004
+  task_id: TASK-034
+  context: After adding the soft-platform experiments, the Abstract and Introduction still contained a single-platform roadmap and implied that disturbance robustness had been tested on both platforms.
+  hypothesis: Experiment additions create stale claims at the most visible narrative boundaries even when the experiment section itself is correct.
+  decision_ref: null
+  action: Audit the Abstract, contributions, and roadmap against the actual experiment matrix; limit robustness to the arm test; add dual-platform validation to the contributions; and recompile and inspect pages 1-2.
+  expected_result: The narrative matches the available evidence and no longer overstates cross-platform robustness.
+  observation: The revised Abstract is 209 words, the clean-copy build is nine pages, the strict warning scan is clean, and pages 1-2 render correctly.
+  actual_result: The Abstract and Introduction now agree with the experiment scope and comparison structure.
+  delta: Corrected one unsupported generalization and one stale platform-count statement.
+  lesson: Every experiment change should trigger a consistency audit across Abstract, Introduction, Contributions, Roadmap, Results, and Conclusion.
+  next_adjustment: Make cross-section claim consistency a mandatory final gate in the future Skill.
+  evidence:
+  - EV-051
+  knowledge_candidate: true
+- id: WT-035-001
+  task_id: TASK-035
+  context: The Conclusion merged prediction, tracking, and disturbance-robustness improvements across both experimental platforms, while disturbance recovery was tested only on the robotic arm and no operating-range limitation was stated.
+  hypothesis: A conclusion that mirrors the experiment matrix and separates theory, platform evidence, and bounded applicability will reduce overclaiming without weakening the contribution.
+  decision_ref: null
+  action: Rewrite the Conclusion to distinguish the two-platform prediction and tracking results from the arm-only disturbance-recovery test, state the tested operating ranges and bounded-disturbance setting, and retain future work as a direct extension.
+  expected_result: Every Conclusion claim is supported by the final experiments and the platform scope is unambiguous.
+  observation: The clean-copy build succeeds with nine pages and no actionable warnings, and the rendered page containing the Conclusion shows a complete, well-formed paragraph.
+  actual_result: The Conclusion now matches the Abstract and experiment matrix while preserving the theoretical bound and future-work statement.
+  delta: Replaced one aggregated cross-platform robustness claim with separately scoped prediction, tracking, and disturbance-recovery statements.
+  lesson: Manuscript conclusions should be generated from the final evidence matrix rather than by compressing the Abstract into a stronger closing sentence.
+  next_adjustment: Use the Conclusion checklist in the future paper-revision Skill as a mandatory final consistency gate.
+  evidence:
+  - EV-053
+  knowledge_candidate: true
+- id: WT-036-001
+  task_id: TASK-036
+  context: The Abstract and Introduction used EDMD, EDMDDL, and FS-EDMD, including two non-obvious or project-specific abbreviations, while the user clarified that common field abbreviations such as LQR and ReLU should not be expanded mechanically.
+  hypothesis: A terminology audit should distinguish established abbreviations from non-obvious or coined terms, and should check Abstract and main-text occurrences independently.
+  decision_ref: null
+  action: Define Extended Dynamic Mode Decomposition (EDMD), Extended Dynamic Mode Decomposition with Dictionary Learning (EDMDDL), and feature-selection-based EDMD (FS-EDMD) before their first short-form uses; leave LQR, PID, PCA, ReLU, MSE, RMSE, and MAE unchanged; then rebuild in a clean copy.
+  expected_result: Readers can resolve every non-obvious acronym at first occurrence without making common robotics and control terminology unnecessarily verbose.
+  observation: The source audit showed EDMD at the first relevant Abstract and Introduction positions, EDMDDL introduced before later baselines, and FS-EDMD introduced as the proposed method; the clean-copy build exits 0 with nine pages and no strict-warning matches, and pages 1-2 render correctly.
+  actual_result: The manuscript now follows a layered abbreviation policy rather than a blanket expansion rule.
+  delta: Added first-use expansions for non-obvious acronyms and recorded the exception policy for established terms.
+  lesson: "Terminology consistency checks should be sensitivity-based: define what a cross-disciplinary reader would not know, and avoid redundant expansions of standard field terms."
+  next_adjustment: Reuse this layered rule in the future paper-revision Skill and apply it independently to the Abstract and main text.
+  evidence:
+  - EV-054
+  knowledge_candidate: true
