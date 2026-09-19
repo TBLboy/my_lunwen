@@ -1,2 +1,30 @@
 version: "0.2"
-retrospectives: []
+retrospectives:
+- id: RETRO-001
+  scope: Vibe Coding 框架在本仓库 2026-09-10 至 2026-09-19 的真实使用过程
+  outcome: 已形成基于当前项目日志和实际操作证据的框架问题复盘，并建立后续优化任务。
+  worked:
+  - 业务澄清、需求基线、决策记录和证据登记在关键论文工作中提供了可追溯性。
+  - 任务、证据和事件日志足以复盘状态不一致、证据失效和运行时故障。
+  - 用户反馈能够及时纠正文体、图表、指标口径和实验范围。
+  failed:
+  - Goal、Run、Task 和 workflow 状态出现不一致，恢复语义不可靠。
+  - 文件级证据绑定造成大量无关证据 stale 和重复验证。
+  - Windows、PowerShell、中文路径及 Git diff 编码问题造成运行返工。
+  - 低风险小改动仍承担完整生命周期成本，独立 review 事件实际缺失。
+  root_causes:
+  - 审计强度未按风险分级。
+  - 缺少单一规范状态源和自动生成的摘要视图。
+  - 证据范围仍停留在文件路径级。
+  - 运行时默认假设 Unix 环境。
+  improvements:
+  - 修复 record-evidence 的二进制 diff 和编码处理。
+  - 统一 Goal、Run、Task 状态机并增加 waiting-user 与一致性校验。
+  - 将证据范围语义化，建立精确失效依赖。
+  - 增加 Windows 原生入口和 vibe-python 自动解析。
+  - 引入 L0/L1/L2 任务分级及自动摘要视图。
+  evidence:
+  - .project-log/docs/vibe-coding-framework-real-usage-review.md
+  - .project-log/loop/events.jsonl
+  - .project-log/tasks/task-list.yaml
+  - .project-log/verification/evidence.yaml

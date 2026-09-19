@@ -2546,3 +2546,57 @@ tasks:
     follow_ups: []
   created_at: '2026-09-19T12:40:00Z'
   updated_at: '2026-09-19T12:40:00Z'
+- id: TASK-039
+  title: Optimize the Vibe Coding runtime and workflow based on the real-usage retrospective
+  kind: repair
+  phase: implementation
+  goal: Convert the evidence-backed findings in RETRO-001 into bounded runtime and workflow improvements without weakening high-risk traceability or verification.
+  status: pending
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - vibe-coding
+  - runtime
+  - workflow
+  - retrospective
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions: []
+  depends_on: []
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-retrospective
+  - a-engineering-landing
+  - a-verification
+  spec_ref: .project-log/docs/vibe-coding-framework-real-usage-review.md
+  inputs:
+  - .project-log/docs/vibe-coding-framework-real-usage-review.md
+  - .project-log/retrospective/retrospective.yaml
+  - .project-log/loop/events.jsonl
+  outputs:
+  - Updated Vibe Coding runtime and workflow files outside the paper project
+  plan:
+  - Prioritize the P0 encoding, binary-diff, and Goal/Run/Task consistency fixes.
+  - Add Windows-native invocation and vibe-python resolution.
+  - Introduce risk-tiered workflow behavior and generated summary views.
+  - Add regression tests for the repaired failure modes.
+  done_when:
+  - Each accepted RETRO-001 improvement has an explicit implementation scope and verification command.
+  - P0 runtime failures are reproduced by tests before being marked fixed.
+  - High-risk task traceability and independent verification remain enforced.
+  verification:
+    status: not-run
+    commands: []
+    evidence: []
+    limitations:
+    - This task records the optimization backlog; implementation is intentionally deferred until the user starts the framework work.
+  result:
+    summary: null
+    changed_files: []
+    deviations: []
+    follow_ups: []
+  created_at: '2026-09-19T13:05:00Z'
+  updated_at: '2026-09-19T13:05:00Z'

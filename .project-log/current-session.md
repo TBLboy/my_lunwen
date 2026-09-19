@@ -14,6 +14,12 @@
   - Replace the equipment figure when the new soft-platform photograph is supplied
   - Perform the final author-guide page-layout pass after those facts and the photograph are supplied
 
+## 2026-09-19 Vibe Coding Real-Usage Retrospective
+
+- Created `.project-log/docs/vibe-coding-framework-real-usage-review.md`, covering the observed framework problems, evidence snapshot, root causes, prioritized improvements, and acceptance criteria.
+- Recorded `RETRO-001` in `.project-log/retrospective/retrospective.yaml` and opened `TASK-039` for the deferred runtime/workflow optimization work.
+- This is a retrospective-only change: no framework code was modified, and `TASK-030` remains blocked on `Q-021`.
+
 ## 2026-09-19 RAS Machine-Checkable Submission-Package Completion
 
 - Verified the remaining author-guide limits on the current manuscript: Abstract 217 words, five keywords, and four highlights with a maximum length of 74 characters.

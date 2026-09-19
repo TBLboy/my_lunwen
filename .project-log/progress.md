@@ -14,6 +14,13 @@
   - Replace the equipment figure when the new soft-platform photograph is supplied
   - Perform the final page-layout and author-guide pass after those facts and the photograph are supplied
 
+## 2026-09-19 Vibe Coding Real-Usage Retrospective
+
+- Status: documented; framework implementation is not started.
+- Created `.project-log/docs/vibe-coding-framework-real-usage-review.md` with the observed problems, evidence snapshot, root causes, prioritized fixes, and acceptance criteria.
+- Recorded `RETRO-001` and opened `TASK-039` for the deferred runtime/workflow optimization work.
+- `TASK-030` remains blocked on `Q-021`; no framework code or paper content was changed by this retrospective.
+
 ## 2026-09-19 RAS Machine-Checkable Submission-Package Completion
 
 - Status: done for all machine-verifiable items; the overall submission package remains pending author facts.
