@@ -1,18 +1,19 @@
 schema_version: 1
-run_id: RUN-20260919-055845-f5210853
+run_id: RUN-20260919-061158-e9ac0a28
 goal_id: null
 phase: implementation
 clarification_domain: null
 task_id: TASK-036
 status: handed-off
 next_action:
+  kind: task
+  subject: TASK-030
   statement: Continue-TASK-030-RAS-submission-package-checks.
-  owner: agent
 counters:
   task_attempts: 0
   same_failure_count: 0
   no_progress_count: 0
-  loop_decisions: 1
+  loop_decisions: 2
 limits:
   task_attempts: 4
   same_failure_count: 2
@@ -23,5 +24,5 @@ native_goal:
   thread_goal_id: null
   last_known_status: null
   last_synced_at: null
-last_event_id: LE-001183
-updated_at: '2026-09-19T06:07:08Z'
+last_event_id: LE-001230
+updated_at: '2026-09-19T06:17:08Z'

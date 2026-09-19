@@ -2384,10 +2384,10 @@ tasks:
     - pdfinfo page-count check
     - pdftoppm rendering and manual inspection of pages 1-2
     evidence:
-    - EV-054
+    - EV-055
     limitations: []
   result:
-    summary: EDMD, EDMDDL, and FS-EDMD are now defined before their first short-form uses in the Abstract and Introduction, while common field abbreviations remain unexpanded under the agreed layered terminology policy.
+    summary: EDMD, EDMDDL, and FS-EDMD are defined in the Abstract, and the Introduction now uses only their short forms; common field abbreviations remain unexpanded under the agreed layered terminology policy.
     changed_files:
     - 论文部分/els-cas/els-cas-templates/main.tex
     - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
@@ -2396,4 +2396,4 @@ tasks:
     deviations: []
     follow_ups: []
   created_at: '2026-09-19T05:55:00Z'
-  updated_at: '2026-09-19T06:10:00Z'
+  updated_at: '2026-09-19T06:15:00Z'

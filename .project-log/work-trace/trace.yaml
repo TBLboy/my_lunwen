@@ -105,3 +105,18 @@ entries:
   evidence:
   - EV-054
   knowledge_candidate: true
+- id: WT-036-002
+  task_id: TASK-036
+  context: The first abbreviation pass checked the Abstract and Introduction independently, so EDMD, EDMDDL, and FS-EDMD were expanded again in the Introduction even though the Abstract had already introduced them.
+  hypothesis: For this manuscript's style, the Abstract and main text should be audited as one ordered document rather than as two independent definition scopes.
+  decision_ref: null
+  action: Replace the Introduction's repeated full terms with EDMD, EDMDDL, and FS-EDMD, and change the reusable rule so that a definition in the Abstract suppresses later full-term repetition in the main text.
+  expected_result: Each non-obvious abbreviation is defined once at its first document occurrence and only the short form is used afterward.
+  observation: Source search now finds the full terms in the Abstract, while the Introduction directly uses EDMD, EDMDDL, and FS-EDMD; the clean-copy build exits 0 with nine pages and a clean strict-warning scan, and pages 1-2 were visually inspected.
+  actual_result: The duplicate Introduction definitions were removed without changing the technical claims or layout.
+  delta: Corrected the interpretation from two separate first-use checks to one document-level first-use check.
+  lesson: In this paper, the Abstract counts as the first occurrence for the main text; once an abbreviation is defined there, the Introduction should not repeat the full term.
+  next_adjustment: Encode this document-level abbreviation order check in the future paper-revision Skill.
+  evidence:
+  - EV-055
+  knowledge_candidate: true

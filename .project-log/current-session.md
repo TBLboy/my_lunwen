@@ -4,8 +4,8 @@
 
 - Current phase: implementation
 - Current task: TASK-036 is complete; TASK-030 remains in-progress for final submission-package checks
-- Current status: Non-obvious and paper-specific abbreviations now have first-use definitions under a layered terminology policy
-- Latest verification: EV-054; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
+- Current status: Non-obvious and paper-specific abbreviations are defined once at their first document occurrence, without repeated full terms in the Introduction
+- Latest verification: EV-055; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
 - Next steps:
   - Continue the remaining TASK-030 RAS submission-package checks
   - Use the captured notes when the dedicated paper-writing and revision Skill is requested
@@ -15,9 +15,9 @@
 ## 2026-09-19 Layered Abbreviation Audit
 
 - Established a sensitivity-based terminology rule: define EDMD, EDMDDL, and FS-EDMD at first use, while allowing common field abbreviations such as LQR, PID, PCA, ReLU, MSE, RMSE, and MAE to appear without mechanical expansion.
-- Checked the Abstract and Introduction independently. The Abstract now presents `Extended Dynamic Mode Decomposition (EDMD)`, `Extended Dynamic Mode Decomposition with Dictionary Learning (EDMDDL)`, and `feature-selection-based EDMD (FS-EDMD)` before the corresponding short forms; the Introduction follows the same order.
-- Added the layered terminology rule to `.project-log/docs/paper-revision-agent-skill-notes.md` and recorded the rationale in `WT-036-001`.
-- Verification: clean-copy `latexmk` exits 0 with 9 pages, the strict warning scan has no matches, and rendered pages 1-2 show correct definitions and layout. Evidence: EV-054.
+- Corrected the ordering rule: the Abstract is treated as the first document occurrence, so its definitions of `Extended Dynamic Mode Decomposition (EDMD)`, `Extended Dynamic Mode Decomposition with Dictionary Learning (EDMDDL)`, and `feature-selection-based EDMD (FS-EDMD)` are not repeated in the Introduction.
+- Removed the duplicate Introduction full terms and updated `.project-log/docs/paper-revision-agent-skill-notes.md`; the rework rationale is recorded in `WT-036-002`.
+- Verification: clean-copy `latexmk` exits 0 with 9 pages, the strict warning scan has no matches, and rendered pages 1-2 show the corrected abbreviation flow. Evidence: EV-055.
 
 ## 2026-09-19 Conclusion Evidence-Scope Audit
 

@@ -12,7 +12,7 @@ Koopman operator theory offers a control-oriented way to
 represent nonlinear dynamics by linear evolution in a lifted observable
 space~\cite{Koopman1931,Korda2018conv}. Since the Koopman operator is
 infinite-dimensional, practical methods rely on finite-dimensional
-approximations. Extended Dynamic Mode Decomposition (EDMD) constructs such an
+approximations. EDMD constructs such an
 approximation by lifting the state through a user-specified dictionary of basis
 functions~\cite{Williams2015EDMD,Korda2018conv}. The resulting lifted linear
 models enable the use of linear-system tools, including Koopman-based model
@@ -32,7 +32,7 @@ Two common strategies are learned dictionaries and sparse selection. Deep
 learning methods can learn nonlinear coordinates from
 data~\cite{Lusch2018,ShiMeng2022RAL,Ren2023TMech}, but the resulting features
 are often difficult to interpret and analyze in robotic control. For example,
-Extended Dynamic Mode Decomposition with Dictionary Learning (EDMDDL) learns a
+EDMDDL learns a
 nonlinear dictionary for the Koopman operator~\cite{Li2017}. Sparse regression
 methods select compact representations from large libraries~\cite{Zhang2022Automatica},
 but they may involve nonsmooth optimization and sensitivity to noise and
@@ -43,8 +43,8 @@ dictionary.
 
 We therefore retain an overcomplete, physics-informed candidate library and
 learn a lower-dimensional recombination of its functions. An optimizable
-selection matrix parameterizes this recombination, and the resulting
-feature-selection-based EDMD (FS-EDMD) model is trained directly for lifted
+selection matrix parameterizes this recombination, and the resulting FS-EDMD
+model is trained directly for lifted
 one-step prediction. Unlike PCA, which preserves dominant data variance, our
 objective targets the prediction error that matters for control. The Koopman and
 selection matrices are then updated jointly by block coordinate descent with

@@ -1483,7 +1483,7 @@ evidence:
 - id: EV-054
   kind: manuscript_build
   subject: TASK-036 clean-copy abbreviation audit
-  status: valid
+  status: stale
   command: latexmk -pdf -interaction=nonstopmode main.tex in clean copy; strict warning
     scan; pdfinfo; pdftoppm pages 1-2
   result_ref: exit 0; 9 pages; no strict warning matches; pages 1-2 rendered and inspected;
@@ -1500,5 +1500,28 @@ evidence:
     file_hashes:
       论文部分/els-cas/main.pdf: 70304f77f38bb7ca7fd5ff082f9d6bee772cd9d866ed844997b9c9e2fd5dfecc
   recorded_at: '2026-09-19T06:03:53Z'
+  invalidated_at: '2026-09-19T06:13:28Z'
+  invalidation_reason: 'TASK-036 rework corrected the abbreviation policy: the Introduction
+    no longer repeats full terms already defined in the Abstract.'
+- id: EV-055
+  kind: manuscript_build
+  subject: TASK-036 abbreviation rework and first-use order check
+  status: valid
+  command: clean-copy latexmk; strict warning scan; pdfinfo; pdftoppm pages 1-2
+  result_ref: exit 0; 9 pages; no strict warning matches; abstract defines EDMD/FS-EDMD/EDMDDL;
+    Introduction uses only the short forms; pages 1-2 inspected; corrected PDF SHA256
+    C6E94EB77B2A89101EC...
+  covers:
+    files:
+    - 论文部分/els-cas/main.pdf
+    requirements: []
+    tasks:
+    - TASK-036
+  version_binding:
+    git_commit: null
+    diff_hash: null
+    file_hashes:
+      论文部分/els-cas/main.pdf: c6e94eb77b2a89101ecca9e56a1c8a874bb02e2f1d49eb58dd7347ed52946673
+  recorded_at: '2026-09-19T06:14:49Z'
   invalidated_at: null
   invalidation_reason: null

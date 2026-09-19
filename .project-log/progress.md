@@ -4,8 +4,8 @@
 
 - Current phase: implementation
 - Current task: TASK-036 is complete; TASK-030 remains in-progress for final submission-package checks
-- Current status: Non-obvious and paper-specific abbreviations now have first-use definitions under a layered terminology policy
-- Latest verification: EV-054; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
+- Current status: Non-obvious and paper-specific abbreviations are defined once at their first document occurrence, without repeated full terms in the Introduction
+- Latest verification: EV-055; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
 - Next steps:
   - Continue the remaining RAS submission-package checks
   - Use the captured notes when the dedicated paper-writing and revision Skill is requested
@@ -15,10 +15,10 @@
 ## 2026-09-19 Layered Abbreviation Audit
 
 - Status: done.
-- Defined EDMD, EDMDDL, and FS-EDMD before their first short-form uses in the Abstract and Introduction.
+- Defined EDMD, EDMDDL, and FS-EDMD in the Abstract and removed their repeated full terms from the Introduction.
 - Left common field abbreviations such as LQR, PID, PCA, ReLU, MSE, RMSE, and MAE unchanged, avoiding mechanical expansion.
-- Added the reusable terminology rule to the paper-revision Skill material and a corresponding work trace.
-- Verification: 9-page clean build, clean strict warning scan, and rendered pages 1-2. Evidence: EV-054.
+- Corrected the reusable terminology rule to audit the Abstract and main text as one document-level first-use sequence.
+- Verification: 9-page clean build, clean strict warning scan, and rendered pages 1-2. Evidence: EV-055.
 
 ## 2026-09-19 Conclusion Evidence-Scope Audit
 
