@@ -1,0 +1,23 @@
+# Fdb version 4
+["pdflatex"] 1789821144.56132 "highlights.tex" "highlights.pdf" "highlights" 1789821144.86743 0
+  "C:/Users/Windows/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1789790934 99790 bccdcc451cf90f9cc037e8317cc0c1fc ""
+  "C:/Users/Windows/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1440.pk" 1789614836 40136 ae468f7520e21145961c6525d5ba4f7f ""
+  "C:/Users/Windows/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1095.pk" 1789537723 26228 3e07bdc57528d13cc4e594487341e51a ""
+  "C:/Users/Windows/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1789614835 12668 4ebed5d3c0625583e82207fca3e66786 ""
+  "C:/Users/Windows/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1789536179 13374079 164057287dc478f6972f225665ccb33a ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1440.tfm" 993061960 3196 0b37fa3083e15c57cfa8c4ff52f2807a ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1095.tfm" 993062124 3172 eb6efaa83c6c52473a1c403f376eab0f ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1440.tfm" 993062128 3168 3bd7b08ba4330af81521911744311212 ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/tcrm1095.tfm" 993062508 1460 8005ce585ff351dff78998923504da5e ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr10.tfm" 1136765053 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/tex/latex/base/article.cls" 1780057299 20144 e6010938fb17dfbae90a243ad7cf351d ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/tex/latex/base/fontenc.sty" 1780057299 5275 529cdf4584f147773f12d4c9bf2b6cc3 ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/tex/latex/base/size11.clo" 1780057299 8464 d6d1b8c8ee5d0bc83b2c1251b4fc6dae ""
+  "C:/Users/Windows/AppData/Local/Programs/MiKTeX/tex/latex/l3kernel/l3backend-pdftex.def" 1786970739 31615 2ca990bd5ca4d9a48b0fffd073e6d6fe ""
+  "highlights.aux" 1789821144 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "highlights.tex" 1789614813 448 bce97f858d0b8f5e93ce8c71818d9490 ""
+  (generated)
+  "highlights.aux"
+  "highlights.log"
+  "highlights.pdf"
+  (rewritten before read)

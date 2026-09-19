@@ -24,11 +24,13 @@
 
 ## Current Manuscript Gap Check
 
-- Abstract: 182 words; within the 250-word limit.
+- Abstract: 217 words; within the 250-word limit.
 - Keywords: 5; within the 1-7 range.
-- Highlights: four bullets; all reduced to 85 characters or fewer and mirrored into `highlights.tex`.
-- Title metadata: author, affiliation, and email are still placeholders.
-- CRediT: author contribution metadata is incomplete.
-- Declarations: competing interests, funding, data availability, and generative AI statements still need author-provided facts.
-- Artwork: separate vector PDF files exist; submission upload naming and standalone figure packaging still need a final check.
+- Highlights: four bullets, each 74 characters or fewer, supplied in the separate editable `highlights.tex` file.
+- Title metadata: author, affiliation, and email are still placeholders and require author-provided facts.
+- CRediT: role metadata is present but remains tied to the placeholder author identity until the real author list is supplied.
+- Declarations: competing-interest and data-availability statements are present; funding and generative-AI statements still require author-provided facts.
+- Artwork and tables: seven cited vector PDF figures and two editable LaTeX tables are present; no unreferenced figure labels were found.
+- Bibliography: all 25 first-citation entries exactly match the generated bibliography order.
+- Build: `main.pdf` is nine pages and `highlights.pdf` is one page; both compile without strict warning matches.
 - Page limit: the pasted official guide contains no eight-page limit; the eight-page target is an internal formatting decision and should not be represented as a journal rule.

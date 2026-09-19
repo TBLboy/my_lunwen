@@ -1506,7 +1506,7 @@ evidence:
 - id: EV-055
   kind: manuscript_build
   subject: TASK-036 abbreviation rework and first-use order check
-  status: valid
+  status: stale
   command: clean-copy latexmk; strict warning scan; pdfinfo; pdftoppm pages 1-2
   result_ref: exit 0; 9 pages; no strict warning matches; abstract defines EDMD/FS-EDMD/EDMDDL;
     Introduction uses only the short forms; pages 1-2 inspected; corrected PDF SHA256
@@ -1523,5 +1523,371 @@ evidence:
     file_hashes:
       论文部分/els-cas/main.pdf: c6e94eb77b2a89101ecca9e56a1c8a874bb02e2f1d49eb58dd7347ed52946673
   recorded_at: '2026-09-19T06:14:49Z'
+  invalidated_at: '2026-09-19T06:26:35Z'
+  invalidation_reason: TASK-037 changed the bibliography style to citation order,
+    so the previous PDF and bibliography evidence no longer covers the current source.
+- id: EV-056
+  kind: manuscript_build
+  subject: TASK-037 citation-order bibliography verification
+  status: valid
+  command: clean-copy latexmk; strict warning scan; pdfinfo; .aux citation order vs
+    .bbl order comparison; pdftoppm pages 1, 8, and 9
+  result_ref: exit 0; 9 pages; no strict warning matches; first-citation order exactly
+    matches bibliography order; Introduction and bibliography pages inspected; PDF
+    SHA256 1A316D8F669893FAFEF6348AAEBB8BAA9A31377EFBDD4A852891B99C225AF2DA
+  covers:
+    files:
+    - 论文部分/els-cas/main.pdf
+    requirements: []
+    tasks:
+    - TASK-037
+  version_binding:
+    git_commit: null
+    diff_hash: null
+    file_hashes:
+      论文部分/els-cas/main.pdf: 1a316d8f669893fafef6348aaebb8baa9a31377efbdd4a852891b99c225af2da
+  recorded_at: '2026-09-19T06:28:04Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-057
+  kind: manuscript_build
+  subject: Section 5.1 experimental-platform rewrite
+  status: stale
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex; strict warning scan; pdfinfo; pdftoppm pages 5-7
+  result_ref: 'PASS: Section 5.1 now introduces two platforms separately, then summarizes
+    random-input collection and trajectory-level splitting; trajectory 66 is not mentioned
+    in 5.1; build exits 0 with 9 pages and no strict warning matches; rendered pages
+    5-7 inspected; parent PDF SHA256 2FCAC6549FDD8E405A17B170225D27100B2BF0D1D63CE309D16B0632008ECABA.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: 5dab42c315710427ffa3b8011fc49ca5cbe93e8247e1d2422525bc8748fbf818
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: ce6fb09cd42c49e045c972e83d42d6668c64b8e33a18b08a30938cd2ff911169
+  recorded_at: '2026-09-19T08:30:59Z'
+  invalidated_at: '2026-09-19T08:35:51Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-058
+  kind: manuscript_build
+  subject: Section 5.1 two-platform rewrite and plural heading
+  status: stale
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex; strict warning scan; pdfinfo; pdftoppm page 6
+  result_ref: 'PASS: Section 5.1 is titled Experimental Platforms and Data Collection;
+    it introduces the rigid and soft platforms separately, then summarizes random-input
+    collection and trajectory-level splitting without mentioning trajectory 66 in
+    the subsection; 9-page build with a clean strict warning scan; page 6 rendered
+    and inspected; parent PDF SHA256 D330567DD17CD6C3599096B75966741158163EF1DAFEA5060B0733561866B1BB.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: 6fd4d396e4544e37ec9ed86b9a750f9c5cbdc271a34eb4ce3608e431a49d67a7
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 6e7eac25f4df3e54e9f8c373686f61be472874f324ea3d9869f40f93fc006728
+  recorded_at: '2026-09-19T08:36:57Z'
+  invalidated_at: '2026-09-19T08:45:11Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-059
+  kind: manuscript_build
+  subject: Remove unverified coupled-boundary claim from Section 5.1
+  status: stale
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex; strict warning scan; pdfinfo; pdftoppm page 6
+  result_ref: 'PASS: removed the unverified statement that data collection avoided
+    the mechanically coupled boundary between joints 2 and 3; retained only the fixed-stylus
+    isolation statement; 9-page build with a clean strict warning scan; page 6 rendered
+    and inspected; parent PDF SHA256 FEA33CF44AB6842B427BA4199D0CEA46E59C7EAD7AAA8A4CFC98D7FBD81949EE.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: b556dcfe65b67c47993cca58c7065dede72d6a8f6be654f3fbfdaff581c6acef
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: ad5c3dec3317ed573a52cfd4ad00adc316e48036fcc686dba5ae1178acc72846
+  recorded_at: '2026-09-19T08:47:21Z'
+  invalidated_at: '2026-09-19T09:45:47Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-060
+  kind: manuscript_build
+  subject: Section 5.1 and Figure 3 dual-platform setup description
+  status: stale
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; strict warning
+    scan; pdfinfo; pdftoppm pages 6-7; visual inspection
+  result_ref: 'PASS: Figure 3 caption and both Section 5.1 platform descriptions now
+    consistently state the rigid arm and soft platform setup; primary PDF hash 0CE7267131056BB3388010287872C87A79C7FF728C618DB3DB9CF8DA5BDB672F;
+    9 pages; clean warning scan; page 6 inspected.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: 8c7baef202615db3f1250cc814def323bb4c2ace11deb14e406c102e8adcd955
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 64580147c9c367b0362127779c5c5b78c755eec3a92c41ca161c488cbefce47b
+  recorded_at: '2026-09-19T09:49:14Z'
+  invalidated_at: '2026-09-19T10:16:53Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-061
+  kind: manuscript_pdf_sync
+  subject: Synchronize top-level els-cas main.pdf with latest Figure 3 build
+  status: stale
+  command: Copy-Item from els-cas-templates/main.pdf to els-cas/main.pdf; compare
+    length, timestamp, and SHA256
+  result_ref: 'PASS: top-level els-cas/main.pdf now matches the freshly built els-cas-templates/main.pdf;
+    both are 3126615 bytes and share SHA256 0CE7267131056BB3388010287872C87A79C7FF728C618DB3DB9CF8DA5BDB672F.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: 8c7baef202615db3f1250cc814def323bb4c2ace11deb14e406c102e8adcd955
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 64580147c9c367b0362127779c5c5b78c755eec3a92c41ca161c488cbefce47b
+  recorded_at: '2026-09-19T10:02:28Z'
+  invalidated_at: '2026-09-19T10:16:53Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-062
+  kind: manuscript_build
+  subject: Symmetric robotic-arm and soft-platform data-collection description
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; strict warning
+    scan; pdfinfo; pdftotext page 6; SHA256 sync check
+  result_ref: 'PASS: Section 5.1 now reports random two-dimensional cable-motion commands
+    at 0.2 s, 100 trajectories of 60 s each, per-sample light-spot position and applied
+    cable command; 9-page build; strict warning scan empty; both PDF paths share SHA256
+    ED062C84FBDA0740E663CC964C5D65BD42A8A7138444ABA65A79455AE2E091BE.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: ed062c84fbda0740e663cc964c5d65bd42a8a7138444aba65a79455ae2e091be
+  recorded_at: '2026-09-19T10:17:44Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-063
+  kind: manuscript_build
+  subject: Symmetric modeling setup for both experimental platforms
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; strict warning
+    scan; pdfinfo; pdftotext pages 6-7; render and inspect pages 6-7; SHA256 sync
+    check
+  result_ref: 'PASS: Section 5.2 now introduces shared method setup, then reports
+    robotic-arm 364/60 and soft-platform 112/20/40 model configurations before either
+    result figure; 9-page build; clean strict warning scan; pages 6-7 visually inspected;
+    both PDFs share SHA256 286936C7C5CC7ADA98CCC2BB7B00801398960440119A83400DC26DA635700282.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 286936c7c5cc7ada98ccc2bb7b00801398960440119a83400dc26da635700282
+  recorded_at: '2026-09-19T10:29:33Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-064
+  kind: manuscript_build
+  subject: Tighten spacing between figure graphics and captions
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; strict warning
+    scan; pdfinfo; render and inspect pages 6-8; SHA256 sync check
+  result_ref: 'PASS: figurehere now sets abovecaptionskip to 6 pt, matching the CAS
+    figure style; 9-page build; strict warning scan empty; pages 6-8 visually inspected;
+    both PDFs share SHA256 1316C8E1BAAD5DB2A36C64D91805E98D388CCF6B3640A8ED81363DE43871B49E.'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 1316c8e1baad5db2a36c64d91805e98d388ccf6b3640a8ed81363de43871b49e
+  recorded_at: '2026-09-19T10:45:49Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-065
+  kind: visual-layout
+  subject: Figure-caption spacing tightened across all manuscript figures
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; pdftoppm
+    -f 3 -l 8 -png -r 144 main.pdf; visual inspection of rendered pages 3, 6, 8; SHA256
+    sync check
+  result_ref: 9 pages; clean warning scan; Figure 1 and Figures 2-7 use compact caption
+    spacing; synchronized PDFs SHA256 13C6F42F0087E6A8EF83FFB553D190B7DC60C79B31E1A141F9BBD21E3FE27F72
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 13c6f42f0087e6a8ef83ffb553d190b7dc60c79b31e1a141f9bbd21e3fe27f72
+  recorded_at: '2026-09-19T11:01:21Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-066
+  kind: visual-layout
+  subject: User-optimized manuscript body reviewed and Table footnote overfull corrected
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; strict main.log
+    warning scan; pdftoppm page review; SHA256 sync check
+  result_ref: 9 pages; no Overfull/Underfull/label/package warnings; user-optimized
+    Sections 5.2-5.3 render cleanly; synchronized PDFs SHA256 1D639FA0D9658E601F3EA1A9F0F3F7804A8758A6F2C734FD7AAE546F9BE021BF
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 1d639fa0d9658e601f3ea1a9f0f3f7804a8758a6f2c734fd7aae546f9be021bf
+  recorded_at: '2026-09-19T11:30:46Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-067
+  kind: visual-layout
+  subject: Competing-interest and data-availability declarations added before references
+  status: valid
+  command: latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex; strict main.log
+    warning scan; pdftotext and rendered page inspection; SHA256 sync check
+  result_ref: 9 pages; declarations render on page 8 before references; no strict
+    warning matches; synchronized PDFs SHA256 1774E6ED0B2E634A8C2025678E2ADAF0700A1FAF8F996B0933E0933958C62AE8
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.pdf: 1774e6ed0b2e634a8c2025678e2adaf0700a1faf8f996b0933e0933958c62ae8
+  recorded_at: '2026-09-19T11:56:22Z'
+  invalidated_at: null
+  invalidation_reason: null
+- id: EV-068
+  kind: manuscript_submission_check
+  subject: RAS machine-checkable submission limits and source/artwork consistency
+  status: stale
+  command: latexmk -g main.tex; latexmk -g highlights.tex; abstract/keyword/highlight
+    limits; citation-order comparison; figure/table/artwork checks; pdfinfo; SHA256
+    comparison
+  result_ref: 'PASS: Abstract 217 words; 5 keywords; 4 highlights with max 74 characters;
+    25/25 first citations match bibliography order; 7/7 figures present and cited;
+    2 editable LaTeX tables; main PDF 9 pages; highlights PDF 1 page; no strict warning
+    matches; main PDF SHA256 105132747514A4F4E689F9CC95DEC51C7FB629873AB9DBB80813D0910920F7E7;
+    highlights SHA256 6FAA79FCDC2F705FD2F9CF120FAC1E5D50050B1814F0818B28D8ACCA47294E2B'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
+    - 论文部分/els-cas/els-cas-templates/highlights.tex
+    - 论文部分/els-cas/els-cas-templates/references.bib
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    - 论文部分/els-cas/els-cas-templates/highlights.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure1.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure2.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure3.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure4.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure5.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure6.pdf
+    - 论文部分/els-cas/els-cas-templates/pictures/Figure7.pdf
+    requirements: []
+    tasks:
+    - TASK-030
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: 9777f19c63506dfc704438a2d5eb2d4e8a092f2d1908e0ef70b1cf4b826e73a4
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/main.tex: 9dba0c0cc442c8fd2dc46969b3fba89600d7c59865720ed78dc1d8eea80372b3
+      论文部分/els-cas/els-cas-templates/manuscript_body.tex: 5adec629b0e942213428ffb5caf7b82c48ccfb23baed72a056573ceb50f5da86
+      论文部分/els-cas/els-cas-templates/highlights.tex: c92779e9b38c5c07b6bc98a09633111125151874828a8f553e318b3b9d8df17c
+      论文部分/els-cas/els-cas-templates/references.bib: 94102a376ad4e23192078a5cfeb1ba7e8da70f6354611fa0b1e70975a98d810f
+      论文部分/els-cas/els-cas-templates/main.pdf: 105132747514a4f4e689f9cc95dec51c7fb629873ab9dbb80813d0910920f7e7
+      论文部分/els-cas/els-cas-templates/highlights.pdf: 6faa79fcdc2f705fd2f9cf120fac1e5d50050b1814f0818b28d8acca47294e2b
+      论文部分/els-cas/els-cas-templates/pictures/Figure1.pdf: 24fd1a6e4890755e9a7e026006b7ae6d6c7f7a02b768e9c773eada087fb7c8ad
+      论文部分/els-cas/els-cas-templates/pictures/Figure2.pdf: 2919c9fb21ef3602b63d4b5551c54f416f30846736aff8389f1c81524a1383c0
+      论文部分/els-cas/els-cas-templates/pictures/Figure3.pdf: b869ccaf2bb2fdd7ddec9a3265b171f5858009a38dc16e013955068346057fb7
+      论文部分/els-cas/els-cas-templates/pictures/Figure4.pdf: c90804f8abb1407d0ee9327404565e89b222cf06b415e24f967f88e103ea34d3
+      论文部分/els-cas/els-cas-templates/pictures/Figure5.pdf: a1ef021f59ff92fd6fec0b4068b201eaaa3ad8c7f0f5f249a897391390b26834
+      论文部分/els-cas/els-cas-templates/pictures/Figure6.pdf: dd1ceb8ecde82a4e9d8279930676b5f7991a464dd6b4733f101794e4863c7f99
+      论文部分/els-cas/els-cas-templates/pictures/Figure7.pdf: bfed43fcf1be312d0ca67f4aca1e9809409e53713b4d0a95210e222ecac3ce79
+  recorded_at: '2026-09-19T12:03:23Z'
+  invalidated_at: '2026-09-19T12:22:04Z'
+  invalidation_reason: PostToolUse:apply_patch
+- id: EV-069
+  kind: bibliography_format
+  subject: RAS-style numbered bibliography aligned with first-citation order
+  status: valid
+  command: latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    main.tex; latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error
+    highlights.tex; strict warning scans; pdfinfo; first-citation order versus main.bbl;
+    DOI/URL scan; SHA256 comparison
+  result_ref: 'PASS: main PDF 9 pages and highlights PDF 1 page; strict warning scans
+    empty; 25 first citations match 25 bibliography items in order; no DOI/URL output;
+    main PDFs share SHA256 8811242B4CD2C624CF5EFD8BD0079961273E7BF74531EA592AB58DFF89EE6A45'
+  covers:
+    files:
+    - 论文部分/els-cas/els-cas-templates/ras-num.bst
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/references.bib
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    - 论文部分/els-cas/main.pdf
+    - 论文部分/els-cas/els-cas-templates/highlights.pdf
+    requirements: []
+    tasks:
+    - TASK-038
+  version_binding:
+    git_commit: bb8d513735772132b2c20131efbf1657cf3ecfa2
+    diff_hash: 06e0adc750ee11100c67107da4e0367bbda0dc6d81cc93df686290a1709d604b
+    file_hashes:
+      论文部分/els-cas/els-cas-templates/ras-num.bst: d11040c7b901d3dd7c63816dde3efe1e48e263e47a79589d029eea7a39b409a7
+      论文部分/els-cas/els-cas-templates/main.tex: 08c61bc05fee351c5e4935c24fdb0591f7fc630d921f4782d27646626d76ec77
+      论文部分/els-cas/els-cas-templates/references.bib: 8a29e453eb4a90c304fb82462f0c9a6f78dc4687b1fc41aea329111293100b38
+      论文部分/els-cas/els-cas-templates/main.pdf: 8811242b4cd2c624cf5efd8bd0079961273e7bf74531ea592ab58dff89ee6a45
+      论文部分/els-cas/main.pdf: 8811242b4cd2c624cf5efd8bd0079961273e7bf74531ea592ab58dff89ee6a45
+      论文部分/els-cas/els-cas-templates/highlights.pdf: 0450011ccd815d1b9afd26d1b656b66fa0aa9a9edc0b45bc79587f42f5561173
+  recorded_at: '2026-09-19T12:40:08Z'
   invalidated_at: null
   invalidation_reason: null

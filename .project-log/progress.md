@@ -3,14 +3,116 @@
 ## Current Snapshot
 
 - Current phase: implementation
-- Current task: TASK-036 is complete; TASK-030 remains in-progress for final submission-package checks
-- Current status: Non-obvious and paper-specific abbreviations are defined once at their first document occurrence, without repeated full terms in the Introduction
-- Latest verification: EV-055; the clean-copy build is 9 pages with a clean strict warning scan, and pages 1-2 were inspected
+- Current task: TASK-030 is blocked on Q-021 after all machine-checkable submission-package checks passed
+- Current status: Only author-supplied factual metadata and the replacement equipment photograph remain
+- Latest verification: EV-069; RAS-style numbered bibliography with 25/25 first-citation order, no DOI/URL output, a clean nine-page manuscript build, a one-page highlights build, and synchronized main PDFs
+- Latest layout check: Figures 2-7 use `figurehere` with `-6pt` caption-top spacing; Figure 1 uses `abovecap=-6pt,belowcap=0pt` on the two-column float
+- Latest table check: Tables 1-2 now use the non-floating `tablehere` environment and follow their source positions
 - Next steps:
-  - Continue the remaining RAS submission-package checks
+  - Obtain the real author names, full affiliations, corresponding-author email, funding information, and actual generative-AI use status
   - Use the captured notes when the dedicated paper-writing and revision Skill is requested
   - Replace the equipment figure when the new soft-platform photograph is supplied
-  - Perform the final page-layout and author-guide pass
+  - Perform the final page-layout and author-guide pass after those facts and the photograph are supplied
+
+## 2026-09-19 RAS Machine-Checkable Submission-Package Completion
+
+- Status: done for all machine-verifiable items; the overall submission package remains pending author facts.
+- Abstract is 217 words, keywords are five, and all four highlights are at most 74 characters.
+- All 25 first citations exactly match bibliography order; all seven figure PDFs are present and cited, and the two tables are editable LaTeX.
+- `main.pdf` is nine pages, `highlights.pdf` is one page, and strict build-log scans are clean.
+- The synchronized manuscript PDFs share SHA256 `105132747514A4F4E689F9CC95DEC51C7FB629873AB9DBB80813D0910920F7E7`; the highlights PDF is `6FAA79FCDC2F705FD2F9CF120FAC1E5D50050B1814F0818B28D8ACCA47294E2B`. Evidence: EV-068.
+- Still required from the author: real names and CRediT attribution, full affiliations, corresponding-author email, funding details, applicable generative-AI disclosure, and the replacement equipment photograph.
+
+## 2026-09-19 RAS Numbered Bibliography Style
+
+- Status: done for the reference-presentation alignment.
+- Replaced `unsrtnat` with local `ras-num.bst`, derived from the official Elsevier numbered style, to match the RAS reference examples while keeping first-citation numbering.
+- Normalized journal abbreviations and suppressed DOI output without changing citation keys or scientific content.
+- Verification: 9-page main PDF, 1-page highlights PDF, clean warning scans, 25/25 citation-order match, no DOI/URL output, and identical main PDF hashes across both output paths. Evidence: EV-069.
+
+## 2026-09-19 Competing-Interest and Data-Availability Declarations
+
+- Status: done.
+- Added `Declaration of competing interest` and `Data availability` after the CRediT statement and before the bibliography in `main.tex`.
+- Used a no-known-competing-interest statement and a conservative corresponding-author data-availability statement.
+- Verification: clean 9-page build, empty strict warning scan, rendered page 8 inspection, and synchronized PDF hashes. Evidence: EV-067.
+
+## 2026-09-19 User-Optimized Experimental Sections
+
+- Status: done.
+- Reviewed the user's compressed Sections 5.2--5.3 and kept the revised shared experimental structure.
+- Added explicit interword spacing after the two `\footnotemark` calls in the quantitative-result paragraphs; the first call previously caused a 9.8655 pt Overfull hbox in the left column.
+- Verification: clean 9-page build, empty strict warning scan, rendered pages 6--9 inspected, and synchronized PDF hashes. Evidence: EV-066.
+
+## 2026-09-19 Compact Figure Caption Spacing
+
+- Status: done.
+- The first 6 pt adjustment still left visible whitespace, so the non-floating figure environment now uses `-6pt` caption-top spacing and `0pt` caption-bottom spacing.
+- Applied the same compact spacing to the full-width Figure 1 float through `abovecap=-6pt,belowcap=0pt`.
+- Verification: clean 9-page build, empty strict warning scan, visually inspected pages 3, 6, and 8, and synchronized PDF hashes. Evidence: EV-065.
+
+## 2026-09-19 Symmetric Modeling Setup
+
+- Status: done.
+- Reworked Section 5.2 so shared method choices are introduced first, followed by separate robotic-arm and soft-platform configurations before any result discussion.
+- Added the actual soft-platform configuration: 112-term candidate library, 20-dimensional EDMDDL dictionary with two 256-neuron hidden layers, and a 40-by-112 FS-EDMD selection matrix.
+- Matched the evaluation descriptions by stating the robotic-arm 800-step/3.2 s rollout and the soft-platform 299-step rollout on test trajectory 66.
+- Verification: clean 9-page build, empty strict warning scan, visually inspected pages 6-7, and synchronized PDF hashes. Evidence: EV-063.
+
+## 2026-09-19 Symmetric Platform Data-Collection Description
+
+- Status: done.
+- Rewrote the Section 5.1 data-collection paragraph so the soft-platform description mirrors the robotic-arm description.
+- The soft platform now explicitly reports random two-dimensional cable-motion commands, a 0.2 s sampling period, 100 trajectories of 60 s each, and the light-spot position plus applied command contained in every trajectory.
+- Preserved the shared trajectory-level split statement and the existing 15:4:1 and 70/20/10 ratios.
+- Verification: clean 9-page `latexmk` build, empty strict warning scan, revised page-6 text, and synchronized PDF hashes. Evidence: EV-062.
+
+## 2026-09-19 Compiled PDF Path Synchronization
+
+- Status: done.
+- Identified that the stale-image report came from two PDF outputs: the fresh build was in `els-cas-templates/main.pdf`, while `els-cas/main.pdf` was still the old build.
+- Synchronized the top-level PDF and verified matching size, timestamp, and SHA256.
+- Verification: both PDFs are 3126615 bytes with SHA256 `0CE7267131056BB3388010287872C87A79C7FF728C618DB3DB9CF8DA5BDB672F`. Evidence: EV-061.
+
+## 2026-09-19 Figure 3 Dual-Platform 5.1 Alignment
+
+- Status: done.
+- Updated Figure 3 to use a combined experimental-setting caption and matched its label/reference to both platforms.
+- Revised Section 5.1 so the rigid arm and soft platform are introduced from the same figure, with the soft-platform hardware and drive electronics described consistently with the labels in the figure.
+- Kept the random-input data-collection procedure and trajectory-level splits unchanged.
+- Verification: 9-page `latexmk` build, clean strict warning scan, and rendered page 6. Evidence: EV-060.
+
+## 2026-09-19 Section 5.1 Two-Platform Rewrite
+
+- Status: done.
+- Reworked Section 5.1, now titled `Experimental Platforms and Data Collection`, to introduce the robotic arm and soft platform separately before summarizing the shared experimental procedure.
+- Generalized data collection as randomly generated control inputs for both platforms, with platform-specific sampling and trajectory counts.
+- Kept the train/validation/test split description at trajectory level, and removed trajectory 66 from the platform/data-collection subsection.
+- Removed the unverified coupled-boundary claim while retaining the fixed-stylus isolation statement.
+- Verification: 9-page `latexmk` build, clean strict warning scan, and rendered page 6. Evidence: EV-059.
+
+## 2026-09-19 Non-Floating In-Column Tables
+
+- Status: done.
+- Added `tablehere` alongside `figurehere`.
+- Replaced both floating `table[htbp]` environments with `tablehere` without changing table data or widths.
+- Verification: 9-page `latexmk` build, no table-related overfull/underfull warnings, and rendered pages 7-8.
+
+## 2026-09-19 Non-Floating In-Column Figures
+
+- Status: done.
+- Replaced Figure 3's remaining top-only float with the existing `figurehere` environment.
+- Figures 2-7 now stay inside a single column at their source positions; Figure 1 remains a two-column `figure*`.
+- Moved Figure 2 after the LQR cost discussion so it renders inside the left column of page 5.
+- Verification: 9-page `latexmk` build and rendered pages 5-6.
+
+## 2026-09-19 Citation-Order Bibliography
+
+- Status: done.
+- Switched from the author-sorted CAS bibliography style to natbib-compatible `unsrtnat`.
+- Verified that the first-citation sequence in `main.aux` exactly matches the 25-entry bibliography order in `main.bbl`.
+- The Introduction now uses sequential citation groups with repeats only where references are cited again later.
+- Verification: 9-page clean build, clean strict warning scan, and rendered pages 1, 8, and 9. Evidence: EV-056.
 
 ## 2026-09-19 Layered Abbreviation Audit
 

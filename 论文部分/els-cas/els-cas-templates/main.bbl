@@ -1,0 +1,123 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Brunton2022}
+S.~L. Brunton, M.~Budi{\v{s}}i{\'c}, E.~Kaiser, J.~N. Kutz, Modern {K}oopman
+  theory for dynamical systems, SIAM Rev. 64~(2) (2022) 229--340.
+
+\bibitem{DellaSantina2023}
+C.~D. Santina, C.~Duriez, D.~Rus, Model-based control of soft robots: A survey
+  of the state of the art and open challenges, IEEE Control Syst. Mag. 43~(3)
+  (2023) 30--65.
+
+\bibitem{Mamakoukas2021TRO}
+G.~Mamakoukas, M.~L. Casta{\~n}o, X.~Tan, T.~D. Murphey, Derivative-based
+  {K}oopman operators for real-time control of robotic systems, IEEE Trans.
+  Robot. 37~(6) (2021) 2173--2192.
+
+\bibitem{Brunke2022}
+L.~Brunke, M.~Greeff, A.~W. Hall, Z.~Yuan, S.~Zhou, J.~Panerati, A.~P.
+  Schoellig, Safe learning in robotics: From learning-based control to safe
+  reinforcement learning, Annu. Rev. Control Robot. Auton. Syst. 5 (2022)
+  411--444.
+
+\bibitem{Tang2025survey}
+C.~Tang, B.~Abbatematteo, J.~Hu, R.~Chandra, R.~Mart{\'i}n-Mart{\'i}n,
+  P.~Stone, Deep reinforcement learning for robotics: A survey of real-world
+  successes, Annu. Rev. Control Robot. Auton. Syst. 8 (2025) 153--188.
+
+\bibitem{LiSu2026TCST}
+Y.~Li, R.~Su, Safety-guaranteed adaptive control of teleoperation systems under
+  event-triggered mechanisms, IEEE Trans. Control Syst. Technol. 34~(3) (2026)
+  1649--1656.
+
+\bibitem{LiEtAl2026TCYB}
+Y.~Li, C.~Li, K.~Liu, J.~Dong, R.~Johansson, Event-triggered control and
+  communication for single-master multislave teleoperation systems with
+  try-once-discard protocol, IEEE Trans. Cybern. 56~(2) (2026) 1117--1130.
+
+\bibitem{Koopman1931}
+B.~O. Koopman, Hamiltonian systems and transformation in {H}ilbert space, Proc.
+  Natl. Acad. Sci. U.S.A. 17~(5) (1931) 315--318.
+
+\bibitem{Korda2018conv}
+M.~Korda, I.~Mezi{\'c}, On convergence of extended dynamic mode decomposition
+  to the {K}oopman operator, J. Nonlinear Sci. 28~(2) (2018) 687--710.
+
+\bibitem{Williams2015EDMD}
+M.~O. Williams, I.~G. Kevrekidis, C.~W. Rowley, A data-driven approximation of
+  the {K}oopman operator: Extending dynamic mode decomposition, J. Nonlinear
+  Sci. 25~(6) (2015) 1307--1346.
+
+\bibitem{Proctor2016DMDc}
+J.~L. Proctor, S.~L. Brunton, J.~N. Kutz, Dynamic mode decomposition with
+  control, SIAM J. Appl. Dyn. Syst. 15~(1) (2016) 142--161.
+
+\bibitem{Korda2018MPC}
+M.~Korda, I.~Mezi{\'c}, Linear predictors for nonlinear dynamical systems:
+  {K}oopman operator meets model predictive control, Automatica 93 (2018)
+  149--160.
+
+\bibitem{Brunton2016Koopman}
+S.~L. Brunton, B.~W. Brunton, J.~L. Proctor, J.~N. Kutz, {K}oopman invariant
+  subspaces and finite linear representations of nonlinear dynamical systems
+  for control, PLOS ONE 11~(2) (2016) e0150171.
+
+\bibitem{Mauroy2019}
+A.~Mauroy, J.~Goncalves, {K}oopman-based lifting techniques for nonlinear
+  systems identification, IEEE Trans. Autom. Control 65~(6) (2020) 2550--2565.
+
+\bibitem{ShiKarydis2022RAL}
+L.~Shi, K.~Karydis, {ACD-EDMD}: Analytical construction for dictionaries of
+  lifting functions in {K}oopman operator-based nonlinear robotic systems, IEEE
+  Robot. Autom. Lett. 7~(2) (2022) 906--913.
+
+\bibitem{Lusch2018}
+B.~Lusch, J.~N. Kutz, S.~L. Brunton, Deep learning for universal linear
+  embeddings of nonlinear dynamics, Nat. Commun. 9 (2018) 4950.
+
+\bibitem{ShiMeng2022RAL}
+H.~Shi, M.~Q.-H. Meng, Deep {K}oopman operator with control for nonlinear
+  systems, IEEE Robot. Autom. Lett. 7~(3) (2022) 7700--7707.
+
+\bibitem{Ren2023TMech}
+C.~Ren, H.~Jiang, C.~Li, W.~Sun, S.~Ma, {K}oopman-operator-based robust
+  data-driven control for wheeled mobile robots, IEEE/ASME Trans. Mechatronics
+  28~(1) (2023) 461--472.
+
+\bibitem{Li2017}
+Q.~Li, F.~Dietrich, E.~M. Bollt, I.~G. Kevrekidis, Extended dynamic mode
+  decomposition with dictionary learning: A data-driven adaptive spectral
+  decomposition of the {K}oopman operator, Chaos 27~(10) (2017) 103111.
+
+\bibitem{Zhang2022Automatica}
+X.~Zhang, W.~Pan, R.~Scattolini, S.~Yu, X.~Xu, Robust tube-based model
+  predictive control with {K}oopman operators, Automatica 137 (2022) 110114.
+
+\bibitem{WangEtAl2023RAL}
+J.~Wang, B.~Xu, J.~Lai, Y.~Wang, C.~Hu, H.~Li, A.~Song, An improved
+  {K}oopman-{MPC} framework for data-driven modeling and control of soft
+  actuators, IEEE Robot. Autom. Lett. 8~(2) (2023) 616--623.
+
+\bibitem{Tseng2001}
+P.~Tseng, Convergence of a block coordinate descent method for
+  nondifferentiable minimization, J. Optim. Theory Appl. 109~(3) (2001)
+  475--494.
+
+\bibitem{Beck2009ISTA}
+A.~Beck, M.~Teboulle, A fast iterative shrinkage-thresholding algorithm for
+  linear inverse problems, SIAM J. Imaging Sci. 2~(1) (2009) 183--202.
+
+\bibitem{Blanchini2008}
+F.~Blanchini, S.~Miani, Set-Theoretic Methods in Control, Birkh{\"a}user,
+  Boston, MA, USA, 2008.
+
+\bibitem{Khalil2002}
+H.~K. Khalil, Nonlinear Systems, 3rd Edition, Prentice Hall, Upper Saddle
+  River, NJ, USA, 2002.
+
+\end{thebibliography}

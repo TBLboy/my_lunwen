@@ -287,7 +287,7 @@ decisions:
 - id: DEC-007
   title: 正式论文迁移到 RAS 的 Elsevier elsarticle 模板
   category: tooling
-  status: active
+  status: superseded
   authority: C
   user_approval: approved
   related_tasks:
@@ -327,15 +327,15 @@ decisions:
   action: 将 IEEE 专用前置结构替换为 Elsevier frontmatter，清除 IEEE 专用宏和 `cite` 包，改用 `keyword`、`\journal{Robotics and Autonomous Systems}` 与 `elsarticle-num`，并保留原 `old` 稿件。
   expected_result: 正式论文后续只在 `论文部分/elsarticle/main.tex` 维护；参考文献、图表路径和交叉引用在静态层面保持完整。
   reversal_plan: 若 RAS 作者指南要求作者—年份引用或特定 production 选项，则仅调整文档类和 citation/bibliography 配置，不改正文内容。
-  observation: null
-  actual_result: null
-  outcome_status: not-observed
-  lesson: null
+  observation: The later official RAS/Elsevier CAS template was confirmed by the user and became the active manuscript source.
+  actual_result: The elsarticle preprint migration is retained as historical work but is no longer the active manuscript path.
+  outcome_status: superseded
+  lesson: When the journal's official template changes during revision, record the replacement decision explicitly and stop treating the earlier template as the active source.
   evidence:
   - EV-025
   supersedes: []
   created_at: '2026-09-16T03:27:40Z'
-  updated_at: '2026-09-16T03:27:40Z'
+  updated_at: '2026-09-19T12:06:00Z'
 - id: DEC-008
   title: 软体平台控制实验的初始接近段与标题评估窗口
   category: technical
@@ -670,3 +670,148 @@ decisions:
   - DEC-013
   created_at: '2026-09-17T08:35:00Z'
   updated_at: '2026-09-17T08:40:00Z'
+- id: DEC-015
+  title: Use a citation-order bibliography style
+  category: technical
+  status: superseded
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-037
+  related_business_logic: []
+  context: The CAS template bibliography style `cas-model2-names` explicitly sorts entries by author, title, and bibliographic key, so citation numbers are not assigned according to first appearance in the manuscript.
+  hypothesis: A natbib-compatible unsorted bibliography style will produce sequential numbered citations and preserve the CAS double-column layout.
+  options:
+  - name: Switch to unsrtnat
+    benefits:
+    - Numbers references by first citation occurrence.
+    - Reuses a maintained BibTeX style already available in the TeX distribution.
+    - Avoids manually maintaining a custom bibliography order.
+    costs:
+    - Reference punctuation and author formatting follow the standard natbib style rather than the CAS bibliography style.
+    risks:
+    - The publisher may reformat references at proof stage, but submission ordering remains compliant.
+  - name: Modify the CAS bibliography style
+    benefits:
+    - Preserves CAS-specific reference formatting.
+    costs:
+    - Requires maintaining a large custom BibTeX style and its duplicate-year label logic.
+    risks:
+    - A local style edit is harder to review and may diverge from the publisher template.
+  decision: Use `unsrtnat` for the manuscript bibliography so references are numbered and listed by first citation occurrence.
+  reason_summary:
+  - RAS instructs authors to number references in citation order.
+  - The existing CAS style sorts by author and title.
+  - The standard unsorted natbib style satisfies the ordering requirement with a one-line change.
+  action: Change the bibliography style in `main.tex`, rebuild the manuscript, compare the first-citation order in `main.aux` with the bibliography order in `main.bbl`, and inspect the Introduction and bibliography pages.
+  expected_result: Introduction citations are numbered sequentially by first appearance, the bibliography follows the same order, and the manuscript remains nine pages without warnings.
+  reversal_plan: Restore `cas-model2-names` if the journal requires the CAS bibliography formatting at submission or proof stage.
+  observation: The clean build is nine pages with no strict-warning matches; the first-citation sequence and all 25 bibliography keys match exactly.
+  actual_result: The Introduction begins with sequential groups [1,2], [3], [4-7], [8,9], and so on, with repeats only where later sections cite earlier references.
+  outcome_status: successful
+  lesson: For numbered journals, verify bibliography style behavior rather than assuming that a template's default `.bst` uses citation order.
+  evidence:
+  - EV-056
+  supersedes: []
+  created_at: '2026-09-19T06:28:00Z'
+  updated_at: '2026-09-19T12:40:00Z'
+- id: DEC-016
+  title: Use the official CAS double-column package as the active RAS manuscript
+  category: tooling
+  status: active
+  authority: C
+  user_approval: approved
+  related_tasks:
+  - TASK-030
+  related_business_logic: []
+  context: The user later confirmed that the correct RAS submission template is the official Elsevier els-cas-templates package and selected the double-column cas-dc variant. The earlier elsarticle preprint migration therefore no longer represents the active manuscript source.
+  hypothesis: Maintaining the current manuscript under 论文部分/els-cas/els-cas-templates with the CAS double-column class will satisfy the journal's LaTeX guidance and preserve the completed nine-page layout.
+  options:
+  - name: Use the official CAS double-column package
+    benefits:
+    - Matches the user-confirmed RAS template.
+    - Preserves the completed double-column layout and page-count work.
+    costs:
+    - The earlier elsarticle preprint path remains only as historical material.
+    risks:
+    - Future edits must be made only in the active CAS source to avoid divergence.
+  - name: Keep the elsarticle preprint manuscript active
+    benefits:
+    - Preserves the earlier migration work.
+    costs:
+    - Contradicts the later user-confirmed official template.
+    risks:
+    - Duplicate active sources can cause stale builds and incorrect submission files.
+  decision: Use 论文部分/els-cas/els-cas-templates/main.tex with `cas-dc` as the active RAS manuscript and mark the earlier elsarticle preprint task as cancelled and superseded.
+  reason_summary:
+  - The user explicitly selected the official els-cas double-column package.
+  - The active CAS manuscript already builds to the required nine-page layout.
+  - Keeping one active source prevents stale or divergent submission files.
+  action: Continue all manuscript and submission-package work in 论文部分/els-cas/els-cas-templates under TASK-030; retain the earlier elsarticle work only for history.
+  expected_result: One authoritative CAS double-column manuscript remains, with no active task or build path depending on the superseded elsarticle preprint source.
+  reversal_plan: If the journal later requires the elsarticle class, reopen the historical task and revalidate that source before switching.
+  observation: The active CAS source compiles to nine pages and all machine-checkable RAS submission checks pass.
+  actual_result: TASK-024 is cancelled as superseded; TASK-030 remains the only active manuscript task pending author-supplied metadata.
+  outcome_status: successful
+  lesson: Track official-template changes as explicit superseding decisions so obsolete LaTeX paths do not remain active in parallel.
+  evidence:
+  - EV-068
+  supersedes:
+  - DEC-007
+  created_at: '2026-09-19T12:06:00Z'
+  updated_at: '2026-09-19T12:06:00Z'
+- id: DEC-017
+  title: Use a local RAS-style numbered bibliography style
+  category: technical
+  status: active
+  authority: B
+  user_approval: not-required
+  related_tasks:
+  - TASK-038
+  related_business_logic: []
+  context: The first citation-order fix used unsrtnat, which corrected the numbering order but did not reproduce the target RAS/Elsevier numbered bibliography presentation shown in the reference examples.
+  hypothesis: A minimal local derivation of the official Elsevier numbered BibTeX style can preserve first-citation numbering while matching the RAS-style author, journal, volume, issue, year, and page layout.
+  options:
+  - name: Keep unsrtnat
+    benefits:
+    - Uses a standard distributed BibTeX style.
+    - Preserves first-citation order.
+    costs:
+    - Bibliography punctuation and author formatting do not match the target RAS examples.
+    risks:
+    - A visually inconsistent reference list remains at submission.
+  - name: Use a local ras-num style derived from elsarticle-num
+    benefits:
+    - Preserves first-citation numbering.
+    - Matches the target numbered Elsevier/RAS presentation.
+    - Allows DOI output to be suppressed without editing every BibTeX entry.
+    costs:
+    - The derived style must be included in the Overleaf or submission package.
+    risks:
+    - Future bibliography requirements may require revalidating the local style.
+  - name: Manually reorder references
+    benefits:
+    - Avoids changing the bibliography style.
+    costs:
+    - Is brittle whenever citations move.
+    risks:
+    - Citation order can drift silently during later revisions.
+  decision: Use local `ras-num.bst`, derived from the official Elsevier numbered style, for the manuscript bibliography.
+  reason_summary:
+  - RAS requires numbered square-bracket citations in order of first appearance.
+  - The target examples use an Elsevier/RAS numbered visual format that unsrtnat does not reproduce.
+  - The derived style keeps the existing citation keys and BibTeX workflow intact.
+  - DOI output is disabled to match the supplied RAS reference examples.
+  action: Set `\bibliographystyle{ras-num}`, normalize journal abbreviations in `references.bib`, rebuild, compare the first-citation order with the bibliography, scan warnings, inspect the rendered references, and synchronize both PDF output paths.
+  expected_result: The manuscript uses first-citation numbered references with the RAS-style presentation, no DOI/URL output, and an unchanged nine-page layout.
+  reversal_plan: Restore unsrtnat if the target journal later rejects the local style; update the style only through the documented template and rebuild.
+  observation: The forced build exits 0 with a nine-page PDF; the strict warning scan is empty; all 25 first-citation keys exactly match the 25 bibliography items in order; the bibliography contains no DOI or URL output; and the two output PDFs have the same SHA256.
+  actual_result: The bibliography now follows the target RAS numbered presentation while preserving the existing citation keys and manuscript layout.
+  outcome_status: successful
+  lesson: For a numbered journal, validate both the citation-order behavior and the rendered bibliography style; a standard unsorted style may solve only the ordering requirement.
+  evidence:
+  - EV-069
+  supersedes:
+  - DEC-015
+  created_at: '2026-09-19T12:40:00Z'
+  updated_at: '2026-09-19T12:40:00Z'

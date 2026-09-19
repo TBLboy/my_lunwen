@@ -455,3 +455,26 @@ questions:
   - 数据备份/软体平台/软体机械臂轨迹跟踪数据/五角星-PID.zip
   created_at: '2026-09-17T07:25:00Z'
   answered_at: '2026-09-17T08:35:00Z'
+- id: Q-021
+  title: Final RAS title-page and declaration facts
+  status: open
+  authority: C
+  impact: critical
+  uncertainty: high
+  rework_cost: low
+  related_business_logic: []
+  related_tasks:
+  - TASK-030
+  context: The CAS manuscript still uses placeholder author, affiliation, and email macros. Funding information and whether a generative-AI declaration is applicable are also author-controlled factual fields that cannot be inferred safely.
+  recommendation: Obtain the final author list and CRediT attribution, full affiliation postal addresses and country, one corresponding-author email, funding statement, and actual generative-AI use status before submission.
+  alternatives:
+  - name: Supply final author facts
+    description: Replace the placeholders and complete the title page and declarations, then rebuild and perform the final page-layout check.
+  - name: Defer factual fields
+    description: Keep the package as a non-submittable draft and preserve the explicit unresolved status.
+  answer: null
+  source_refs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - .project-log/research/ras-author-guide-2026.md
+  created_at: '2026-09-19T12:08:00Z'
+  answered_at: null

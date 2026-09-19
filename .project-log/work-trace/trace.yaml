@@ -120,3 +120,108 @@ entries:
   evidence:
   - EV-055
   knowledge_candidate: true
+- id: WT-037-001
+  task_id: TASK-037
+  context: The Introduction citations appeared out of order because `cas-model2-names.bst` performs author-title sorting rather than citation-order numbering.
+  hypothesis: Replacing the bibliography style with natbib-compatible `unsrtnat` will number and list references by first citation while preserving the CAS layout.
+  decision_ref: DEC-015
+  action: Change the bibliography style, rebuild in a clean copy, compare the first-citation sequence from `main.aux` with the `main.bbl` bibliography order, and inspect the Introduction and bibliography pages.
+  expected_result: The Introduction uses sequential citation numbers by first appearance, the bibliography follows the same order, and the manuscript remains nine pages without actionable warnings.
+  observation: The clean build exits 0 with nine pages and no strict-warning matches; all 25 first-citation keys exactly match the bibliography order, and pages 1, 8, and 9 render correctly.
+  actual_result: Citation numbering is now sequential by first occurrence, with only normal repeated references later in the manuscript.
+  delta: Replaced an author-sorted bibliography style with an unsorted natbib style instead of manually reordering BibTeX entries.
+  lesson: A bibliography style can look numerically formatted while still sorting by author; for numbered journals, validate the actual first-citation sequence against the generated bibliography.
+  next_adjustment: Include an `.aux`-versus-`.bbl` citation-order check in the future paper-revision Skill.
+  evidence:
+  - EV-056
+  knowledge_candidate: true
+- id: WT-030-001
+  task_id: TASK-030
+  context: Figure 3 changed from an arm-only equipment photograph to a combined setup showing both the Geomagic Touch robot arm and the soft platform, while the caption, label, and Section 5.1 text still described an arm-only figure.
+  hypothesis: A figure-content expansion must be treated as a semantic change, so its caption, cross-reference label, and adjacent platform descriptions all need to be updated together.
+  decision_ref: null
+  action: Replace the arm-only caption and label with a combined experimental-setup description, reference that figure from the opening of Section 5.1, and revise the soft-platform paragraph to match the component labels visible in the new figure.
+  expected_result: Section 5.1 describes both experimental platforms from one consistent figure reference, the figure resolves to the correct page, and the manuscript remains nine pages.
+  observation: The rebuilt PDF is nine pages, Figure 3 resolves to page 6, the strict warning scan is clean, and the rendered page shows the combined caption and dual-platform description without clipping or missing references.
+  actual_result: The figure and Section 5.1 now use a single consistent dual-platform narrative while the original data-collection and split statements remain unchanged.
+  delta: Updated the caption, renamed the figure label, added the combined figure reference, and expanded the soft-platform hardware description to match the figure labels.
+  lesson: When an equipment figure gains another device or subsystem, the caption and every nearby hardware description must be audited as part of the same change.
+  next_adjustment: Include a figure-asset-to-caption-and-prose consistency check in the future paper-revision Skill.
+  evidence:
+  - EV-060
+  knowledge_candidate: true
+- id: WT-030-002
+  task_id: TASK-030
+  context: The user replaced Figure 3 and reported that the compiled manuscript still showed the old image, even though Section 5.1 had been updated to describe the combined setup.
+  hypothesis: The source figure and fresh build may be correct, while the user-visible PDF path may point to an older duplicate output.
+  decision_ref: null
+  action: Compare timestamps and SHA256 values for `els-cas/main.pdf`, `els-cas-templates/main.pdf`, and `pictures/Figure3.pdf`; then copy the latest build to the top-level user-facing PDF path and compare the results.
+  expected_result: The top-level and template PDFs become byte-identical and both contain the new Figure 3.
+  observation: The old top-level PDF was dated 16:45 and the fresh template PDF was dated 17:46; after copying, both were 3126615 bytes and shared SHA256 `0CE7267131056BB3388010287872C87A79C7FF728C618DB3DB9CF8DA5BDB672F`.
+  actual_result: The stale-image report was caused by opening a duplicate top-level PDF rather than by LaTeX using the wrong figure file.
+  delta: Synchronized the build output to the path the user had been opening.
+  lesson: When a manuscript has duplicated build/output paths, verify the exact PDF path being opened and compare artifact hashes before debugging LaTeX image inclusion.
+  next_adjustment: Prefer one canonical PDF output path or automatically synchronize the user-facing copy after every final build.
+  evidence:
+  - EV-061
+  knowledge_candidate: true
+- id: WT-030-003
+  task_id: TASK-030
+  context: The Section 5.1 data-collection paragraph specified the robotic-arm control input, sampling period, trajectory count, and sample contents, but described the soft-platform dataset only by trajectory and sample counts.
+  hypothesis: A symmetric platform-by-platform description will make the experiment protocol directly comparable without adding new experimental volume or unsupported technical claims.
+  decision_ref: null
+  action: Verify the soft-platform acquisition code and source archives, then add its random two-dimensional cable-motion command, 0.2 s sampling period, 100 trajectories of 60 s, and per-sample light-spot/control contents before the shared split statement.
+  expected_result: Both platforms have parallel descriptions of excitation signal, sampling period, trajectory count, sample contents, and dataset split while the manuscript remains nine pages.
+  observation: The source configuration uses a 0.2 s sampling interval, the archive contains 100 trajectories with 300 two-dimensional state/control samples each, the text appears on page 6, the strict warning scan is empty, and both PDF outputs share SHA256 ED062C84FBDA0740E663CC964C5D65BD42A8A7138444ABA65A79455AE2E091BE.
+  actual_result: The data-collection paragraph now reports the platforms symmetrically and preserves the existing split ratios.
+  delta: Added the soft-platform input signal, 60 s trajectory duration, and sample contents rather than changing experiments or metrics.
+  lesson: When a manuscript compares two experimental platforms, the data-collection paragraph should use the same information fields for each platform so readers can compare protocols directly.
+  next_adjustment: Include a platform-field symmetry check in the future paper-revision Skill.
+  evidence:
+  - EV-062
+  knowledge_candidate: true
+- id: WT-030-004
+  task_id: TASK-030
+  context: Section 5.2 introduced the robotic-arm model dimensions immediately and deferred the soft-platform model configuration, so the experimental setup and subsequent result comparisons were asymmetric.
+  hypothesis: Separating shared method choices from platform-specific configuration and evaluation will make both platforms equally interpretable before the figures and table are shown.
+  decision_ref: null
+  action: Recover the soft-platform run configuration, rewrite the opening of Section 5.2 into shared setup plus parallel platform-specific methods, and compile and inspect the affected pages.
+  expected_result: Readers see the candidate-library, dictionary, selection-dimension, and evaluation protocol for each platform before any per-platform result is presented, while the manuscript remains nine pages.
+  observation: The soft-platform run uses a 112-term library, a 20-dimensional EDMDDL dictionary with 256-by-256 hidden layers, and a 40-dimensional FS-EDMD selection; the revised build is nine pages with an empty strict warning scan, and pages 6-7 render correctly.
+  actual_result: Section 5.2 now describes both platform configurations symmetrically before Fig. 4, Fig. 5, and Table 1.
+  delta: Replaced the arm-first configuration paragraph with a shared setup statement and parallel arm/soft-platform configuration details.
+  lesson: In a cross-platform method comparison, result presentation should only begin after each platform's model configuration and evaluation horizon have been stated with the same information fields.
+  next_adjustment: Add a result-order audit that checks all platform configurations precede platform-specific figures and tables in the future paper-revision Skill.
+  evidence:
+  - EV-063
+  knowledge_candidate: true
+- id: WT-030-005
+  task_id: TASK-030
+  context: The in-column `figurehere` environment bypassed the CAS class's renewed figure environment, so its captions inherited a larger default top spacing than ordinary CAS figures.
+  hypothesis: Setting the caption top skip inside `figurehere` to the CAS figure default will tighten the visual relationship between each graphic and caption without affecting surrounding layout.
+  decision_ref: null
+  action: Set `\abovecaptionskip` to 6 pt within `figurehere`, rebuild, scan warnings, render the affected pages, and synchronize the user-facing PDF.
+  expected_result: The figure-to-caption gap matches the class style, the manuscript remains nine pages, and no new warnings or placement regressions appear.
+  observation: The rebuilt PDF remains nine pages with an empty strict warning scan; pages 6 and 8 show tighter caption spacing with all figure content intact, and both PDF copies share SHA256 1316C8E1BAAD5DB2A36C64D91805E98D388CCF6B3640A8ED81363DE43871B49E.
+  actual_result: In-column figure captions now use 6 pt top spacing while Figure 1 and the global caption configuration remain unchanged.
+  delta: Added a local `\abovecaptionskip` override only to `figurehere`.
+  lesson: When a custom non-floating environment bypasses a document class's redefined float environment, verify caption skips and other class-level formatting rather than assuming inheritance.
+  next_adjustment: Include custom-environment caption-spacing checks in the future paper-revision Skill.
+  evidence:
+  - EV-064
+  knowledge_candidate: true
+- id: WT-038-001
+  task_id: TASK-038
+  context: The first bibliography fix used unsrtnat to restore first-citation numbering, but visual comparison with the supplied RAS reference examples showed that the standard unsorted natbib presentation did not match the target numbered Elsevier style.
+  hypothesis: A local BibTeX style derived from the official Elsevier numbered style can preserve citation-order numbering while reproducing the target author, journal, volume, issue, year, and page presentation.
+  decision_ref: DEC-017
+  action: Derive `ras-num.bst` from the official numbered Elsevier style, suppress DOI output, normalize journal abbreviations in `references.bib`, rebuild, compare `main.aux` first-citation order with `main.bbl` order, scan warnings, inspect rendered pages, and synchronize the user-facing PDF.
+  expected_result: The bibliography matches the RAS numbered presentation, remains in first-citation order, keeps all existing citation keys, and leaves the manuscript at nine pages.
+  observation: The forced main build exits 0 with a nine-page PDF and no actionable warnings; all 25 first-citation keys exactly match the 25 bibliography items in order; the bibliography has no DOI or URL output; and the template and user-facing PDFs share SHA256 8811242B4CD2C624CF5EFD8BD0079961273E7BF74531EA.
+  actual_result: The bibliography now uses the local RAS-style numbered presentation without manual reference reordering.
+  delta: Replaced the unsorted natbib presentation with a minimal local style derived from the official Elsevier numbered style and disabled DOI output.
+  lesson: Citation-order validation and visual-format validation are separate gates; passing one does not prove the other.
+  next_adjustment: In a future paper-revision Skill, check numbering order first, then compare rendered bibliography entries against the target journal examples before declaring the reference style complete.
+  evidence:
+  - EV-069
+  knowledge_candidate: true

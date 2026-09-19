@@ -72,7 +72,10 @@
 % Fixed in-column figure for placements that must not float.
 \makeatletter
 \newenvironment{figurehere}
-  {\@float@HH{figure}[H]\centering}
+  {\@float@HH{figure}[H]\setlength{\abovecaptionskip}{-6pt}\setlength{\belowcaptionskip}{0pt}\centering}
+  {\float@endH}
+\newenvironment{tablehere}
+  {\@float@HH{table}[H]\centering}
   {\float@endH}
 \makeatother
 
@@ -164,7 +167,13 @@ Koopman operator \sep basis function selection \sep data-driven modeling \sep LQ
 
 \printcredits
 
-\bibliographystyle{cas-model2-names}
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+The data that support the findings of this study are available from the corresponding author upon reasonable request.
+
+\bibliographystyle{ras-num}
 \bibliography{references}
 
 \end{document}

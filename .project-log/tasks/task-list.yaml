@@ -1522,7 +1522,7 @@ tasks:
   kind: task
   phase: implementation
   goal: 以 Elsevier 官方 elsarticle 模板重写正式稿前置结构，移除 IEEE 专用配置，并保持现有正文、图表、引用和指标不变。
-  status: implemented-unverified
+  status: cancelled
   priority: high
   risk: medium
   authority: B
@@ -1576,14 +1576,14 @@ tasks:
     limitations:
     - 当前机器未安装 pdflatex、xelatex、lualatex、latexmk 或 bibtex，未执行整篇 PDF 编译。
   result:
-    summary: 正式稿前置结构已迁移到 Elsevier elsarticle preprint 模板并声明 RAS；正文和资源路径保持不变，静态引用检查通过。
+    summary: Superseded by the later user-confirmed RAS/Elsevier CAS double-column template in 论文部分/els-cas/els-cas-templates. The elsarticle preprint path is no longer the active manuscript source; its historical migration work is retained for traceability.
     changed_files:
     - 论文部分/elsarticle/main.tex
     deviations: []
     follow_ups:
-    - 作者信息替换后，在安装 TeX 环境的机器或 Overleaf 上执行 pdflatex/bibtex 全流程和 8 页版式检查。
+    - None; continue the active submission package in 论文部分/els-cas/els-cas-templates under TASK-030.
   created_at: '2026-09-16T03:27:40Z'
-  updated_at: '2026-09-16T03:27:40Z'
+  updated_at: '2026-09-19T12:06:00Z'
 - id: TASK-025
   title: 生成并整合软体平台 Figure 4 与 Table II 软体控制结果
   kind: task
@@ -1941,7 +1941,7 @@ tasks:
   kind: task
   phase: implementation
   goal: Bring the CAS manuscript and submission assets into compliance with the official RAS Guide for Authors without inventing author, funding, data, or AI-use facts.
-  status: in-progress
+  status: blocked
   priority: high
   risk: medium
   authority: B
@@ -1957,7 +1957,8 @@ tasks:
   depends_on:
   - TASK-028
   blocked_by: []
-  blocked_by_questions: []
+  blocked_by_questions:
+  - Q-021
   required_skills:
   - a-business-clarify
   - a-engineering-landing
@@ -1985,23 +1986,34 @@ tasks:
     commands:
     - PowerShell checks for abstract word count, keyword count, and highlight character limits
     - latexmk PDF builds for main.tex and highlights.tex
+    - Compare main.aux first-citation order with main.bbl bibliography order
+    - Check figure references, artwork availability, and editable table environments
     evidence:
     - EV-032
     - EV-051
+    - EV-060
+    - EV-061
+    - EV-062
+    - EV-063
+    - EV-064
+    - EV-067
+    - EV-068
     limitations:
-    - Author metadata and declarations require user-provided facts.
+    - Author metadata, funding, and any applicable generative-AI disclosure still require user-provided facts.
   result:
-    summary: Highlights were reduced and separated; Q-019 is resolved as a nine-page internal target; the Abstract and Introduction now consistently describe the dual-platform experiments, and the remaining guide-compliance items are in progress.
+    summary: Highlights were reduced and separated; Q-019 is resolved as a nine-page internal target; the Abstract and Introduction consistently describe the dual-platform experiments; Section 5.1 now describes the rigid and soft platforms symmetrically, including their control inputs, sampling periods, trajectory counts, sample contents, and trajectory-level splits; figure captions now use compact spacing; competing-interest and data-availability statements are present before the bibliography; all machine-checkable author-guide limits pass, including Abstract length, keyword count, highlights length, citation order, figure citations/artwork, editable tables, and both PDF builds; the top-level `els-cas/main.pdf` was synchronized with the latest build; only author-supplied factual metadata and the replacement equipment photograph remain.
     changed_files:
     - 论文部分/els-cas/els-cas-templates/main.tex
     - 论文部分/els-cas/els-cas-templates/highlights.tex
+    - 论文部分/els-cas/els-cas-templates/manuscript_body.tex
     - .project-log/research/ras-author-guide-2026.md
     deviations: []
     follow_ups:
-    - Complete author metadata and declaration fields.
+    - Complete author metadata and funding information.
+    - Add a generative-AI declaration only if an applicable tool or service was used in manuscript preparation.
     - Finalize the nine-page layout after the soft-platform equipment photo is supplied.
   created_at: '2026-09-17T03:25:00Z'
-  updated_at: '2026-09-17T03:25:00Z'
+  updated_at: '2026-09-19T12:05:00Z'
 - id: TASK-031
   title: Restore Figure 2 and Figure 3 to their corresponding manuscript sections
   kind: task
@@ -2397,3 +2409,140 @@ tasks:
     follow_ups: []
   created_at: '2026-09-19T05:55:00Z'
   updated_at: '2026-09-19T06:15:00Z'
+- id: TASK-037
+  title: Order references by first citation occurrence
+  kind: task
+  phase: implementation
+  goal: Ensure the bibliography is numbered and ordered by first citation occurrence, with the Introduction citations remaining sequential or as close to sequential as possible, while preserving a clean CAS-template build.
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - bibliography
+  - citation-order
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-015
+  depends_on:
+  - TASK-030
+  - TASK-036
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-project-log
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/references.bib
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/main.pdf
+  plan:
+  - Confirm that the current bibliography style sorts entries by author and title rather than by citation order.
+  - Evaluate a natbib-compatible unsorted bibliography style in an isolated build.
+  - Switch the manuscript to the validated style and verify citation numbers, bibliography order, page count, and warnings.
+  done_when:
+  - Introduction citations are numbered in first-use order or with only unavoidable local deviations.
+  - The bibliography order matches the first citation order of the manuscript.
+  - The clean build remains nine pages without actionable warnings.
+  verification:
+    status: passed
+    commands:
+    - Clean-copy latexmk -pdf -interaction=nonstopmode main.tex
+    - Strict warning scan of main.log
+    - pdfinfo page-count check
+    - Parse main.aux first-citation order and compare it with main.bbl order
+    - pdftoppm rendering and visual inspection of pages 1, 8, and 9
+    evidence:
+    - EV-056
+    limitations: []
+  result:
+    summary: Temporarily replaced the author-sorted CAS bibliography style with natbib-compatible unsrtnat and verified exact first-citation order. TASK-038 later superseded the presentation with the local RAS-style numbered style while retaining this ordering behavior.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - .project-log/docs/paper-revision-agent-skill-notes.md
+    deviations: []
+    follow_ups:
+    - Completed by TASK-038, which aligned the rendered bibliography presentation with the RAS reference examples.
+  created_at: '2026-09-19T06:22:00Z'
+  updated_at: '2026-09-19T06:28:00Z'
+- id: TASK-038
+  title: Align bibliography presentation with the RAS numbered style
+  kind: task
+  phase: implementation
+  goal: Match the target RAS reference presentation while preserving first-citation numbering, the existing citation keys, and the nine-page CAS manuscript layout.
+  status: done
+  priority: high
+  risk: medium
+  authority: B
+  owner: agent
+  tags:
+  - paper-revision
+  - bibliography
+  - ras
+  - formatting
+  related_business_logic: []
+  acceptance_refs: []
+  related_decisions:
+  - DEC-017
+  depends_on:
+  - TASK-037
+  blocked_by: []
+  blocked_by_questions: []
+  required_skills:
+  - a-engineering-landing
+  - a-verification
+  - a-project-log
+  spec_ref: .project-log/specs/paper-revision-experiment-plan.md
+  inputs:
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/references.bib
+  outputs:
+  - 论文部分/els-cas/els-cas-templates/ras-num.bst
+  - 论文部分/els-cas/els-cas-templates/main.tex
+  - 论文部分/els-cas/els-cas-templates/references.bib
+  - 论文部分/els-cas/els-cas-templates/main.pdf
+  - 论文部分/els-cas/main.pdf
+  plan:
+  - Compare the generated bibliography against the RAS numbered examples.
+  - Retain first-citation ordering while replacing the visually incompatible unsorted natbib output.
+  - Derive a local numbered BibTeX style from the official Elsevier numbered style and suppress DOI output.
+  - Normalize journal abbreviations in the existing bibliography without adding or removing references.
+  - Rebuild, compare citation and bibliography order, scan warnings, inspect rendered pages, and synchronize the user-facing PDF.
+  done_when:
+  - References use numbered square-bracket citations and appear in first-citation order.
+  - Entries follow the RAS-style author, title, abbreviated journal, volume, issue, year, and pages presentation.
+  - DOI and URL fields do not appear in the generated bibliography.
+  - All 25 citation keys and bibliography items match exactly in order.
+  - The manuscript remains nine pages with no actionable LaTeX warnings.
+  verification:
+    status: passed
+    commands:
+    - latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
+    - latexmk -g -pdf -interaction=nonstopmode -halt-on-error -file-line-error highlights.tex
+    - Strict main.log and highlights.log warning scans
+    - pdfinfo page-count and PDF-version checks
+    - main.aux first-citation order versus main.bbl bibliography order
+    - main.bbl DOI and URL scan
+    - SHA256 comparison of the template and user-facing manuscript PDFs
+    evidence:
+    - EV-069
+    limitations: []
+  result:
+    summary: Replaced unsrtnat with a local ras-num BibTeX style derived from the official Elsevier numbered style. The bibliography now uses first-citation numbering and the RAS-style numbered presentation, with journal abbreviations normalized and DOI output suppressed.
+    changed_files:
+    - 论文部分/els-cas/els-cas-templates/ras-num.bst
+    - 论文部分/els-cas/els-cas-templates/main.tex
+    - 论文部分/els-cas/els-cas-templates/references.bib
+    - 论文部分/els-cas/els-cas-templates/main.pdf
+    - 论文部分/els-cas/main.pdf
+    deviations:
+    - A local derived BibTeX style is required because the available unsorted natbib style did not reproduce the target RAS presentation.
+    follow_ups: []
+  created_at: '2026-09-19T12:40:00Z'
+  updated_at: '2026-09-19T12:40:00Z'
